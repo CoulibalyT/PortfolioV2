@@ -1,0 +1,20 @@
+{
+  "role": "Developer & Designer",
+  "menu": {
+    "me": "Me",
+    "projects": "Projects",
+    "contact": "Contact",
+    "skills": "Skills"
+  },
+  "status": {
+    "available": "Available"
+  },
+
+  "description": {
+    "intro": "Hi, I’m Tene.",
+    "2intro":" I enjoy turning ideas into smooth and intuitive web experiences. Every line of code is a building block that creates a sustainable, high-performance, and accessible project for everyone.",
+    "value":" Create, optimize, innovate ",
+    "end":": three words that guide my vision of development. I believe that a good product is not just about its design or technology, but the emotion and impact it generates."
+  }
+
+}
