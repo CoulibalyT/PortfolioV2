@@ -6,8 +6,19 @@
       class="carousel-item"
     >
       <!-- Nom du projet (fixe, ne scroll pas avec les images) -->
-      <p class="project-name">{{ project.title }}</p>
-
+      <div class="flex justify-between items-center pb-3">
+        <p class="project-name">{{ project.title }}</p>
+        <div class="flex">
+          <ChevronLeftIcon 
+            class="w-5" 
+            :class="{ 'text-gray-500': isAtStart }"
+          />
+          <ChevronRightIcon 
+            class="w-5" 
+            :class="{ 'text-gray-500': isAtEnd }"
+          />
+        </div>
+      </div>
       <!-- Conteneur des miniatures -->
       <div class="thumbnails-container">
         <div class="thumbnails-track">
@@ -20,19 +31,40 @@
           />
         </div>
       </div>
-      <a v-if="project.link" class=" float-right" :href="project.link"><ArrowUpRightIcon class="h-[60px] w-10 text-white"/></a>
+      <a v-if="project.link" class="float-right" :href="project.link"><ArrowUpRightIcon class="h-[60px] w-10 text-white"/></a>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-  import { ArrowUpRightIcon } from '@heroicons/vue/24/solid';
-
+import { ref, onMounted } from 'vue'
+import { ArrowUpRightIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/24/solid'
 
 // Props
 const { arrayOfImage } = defineProps(['arrayOfImage'])
+
+// Références et état
+const carousel = ref(null)
+const isAtStart = ref(true)
+const isAtEnd = ref(false)
+
+// Détecter la position du scroll
+const updateArrowState = () => {
+  if (carousel.value) {
+    const container = carousel.value
+    isAtStart.value = container.scrollLeft === 0
+    isAtEnd.value = container.scrollWidth === container.scrollLeft + container.clientWidth
+  }
+}
+
+onMounted(() => {
+  updateArrowState()
+  // Ajouter un événement de scroll pour mettre à jour les chevrons
+  carousel.value.addEventListener('scroll', updateArrowState)
+})
+
 </script>
+
 
 <style scoped>
 .carousel-container {
@@ -53,7 +85,6 @@ const { arrayOfImage } = defineProps(['arrayOfImage'])
 
 /* Style pour le nom du projet */
 .project-name {
-  margin-bottom: 10px;
   font-weight: bold;
   color: white;
   text-align: left;
