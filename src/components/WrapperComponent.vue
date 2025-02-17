@@ -115,6 +115,7 @@ const isScrollingInsideSlot = (event) => {
   return false; // L'utilisateur scrolle sur la page principale
 };
 
+// Gérer le scroll de la souris sur PC
 const handleScroll = (event) => {
   if (isScrolling || isScrollingInsideSlot(event)) return; // Bloque le changement de route si on est dans un élément scrollable
   isScrolling = true;
@@ -141,13 +142,52 @@ const handleScroll = (event) => {
   }
 };
 
+// Gérer le scroll tactile sur mobile
+let startY = 0;
+
+const handleTouchStart = (event) => {
+  startY = event.touches[0].clientY;
+};
+
+const handleTouchMove = (event) => {
+  let deltaY = event.touches[0].clientY - startY;
+  if (isScrolling || isScrollingInsideSlot(event)) return;
+
+  isScrolling = true;
+  let index = routes.indexOf(route.path);
+
+  if (deltaY < -50 && index < routes.length - 1) {
+    index++;
+  } else if (deltaY > 50 && index > 0) {
+    index--;
+  }
+
+  if (routes[index] !== route.path) {
+    gsap.to(window, {
+      duration: 1,
+      scrollTo: { y: 0, autoKill: false },
+      ease: "power2.inOut",
+      onComplete: () => {
+        router.push(routes[index]);
+        isScrolling = false;
+      },
+    });
+  } else {
+    isScrolling = false;
+  }
+};
+
 // Ajouter/Supprimer l'écouteur de scroll
 onMounted(() => {
   window.addEventListener("wheel", handleScroll, { passive: true });
+  window.addEventListener("touchstart", handleTouchStart, { passive: true });
+  window.addEventListener("touchmove", handleTouchMove, { passive: true });
 });
 
 onUnmounted(() => {
   window.removeEventListener("wheel", handleScroll);
+  window.removeEventListener("touchstart", handleTouchStart);
+  window.removeEventListener("touchmove", handleTouchMove);
 });
 
 watch(() => route.path, () => {
