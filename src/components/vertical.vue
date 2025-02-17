@@ -46,9 +46,9 @@
     width: 100%;
     height: 200px; /* Hauteur exacte d'une vignette */
     overflow-y: auto;
+    padding: 10px; 
     scroll-snap-type: y mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1;
+
   }
   
   .thumbnails-container::-webkit-scrollbar {
@@ -67,7 +67,8 @@
   .thumbnails-track {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    /* gap: 15px; */
+
   }
   
   .thumbnail-image {
@@ -75,7 +76,11 @@
     height: 100%; /* Même hauteur que le conteneur */
     object-fit: cover;
     border-radius: 10px;
+    background-color: white;
+    border: 2px solid white;
     scroll-snap-align: start;
+    margin-bottom: 10px;
+    border-collapse: collapse;
     flex-shrink: 0; /* Empêche l'image de se rétrécir */
   }
   </style>
