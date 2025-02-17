@@ -83,16 +83,22 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted, watch , watchEffect} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+
+const currentLanguage = ref(localStorage.getItem("language") || "fr");
+
 
 gsap.registerPlugin(ScrollToPlugin);
 
 const router = useRouter();
 const route = useRoute();
 const isDarkMode = ref(localStorage.getItem("theme") === "dark");
+import { setI18nLanguage } from "../../config/i18n";
+
 
 const routes = ["/", "/projects", "/contact"]; // Liste des routes
 let isScrolling = false;
@@ -146,6 +152,27 @@ onUnmounted(() => {
 
 watch(() => route.path, () => {
   gsap.to(window, { scrollTo: { y: 0, autoKill: false }, duration: 0.5, ease: "power2.inOut" });
+});
+
+watchEffect(() => {
+  document.documentElement.classList.toggle("dark", isDarkMode.value);
+  localStorage.setItem("theme", isDarkMode.value ? "dark" : "light");
+});
+
+const toggleDarkMode = (mode) => {
+  isDarkMode.value = mode;
+};
+
+
+const setLanguage = (lang) => {
+  currentLanguage.value = lang;
+  setI18nLanguage(lang);
+  localStorage.setItem("language", lang);
+};
+
+// Appliquer la langue au chargement
+watchEffect(() => {
+  setI18nLanguage(currentLanguage.value);
 });
 </script>
 
