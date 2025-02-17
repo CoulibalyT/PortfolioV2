@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100dvh] flex flex-col md:p-28 p-6 gap-5 overflow-y-auto bg-white dark:bg-gray-900" :class="{ 'dark': isDarkMode }">
+  <div class="h-[100dvh] flex flex-col md:p-28 p-6 gap-5  bg-white dark:bg-gray-900" :class="{ 'dark': isDarkMode }">
     <!-- Header -->
     <div class="flex justify-between items-start ">
       <div class="flex items-center">

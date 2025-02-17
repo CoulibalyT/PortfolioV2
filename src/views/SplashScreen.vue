@@ -10,17 +10,17 @@ onMounted(() => {
 
   tl.to(".name", {
     opacity: 0,
-    duration: 1.5, // 🔹 Augmentation du temps pour une disparition plus lente
+    duration: 1.5, 
     ease: "power2.inOut",
   })
   .to(".portfolio", {
     opacity: 0,
-    duration: 1.5, // 🔹 Même effet ici pour garder la cohérence
+    duration: 1.5, 
     ease: "power2.inOut",
-  }, "-=1") // 🔹 Overlap plus long pour un effet fondu plus subtil
+  }, "-=1") 
   .to(".splash-screen", {
     opacity: 0,
-    duration: 1.5, // 🔹 L'écran disparaît plus lentement aussi
+    duration: 1.5,
     ease: "power2.inOut",
     onComplete: () => router.push("/"),
   }, "-=1");
