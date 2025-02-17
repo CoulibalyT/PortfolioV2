@@ -82,59 +82,73 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref, watchEffect, watch } from "vue";
-import { setI18nLanguage } from "../../config/i18n";
-
-import { useRoute } from "vue-router";
-const route = useRoute();
-
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-console.log("ScrollToPlugin enregistré ?", gsap.plugins.ScrollToPlugin ? "Oui" : "Non");
-
-
-
-
-
+const router = useRouter();
+const route = useRoute();
 const isDarkMode = ref(localStorage.getItem("theme") === "dark");
 
-watch(() => route.path, (newPath, oldPath) => {
-  if (newPath !== oldPath) {
+const routes = ["/", "/projects", "/contact"]; // Liste des routes
+let isScrolling = false;
+
+// Vérifie si on scrolle à l'intérieur d'un élément avec du scroll actif
+const isScrollingInsideSlot = (event) => {
+  let target = event.target;
+  while (target !== document.body) {
+    if (target.scrollHeight > target.clientHeight || target.scrollWidth > target.clientWidth) {
+      return true; // Un élément scrollable capture l'événement
+    }
+    target = target.parentElement;
+  }
+  return false; // L'utilisateur scrolle sur la page principale
+};
+
+const handleScroll = (event) => {
+  if (isScrolling || isScrollingInsideSlot(event)) return; // Bloque le changement de route si on est dans un élément scrollable
+  isScrolling = true;
+
+  let index = routes.indexOf(route.path);
+  if (event.deltaY > 0 && index < routes.length - 1) {
+    index++; // Scroll bas → Page suivante
+  } else if (event.deltaY < 0 && index > 0) {
+    index--; // Scroll haut → Page précédente
+  }
+
+  if (routes[index] !== route.path) {
     gsap.to(window, {
-      duration: 0.5,
+      duration: 1,
       scrollTo: { y: 0, autoKill: false },
       ease: "power2.inOut",
+      onComplete: () => {
+        router.push(routes[index]);
+        isScrolling = false;
+      },
     });
+  } else {
+    isScrolling = false;
   }
-});
-
-watchEffect(() => {
-  document.documentElement.classList.toggle("dark", isDarkMode.value);
-  localStorage.setItem("theme", isDarkMode.value ? "dark" : "light");
-});
-
-const toggleDarkMode = (mode) => {
-  isDarkMode.value = mode;
 };
 
-const currentLanguage = ref(localStorage.getItem("language") || "fr");
+// Ajouter/Supprimer l'écouteur de scroll
+onMounted(() => {
+  window.addEventListener("wheel", handleScroll, { passive: true });
+});
 
-const setLanguage = (lang) => {
-  currentLanguage.value = lang;
-  setI18nLanguage(lang);
-  localStorage.setItem("language", lang);
-};
+onUnmounted(() => {
+  window.removeEventListener("wheel", handleScroll);
+});
 
-// Appliquer la langue au chargement
-watchEffect(() => {
-  setI18nLanguage(currentLanguage.value);
+watch(() => route.path, () => {
+  gsap.to(window, { scrollTo: { y: 0, autoKill: false }, duration: 0.5, ease: "power2.inOut" });
 });
 </script>
+
 
 <style scoped>
 @keyframes blink {

@@ -87,16 +87,14 @@
     const project = arrayOfImage[index]
   
     if (project.mainImage !== thumbnailSrc) {
-      // Remplacer l’image principale et la réintégrer dans les vignettes
       project.thumbnails = [
-        project.mainImage, // L'ancienne image principale devient une vignette
-        ...project.thumbnails.filter((img) => img !== thumbnailSrc), // On enlève la vignette sélectionnée
+        project.mainImage,
+        ...project.thumbnails.filter((img) => img !== thumbnailSrc),
       ]
-      project.mainImage = thumbnailSrc // Nouvelle image principale
+      project.mainImage = thumbnailSrc 
     }
   }
   
-  // import base from '../../src/assets/base.css'
   
   onMounted(() => {
   
@@ -115,20 +113,17 @@
   .carousel-container {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-x: auto;
     position: relative;
   }
   
   .carousel-track {
     display: flex;
-    width: 100%; /* Nombre de projets * 100% */
-    /* height: 100%;`` */
-    /* gap: 4rem; Ajoute un espace de 4rem entre les projets */
+    width: 100%; 
     will-change: transform;
   }
   
   .carousel-item {
-    /* @apply  ; */
     flex: 0 0 100%;
     width: 100%;
     display: flex;
@@ -137,7 +132,6 @@
     justify-content: center;
     background-color: white;
     border-radius: 20px;
-    /* border: 4px solid; Tailwind applique la couleur via @apply */
     gap: 2rem;
     padding: 1rem;
   }
@@ -153,8 +147,7 @@
     width: 100%;
     height: auto;
     object-fit: contain;
-    /* border: 1px solid #ececec; Bordure légère */
-    border-radius: 10px; /* Coins arrondis */
+    border-radius: 10px;
   }
   
   .thumbnail-grid {
