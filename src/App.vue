@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import gsap from "gsap";
 
@@ -43,6 +43,12 @@ router.beforeEach(async (to, from, next) => {
 
 watchEffect(() => {
   isDarkMode.value = localStorage.getItem("theme") === "dark";
+});
+
+onMounted(() => {
+  if (router.currentRoute.value.path !== "/splash") {
+    router.push("/splash");
+  }
 });
 </script>
 
