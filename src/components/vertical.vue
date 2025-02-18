@@ -1,70 +1,53 @@
 <template>
-  <div class="carousel-container" ref="carousel">
+  <div class="carousel-container" :class="{ 'dark': isDarkMode }">
     <div 
       v-for="(project, index) in arrayOfImage" 
       :key="index" 
       class="carousel-item"
     >
-      <!-- Nom du projet (fixe, ne scroll pas avec les images) -->
       <div class="flex justify-between items-center pb-3">
-        <p class="project-name">{{ project.title }}</p>
-        <div class="flex">
-          <ChevronLeftIcon 
-            class="w-5" 
-            :class="{ 'text-gray-500': isAtStart }"
-          />
-          <ChevronRightIcon 
-            class="w-5" 
-            :class="{ 'text-gray-500': isAtEnd }"
-          />
-        </div>
+        <p class="project-name" >
+          {{ project.title }}
+        </p>
       </div>
-      <!-- Conteneur des miniatures -->
       <div class="thumbnails-container">
         <div class="thumbnails-track">
           <img 
             v-for="(thumbnail, i) in project.thumbnails" 
             :key="i" 
             :src="thumbnail" 
+            loading="lazy"
             alt="Thumbnail"
+            
             class="thumbnail-image"
           />
         </div>
       </div>
-      <a v-if="project.link" class="float-right" :href="project.link"><ArrowUpRightIcon class="h-[60px] w-10 text-white"/></a>
+
+      <a v-if="project.link" class="float-right" :href="project.link">
+        <ArrowUpRightIcon class="h-[60px] w-10 " />
+      </a>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { ArrowUpRightIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/24/solid'
 
-// Props
 const { arrayOfImage } = defineProps(['arrayOfImage'])
+const isDarkMode = ref(localStorage.getItem('theme') === 'dark');
 
-// Références et état
-const carousel = ref(null)
-const isAtStart = ref(true)
-const isAtEnd = ref(false)
-
-// Détecter la position du scroll
-const updateArrowState = () => {
-  if (carousel.value) {
-    const container = carousel.value
-    isAtStart.value = container.scrollLeft === 0
-    isAtEnd.value = container.scrollWidth === container.scrollLeft + container.clientWidth
-  }
-}
+watch(isDarkMode, (newValue) => {
+  localStorage.setItem('theme', newValue ? 'dark' : 'light');
+  document.documentElement.classList.toggle('dark', newValue);
+});
 
 onMounted(() => {
-  updateArrowState()
-  // Ajouter un événement de scroll pour mettre à jour les chevrons
-  carousel.value.addEventListener('scroll', updateArrowState)
+  isDarkMode.value = localStorage.getItem('theme') === 'dark';
+  document.documentElement.classList.toggle('dark', isDarkMode.value);
 })
-
 </script>
-
 
 <style scoped>
 .carousel-container {
@@ -73,7 +56,6 @@ onMounted(() => {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  /* padding: 20px; */
 }
 
 .carousel-item {
@@ -83,10 +65,8 @@ onMounted(() => {
   position: relative;
 }
 
-/* Style pour le nom du projet */
 .project-name {
   font-weight: bold;
-  color: white;
   text-align: left;
 }
 
@@ -94,7 +74,6 @@ onMounted(() => {
   width: 100%;
   height: 220px;
   overflow-y: auto;
-  /* padding: 10px; */
   scroll-snap-type: y mandatory;
 }
 
@@ -122,9 +101,11 @@ onMounted(() => {
   object-fit: cover;
   border-radius: 10px;
   background-color: white;
-  border: 2px solid white;
+  border: 2px solid transparent; /* Bordure par défaut */
   scroll-snap-align: start;
   margin-bottom: 10px;
   flex-shrink: 0;
 }
+
+
 </style>
