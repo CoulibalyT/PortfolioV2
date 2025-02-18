@@ -6,6 +6,8 @@
     "contact": "Contact",
     "skills": "Compétences"
   },
+  "dark": "sombre",
+  "light": "claire",
   "status": {
     "available": "Disponible"
   },

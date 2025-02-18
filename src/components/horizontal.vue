@@ -1,38 +1,57 @@
 <template>
-      <div class="carousel-container" :class="{ 'dark': isDarkMode }">
-        <div
-          class="carousel-track"
-          ref="carousel"
-          @wheel.prevent="handleScroll"
-          @touchstart="handleTouchStart"
-          @touchend="handleTouchEnd"
-        >
-          <div v-for="(item, index) in arrayOfImage" :key="index" class="carousel-item border-white border-2 dark:border-black" > 
-            <div class="main-image-wrapper">
-              <img :src="item.mainImage" :alt="item.title" class="main-image" ref="imageRef" />
-            </div>
-            <div class="thumbnail-grid hidden md:flex" ref="gridRef">
-              <template v-for="(src, i) in item.thumbnails" :key="i">
-                <img
-                  :src="src"
-                  alt="Thumbnail"
-                  class="thumbnail"
-                  @click="changeMainImage(src, index)"
-                />
-              </template>
-              <a v-if="item.link" class=" m-auto" :href="item.link"><ArrowUpRightIcon class="h-[60px] w-full text-black"/></a>
-            </div>
-          </div>
+  <div class="carousel-container" :class="{ 'dark': isDarkMode }">
+    
+    <div
+      class="carousel-track"
+      ref="carousel"
+      @wheel.prevent="handleScroll"
+      @touchstart="handleTouchStart"
+      @touchend="handleTouchEnd"
+    >
+    <div v-for="(item, index) in arrayOfImage" :key="index" class="carousel-item border-2" :class="{'border-white': !isDarkMode, 'border-black': isDarkMode}">
+      <div class="flex justify-between items-center w-full">
+        <p class="project-name">{{ item.title }}</p>
+        <div class="flex">
+          <ChevronLeftIcon 
+            class="w-5" 
+            :class="{ 'text-gray-500': isAtStart }"
+          />
+          <ChevronRightIcon 
+            class="w-5" 
+            :class="{ 'text-gray-500': isAtEnd }"
+          />
         </div>
       </div>
-  </template>
+        <div class="main-image-wrapper">
+          <img :src="item.mainImage" :alt="item.title" class="main-image" loading="lazy" ref="imageRef" />
+        </div>
+        <div class="thumbnail-grid hidden md:flex" ref="gridRef">
+          <template v-for="(src, i) in item.thumbnails" :key="i">
+            <img
+              :src="src"
+              alt="Thumbnail"
+              class="thumbnail image-loaded opacity-0 transition-opacity duration-300"
+              @click="changeMainImage(src, index)"
+              loading="lazy"
+            />
+          </template>
+          <a v-if="item.link" class="m-auto" :href="item.link">
+            <ArrowUpRightIcon class="h-[60px] w-full text-black"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
   
   <script setup>
-  import { ref, onMounted, onUnmounted } from 'vue'
+  import { ref, onMounted, onUnmounted, watch } from 'vue'
   import gsap from 'gsap'
-  import { ArrowUpRightIcon } from '@heroicons/vue/24/solid';
+  import { ArrowUpRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid'
 
   const {arrayOfImage} = defineProps(['arrayOfImage'])
+
+  console.log(arrayOfImage)
 
   
   const carousel = ref(null)
@@ -40,10 +59,24 @@
   const isAnimating = ref(false)
   const imageRef = ref(null)
   const gridRef = ref(null)
-  
+
+  const isAtStart = ref(true)
+const isAtEnd = ref(false)
+
+const updateArrowState = () => {
+  if (carousel.value) {
+    const container = carousel.value
+    isAtStart.value = container.scrollLeft === 0
+    isAtEnd.value = container.scrollWidth === container.scrollLeft + container.clientWidth
+  }
+}
+
   
   const isDarkMode = ref(localStorage.getItem('theme') === 'dark')
   
+  
+
+
 
   const changeProject = (direction) => {
     if (isAnimating.value) return
@@ -94,11 +127,18 @@
       project.mainImage = thumbnailSrc 
     }
   }
-  
+  watch(isDarkMode, (newValue) => {
+  localStorage.setItem('theme', newValue ? 'dark' : 'light');
+  document.documentElement.classList.toggle('dark', newValue);
+});
   
   onMounted(() => {
   
     document.body.style.overflow = 'hidden'
+    isDarkMode.value = localStorage.getItem('theme') === 'dark';
+    document.documentElement.classList.toggle('dark', isDarkMode.value);
+    updateArrowState()
+  carousel.value.addEventListener('scroll', updateArrowState)
   })
   
   onUnmounted(() => {
@@ -116,6 +156,12 @@
     overflow-x: auto;
     position: relative;
   }
+
+  .project-name {
+  font-weight: bold;
+  color: black;
+  text-align: left;
+}
   
   .carousel-track {
     display: flex;
@@ -169,6 +215,11 @@
   .thumbnail:hover {
     transform: scale(1.05);
   }
+
+  .image-loaded {
+  opacity: 1 !important;
+}
+
   
   </style>
   

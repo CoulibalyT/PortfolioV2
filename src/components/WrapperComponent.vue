@@ -71,13 +71,13 @@
           @click="toggleDarkMode(false)" 
           :class="{ 'font-bold': !isDarkMode }"
           class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
-        >light</span>
+        >{{$t("light")}}</span>
         -
         <span 
           @click="toggleDarkMode(true)" 
           :class="{ 'font-bold': isDarkMode }"
           class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
-        >dark</span>
+        >{{$t("dark")}}</span>
       </div>
     </div>
   </div>
@@ -129,7 +129,7 @@ const handleScroll = (event) => {
 
   if (routes[index] !== route.path) {
     gsap.to(window, {
-      duration: 1,
+      duration: 0.7,
       scrollTo: { y: 0, autoKill: false },
       ease: "power2.inOut",
       onComplete: () => {
@@ -179,15 +179,24 @@ const handleTouchMove = (event) => {
 
 // Ajouter/Supprimer l'écouteur de scroll
 onMounted(() => {
-  window.addEventListener("wheel", handleScroll, { passive: true });
-  window.addEventListener("touchstart", handleTouchStart, { passive: true });
-  window.addEventListener("touchmove", handleTouchMove, { passive: true });
+  // Vérifie si l'écran est mobile
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    window.addEventListener("wheel", handleScroll, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+  }
 });
 
 onUnmounted(() => {
-  window.removeEventListener("wheel", handleScroll);
-  window.removeEventListener("touchstart", handleTouchStart);
-  window.removeEventListener("touchmove", handleTouchMove);
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    window.removeEventListener("wheel", handleScroll);
+    window.removeEventListener("touchstart", handleTouchStart);
+    window.removeEventListener("touchmove", handleTouchMove);
+  }
 });
 
 watch(() => route.path, () => {

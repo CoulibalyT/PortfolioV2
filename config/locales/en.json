@@ -9,7 +9,8 @@
   "status": {
     "available": "Available"
   },
-
+  "dark": "dark",
+  "light": "light",
   "description": {
     "intro": "Hi, I’m Tene.",
     "2intro":" I enjoy turning ideas into smooth and intuitive web experiences. Every line of code is a building block that creates a sustainable, high-performance, and accessible project for everyone.",
