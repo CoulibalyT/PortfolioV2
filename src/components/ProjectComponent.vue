@@ -49,6 +49,18 @@ const projects = ref([
       // "/images/arrow.png",
     ],
   },
+  // {
+  //   title: 'Daily quote',
+  //   mainImage: '/images/projet3/DailyQuote.png',
+  //   // thumbnails: [
+  //   //   '/images/projet2/home.png',
+  //   //   '/images/projet2/choose.png',
+  //   //   '/images/projet2/form.png',
+  //   //   '/images/projet2/details.png',
+  //   //   '/images/projet2/finalize.png',
+  //   //   // "/images/arrow.png",
+  //   // ],
+  // },
 ])
 
 

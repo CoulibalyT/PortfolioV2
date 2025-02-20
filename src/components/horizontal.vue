@@ -25,7 +25,7 @@
         <div class="main-image-wrapper">
           <img :src="item.mainImage" :alt="item.title" class="main-image" loading="lazy" ref="imageRef" />
         </div>
-        <div class="thumbnail-grid hidden md:flex" ref="gridRef">
+        <div v-if="item.thumbnails" class="thumbnail-grid hidden md:flex" ref="gridRef">
           <template v-for="(src, i) in item.thumbnails" :key="i">
             <img
               :src="src"
