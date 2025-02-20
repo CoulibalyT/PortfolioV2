@@ -31,7 +31,7 @@
           />
         </div>
       </div>
-      <a v-if="project.link" class="float-right" :href="project.link">
+      <a v-if="project.link"  target="_blank"  class="float-right" :href="project.link">
         <ArrowUpRightIcon class="h-[60px] w-10" />
       </a>
     </div>

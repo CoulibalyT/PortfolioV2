@@ -35,7 +35,7 @@
               loading="lazy"
             />
           </template>
-          <a v-if="item.link" class="m-auto" :href="item.link">
+          <a v-if="item.link" class="m-auto"  target="_blank"  :href="item.link">
             <ArrowUpRightIcon class="h-[60px] w-full text-black"/>
           </a>
         </div>
