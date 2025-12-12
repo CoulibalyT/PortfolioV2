@@ -5,35 +5,52 @@
       :key="index" 
       class="carousel-item"
     >
-      <div class="flex justify-between items-center pb-3">
-        <p class="project-name">{{ project.title }}</p>
-        <div class="flex">
-          <ChevronLeftIcon 
-            class="w-5" 
-            :class="{ 'text-gray-500': isAtStart }"
-          />
-          <ChevronRightIcon 
-            class="w-5" 
-            :class="{ 'text-gray-500': isAtEnd }"
-          />
+      <div class="flex justify-between items-center pb-3 px-2">
+        <div class="flex flex-col items-start">
+          <p class="project-name text-xl font-bold text-black dark:text-white">{{ project.title }}</p>
+          <div class="flex gap-1.5 mt-1 flex-wrap">
+            <span v-for="(tech, tIndex) in project.tech" :key="tIndex" class="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+              {{ tech }}
+            </span>
+          </div>
         </div>
+        <a v-if="project.link" :href="project.link" target="_blank" class="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-full">
+          <ArrowUpRightIcon class="w-4 h-4 text-black dark:text-white" />
+        </a>
       </div>
-      <div class="thumbnails-container">
-        <div class="thumbnails-track">
-          <img 
-            v-for="(thumbnail, i) in project.thumbnails" 
-            :key="i" 
-            :src="thumbnail" 
-            loading="lazy"
-            alt="Thumbnail"
-            class="thumbnail-image"
-            :class="{ 'light-border': !isDarkMode }"
-          />
+      
+      <div class="main-image-container mb-3 rounded-lg overflow-hidden shadow-sm relative group">
+        <!-- Image Navigation -->
+        <div class="absolute inset-0 flex justify-between items-center px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
+          <button 
+            @click.stop="prevImage(index)" 
+            class="bg-white/80 dark:bg-black/80 p-1.5 rounded-full backdrop-blur-sm pointer-events-auto"
+            :class="{ 'opacity-50': currentImageIndices[index] === 0 }"
+            :disabled="currentImageIndices[index] === 0"
+          >
+            <ChevronLeftIcon class="w-4 h-4 text-black dark:text-white" />
+          </button>
+          <button 
+            @click.stop="nextImage(index)" 
+            class="bg-white/80 dark:bg-black/80 p-1.5 rounded-full backdrop-blur-sm pointer-events-auto"
+            :class="{ 'opacity-50': currentImageIndices[index] === project.images.length - 1 }"
+            :disabled="currentImageIndices[index] === project.images.length - 1"
+          >
+            <ChevronRightIcon class="w-4 h-4 text-black dark:text-white" />
+          </button>
         </div>
+
+        <!-- Counter -->
+        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 dark:bg-white/20 backdrop-blur-md px-2 py-0.5 rounded-full text-[10px] text-white font-medium z-10">
+          {{ currentImageIndices[index] + 1 }} / {{ project.images.length }}
+        </div>
+
+        <img 
+          :src="project.images[currentImageIndices[index]]" 
+          class="w-full h-48 object-cover transition-all duration-300 border border-gray-200 dark:border-gray-800" 
+          @click="triggerEasterEgg($event)"
+        />
       </div>
-      <a v-if="project.link"  target="_blank"  class="float-right" :href="project.link">
-        <ArrowUpRightIcon class="h-[60px] w-10" />
-      </a>
     </div>
   </div>
 </template>
@@ -41,6 +58,45 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { ArrowUpRightIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/24/solid'
+import gsap from 'gsap'
+
+const props = defineProps(['arrayOfImage'])
+const { arrayOfImage } = props
+
+// Track current image index for each project
+const currentImageIndices = ref(arrayOfImage.map(() => 0))
+
+const nextImage = (projectIndex) => {
+  if (currentImageIndices.value[projectIndex] < arrayOfImage[projectIndex].images.length - 1) {
+    currentImageIndices.value[projectIndex]++
+  }
+}
+
+const prevImage = (projectIndex) => {
+  if (currentImageIndices.value[projectIndex] > 0) {
+    currentImageIndices.value[projectIndex]--
+  }
+}
+
+const triggerEasterEgg = async (event) => {
+  // Simple click animation
+  gsap.to(event.target, {
+    scale: 0.95,
+    duration: 0.1,
+    yoyo: true,
+    repeat: 1
+  });
+
+  // Dynamic import for better performance
+  const confetti = (await import('canvas-confetti')).default;
+
+  // Confetti explosion
+  confetti({
+    particleCount: 80, // Slightly less for mobile/vertical
+    spread: 60,
+    origin: { y: 0.6 }
+  });
+}
 
 const carousel = ref(null)
 const isAtStart = ref(true)
@@ -54,7 +110,6 @@ const updateArrowState = () => {
   }
 }
 
-const { arrayOfImage } = defineProps(['arrayOfImage'])
 const isDarkMode = ref(localStorage.getItem('theme') === 'dark');
 
 watch(isDarkMode, (newValue) => {
@@ -91,45 +146,4 @@ onMounted(() => {
   text-align: left;
 }
 
-.thumbnails-container {
-  width: 100%;
-  height: 220px;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-}
-
-.thumbnails-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.thumbnails-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.thumbnails-container::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 3px;
-}
-
-.thumbnails-track {
-  display: flex;
-  flex-direction: column;
-}
-
-.thumbnail-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  background-color: white;
-  border: 2px solid transparent;
-  scroll-snap-align: start;
-  margin-bottom: 10px;
-  flex-shrink: 0;
-}
-
-/* Bordure visible seulement en mode light */
-.light-border {
-  border-color: #eaeaea;
-}
 </style>

@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import ContactView from '@/views/ContactView.vue'
 import ProjectView from '@/views/ProjectView.vue'
 import SplashScreen from "@/views/SplashScreen.vue";
-// import SkillsView from '@/views/SkillsView.vue';
+import SkillsView from '@/views/SkillsView.vue';
+import TimelineView from '@/views/TimelineView.vue';
 
 
 const router = createRouter({
@@ -24,11 +25,16 @@ const router = createRouter({
       name: 'project',
       component: ProjectView,
     },
-    // {
-    //   path: '/skills',
-    //   name: 'skills',
-    //   component: SkillsView,
-    // },
+    {
+      path: '/skills',
+      name: 'skills',
+      component: SkillsView,
+    },
+    {
+      path: '/timeline',
+      name: 'timeline',
+      component: TimelineView,
+    },
     {
       path: '/contact',
       name: 'contact',

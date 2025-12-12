@@ -1,12 +1,12 @@
 <template>
   <Wrapper>
-    <div class="w-96 flex flex-col items-start gap-2">
+    <div class="w-full max-w-md flex flex-col items-start gap-2 px-4 md:px-0">
       <a
         href="mailto:coulibaly.tene00@gmail.com"
-        class="text-center flex gap-1 items-center justify-center relative group text-bold"
+        class="flex gap-1 items-center relative group text-bold break-all text-left"
       >
         coulibaly.tene00@gmail.com
-        <ArrowUpRightIcon class="size-4.5" />
+        <ArrowUpRightIcon class="size-4.5 shrink-0" />
         <span class="underline-hover"></span>
       </a>
       

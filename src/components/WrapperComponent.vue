@@ -1,11 +1,11 @@
 <template>
-  <div class="h-[100dvh] flex flex-col md:p-28 p-6 gap-5  bg-white dark:bg-gray-900" :class="{ 'dark': isDarkMode }">
+  <div class="h-[100dvh] flex flex-col md:p-28 p-6 gap-5 bg-transparent" :class="{ 'dark': isDarkMode }">
     <!-- Header -->
     <div class="flex justify-between items-start ">
       <div class="flex items-center">
         <div>
           <p class="md:text-[40px] text-2xl font-thin text-gray-900 dark:text-gray-100">Tene Coulibaly</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">{{ $t("role") }}</p>
+          <p ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">{{ $t("role") }}</p>
         </div>
         <div>
           <p class="text-gray-700 dark:text-gray-300">/ˈte.ne/</p>
@@ -28,8 +28,8 @@
     </div>
 
     <!-- Navigation -->
-    <div class="flex-1 flex lg:flex-row flex-col ">
-      <nav class="w-1/4 flex flex-col justify-center gap-1.5">
+    <div class="flex-1 flex lg:flex-row flex-col min-h-0 overflow-hidden">
+      <nav ref="navMenu" class="lg:w-1/4 w-full flex flex-col justify-center gap-1.5 mb-6 lg:mb-0 shrink-0">
         <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
@@ -40,11 +40,16 @@
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
           to="/projects"
         >{{ $t("menu.projects") }}</router-link>
-        <!-- <router-link 
+        <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
           to="/skills"
-        >{{ $t("menu.skills") }}</router-link> -->
+        >{{ $t("menu.skills") }}</router-link>
+        <router-link 
+          active-class="font-bold" 
+          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          to="/timeline"
+        >{{ $t("menu.timeline") }}</router-link>
         <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
@@ -52,8 +57,17 @@
         >{{ $t("menu.contact") }}</router-link>
       </nav>
 
-      <div class="flex-1 text-center flex items-center justify-center text-gray-900 dark:text-gray-100">
-        <slot></slot>
+      <div 
+        ref="contentWrapper"
+        class="flex-1 text-center relative text-gray-900 dark:text-gray-100 h-full"
+        :class="route.name === 'timeline' ? 'overflow-hidden' : 'overflow-y-auto scroll-container scroll-smooth'"
+      >
+        <div  
+          class="w-full"
+          :class="route.name === 'timeline' ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-8'"
+        >
+          <slot></slot>
+        </div>
       </div>
       <div class="w-1/4"></div>
     </div>
@@ -61,7 +75,7 @@
     <!-- Footer -->
     <div class="flex justify-between items-end">
       <div class="flex items-center gap-1.5">
-        <div class="w-3 h-3 rounded-full bg-green-500 dark:bg-green-400 dot"></div>
+        <div class="w-3 h-3 rounded-full bg-red-500 dark:bg-red-400 dot"></div>
         <p class="text-gray-700 dark:text-gray-300">{{ $t("status.available") }}</p>
       </div>
 
@@ -83,13 +97,16 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted, onUnmounted, watch , watchEffect} from "vue";
+import { ref, onMounted, onUnmounted, watch , watchEffect, nextTick} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 
 const currentLanguage = ref(localStorage.getItem("language") || "fr");
+const roleText = ref(null);
+const navMenu = ref(null);
+const contentWrapper = ref(null);
 
 
 gsap.registerPlugin(ScrollToPlugin);
@@ -214,9 +231,34 @@ const toggleDarkMode = (mode) => {
 
 
 const setLanguage = (lang) => {
-  currentLanguage.value = lang;
-  setI18nLanguage(lang);
-  localStorage.setItem("language", lang);
+  if (currentLanguage.value === lang) return;
+
+  const tl = gsap.timeline();
+
+  // Fade out elements
+  tl.to([roleText.value, navMenu.value, contentWrapper.value], {
+    opacity: 0,
+    y: -10,
+    duration: 0.3,
+    stagger: 0.05,
+    ease: "power2.in"
+  });
+
+  tl.call(() => {
+    currentLanguage.value = lang;
+    setI18nLanguage(lang);
+    localStorage.setItem("language", lang);
+  });
+
+  // Fade in elements
+  tl.to([roleText.value, navMenu.value, contentWrapper.value], {
+    opacity: 1,
+    y: 0,
+    duration: 0.5,
+    stagger: 0.1,
+    ease: "power2.out",
+    delay: 0.1 
+  });
 };
 
 // Appliquer la langue au chargement
