@@ -4,10 +4,81 @@
     "me": "Me",
     "projects": "Projects",
     "contact": "Contact",
-    "skills": "Skills"
+    "skills": "Skills",
+    "timeline": "Timeline"
   },
   "status": {
-    "available": "Available"
+    "available": "Not available / Student Full Stack Developer at INSEAD"
+  },
+  "timeline_section": {
+    "title": "My Journey",
+    "subtitle": "The path that led me here.",
+    "experience_title": "Professional Experience",
+    "education_title": "Education",
+    "experience": [
+      {
+        "year": "April 2025 - Present",
+        "title": "Student Developer",
+        "place": "INSEAD",
+        "description": "Student position, currently ongoing."
+      },
+      {
+        "year": "2023 - 2025",
+        "title": "Developer",
+        "place": "CAPTAG",
+        "description": "Carbon module (Vue 3 · Node.js · API Climeet). Autonomous project, agile collaboration."
+      },
+      {
+        "year": "2022 - 2023",
+        "title": "Web Developer",
+        "place": "Sayse",
+        "description": "SaaS Development (React.js · TypeScript · Node.js · Docker)."
+      },
+      {
+        "year": "2019 - 2020",
+        "title": "Volunteer",
+        "place": "French Red Cross",
+        "description": "Reception, social shop management, human contact."
+      }
+    ],
+    "education": [
+      {
+        "year": "Jan 2025 - Oct 2026",
+        "title": "Master's Degree",
+        "place": "",
+        "description": ""
+      },
+      {
+        "year": "2023 - 2025",
+        "title": "Application Designer & Developer (Bachelor's)",
+        "place": "ETNA",
+        "description": ""
+      },
+      {
+        "year": "2021 - 2023",
+        "title": "Web Developer (Associate's)",
+        "place": "Epitech",
+        "description": ""
+      },
+      {
+        "year": "2021",
+        "title": "Web Designer Training",
+        "place": "Doranco",
+        "description": ""
+      },
+      {
+        "year": "2019 - 2020",
+        "title": "Personal Development",
+        "place": "Self-taught",
+        "description": "Communication skills & time management."
+      },
+      {
+        "year": "2018",
+        "title": "High School Diploma – Industrial Product Design",
+        "place": "Lycée Diderot",
+        "description": ""
+      }
+    ]
   },
   "dark": "dark",
   "light": "light",
@@ -16,6 +87,28 @@
     "2intro":" I enjoy turning ideas into smooth and intuitive web experiences. Every line of code is a building block that creates a sustainable, high-performance, and accessible project for everyone.",
     "value":" Create, optimize, innovate ",
     "end":": three words that guide my vision of development. I believe that a good product is not just about its design or technology, but the emotion and impact it generates."
+  },
+  "projects_section": {
+    "title": "Selected Works",
+    "subtitle": "A selection of projects that I'm passionate about.",
+    "view_code": "View Code",
+    "view_project": "Live Demo"
+  },
+  "skills_section": {
+    "title": "My Arsenal",
+    "subtitle": "The tools and technologies I use to bring ideas to life.",
+    "tech_stack": "Tech Stack",
+    "workflow": "Workflow & Mindset",
+    "skills": {
+      "ai": "AI Integration",
+      "adaptability": "Adaptability",
+      "multitasking": "Multitasking",
+      "problem_solving": "Problem Solving"
+    }
+  },
+  "contact_section": {
+    "title": "Let's Connect",
+    "text": "Although I am not currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
+    "cta": "Say Hello"
   }
-
 }

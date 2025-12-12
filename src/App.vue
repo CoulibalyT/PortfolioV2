@@ -1,5 +1,7 @@
 <template>
   <div>
+    <InteractiveBackground />
+    <CustomCursor />
     <div ref="overlay" :class="['transition-overlay', { 'dark-overlay': isDarkMode }]" ></div>
     <router-view v-slot="{ Component, route }">
       <component :is="Component" :key="route.path" class="page" />
@@ -11,6 +13,8 @@
 import { ref, watchEffect, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import gsap from "gsap";
+import CustomCursor from "@/components/CustomCursor.vue";
+import InteractiveBackground from "@/components/InteractiveBackground.vue";
 
 const overlay = ref(null);
 const router = useRouter();

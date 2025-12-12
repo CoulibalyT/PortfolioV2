@@ -4,18 +4,112 @@
     "me": "Moi",
     "projects": "Projets",
     "contact": "Contact",
-    "skills": "Compétences"
+    "skills": "Compétences",
+    "timeline": "Parcours"
+  },
+  "timeline_section": {
+    "title": "Mon Parcours",
+    "subtitle": "Le chemin qui m'a mené ici.",
+    "experience_title": "Expériences Professionnelles",
+    "education_title": "Formations",
+    "experience": [
+      {
+        "year": "Avril 2025 - Présent",
+        "title": "Développeuse Étudiante",
+        "place": "INSEAD",
+        "description": "Poste étudiant en cours."
+      },
+      {
+        "year": "2023 - 2025",
+        "title": "Développeuse",
+        "place": "CAPTAG",
+        "description": "Module carbone (Vue 3 · Node.js · API Climeet). Projet mené en autonomie, collaboration agile."
+      },
+      {
+        "year": "2022 - 2023",
+        "title": "Développeuse Web",
+        "place": "Sayse",
+        "description": "Développement SaaS (React.js · TypeScript · Node.js · Docker)."
+      },
+      {
+        "year": "2019 - 2020",
+        "title": "Bénévole",
+        "place": "Croix-Rouge Française",
+        "description": "Accueil, gestion boutique sociale, contact humain."
+      }
+    ],
+    "education": [
+      {
+        "year": "Jan 2025 - Oct 2026",
+        "title": "Master",
+        "place": "",
+        "description": ""
+      },
+      {
+        "year": "2023 - 2025",
+        "title": "Concepteur Développeur d’Applications (Bac +3)",
+        "place": "ETNA",
+        "description": ""
+      },
+      {
+        "year": "2021 - 2023",
+        "title": "Développeuse Web (Bac +2)",
+        "place": "Epitech",
+        "description": ""
+      },
+      {
+        "year": "2021",
+        "title": "Formation Web Designer",
+        "place": "Doranco",
+        "description": ""
+      },
+      {
+        "year": "2019 - 2020",
+        "title": "Développement Personnel",
+        "place": "Autodidacte",
+        "description": "Développement de compétences en communication & gestion du temps."
+      },
+      {
+        "year": "2018",
+        "title": "Bac – Étude et définition de produits industriels",
+        "place": "Lycée Diderot",
+        "description": ""
+      }
+    ]
   },
   "dark": "sombre",
   "light": "claire",
   "status": {
-    "available": "Disponible"
+    "available": "Pas disponible / Étudiante Développeuse Full Stack à INSEAD"
   },
     "description": {
       "intro": "Salut, moi c’est Tene.",
       "2intro":" J’aime transformer des idées en expériences web fluides et intuitives. Chaque ligne de code est une brique qui construit un projet durable, performant et accessible à tous.",
       "value":"Créer, optimiser, innover ",
       "end":": trois mots qui guident ma vision du développement. Je crois qu’un bon produit ne se limite pas à son design ou à sa technique, mais à l’émotion et à l’impact qu’il génère."
+    },
+  "projects_section": {
+    "title": "Projets Sélectionnés",
+    "subtitle": "Une sélection de projets qui me passionnent.",
+    "view_code": "Voir le code",
+    "view_project": "Voir le site"
+  },
+  "skills_section": {
+    "title": "Mon Arsenal",
+    "subtitle": "Les outils et technologies que j'utilise pour donner vie aux idées.",
+    "tech_stack": "Stack Technique",
+    "workflow": "Workflow & État d'esprit",
+    "skills": {
+      "ai": "Intégration IA",
+      "adaptability": "Adaptabilité",
+      "multitasking": "Polyvalence",
+      "problem_solving": "Résolution de problèmes"
     }
+  },
+  "contact_section": {
+    "title": "Restons en contact",
+    "text": "Bien que je ne sois pas actuellement à la recherche de nouvelles opportunités, ma boîte de réception est toujours ouverte. Que vous ayez une question ou juste pour dire bonjour, je ferai de mon mieux pour vous répondre !",
+    "cta": "Dire Bonjour"
+  }
   
   }
