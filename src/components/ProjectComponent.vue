@@ -18,10 +18,11 @@ import WrapperComponent from './WrapperComponent.vue'
 import Vertical from './vertical.vue';
 import { ArrowUpRightIcon } from '@heroicons/vue/24/solid';
 import Horizontal from './horizontal.vue';
+import { useTheme } from '../composables/useTheme';
 
 
 
-const isDarkMode = ref(localStorage.getItem('theme') === 'dark')
+const { isDarkMode } = useTheme();
 
 const projects = ref([
   {

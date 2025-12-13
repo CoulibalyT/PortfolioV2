@@ -47,11 +47,69 @@ const animate = () => {
   requestAnimationFrame(animate);
 };
 
+const onHoverStart = () => {
+  gsap.to(cursorRing.value, {
+    scale: 1.5,
+    duration: 0.3,
+    ease: "power2.out"
+  });
+  gsap.to(cursorDot.value, {
+    scale: 0.5,
+    duration: 0.3
+  });
+};
+
+const onHoverEnd = () => {
+  gsap.to(cursorRing.value, {
+    scale: 1,
+    duration: 0.3,
+    ease: "power2.out"
+  });
+  gsap.to(cursorDot.value, {
+    scale: 1,
+    duration: 0.3
+  });
+};
+
 onMounted(() => {
   // Center the cursor elements initially
   gsap.set([cursorDot.value, cursorRing.value], { xPercent: -50, yPercent: -50 });
 
   window.addEventListener('mousemove', onMouseMove);
+  
+  // Add listeners for interactive elements
+  const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .cursor-pointer');
+  interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', onHoverStart);
+    el.addEventListener('mouseleave', onHoverEnd);
+  });
+
+  // Observer for dynamic elements
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.addedNodes.length) {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) { // Element node
+            const elements = node.querySelectorAll ? node.querySelectorAll('a, button, input, textarea, select, .cursor-pointer') : [];
+            if (node.matches && node.matches('a, button, input, textarea, select, .cursor-pointer')) {
+              node.addEventListener('mouseenter', onHoverStart);
+              node.addEventListener('mouseleave', onHoverEnd);
+            }
+            elements.forEach(el => {
+              el.addEventListener('mouseenter', onHoverStart);
+              el.addEventListener('mouseleave', onHoverEnd);
+            });
+          }
+        });
+      }
+    });
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
   animate();
 });
 

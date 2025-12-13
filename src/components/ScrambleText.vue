@@ -1,5 +1,5 @@
 <template>
-  <span class="inline-block min-w-[1ch]">{{ displayedText }}</span>
+  <span class="scramble-text">{{ displayedText }}</span>
 </template>
 
 <script setup>
@@ -7,70 +7,62 @@ import { ref, onMounted, watch } from 'vue';
 
 const props = defineProps({
   text: { type: String, required: true },
-  duration: { type: Number, default: 1.5 }, // seconds
-  delay: { type: Number, default: 0 }, // ms
-  scrambleSpeed: { type: Number, default: 50 } // ms per frame
+  duration: { type: Number, default: 0.8 }, // seconds
+  scrambleSpeed: { type: Number, default: 30 } // ms per frame
 });
 
-const displayedText = ref('');
-// Characters to use for scrambling (Matrix/Tech feel)
+const displayedText = ref(props.text);
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~';
 
 let intervalId = null;
-let timeoutId = null;
 
-const startScramble = () => {
-  if (!props.text) return;
+const startScramble = (newText) => {
+  const start = Date.now();
+  const length = Math.max(displayedText.value.length, newText.length);
   
-  // Initial state: random characters
-  const length = props.text.length;
-  let frame = 0;
-  const totalFrames = (props.duration * 1000) / props.scrambleSpeed;
-  
-  // Clear any existing intervals
   if (intervalId) clearInterval(intervalId);
   
   intervalId = setInterval(() => {
-    frame++;
-    const progress = frame / totalFrames;
+    const now = Date.now();
+    const progress = (now - start) / (props.duration * 1000);
+    
+    if (progress >= 1) {
+      displayedText.value = newText;
+      clearInterval(intervalId);
+      return;
+    }
     
     let result = '';
     for (let i = 0; i < length; i++) {
-      // If we've progressed past this character's index relative to total length, reveal it
-      // Adding some randomness to the reveal threshold so it's not perfectly linear
-      if (progress * length > i) {
-        result += props.text[i];
+      // Reveal character if progress covers it
+      if (i < newText.length * progress) {
+        result += newText[i];
       } else {
-        // Otherwise show a random character
+        // Show random char
         result += chars[Math.floor(Math.random() * chars.length)];
       }
     }
     
-    displayedText.value = result;
+    // Adjust length smoothly
+    const currentLength = Math.floor(length * (1 - progress) + newText.length * progress);
+    displayedText.value = result.slice(0, currentLength);
     
-    if (progress >= 1) {
-      displayedText.value = props.text;
-      clearInterval(intervalId);
-    }
   }, props.scrambleSpeed);
 };
 
-onMounted(() => {
-  // Initialize with empty or random string of correct length to reserve space?
-  // For now, start empty or wait for delay.
-  displayedText.value = ''; 
-  
-  timeoutId = setTimeout(() => {
-    startScramble();
-  }, props.delay);
+watch(() => props.text, (newVal) => {
+  startScramble(newVal);
 });
 
-watch(() => props.text, () => {
-  if (timeoutId) clearTimeout(timeoutId);
-  if (intervalId) clearInterval(intervalId);
-  
-  timeoutId = setTimeout(() => {
-    startScramble();
-  }, props.delay);
+onMounted(() => {
+  displayedText.value = props.text;
 });
 </script>
+
+<style scoped>
+.scramble-text {
+  display: inline-block;
+  white-space: pre;
+  min-width: 1ch;
+}
+</style>
