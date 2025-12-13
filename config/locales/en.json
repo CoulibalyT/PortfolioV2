@@ -9,7 +9,13 @@
     "projects": "Projects",
     "contact": "Contact",
     "skills": "Skills",
-    "timeline": "Timeline"
+    "timeline": "Timeline",
+    "playground": "The Lab"
+  },
+  "playground": {
+    "title": "The Lab",
+    "subtitle": "A space for creative coding experiments and 3D explorations.",
+    "wip": "Work in Progress"
   },
   "status": {
     "available": "Not available / Student Full Stack Developer at INSEAD",

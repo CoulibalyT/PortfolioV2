@@ -70,16 +70,22 @@
           to="/contact"
           @click="playClick"
         ><ScrambleText :text="$t('menu.contact')" /></router-link>
+        <router-link 
+          active-class="font-bold" 
+          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          to="/playground"
+          @click="playClick"
+        ><ScrambleText :text="$t('menu.playground')" /></router-link>
       </nav>
 
       <div 
         ref="contentWrapper"
         class="flex-1 text-center relative text-gray-900 dark:text-gray-100 h-full"
-        :class="route.name === 'timeline' ? 'overflow-hidden' : 'overflow-y-auto scroll-container scroll-smooth'"
+        :class="['timeline', 'playground'].includes(route.name) ? 'overflow-hidden' : 'overflow-y-auto scroll-container scroll-smooth'"
       >
         <div  
           class="w-full"
-          :class="route.name === 'timeline' ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-8'"
+          :class="['timeline', 'playground'].includes(route.name) ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-8'"
         >
           <slot></slot>
         </div>
@@ -158,7 +164,7 @@ const { playClick } = useSound();
 import { setI18nLanguage } from "../../config/i18n";
 
 
-const routes = ["/", "/projects", "/contact"]; // Liste des routes
+const routes = ["/", "/projects", "/skills", "/timeline", "/contact", "/playground"]; // Liste des routes
 let isScrolling = false;
 
 // Vérifie si on scrolle à l'intérieur d'un élément avec du scroll actif
