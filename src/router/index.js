@@ -5,6 +5,7 @@ import ProjectView from '@/views/ProjectView.vue'
 import SplashScreen from "@/views/SplashScreen.vue";
 import SkillsView from '@/views/SkillsView.vue';
 import TimelineView from '@/views/TimelineView.vue';
+import NotFoundView from '@/views/NotFoundView.vue';
 
 
 const router = createRouter({
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactView,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFoundView,
     },
     
     // {

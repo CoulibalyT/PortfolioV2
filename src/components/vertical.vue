@@ -56,47 +56,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, toRefs } from 'vue'
 import { ArrowUpRightIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/24/solid'
 import gsap from 'gsap'
+import { useTheme } from '../composables/useTheme'
+import { useProjectGallery } from '../composables/useProjectGallery'
 
 const props = defineProps(['arrayOfImage'])
-const { arrayOfImage } = props
+const { arrayOfImage } = toRefs(props)
 
-// Track current image index for each project
-const currentImageIndices = ref(arrayOfImage.map(() => 0))
-
-const nextImage = (projectIndex) => {
-  if (currentImageIndices.value[projectIndex] < arrayOfImage[projectIndex].images.length - 1) {
-    currentImageIndices.value[projectIndex]++
-  }
-}
-
-const prevImage = (projectIndex) => {
-  if (currentImageIndices.value[projectIndex] > 0) {
-    currentImageIndices.value[projectIndex]--
-  }
-}
-
-const triggerEasterEgg = async (event) => {
-  // Simple click animation
-  gsap.to(event.target, {
-    scale: 0.95,
-    duration: 0.1,
-    yoyo: true,
-    repeat: 1
-  });
-
-  // Dynamic import for better performance
-  const confetti = (await import('canvas-confetti')).default;
-
-  // Confetti explosion
-  confetti({
-    particleCount: 80, // Slightly less for mobile/vertical
-    spread: 60,
-    origin: { y: 0.6 }
-  });
-}
+const { isDarkMode } = useTheme()
+const { currentImageIndices, nextImage, prevImage, triggerEasterEgg } = useProjectGallery(arrayOfImage)
 
 const carousel = ref(null)
 const isAtStart = ref(true)
@@ -110,16 +80,7 @@ const updateArrowState = () => {
   }
 }
 
-const isDarkMode = ref(localStorage.getItem('theme') === 'dark');
-
-watch(isDarkMode, (newValue) => {
-  localStorage.setItem('theme', newValue ? 'dark' : 'light');
-  document.documentElement.classList.toggle('dark', newValue);
-});
-
 onMounted(() => {
-  isDarkMode.value = localStorage.getItem('theme') === 'dark';
-  document.documentElement.classList.toggle('dark', isDarkMode.value);
   updateArrowState()
   carousel.value.addEventListener('scroll', updateArrowState)
 })

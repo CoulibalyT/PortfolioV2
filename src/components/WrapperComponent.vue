@@ -5,7 +5,9 @@
       <div class="flex items-center">
         <div>
           <p class="md:text-[40px] text-2xl font-thin text-gray-900 dark:text-gray-100">Tene Coulibaly</p>
-          <p ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">{{ $t("role") }}</p>
+          <p ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">
+            <ScrambleText :text="$t('role')" />
+          </p>
         </div>
         <div>
           <p class="text-gray-700 dark:text-gray-300">/ˈte.ne/</p>
@@ -34,27 +36,32 @@
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
           to="/"
-        >{{ $t("menu.me") }}</router-link>
+          @click="playClick"
+        ><ScrambleText :text="$t('menu.me')" /></router-link>
         <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
           to="/projects"
-        >{{ $t("menu.projects") }}</router-link>
+          @click="playClick"
+        ><ScrambleText :text="$t('menu.projects')" /></router-link>
         <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
           to="/skills"
-        >{{ $t("menu.skills") }}</router-link>
+          @click="playClick"
+        ><ScrambleText :text="$t('menu.skills')" /></router-link>
         <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
           to="/timeline"
-        >{{ $t("menu.timeline") }}</router-link>
+          @click="playClick"
+        ><ScrambleText :text="$t('menu.timeline')" /></router-link>
         <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
           to="/contact"
-        >{{ $t("menu.contact") }}</router-link>
+          @click="playClick"
+        ><ScrambleText :text="$t('menu.contact')" /></router-link>
       </nav>
 
       <div 
@@ -76,7 +83,9 @@
     <div class="flex justify-between items-end">
       <div class="flex items-center gap-1.5">
         <div class="w-3 h-3 rounded-full bg-red-500 dark:bg-red-400 dot"></div>
-        <p class="text-gray-700 dark:text-gray-300">{{ $t("status.available") }}</p>
+        <p class="text-gray-700 dark:text-gray-300">
+          <ScrambleText :text="$t('status.available')" />
+        </p>
       </div>
 
       <!-- Toggle Mode Clair/Sombre -->
@@ -101,6 +110,9 @@ import { ref, onMounted, onUnmounted, watch , watchEffect, nextTick} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useTheme } from "../composables/useTheme";
+import { useSound } from "../composables/useSound";
+import ScrambleText from "./ScrambleText.vue";
 
 
 const currentLanguage = ref(localStorage.getItem("language") || "fr");
@@ -113,7 +125,8 @@ gsap.registerPlugin(ScrollToPlugin);
 
 const router = useRouter();
 const route = useRoute();
-const isDarkMode = ref(localStorage.getItem("theme") === "dark");
+const { isDarkMode, toggleDarkMode } = useTheme();
+const { playClick } = useSound();
 import { setI18nLanguage } from "../../config/i18n";
 
 
@@ -220,27 +233,16 @@ watch(() => route.path, () => {
   gsap.to(window, { scrollTo: { y: 0, autoKill: false }, duration: 0.5, ease: "power2.inOut" });
 });
 
-watchEffect(() => {
-  document.documentElement.classList.toggle("dark", isDarkMode.value);
-  localStorage.setItem("theme", isDarkMode.value ? "dark" : "light");
-});
-
-const toggleDarkMode = (mode) => {
-  isDarkMode.value = mode;
-};
-
-
 const setLanguage = (lang) => {
   if (currentLanguage.value === lang) return;
 
   const tl = gsap.timeline();
 
-  // Fade out elements
-  tl.to([roleText.value, navMenu.value, contentWrapper.value], {
+  // Blur out content only (Text Scramble handles the rest)
+  tl.to(contentWrapper.value, {
     opacity: 0,
-    y: -10,
+    filter: "blur(10px)",
     duration: 0.3,
-    stagger: 0.05,
     ease: "power2.in"
   });
 
@@ -250,12 +252,11 @@ const setLanguage = (lang) => {
     localStorage.setItem("language", lang);
   });
 
-  // Fade in elements
-  tl.to([roleText.value, navMenu.value, contentWrapper.value], {
+  // Blur in content
+  tl.to(contentWrapper.value, {
     opacity: 1,
-    y: 0,
+    filter: "blur(0px)",
     duration: 0.5,
-    stagger: 0.1,
     ease: "power2.out",
     delay: 0.1 
   });

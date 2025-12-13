@@ -76,67 +76,30 @@
 </template>
   
   <script setup>
-  import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
+  import { ref, onMounted, onUnmounted, watch, computed, toRefs } from 'vue'
   import gsap from 'gsap'
   import { ArrowUpRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid'
+  import { useTheme } from '../composables/useTheme'
+  import { useProjectGallery } from '../composables/useProjectGallery'
 
   const props = defineProps(['arrayOfImage'])
-  const { arrayOfImage } = props
+  const { arrayOfImage } = toRefs(props)
 
-  // Track current image index for each project
-  const currentImageIndices = ref(arrayOfImage.map(() => 0))
-
-  const nextImage = (projectIndex) => {
-    if (currentImageIndices.value[projectIndex] < arrayOfImage[projectIndex].images.length - 1) {
-      currentImageIndices.value[projectIndex]++
-    }
-  }
-
-  const prevImage = (projectIndex) => {
-    if (currentImageIndices.value[projectIndex] > 0) {
-      currentImageIndices.value[projectIndex]--
-    }
-  }
-
-  const triggerEasterEgg = async (event) => {
-    // Simple click animation
-    gsap.to(event.target, {
-      scale: 0.95,
-      duration: 0.1,
-      yoyo: true,
-      repeat: 1
-    });
-
-    // Dynamic import for better performance and to avoid build issues if not pre-bundled
-    const confetti = (await import('canvas-confetti')).default;
-
-    // Confetti explosion
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  }
+  const { isDarkMode } = useTheme()
+  const { currentImageIndices, nextImage, prevImage, triggerEasterEgg } = useProjectGallery(arrayOfImage)
   
   const carousel = ref(null)
   const activeIndex = ref(0)
   const isAnimating = ref(false)
 
   const isAtStart = computed(() => activeIndex.value === 0)
-  const isAtEnd = computed(() => activeIndex.value === arrayOfImage.length - 1)
-
-  
-  const isDarkMode = ref(localStorage.getItem('theme') === 'dark')
-  
-  
-
-
+  const isAtEnd = computed(() => activeIndex.value === arrayOfImage.value.length - 1)
 
   const changeProject = (direction) => {
     if (isAnimating.value) return
   
     const nextIndex = activeIndex.value + direction
-    if (nextIndex >= 0 && nextIndex < arrayOfImage.length) {
+    if (nextIndex >= 0 && nextIndex < arrayOfImage.value.length) {
       isAnimating.value = true
       activeIndex.value = nextIndex
   
@@ -173,16 +136,9 @@
     }
   }
   
-  watch(isDarkMode, (newValue) => {
-  localStorage.setItem('theme', newValue ? 'dark' : 'light');
-  document.documentElement.classList.toggle('dark', newValue);
-});
-  
   onMounted(() => {
   
     document.body.style.overflow = 'hidden'
-    isDarkMode.value = localStorage.getItem('theme') === 'dark';
-    document.documentElement.classList.toggle('dark', isDarkMode.value);
   })
   
   onUnmounted(() => {
