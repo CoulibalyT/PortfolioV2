@@ -1,6 +1,8 @@
 <template>
-  <div class="fixed inset-0 z-[-1] overflow-hidden bg-gray-50 dark:bg-gray-950 transition-colors duration-500" ref="container">
-    <div class="absolute inset-0 blur-[80px] md:blur-[120px]">
+  <div class="fixed inset-0 z-[-1] overflow-hidden bg-gray-50 dark:bg-gray-950 transition-colors duration-500" 
+       :class="{ '!bg-[#852C2C]': isRedMode }"
+       ref="container">
+    <div class="absolute inset-0 blur-[80px] md:blur-[120px]" :class="{ 'opacity-0': isRedMode }">
       <!-- Ambient Blobs -->
       <div ref="blob1" class="absolute top-0 left-0 w-[50vw] h-[50vw] bg-purple-200 dark:bg-purple-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-70 animate-float"></div>
       <div ref="blob2" class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-70 animate-float animation-delay-2000"></div>
@@ -13,13 +15,16 @@
     <!-- Hidden Text Layer (Spotlight Effect) -->
     <div class="absolute inset-0 z-0 pointer-events-none flex flex-col justify-center items-center select-none overflow-hidden"
          :style="{ maskImage: `radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black, transparent)`, webkitMaskImage: `radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black, transparent)` }">
-         <div class="text-[15vw] font-black text-gray-900/5 dark:text-white/5 leading-none tracking-tighter text-center">
+         <div class="text-[15vw] font-black text-gray-900/5 dark:text-white/5 leading-none tracking-tighter text-center"
+              :class="{ 'text-white/10': isRedMode }">
             PORTFOLIO
          </div>
-         <div class="text-[15vw] font-black text-gray-900/5 dark:text-white/5 leading-none tracking-tighter text-center">
+         <div class="text-[15vw] font-black text-gray-900/5 dark:text-white/5 leading-none tracking-tighter text-center"
+              :class="{ 'text-white/10': isRedMode }">
             CREATIVE
          </div>
-         <div class="text-[15vw] font-black text-gray-900/5 dark:text-white/5 leading-none tracking-tighter text-center">
+         <div class="text-[15vw] font-black text-gray-900/5 dark:text-white/5 leading-none tracking-tighter text-center"
+              :class="{ 'text-white/10': isRedMode }">
             DEVELOPER
          </div>
     </div>
@@ -34,6 +39,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import gsap from 'gsap';
+import { useTheme } from '@/composables/useTheme';
+
+const { isRedMode } = useTheme();
 
 const container = ref(null);
 const interactiveBlob = ref(null);

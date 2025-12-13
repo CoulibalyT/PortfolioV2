@@ -82,7 +82,7 @@ const title = "Tene Coulibaly".split("");
 
       <div class="overflow-hidden mt-2">
         <p class="subtitle text-sm md:text-base text-gray-500 dark:text-gray-400 tracking-[0.2em] uppercase">
-          Portfolio &copy; 2025
+          Portfolio &copy; 2026
         </p>
       </div>
 

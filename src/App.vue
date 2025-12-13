@@ -1,33 +1,58 @@
 <template>
   <div>
+    <NoiseOverlay />
     <InteractiveBackground />
     <KonamiHint />
     <CustomCursor />
     <div ref="overlay" :class="['transition-overlay', { 'dark-overlay': isDarkMode }]" >
       <p class="overlay-text">{{ transitionText }}</p>
     </div>
-    <router-view v-slot="{ Component, route }">
-      <component :is="Component" :key="route.path" class="page" />
-    </router-view>
+    
+    <WrapperComponent v-if="route.name !== 'SplashScreen'">
+      <router-view v-slot="{ Component, route }">
+        <component :is="Component" :key="route.path" class="page" />
+      </router-view>
+    </WrapperComponent>
+    <router-view v-else />
   </div>
 </template>
 
 <script setup>
 import { ref, watchEffect, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import gsap from "gsap";
 import { useI18n } from "vue-i18n";
 import CustomCursor from "@/components/CustomCursor.vue";
 import InteractiveBackground from "@/components/InteractiveBackground.vue";
+import NoiseOverlay from "@/components/NoiseOverlay.vue";
 import KonamiHint from "@/components/KonamiHint.vue";
+import WrapperComponent from "@/components/WrapperComponent.vue";
 import { useKonamiCode } from "@/composables/useKonamiCode";
 
 const overlay = ref(null);
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
 const isTransitioning = ref(false);
 const isDarkMode = ref(localStorage.getItem("theme") === "dark");
 const transitionText = ref("");
+
+// Sound Design
+const playClickSound = () => {
+  const audio = new Audio('/sounds/click.mp3');
+  audio.volume = 0.2; // Subtle volume
+  audio.play().catch(() => {
+    // Ignore auto-play errors
+  });
+};
+
+onMounted(() => {
+  // Add global click listener for sound
+  window.addEventListener('click', playClickSound);
+  
+  // Add hover sound for interactive elements (optional, requires a separate sound file)
+  // For now, we stick to the click sound as requested
+});
 
 useKonamiCode(async () => {
   // Easter Egg Trigger
