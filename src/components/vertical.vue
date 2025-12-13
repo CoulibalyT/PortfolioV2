@@ -7,15 +7,19 @@
     >
       <div class="flex justify-between items-center pb-3 px-2">
         <div class="flex flex-col items-start">
-          <p class="project-name text-xl font-bold text-black dark:text-white">{{ project.title }}</p>
+          <p class="project-name text-xl font-bold text-black dark:text-white" :class="{ 'text-white': isRedMode }">{{ project.title }}</p>
           <div class="flex gap-1.5 mt-1 flex-wrap">
-            <span v-for="(tech, tIndex) in project.tech" :key="tIndex" class="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+            <span v-for="(tech, tIndex) in project.tech" :key="tIndex" 
+                  class="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700"
+                  :class="{ '!bg-white/10 !border-white/20 !text-white': isRedMode }">
               {{ tech }}
             </span>
           </div>
         </div>
-        <a v-if="project.link" :href="project.link" target="_blank" class="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-full">
-          <ArrowUpRightIcon class="w-4 h-4 text-black dark:text-white" />
+        <a v-if="project.link" :href="project.link" target="_blank" 
+           class="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-full"
+           :class="{ '!bg-white/10': isRedMode }">
+          <ArrowUpRightIcon class="w-4 h-4 text-black dark:text-white" :class="{ '!text-white': isRedMode }" />
         </a>
       </div>
       
@@ -65,7 +69,7 @@ import { useProjectGallery } from '../composables/useProjectGallery'
 const props = defineProps(['arrayOfImage'])
 const { arrayOfImage } = toRefs(props)
 
-const { isDarkMode } = useTheme()
+const { isDarkMode, isRedMode } = useTheme()
 const { currentImageIndices, nextImage, prevImage, triggerEasterEgg } = useProjectGallery(arrayOfImage)
 
 const carousel = ref(null)

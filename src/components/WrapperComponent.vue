@@ -1,13 +1,21 @@
 <template>
-  <div class="h-[100dvh] flex flex-col md:p-28 p-6 gap-5 bg-transparent" :class="{ 'dark': isDarkMode }">
+  <div class="h-[100dvh] flex flex-col md:p-28 p-6 gap-5 bg-transparent" :class="{ 'dark': isDarkMode, 'red-theme': isRedMode }">
     <!-- Header -->
     <div class="flex justify-between items-start ">
       <div class="flex items-center">
         <div>
           <p class="md:text-[40px] text-2xl font-thin text-gray-900 dark:text-gray-100">Tene Coulibaly</p>
-          <p ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">
-            <ScrambleText :text="$t('role')" />
-          </p>
+          <div ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5 flex gap-1">
+            <SynonymReveal 
+              :baseText="$t('role').split(' & ')[0] || 'Developer'" 
+              :synonyms="$tm('synonyms.dev')" 
+            />
+            <span>&</span>
+            <SynonymReveal 
+              :baseText="$t('role').split(' & ')[1] || 'Designer'" 
+              :synonyms="$tm('synonyms.design')" 
+            />
+          </div>
         </div>
         <div>
           <p class="text-gray-700 dark:text-gray-300">/ˈte.ne/</p>
@@ -76,31 +84,47 @@
           <slot></slot>
         </div>
       </div>
-      <div class="w-1/4"></div>
+      <div class="w-1/4">
+        <DailyQuote />
+      </div>
     </div>
 
     <!-- Footer -->
     <div class="flex justify-between items-end">
-      <div class="flex items-center gap-1.5">
-        <div class="w-3 h-3 rounded-full bg-red-500 dark:bg-red-400 dot"></div>
-        <p class="text-gray-700 dark:text-gray-300">
-          <ScrambleText :text="$t('status.available')" />
-        </p>
+      <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+        <div class="flex items-center gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-custom-red dot"></div>
+          <p class="text-gray-700 dark:text-gray-300">
+            <span class="md:hidden"><ScrambleText :text="$t('status.available_short')" /></span>
+            <span class="hidden md:inline"><ScrambleText :text="$t('status.available')" /></span>
+          </p>
+        </div>
+        
+        <div class="hidden md:block w-px h-4 bg-gray-300 dark:bg-gray-700"></div>
+        
+        <LocalTime />
+        <WeatherWidget />
       </div>
 
       <!-- Toggle Mode Clair/Sombre -->
       <div class="space-x-2 text-gray-700 dark:text-gray-300">
         <span 
           @click="toggleDarkMode(false)" 
-          :class="{ 'font-bold': !isDarkMode }"
+          :class="{ 'font-bold': !isDarkMode && !isRedMode }"
           class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
         >{{$t("light")}}</span>
         -
         <span 
           @click="toggleDarkMode(true)" 
-          :class="{ 'font-bold': isDarkMode }"
+          :class="{ 'font-bold': isDarkMode && !isRedMode }"
           class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
         >{{$t("dark")}}</span>
+        -
+        <span 
+          @click="toggleRedMode()" 
+          :class="{ 'font-bold': isRedMode, 'text-custom-red': !isRedMode }"
+          class="cursor-pointer hover:text-custom-red"
+        >red</span>
       </div>
     </div>
   </div>
@@ -113,6 +137,10 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useTheme } from "../composables/useTheme";
 import { useSound } from "../composables/useSound";
 import ScrambleText from "./ScrambleText.vue";
+import LocalTime from "./LocalTime.vue";
+import WeatherWidget from "./WeatherWidget.vue";
+import SynonymReveal from "./SynonymReveal.vue";
+import DailyQuote from "./DailyQuote.vue";
 
 
 const currentLanguage = ref(localStorage.getItem("language") || "fr");
@@ -125,7 +153,7 @@ gsap.registerPlugin(ScrollToPlugin);
 
 const router = useRouter();
 const route = useRoute();
-const { isDarkMode, toggleDarkMode } = useTheme();
+const { isDarkMode, isRedMode, toggleDarkMode, toggleRedMode } = useTheme();
 const { playClick } = useSound();
 import { setI18nLanguage } from "../../config/i18n";
 

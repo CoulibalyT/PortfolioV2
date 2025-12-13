@@ -1,5 +1,4 @@
 <template>
-  <Wrapper>
     <div class="w-full h-full max-w-4xl mx-auto px-4 overflow-y-auto snap-y snap-mandatory scroll-smooth scroll-container relative no-scrollbar">
       
       <!-- Title Slide -->
@@ -90,12 +89,10 @@
       <div class="h-20"></div> <!-- Spacer for bottom scroll -->
 
     </div>
-  </Wrapper>
 </template>
 
 <script setup>
 import { onMounted, nextTick } from 'vue';
-import Wrapper from '../components/WrapperComponent.vue';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 

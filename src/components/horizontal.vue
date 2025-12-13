@@ -11,9 +11,11 @@
     <div v-for="(item, index) in arrayOfImage" :key="index" class="carousel-item">
       <div class="flex justify-between items-center w-full mb-2">
         <div class="flex flex-col items-start">
-          <p class="project-name text-xl md:text-2xl text-black dark:text-white">{{ item.title }}</p>
+          <p class="project-name text-xl md:text-2xl text-black dark:text-white" :class="{ 'text-white': isRedMode }">{{ item.title }}</p>
           <div class="flex gap-2 mt-1">
-            <span v-for="(tech, tIndex) in item.tech" :key="tIndex" class="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+            <span v-for="(tech, tIndex) in item.tech" :key="tIndex" 
+                  class="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700"
+                  :class="{ '!bg-white/10 !border-white/20 !text-white': isRedMode }">
               {{ tech }}
             </span>
           </div>
@@ -21,18 +23,23 @@
         <div class="flex gap-4">
           <ChevronLeftIcon 
             class="w-5 h-5 cursor-pointer hover:scale-110 transition-transform" 
-            :class="isAtStart ? 'text-gray-300 dark:text-gray-700' : 'text-black dark:text-white'"
+            :class="[isAtStart ? 'text-gray-300 dark:text-gray-700' : 'text-black dark:text-white', { '!text-white/50': isAtStart && isRedMode, '!text-white': !isAtStart && isRedMode }]"
             @click="changeProject(-1)"
           />
           <ChevronRightIcon 
             class="w-5 h-5 cursor-pointer hover:scale-110 transition-transform" 
-            :class="isAtEnd ? 'text-gray-300 dark:text-gray-700' : 'text-black dark:text-white'"
+            :class="[isAtEnd ? 'text-gray-300 dark:text-gray-700' : 'text-black dark:text-white', { '!text-white/50': isAtEnd && isRedMode, '!text-white': !isAtEnd && isRedMode }]"
             @click="changeProject(1)"
           />
         </div>
       </div>
         
-        <div class="main-image-wrapper relative group">
+        <div 
+          class="main-image-wrapper relative group perspective-container"
+          @mousemove="handleTilt($event, index)"
+          @mouseleave="resetTilt(index)"
+          :style="tiltStyles[index]"
+        >
           <!-- Image Navigation -->
           <div class="absolute inset-0 flex justify-between items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
             <button 
@@ -85,15 +92,41 @@
   const props = defineProps(['arrayOfImage'])
   const { arrayOfImage } = toRefs(props)
 
-  const { isDarkMode } = useTheme()
+  const { isDarkMode, isRedMode } = useTheme()
   const { currentImageIndices, nextImage, prevImage, triggerEasterEgg } = useProjectGallery(arrayOfImage)
   
   const carousel = ref(null)
   const activeIndex = ref(0)
   const isAnimating = ref(false)
+  const tiltStyles = ref({})
 
   const isAtStart = computed(() => activeIndex.value === 0)
   const isAtEnd = computed(() => activeIndex.value === arrayOfImage.value.length - 1)
+
+  const handleTilt = (e, index) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg rotation
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    tiltStyles.value[index] = {
+      transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
+      transition: 'transform 0.1s ease-out'
+    };
+  };
+
+  const resetTilt = (index) => {
+    tiltStyles.value[index] = {
+      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+      transition: 'transform 0.5s ease-out'
+    };
+  };
 
   const changeProject = (direction) => {
     if (isAnimating.value) return
@@ -193,7 +226,7 @@
   
   .main-image {
     width: 100%;
-    max-height: 50vh;
+    height: 50vh;
     object-fit: cover;
     border-radius: 12px;
   }

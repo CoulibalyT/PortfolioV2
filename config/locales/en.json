@@ -1,5 +1,9 @@
 {
   "role": "Developer & Designer",
+  "synonyms": {
+    "dev": ["Full Stack", "Front-End", "Back-End", "Creative Coder", "Problem Solver", "Tech Lead"],
+    "design": ["UI Designer", "UX Researcher", "Product Designer", "Art Director", "Pixel Perfect", "Prototyper"]
+  },
   "menu": {
     "me": "Me",
     "projects": "Projects",
@@ -8,7 +12,8 @@
     "timeline": "Timeline"
   },
   "status": {
-    "available": "Not available / Student Full Stack Developer at INSEAD"
+    "available": "Not available / Student Full Stack Developer at INSEAD",
+    "available_short": "Not available"
   },
   "timeline_section": {
     "title": "My Journey",
@@ -84,8 +89,8 @@
   "light": "light",
   "description": {
     "intro": "Hi, I’m Tene.",
-    "2intro":" I enjoy turning ideas into smooth and intuitive web experiences. Every line of code is a building block that creates a sustainable, high-performance, and accessible project for everyone.",
-    "value":" Create, optimize, innovate ",
+    "2intro":"I enjoy turning ideas into smooth and intuitive web experiences. Every line of code is a building block that creates a sustainable, high-performance, and accessible project for everyone.",
+    "value":"Create, optimize, innovate ",
     "end":": three words that guide my vision of development. I believe that a good product is not just about its design or technology, but the emotion and impact it generates."
   },
   "projects_section": {
@@ -99,6 +104,7 @@
     "subtitle": "The tools and technologies I use to bring ideas to life.",
     "tech_stack": "Tech Stack",
     "workflow": "Workflow & Mindset",
+    "learning": "Currently Learning",
     "skills": {
       "ai": "AI Integration",
       "adaptability": "Adaptability",
@@ -110,5 +116,23 @@
     "title": "Let's Connect",
     "text": "Although I am not currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
     "cta": "Say Hello"
-  }
+  },
+  "copied": "Copied!",
+  "quotes": [
+    { "text": "Simplicity is the ultimate sophistication.", "author": "Leonardo da Vinci" },
+    { "text": "Code is like humor. When you have to explain it, it’s bad.", "author": "Cory House" },
+    { "text": "Design is not just what it looks like and feels like. Design is how it works.", "author": "Steve Jobs" },
+    { "text": "First, solve the problem. Then, write the code.", "author": "John Johnson" },
+    { "text": "Creativity is intelligence having fun.", "author": "Albert Einstein" },
+    { "text": "Make it work, make it right, make it fast.", "author": "Kent Beck" },
+    { "text": "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.", "author": "Antoine de Saint-Exupéry" },
+    { "text": "Computer science is no more about computers than astronomy is about telescopes.", "author": "Edsger Dijkstra" },
+    { "text": "A good programmer is someone who always looks both ways before crossing a one-way street.", "author": "Doug Linder" },
+    { "text": "The best way to predict the future is to invent it.", "author": "Alan Kay" },
+    { "text": "Details make perfection, and perfection is not a detail.", "author": "Leonardo da Vinci" },
+    { "text": "Everybody in this country should learn to program a computer, because it teaches you how to think.", "author": "Steve Jobs" },
+    { "text": "Talk is cheap. Show me the code.", "author": "Linus Torvalds" },
+    { "text": "Quality means doing it right when no one is looking.", "author": "Henry Ford" },
+    { "text": "It's not a bug, it's an undocumented feature.", "author": "Anonymous" }
+  ]
 }

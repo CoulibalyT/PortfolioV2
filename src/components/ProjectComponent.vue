@@ -1,5 +1,4 @@
 <template>
-  <WrapperComponent>
     <div :class="{ 'dark': isDarkMode }" class="w-full h-full flex items-center justify-center">
       <div class="md:hidden w-full">
         <Vertical :arrayOfImage="projects"/>
@@ -8,13 +7,11 @@
         <Horizontal :arrayOfImage="projects"/>
       </div>
        </div>
-  </WrapperComponent>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
-import WrapperComponent from './WrapperComponent.vue'
 import Vertical from './vertical.vue';
 import { ArrowUpRightIcon } from '@heroicons/vue/24/solid';
 import Horizontal from './horizontal.vue';
@@ -47,6 +44,13 @@ const projects = ref([
       '/images/projet2/form.png',
       '/images/projet2/details.png',
       '/images/projet2/finalize.png',
+    ],
+  },
+  {
+    title: 'Daily Quote App',
+    tech: ['Flutter', 'Dart', 'Mobile'],
+    images: [
+      '/images/projet3/DailyQuote.png',
     ],
   },
 ])

@@ -68,6 +68,53 @@
   --color-text: var(--vt-c-text-dark-2);
 }
 
+:root.red-theme {
+  --color-background: #852C2C;
+  --color-background-soft: #6b2323;
+  --color-background-mute: #521b1b;
+
+  --color-border: rgba(255, 255, 255, 0.2);
+  --color-border-hover: rgba(255, 255, 255, 0.4);
+
+  --color-heading: #ffffff;
+  --color-text: rgba(255, 255, 255, 0.9);
+}
+
+:root.red-theme body {
+  background-color: #852C2C;
+  color: white;
+}
+
+/* Override Tailwind classes for red theme */
+:root.red-theme .text-gray-900,
+:root.red-theme .text-gray-700,
+:root.red-theme .text-gray-500,
+:root.red-theme .dark\:text-gray-100,
+:root.red-theme .dark\:text-gray-300,
+:root.red-theme .dark\:text-gray-400 {
+  color: white !important;
+}
+
+:root.red-theme .bg-white,
+:root.red-theme .dark\:bg-black {
+  background-color: #852C2C !important;
+}
+
+:root.red-theme .hover\:text-gray-900:hover,
+:root.red-theme .dark\:hover\:text-gray-100:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+body.dark {
+  background: var(--vt-c-black);
+  color: var(--vt-c-text-dark-2);
+}
+
+body.red-theme {
+  background: #852C2C;
+  color: white;
+}
+
 
 *,
 *::before,

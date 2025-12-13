@@ -8,54 +8,59 @@ import { ref, onMounted, watch } from 'vue';
 const props = defineProps({
   text: { type: String, required: true },
   duration: { type: Number, default: 0.8 }, // seconds
-  scrambleSpeed: { type: Number, default: 30 } // ms per frame
+  scrambleSpeed: { type: Number, default: 30 }, // ms per frame
+  delay: { type: Number, default: 0 } // ms delay before start
 });
 
-const displayedText = ref(props.text);
+const displayedText = ref(''); // Start empty
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~';
 
 let intervalId = null;
+let timeoutId = null;
 
 const startScramble = (newText) => {
-  const start = Date.now();
-  const length = Math.max(displayedText.value.length, newText.length);
-  
+  // Clear any existing timers
   if (intervalId) clearInterval(intervalId);
-  
-  intervalId = setInterval(() => {
-    const now = Date.now();
-    const progress = (now - start) / (props.duration * 1000);
+  if (timeoutId) clearTimeout(timeoutId);
+
+  // Wait for delay
+  timeoutId = setTimeout(() => {
+    const start = Date.now();
+    const length = newText.length;
     
-    if (progress >= 1) {
-      displayedText.value = newText;
-      clearInterval(intervalId);
-      return;
-    }
-    
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      // Reveal character if progress covers it
-      if (i < newText.length * progress) {
-        result += newText[i];
-      } else {
-        // Show random char
-        result += chars[Math.floor(Math.random() * chars.length)];
+    intervalId = setInterval(() => {
+      const now = Date.now();
+      const progress = (now - start) / (props.duration * 1000);
+      
+      if (progress >= 1) {
+        displayedText.value = newText;
+        clearInterval(intervalId);
+        return;
       }
-    }
-    
-    // Adjust length smoothly
-    const currentLength = Math.floor(length * (1 - progress) + newText.length * progress);
-    displayedText.value = result.slice(0, currentLength);
-    
-  }, props.scrambleSpeed);
+      
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        // Reveal character if progress covers it
+        if (i < length * progress) {
+          result += newText[i];
+        } else {
+          // Show random char
+          result += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      
+      displayedText.value = result;
+      
+    }, props.scrambleSpeed);
+  }, props.delay);
 };
+
+onMounted(() => {
+  startScramble(props.text);
+});
 
 watch(() => props.text, (newVal) => {
   startScramble(newVal);
-});
-
-onMounted(() => {
-  displayedText.value = props.text;
 });
 </script>
 
