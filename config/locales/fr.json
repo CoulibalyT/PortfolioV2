@@ -9,7 +9,13 @@
     "projects": "Projets",
     "contact": "Contact",
     "skills": "Compétences",
-    "timeline": "Parcours"
+    "timeline": "Parcours",
+    "playground": "Le Labo"
+  },
+  "playground": {
+    "title": "Le Labo",
+    "subtitle": "Un espace pour mes expérimentations créatives et explorations 3D.",
+    "wip": "En cours de développement"
   },
   "timeline_section": {
     "title": "Mon Parcours",

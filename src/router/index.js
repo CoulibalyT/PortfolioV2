@@ -5,6 +5,7 @@ import ProjectView from '@/views/ProjectView.vue'
 import SplashScreen from "@/views/SplashScreen.vue";
 import SkillsView from '@/views/SkillsView.vue';
 import TimelineView from '@/views/TimelineView.vue';
+import PlaygroundView from '@/views/PlaygroundView.vue';
 import NotFoundView from '@/views/NotFoundView.vue';
 
 
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactView,
+    },
+    {
+      path: '/playground',
+      name: 'playground',
+      component: PlaygroundView,
     },
     {
       path: '/:pathMatch(.*)*',
