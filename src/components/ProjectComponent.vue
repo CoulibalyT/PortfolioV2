@@ -1,11 +1,15 @@
 <template>
   <div ref="canvasRoot" class="canvas-root">
-    <!-- Mini floating header -->
+    <!-- Floating header with nav -->
     <header class="floating-header">
-      <router-link to="/" class="header-link">
-        <span class="header-name">Tene Coulibaly</span>
-        <span class="header-back">← Retour</span>
-      </router-link>
+      <router-link to="/" class="header-name-link">Tene Coulibaly</router-link>
+      <nav class="floating-nav">
+        <router-link to="/">{{ locale === 'fr' ? 'Moi' : 'Me' }}</router-link>
+        <router-link to="/skills">{{ locale === 'fr' ? 'Compétences' : 'Skills' }}</router-link>
+        <router-link to="/timeline">{{ locale === 'fr' ? 'Parcours' : 'Timeline' }}</router-link>
+        <router-link to="/contact">Contact</router-link>
+        <router-link to="/playground">{{ locale === 'fr' ? 'Labo' : 'Lab' }}</router-link>
+      </nav>
     </header>
 
     <!-- Dot grid background -->
@@ -40,6 +44,20 @@
       </Transition>
     </Teleport>
 
+    <!-- Filter bar -->
+    <div class="filter-bar" @mousedown.stop @touchstart.stop @click.stop>
+      <button
+        :class="['filter-btn', { active: activeFilter === null }]"
+        @click="setFilter(null)"
+      >{{ locale === 'fr' ? 'Tous' : 'All' }}</button>
+      <button
+        v-for="name in projectNames"
+        :key="name"
+        :class="['filter-btn', { active: activeFilter === name }]"
+        @click="setFilter(name)"
+      >{{ name }}</button>
+    </div>
+
     <!-- Hint -->
     <Transition name="hint-fade">
       <div v-if="showHint" class="canvas-hint">
@@ -55,8 +73,9 @@ import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 
-import { projectCards, TILE_W, TILE_H } from '@/data/projects'
+import { projects, projectCards, TILE_W, TILE_H } from '@/data/projects'
 const cards = projectCards
+const projectNames = projects.map(p => p.name)
 const FRICTION = 0.93
 const DRAG_THRESHOLD = 3
 
@@ -68,6 +87,12 @@ const dotGrid = ref(null)
 const cardsContainer = ref(null)
 const lightboxData = ref(null)
 const showHint = ref(true)
+const activeFilter = ref(null)
+
+function setFilter(name) {
+  activeFilter.value = activeFilter.value === name ? null : name
+  render()
+}
 
 const hintText = computed(() =>
   locale.value === 'fr' ? 'Glisser pour explorer' : 'Drag to explore'
@@ -172,6 +197,21 @@ function render() {
 
         const badge = el.querySelector('.card-badge')
         if (badge) badge.style.display = c.url ? 'block' : 'none'
+
+        // Apply filter
+        const filter = activeFilter.value
+        if (filter && c.project !== filter) {
+          el.style.opacity = '0.15'
+          el.style.filter = 'grayscale(0.8)'
+        } else if (filter && c.project === filter) {
+          el.style.opacity = '1'
+          el.style.filter = 'none'
+          el.style.borderColor = 'rgba(200, 255, 0, 0.2)'
+        } else {
+          el.style.opacity = '1'
+          el.style.filter = 'none'
+          el.style.borderColor = ''
+        }
 
         el._cardData = c
         poolIdx++
@@ -295,67 +335,26 @@ function startMomentum() {
   animId = requestAnimationFrame(step)
 }
 
-// ---- Touch handling (2 fingers = pan, 1 finger tap = lightbox) ----
-
-let touchStartSingle = null // track single finger tap position
-
-function getTwoFingerCenter(e) {
-  const t0 = e.touches[0]
-  const t1 = e.touches[1]
-  return { x: (t0.clientX + t1.clientX) / 2, y: (t0.clientY + t1.clientY) / 2 }
-}
+// ---- Touch handling (1 finger = drag OR tap, distinguished by distance) ----
 
 function onTouchStart(e) {
   e.preventDefault()
   e.stopPropagation()
-
-  if (e.touches.length === 2) {
-    // Two fingers: start pan
-    touchStartSingle = null
-    const center = getTwoFingerCenter(e)
-    // Reuse pointer logic with the center point
-    const fakeEvent = { clientX: center.x, clientY: center.y }
-    onPointerDown(fakeEvent)
-  } else if (e.touches.length === 1) {
-    // One finger: track for potential tap
-    touchStartSingle = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-  }
+  const t = e.touches[0]
+  onPointerDown({ clientX: t.clientX, clientY: t.clientY })
 }
 
 function onTouchMove(e) {
   e.preventDefault()
   e.stopPropagation()
-
-  if (e.touches.length === 2 && isDragging) {
-    const center = getTwoFingerCenter(e)
-    const fakeEvent = { clientX: center.x, clientY: center.y }
-    onPointerMove(fakeEvent)
-  }
-
-  // If one finger moved, cancel tap
-  if (e.touches.length === 1 && touchStartSingle) {
-    const dx = e.touches[0].clientX - touchStartSingle.x
-    const dy = e.touches[0].clientY - touchStartSingle.y
-    if (Math.abs(dx) + Math.abs(dy) > DRAG_THRESHOLD) {
-      touchStartSingle = null
-    }
-  }
+  const t = e.touches[0]
+  onPointerMove({ clientX: t.clientX, clientY: t.clientY })
 }
 
 function onTouchEnd(e) {
   e.preventDefault()
   e.stopPropagation()
-
-  // If two-finger pan was active and now less than 2 fingers
-  if (isDragging && e.touches.length < 2) {
-    onPointerUp()
-  }
-
-  // Single finger tap (no movement)
-  if (e.touches.length === 0 && touchStartSingle) {
-    handleTap(touchStartSingle)
-    touchStartSingle = null
-  }
+  onPointerUp()
 }
 
 // ---- Mouse handling (bound in template) ----
@@ -385,6 +384,9 @@ onMounted(() => {
 
   initPool()
   render()
+
+  // Auto-hide hint after 3s
+  setTimeout(() => { showHint.value = false }, 3000)
 
   const root = canvasRoot.value
   if (root) {
@@ -455,41 +457,60 @@ body.canvas-page-active {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 20px 32px;
+  padding: 16px 28px;
   pointer-events: none;
   background: linear-gradient(to bottom, rgba(8, 8, 10, 0.6), transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-}
-
-.header-link {
-  pointer-events: auto;
-  display: inline-flex;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  text-decoration: none;
-  color: #f0ece4;
-  transition: color 0.2s ease;
 }
 
-.header-link:hover {
-  color: #c8ff00;
-}
-
-.header-name {
+.header-name-link {
+  pointer-events: auto;
   font-size: 18px;
   font-weight: 300;
   letter-spacing: 0.01em;
+  text-decoration: none;
+  color: #f0ece4;
+  transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
-.header-back {
+.header-name-link:hover {
+  color: #c8ff00;
+}
+
+.floating-nav {
+  display: flex;
+  gap: 20px;
+  pointer-events: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.floating-nav a {
   font-size: 13px;
-  opacity: 0.5;
-  transition: opacity 0.2s ease;
+  font-weight: 300;
+  color: rgba(240, 236, 228, 0.45);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
 }
 
-.header-link:hover .header-back {
-  opacity: 1;
+.floating-nav a:hover {
+  color: #f0ece4;
+}
+
+@media (max-width: 640px) {
+  .floating-nav {
+    gap: 14px;
+  }
+  .floating-nav a {
+    font-size: 11px;
+  }
 }
 
 /* ---- Dot grid ---- */
@@ -688,10 +709,64 @@ body.canvas-page-active {
   opacity: 0;
 }
 
+/* ---- Filter bar ---- */
+.filter-bar {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background: rgba(17, 17, 19, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  padding: 6px 8px;
+  pointer-events: auto;
+  max-width: 90vw;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.filter-btn.active {
+  background: #c8ff00;
+  color: #08080a;
+  font-weight: 500;
+}
+
 /* ---- Hint ---- */
 .canvas-hint {
   position: fixed;
-  bottom: 32px;
+  bottom: 90px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
