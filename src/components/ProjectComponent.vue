@@ -1,66 +1,718 @@
 <template>
-    <div :class="{ 'dark': isDarkMode }" class="w-full h-full flex items-center justify-center">
-      <div class="md:hidden w-full">
-        <Vertical :arrayOfImage="projects"/>
+  <div ref="canvasRoot" class="canvas-root">
+    <!-- Mini floating header -->
+    <header class="floating-header">
+      <router-link to="/" class="header-link">
+        <span class="header-name">Tene Coulibaly</span>
+        <span class="header-back">← Retour</span>
+      </router-link>
+    </header>
+
+    <!-- Dot grid background -->
+    <div ref="dotGrid" class="dot-grid"></div>
+
+    <!-- Cards container (DOM pool) -->
+    <div ref="cardsContainer" class="cards-container"></div>
+
+    <!-- Lightbox -->
+    <Teleport to="body">
+      <Transition name="lightbox-fade">
+        <div v-if="lightboxData" class="lightbox-overlay" @click="closeLightbox">
+          <div class="lightbox-content" @click.stop>
+            <img :src="lightboxData.img" :alt="lightboxData.label" />
+            <div class="lightbox-info">
+              <span class="lightbox-label">{{ lightboxData.label }}</span>
+              <span class="lightbox-project">{{ lightboxData.project }}</span>
+              <a
+                v-if="lightboxData.url"
+                :href="lightboxData.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="lightbox-link"
+                @click.stop
+              >
+                {{ lightboxData.urlLabel || 'Voir le site' }} →
+              </a>
+            </div>
+            <button class="lightbox-close" @click="closeLightbox">&times;</button>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
+
+    <!-- Hint -->
+    <Transition name="hint-fade">
+      <div v-if="showHint" class="canvas-hint">
+        {{ hintText }}
       </div>
-      <div class="hidden md:flex w-full h-full items-center justify-center">
-        <Horizontal :arrayOfImage="projects"/>
-      </div>
-       </div>
+    </Transition>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import gsap from 'gsap'
-import Vertical from './vertical.vue';
-import { ArrowUpRightIcon } from '@heroicons/vue/24/solid';
-import Horizontal from './horizontal.vue';
-import { useTheme } from '../composables/useTheme';
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { locale } = useI18n()
 
+import { projectCards, TILE_W, TILE_H } from '@/data/projects'
+const cards = projectCards
+const FRICTION = 0.93
+const DRAG_THRESHOLD = 3
 
-const { isDarkMode } = useTheme();
+const POOL_SIZE = cards.length * 9
 
-const projects = ref([
-  {
-    title: 'Bento',
-    tech: ['Vue.js', 'Tailwind', 'Vercel'],
-    images: [
-      '/images/projet1/home.png',
-      '/images/projet1/challge.png',
-      '/images/projet1/log.png',
-      '/images/projet1/value.png',
-      '/images/projet1/bnnto.png',
-    ],
-    link: 'https://bento-sable.vercel.app/',
-  },
-  {
-    title: 'Simulateur de calculateur carbone',
-    tech: ['Vue.js', 'Node.js', 'API Climeet'],
-    images: [
-      '/images/projet2/cxc.jpg',
-      '/images/projet2/home.png',
-      '/images/projet2/choose.png',
-      '/images/projet2/form.png',
-      '/images/projet2/details.png',
-      '/images/projet2/finalize.png',
-    ],
-  },
-  {
-    title: 'Daily Quote App',
-    tech: ['Flutter', 'Dart', 'Mobile'],
-    images: [
-      '/images/projet3/DailyQuote.png',
-    ],
-  },
-])
+// Refs
+const canvasRoot = ref(null)
+const dotGrid = ref(null)
+const cardsContainer = ref(null)
+const lightboxData = ref(null)
+const showHint = ref(true)
 
+const hintText = computed(() =>
+  locale.value === 'fr' ? 'Glisser pour explorer' : 'Drag to explore'
+)
 
+// Pan state
+let px = 0
+let py = 0
+let vx = 0
+let vy = 0
+let isDragging = false
+let pointerStartX = 0
+let pointerStartY = 0
+let lastPointerX = 0
+let lastPointerY = 0
+let dragDistance = 0
+let lastTime = 0
+let animId = null
+let pool = []
+
+function createCardElement() {
+  const card = document.createElement('div')
+  card.className = 'canvas-card'
+  card.innerHTML = `
+    <img loading="lazy" draggable="false" />
+    <div class="card-badge">↗ Live</div>
+    <div class="card-overlay">
+      <span class="card-label"></span>
+      <span class="card-project"></span>
+    </div>
+  `
+  card.style.display = 'none'
+  return card
+}
+
+function initPool() {
+  const container = cardsContainer.value
+  pool = []
+  for (let i = 0; i < POOL_SIZE; i++) {
+    const el = createCardElement()
+    container.appendChild(el)
+    pool.push(el)
+  }
+}
+
+function render() {
+  const root = canvasRoot.value
+  if (!root) return
+
+  const vw = root.clientWidth
+  const vh = root.clientHeight
+  const margin = 80
+
+  // Update dot grid position
+  if (dotGrid.value) {
+    dotGrid.value.style.backgroundPosition = `${px % 24}px ${py % 24}px`
+  }
+
+  // Calculate visible tiles
+  const startTileX = Math.floor(-px / TILE_W) - 1
+  const endTileX = Math.floor((-px + vw) / TILE_W) + 1
+  const startTileY = Math.floor(-py / TILE_H) - 1
+  const endTileY = Math.floor((-py + vh) / TILE_H) + 1
+
+  let poolIdx = 0
+
+  for (let ty = startTileY; ty <= endTileY; ty++) {
+    for (let tx = startTileX; tx <= endTileX; tx++) {
+      for (let ci = 0; ci < cards.length; ci++) {
+        const c = cards[ci]
+        const screenX = c.tx + tx * TILE_W + px
+        const screenY = c.ty + ty * TILE_H + py
+
+        // Frustum culling
+        if (
+          screenX + c.w < -margin ||
+          screenX > vw + margin ||
+          screenY + c.h < -margin ||
+          screenY > vh + margin
+        ) {
+          continue
+        }
+
+        if (poolIdx >= pool.length) break
+
+        const el = pool[poolIdx]
+        el.style.display = 'block'
+        el.style.transform = `translate3d(${screenX}px, ${screenY}px, 0) rotate(${c.rot}deg)`
+        el.style.width = c.w + 'px'
+        el.style.height = c.h + 'px'
+
+        const img = el.querySelector('img')
+        if (img.dataset.src !== c.img) {
+          img.src = c.img
+          img.dataset.src = c.img
+        }
+
+        const label = el.querySelector('.card-label')
+        const project = el.querySelector('.card-project')
+        if (label.textContent !== c.label) label.textContent = c.label
+        if (project.textContent !== c.project) project.textContent = c.project
+
+        const badge = el.querySelector('.card-badge')
+        if (badge) badge.style.display = c.url ? 'block' : 'none'
+
+        el._cardData = c
+        poolIdx++
+      }
+    }
+  }
+
+  // Hide unused pool elements
+  for (let i = poolIdx; i < pool.length; i++) {
+    pool[i].style.display = 'none'
+  }
+}
+
+// ---- Pointer handling ----
+
+function getPointerPos(e) {
+  if (e.touches && e.touches.length > 0) {
+    return { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+  return { x: e.clientX, y: e.clientY }
+}
+
+function onPointerDown(e) {
+  if (e.button && e.button !== 0) return
+  const pos = getPointerPos(e)
+  isDragging = true
+  dragDistance = 0
+  pointerStartX = pos.x
+  pointerStartY = pos.y
+  lastPointerX = pos.x
+  lastPointerY = pos.y
+  vx = 0
+  vy = 0
+  lastTime = performance.now()
+
+  if (animId) {
+    cancelAnimationFrame(animId)
+    animId = null
+  }
+
+  if (showHint.value) {
+    showHint.value = false
+  }
+}
+
+function onPointerMove(e) {
+  if (!isDragging) return
+
+  const pos = getPointerPos(e)
+  const dx = pos.x - lastPointerX
+  const dy = pos.y - lastPointerY
+  const now = performance.now()
+  const dt = now - lastTime
+
+  dragDistance += Math.abs(dx) + Math.abs(dy)
+  px += dx
+  py += dy
+
+  if (dt > 0) {
+    const factor = 0.4
+    vx = vx * (1 - factor) + (dx / dt) * 16 * factor
+    vy = vy * (1 - factor) + (dy / dt) * 16 * factor
+  }
+
+  lastPointerX = pos.x
+  lastPointerY = pos.y
+  lastTime = now
+
+  render()
+}
+
+function onPointerUp() {
+  if (!isDragging) return
+  isDragging = false
+
+  if (dragDistance < DRAG_THRESHOLD) {
+    const pos = { x: pointerStartX, y: pointerStartY }
+    handleTap(pos)
+    return
+  }
+
+  startMomentum()
+}
+
+function handleTap(pos) {
+  for (let i = pool.length - 1; i >= 0; i--) {
+    const el = pool[i]
+    if (el.style.display === 'none' || !el._cardData) continue
+
+    const elRect = el.getBoundingClientRect()
+    if (
+      pos.x >= elRect.left && pos.x <= elRect.right &&
+      pos.y >= elRect.top && pos.y <= elRect.bottom
+    ) {
+      lightboxData.value = { ...el._cardData }
+      return
+    }
+  }
+}
+
+function closeLightbox() {
+  lightboxData.value = null
+}
+
+function startMomentum() {
+  const step = () => {
+    vx *= FRICTION
+    vy *= FRICTION
+
+    if (Math.abs(vx) < 0.1 && Math.abs(vy) < 0.1) {
+      animId = null
+      return
+    }
+
+    px += vx
+    py += vy
+    render()
+
+    animId = requestAnimationFrame(step)
+  }
+  animId = requestAnimationFrame(step)
+}
+
+// ---- Touch handling (2 fingers = pan, 1 finger tap = lightbox) ----
+
+let touchStartSingle = null // track single finger tap position
+
+function getTwoFingerCenter(e) {
+  const t0 = e.touches[0]
+  const t1 = e.touches[1]
+  return { x: (t0.clientX + t1.clientX) / 2, y: (t0.clientY + t1.clientY) / 2 }
+}
+
+function onTouchStart(e) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  if (e.touches.length === 2) {
+    // Two fingers: start pan
+    touchStartSingle = null
+    const center = getTwoFingerCenter(e)
+    // Reuse pointer logic with the center point
+    const fakeEvent = { clientX: center.x, clientY: center.y }
+    onPointerDown(fakeEvent)
+  } else if (e.touches.length === 1) {
+    // One finger: track for potential tap
+    touchStartSingle = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+}
+
+function onTouchMove(e) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  if (e.touches.length === 2 && isDragging) {
+    const center = getTwoFingerCenter(e)
+    const fakeEvent = { clientX: center.x, clientY: center.y }
+    onPointerMove(fakeEvent)
+  }
+
+  // If one finger moved, cancel tap
+  if (e.touches.length === 1 && touchStartSingle) {
+    const dx = e.touches[0].clientX - touchStartSingle.x
+    const dy = e.touches[0].clientY - touchStartSingle.y
+    if (Math.abs(dx) + Math.abs(dy) > DRAG_THRESHOLD) {
+      touchStartSingle = null
+    }
+  }
+}
+
+function onTouchEnd(e) {
+  e.preventDefault()
+  e.stopPropagation()
+
+  // If two-finger pan was active and now less than 2 fingers
+  if (isDragging && e.touches.length < 2) {
+    onPointerUp()
+  }
+
+  // Single finger tap (no movement)
+  if (e.touches.length === 0 && touchStartSingle) {
+    handleTap(touchStartSingle)
+    touchStartSingle = null
+  }
+}
+
+// ---- Mouse handling (bound in template) ----
+
+function onMouseDown(e) {
+  onPointerDown(e)
+}
+
+function onMouseMove(e) {
+  onPointerMove(e)
+}
+
+function onMouseUp() {
+  onPointerUp()
+}
+
+// ---- Keyboard ----
+function onKeyDown(e) {
+  if (e.key === 'Escape' && lightboxData.value) {
+    closeLightbox()
+  }
+}
+
+onMounted(() => {
+  // Scope overflow: hidden to this page
+  document.body.classList.add('canvas-page-active')
+
+  initPool()
+  render()
+
+  const root = canvasRoot.value
+  if (root) {
+    root.addEventListener('mousedown', onMouseDown)
+    root.addEventListener('mousemove', onMouseMove)
+    root.addEventListener('mouseup', onMouseUp)
+    root.addEventListener('mouseleave', onMouseUp)
+    root.addEventListener('touchstart', onTouchStart, { passive: false })
+    root.addEventListener('touchmove', onTouchMove, { passive: false })
+    root.addEventListener('touchend', onTouchEnd, { passive: false })
+  }
+
+  window.addEventListener('keydown', onKeyDown)
+})
+
+onUnmounted(() => {
+  // Remove scoped body class
+  document.body.classList.remove('canvas-page-active')
+
+  if (animId) cancelAnimationFrame(animId)
+
+  const root = canvasRoot.value
+  if (root) {
+    root.removeEventListener('mousedown', onMouseDown)
+    root.removeEventListener('mousemove', onMouseMove)
+    root.removeEventListener('mouseup', onMouseUp)
+    root.removeEventListener('mouseleave', onMouseUp)
+    root.removeEventListener('touchstart', onTouchStart)
+    root.removeEventListener('touchmove', onTouchMove)
+    root.removeEventListener('touchend', onTouchEnd)
+  }
+
+  window.removeEventListener('keydown', onKeyDown)
+})
 </script>
 
-<style scoped>
+<style>
+/* Scoped body styles — only active when this page is mounted */
+body.canvas-page-active {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  -webkit-touch-callout: none;
+}
 
-@reference "../../src/assets/base.css";
+/* ---- Full-page canvas ---- */
+.canvas-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  z-index: 1;
+}
 
+.canvas-root:active {
+  cursor: grabbing;
+}
 
+/* ---- Floating header ---- */
+.floating-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 32px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(8, 8, 10, 0.6), transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.header-link {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: #f0ece4;
+  transition: color 0.2s ease;
+}
+
+.header-link:hover {
+  color: #c8ff00;
+}
+
+.header-name {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.header-back {
+  font-size: 13px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.header-link:hover .header-back {
+  opacity: 1;
+}
+
+/* ---- Dot grid ---- */
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Cards container ---- */
+.cards-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---- Card ---- */
+.canvas-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111113;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  pointer-events: auto;
+  will-change: transform;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.canvas-card:hover {
+  box-shadow: 0 0 24px rgba(200, 255, 0, 0.15), 0 0 0 1px rgba(200, 255, 0, 0.3);
+  border-color: rgba(200, 255, 0, 0.4);
+  z-index: 10;
+}
+
+.canvas-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  pointer-events: none;
+}
+
+.canvas-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.15);
+}
+
+/* ---- Card badge ---- */
+.card-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(200, 255, 0, 0.9);
+  color: #08080a;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.03em;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.canvas-card:hover .card-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Card overlay ---- */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.canvas-card:hover .card-overlay {
+  transform: translateY(0);
+}
+
+.card-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f0ece4;
+}
+
+.card-project {
+  font-size: 12px;
+  color: #c8ff00;
+}
+
+/* ---- Lightbox ---- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.93);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 84vh;
+  cursor: default;
+}
+
+.lightbox-content img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+.lightbox-info {
+  text-align: center;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lightbox-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f0ece4;
+}
+
+.lightbox-project {
+  font-size: 14px;
+  color: #c8ff00;
+}
+
+.lightbox-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #c8ff00;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-link:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #f0ece4;
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+}
+
+.lightbox-close:hover {
+  color: #c8ff00;
+}
+
+.lightbox-fade-enter-active,
+.lightbox-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.lightbox-fade-enter-from,
+.lightbox-fade-leave-to {
+  opacity: 0;
+}
+
+/* ---- Hint ---- */
+.canvas-hint {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  background: rgba(17, 17, 19, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f0ece4;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hint-fade-enter-active,
+.hint-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.hint-fade-enter-from,
+.hint-fade-leave-to {
+  opacity: 0;
+}
 </style>

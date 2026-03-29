@@ -1,8 +1,7 @@
 {
-  "role": "Développeur & Designer",
+  "role": "Développeuse Full Stack",
   "synonyms": {
-    "dev": ["Full Stack", "Front-End", "Back-End", "Creative Coder", "Problem Solver", "Tech Lead"],
-    "design": ["UI Designer", "UX Researcher", "Product Designer", "Art Director", "Pixel Perfect", "Prototyper"]
+    "dev": ["Full Stack", "Front-End", "Back-End", "Creative Coder", "Problem Solver", "Tech Lead"]
   },
   "menu": {
     "me": "Moi",
@@ -27,7 +26,7 @@
         "year": "Avril 2025 - Présent",
         "title": "Développeuse Étudiante",
         "place": "INSEAD",
-        "description": "Poste étudiant en cours."
+        "description": "Développement d'outils internes et applications web."
       },
       {
         "year": "2023 - 2025",
@@ -52,8 +51,8 @@
       {
         "year": "Jan 2025 - Oct 2026",
         "title": "Master",
-        "place": "",
-        "description": ""
+        "place": "INSEAD",
+        "description": "Master en cours."
       },
       {
         "year": "2023 - 2025",
@@ -89,15 +88,14 @@
   },
   "dark": "sombre",
   "light": "claire",
+   "red": "rouge",
   "status": {
-    "available": "Pas disponible / Étudiante Développeuse Full Stack à INSEAD",
-    "available_short": "Pas disponible"
+    "available": "Étudiante Développeuse Full Stack à INSEAD",
+    "available_short": "Étudiante à INSEAD"
   },
     "description": {
       "intro": "Salut, moi c’est Tene.",
-      "2intro":"J’aime transformer des idées en expériences web fluides et intuitives. Chaque ligne de code est une brique qui construit un projet durable, performant et accessible à tous.",
-      "value":"Créer, optimiser, innover ",
-      "end":": trois mots qui guident ma vision du développement. Je crois qu’un bon produit ne se limite pas à son design ou à sa technique, mais à l’émotion et à l’impact qu’il génère."
+      "2intro":"Développeuse Full Stack en alternance chez Captag, étudiante à l’ETNA. Je construis des applications web du back-end à l’interface — propres, performantes, et pensées pour les utilisateurs."
     },
   "projects_section": {
     "title": "Projets Sélectionnés",
@@ -112,16 +110,43 @@
     "workflow": "Workflow & État d'esprit",
     "learning": "En Apprentissage",
     "skills": {
-      "ai": "Intégration IA",
-      "adaptability": "Adaptabilité",
-      "multitasking": "Polyvalence",
-      "problem_solving": "Résolution de problèmes"
+      "agile": "Méthode Agile/Scrum",
+      "cicd": "CI/CD",
+      "testing": "Tests & Debugging",
+      "problem_solving": "Résolution de problèmes",
+      "autonomy": "Autonomie & alternance"
     }
   },
   "contact_section": {
     "title": "Restons en contact",
     "text": "Bien que je ne sois pas actuellement à la recherche de nouvelles opportunités, ma boîte de réception est toujours ouverte. Que vous ayez une question ou juste pour dire bonjour, je ferai de mon mieux pour vous répondre !",
     "cta": "Dire Bonjour"
+  },
+  "seo": {
+    "home": {
+      "title": "Tene Coulibaly — Développeuse Full Stack | Portfolio",
+      "description": "Portfolio de Tene Coulibaly, développeuse Full Stack. Création d'expériences web fluides, performantes et accessibles."
+    },
+    "projects": {
+      "title": "Projets — Tene Coulibaly",
+      "description": "Découvrez les projets réalisés par Tene Coulibaly : applications web, SaaS, modules carbone et plus encore."
+    },
+    "skills": {
+      "title": "Compétences — Tene Coulibaly",
+      "description": "Stack technique et compétences de Tene Coulibaly : Vue.js, React, Node.js, TypeScript, Docker et plus."
+    },
+    "timeline": {
+      "title": "Parcours — Tene Coulibaly",
+      "description": "Parcours professionnel et formations de Tene Coulibaly : INSEAD, CAPTAG, Sayse, Epitech, ETNA."
+    },
+    "contact": {
+      "title": "Contact — Tene Coulibaly",
+      "description": "Contactez Tene Coulibaly pour discuter de vos projets web ou simplement dire bonjour."
+    },
+    "playground": {
+      "title": "Le Labo — Tene Coulibaly",
+      "description": "Expérimentations créatives et explorations 3D par Tene Coulibaly : particules, galaxie, ADN et plus."
+    }
   },
   "copied": "Copié !",
   "quotes": [

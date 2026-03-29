@@ -1,0 +1,67 @@
+{
+  "projects": [
+    {
+      "name": "skywalk",
+      "url": "https://skywalk-chi.vercel.app",
+      "auth": {
+        "type": "form",
+        "loginUrl": "/auth/login",
+        "usernameSelector": "input[type='email']",
+        "passwordSelector": "input[type='password']",
+        "submitSelector": "button[type='submit']",
+        "username": "${SKYWALK_EMAIL}",
+        "password": "${SKYWALK_PASSWORD}",
+        "waitForSelector": "nav"
+      },
+      "pages": [
+        { "path": "/", "name": "home" },
+        { "path": "/destinations", "name": "destinations" },
+        { "path": "/forum", "name": "forum" },
+        { "path": "/dashboard/personalized", "name": "dashboard" },
+        { "path": "/projects", "name": "projects" }
+      ],
+      "viewport": { "width": 1920, "height": 1080 },
+      "outputDir": "./public/images/projects/skywalk"
+    },
+    {
+  "name": "bento",
+  "url": "https://bento-sable.vercel.app",
+  "auth": {
+    "type": "form",
+    "loginUrl": "/login",
+    "usernameSelector": "#email",
+    "passwordSelector": "#password_hash",
+    "submitSelector": "button[type='submit']",
+    "username": "${BENTO_EMAIL}",
+    "password": "${BENTO_PASSWORD}",
+    "waitForSelector": "nav"
+  },
+  "pages": [
+    { "path": "/", "name": "home" },
+    { "path": "/explore", "name": "explore" },
+    { "path": "/challenges", "name": "challenges" },
+    { "path": "/users", "name": "community" },
+    { "path": "/projects", "name": "projects" }
+  ],
+  "viewport": { "width": 1440, "height": 900 },
+  "outputDir": "./public/images/projects/bento"
+},
+    {
+      "name": "joyofsimple",
+      "url": "https://joyofsimple-site.vercel.app",
+      "pages": [
+        { "path": "/", "name": "home" },
+        { "path": "/en/contact", "name": "contact" },
+        { "path": "/en/approche", "name": "approche" }
+      ],
+      "viewport": { "width": 1920, "height": 1080 },
+      "outputDir": "./public/images/projects/joyofsimple"
+    }
+  ],
+  "options": {
+    "quality": 90,
+    "format": "webp",
+    "waitFor": 2000,
+    "fullPage": false
+  }
+}

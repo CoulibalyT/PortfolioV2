@@ -8,7 +8,7 @@
       <p class="overlay-text">{{ transitionText }}</p>
     </div>
     
-    <WrapperComponent v-if="route.name !== 'SplashScreen'">
+    <WrapperComponent v-if="route.name !== 'SplashScreen' && route.name !== 'project'">
       <router-view v-slot="{ Component, route }">
         <component :is="Component" :key="route.path" class="page" />
       </router-view>
@@ -37,22 +37,7 @@ const isTransitioning = ref(false);
 const isDarkMode = ref(localStorage.getItem("theme") === "dark");
 const transitionText = ref("");
 
-// Sound Design
-const playClickSound = () => {
-  const audio = new Audio('/sounds/click.mp3');
-  audio.volume = 0.2; // Subtle volume
-  audio.play().catch(() => {
-    // Ignore auto-play errors
-  });
-};
-
-onMounted(() => {
-  // Add global click listener for sound
-  window.addEventListener('click', playClickSound);
-  
-  // Add hover sound for interactive elements (optional, requires a separate sound file)
-  // For now, we stick to the click sound as requested
-});
+onMounted(() => {});
 
 useKonamiCode(async () => {
   // Easter Egg Trigger

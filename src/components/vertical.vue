@@ -49,9 +49,11 @@
           {{ currentImageIndices[index] + 1 }} / {{ project.images.length }}
         </div>
 
-        <img 
-          :src="project.images[currentImageIndices[index]]" 
-          class="w-full h-48 object-cover transition-all duration-300 border border-gray-200 dark:border-gray-800" 
+        <img
+          :src="project.images[currentImageIndices[index]]"
+          :alt="project.title"
+          loading="lazy"
+          class="w-full h-48 object-cover transition-all duration-300 border border-gray-200 dark:border-gray-800"
           @click="triggerEasterEgg($event)"
         />
       </div>
