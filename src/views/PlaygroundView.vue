@@ -44,6 +44,9 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
+import { useSeo } from '@/composables/useSeo'
+
+useSeo('playground', '/playground')
 import ParticleCloud from '@/components/playground/ParticleCloud.vue';
 import TorusKnot from '@/components/playground/TorusKnot.vue';
 import WavyGrid from '@/components/playground/WavyGrid.vue';

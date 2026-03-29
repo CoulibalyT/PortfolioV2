@@ -1,8 +1,7 @@
 {
-  "role": "Developer & Designer",
+  "role": "Full Stack Developer",
   "synonyms": {
-    "dev": ["Full Stack", "Front-End", "Back-End", "Creative Coder", "Problem Solver", "Tech Lead"],
-    "design": ["UI Designer", "UX Researcher", "Product Designer", "Art Director", "Pixel Perfect", "Prototyper"]
+    "dev": ["Full Stack", "Front-End", "Back-End", "Creative Coder", "Problem Solver", "Tech Lead"]
   },
   "menu": {
     "me": "Me",
@@ -18,8 +17,8 @@
     "wip": "Work in Progress"
   },
   "status": {
-    "available": "Not available / Student Full Stack Developer at INSEAD",
-    "available_short": "Not available"
+    "available": "Full Stack Developer Student at INSEAD",
+    "available_short": "Student at INSEAD"
   },
   "timeline_section": {
     "title": "My Journey",
@@ -31,7 +30,7 @@
         "year": "April 2025 - Present",
         "title": "Student Developer",
         "place": "INSEAD",
-        "description": "Student position, currently ongoing."
+        "description": "Development of internal tools and web applications."
       },
       {
         "year": "2023 - 2025",
@@ -56,8 +55,8 @@
       {
         "year": "Jan 2025 - Oct 2026",
         "title": "Master's Degree",
-        "place": "",
-        "description": ""
+        "place": "INSEAD",
+        "description": "Master's degree in progress."
       },
       {
         "year": "2023 - 2025",
@@ -93,11 +92,10 @@
   },
   "dark": "dark",
   "light": "light",
+  "red": "red",
   "description": {
     "intro": "Hi, I’m Tene.",
-    "2intro":"I enjoy turning ideas into smooth and intuitive web experiences. Every line of code is a building block that creates a sustainable, high-performance, and accessible project for everyone.",
-    "value":"Create, optimize, innovate ",
-    "end":": three words that guide my vision of development. I believe that a good product is not just about its design or technology, but the emotion and impact it generates."
+    "2intro":"Full Stack Developer on a work-study program at Captag, student at ETNA. I build web applications from back-end to interface — clean, performant, and designed for users."
   },
   "projects_section": {
     "title": "Selected Works",
@@ -112,16 +110,43 @@
     "workflow": "Workflow & Mindset",
     "learning": "Currently Learning",
     "skills": {
-      "ai": "AI Integration",
-      "adaptability": "Adaptability",
-      "multitasking": "Multitasking",
-      "problem_solving": "Problem Solving"
+      "agile": "Agile/Scrum",
+      "cicd": "CI/CD",
+      "testing": "Testing & Debugging",
+      "problem_solving": "Problem Solving",
+      "autonomy": "Self-directed & Work-study"
     }
   },
   "contact_section": {
     "title": "Let's Connect",
     "text": "Although I am not currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
     "cta": "Say Hello"
+  },
+  "seo": {
+    "home": {
+      "title": "Tene Coulibaly — Full Stack Developer | Portfolio",
+      "description": "Portfolio of Tene Coulibaly, Full Stack Developer. Building smooth, performant, and accessible web experiences."
+    },
+    "projects": {
+      "title": "Projects — Tene Coulibaly",
+      "description": "Explore projects by Tene Coulibaly: web applications, SaaS, carbon modules and more."
+    },
+    "skills": {
+      "title": "Skills — Tene Coulibaly",
+      "description": "Tech stack and skills of Tene Coulibaly: Vue.js, React, Node.js, TypeScript, Docker and more."
+    },
+    "timeline": {
+      "title": "Timeline — Tene Coulibaly",
+      "description": "Professional journey and education of Tene Coulibaly: INSEAD, CAPTAG, Sayse, Epitech, ETNA."
+    },
+    "contact": {
+      "title": "Contact — Tene Coulibaly",
+      "description": "Get in touch with Tene Coulibaly to discuss web projects or just say hello."
+    },
+    "playground": {
+      "title": "The Lab — Tene Coulibaly",
+      "description": "Creative coding experiments and 3D explorations by Tene Coulibaly: particles, galaxy, DNA and more."
+    }
   },
   "copied": "Copied!",
   "quotes": [

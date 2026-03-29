@@ -1,19 +1,14 @@
 <template>
-  <div class="h-[100dvh] flex flex-col md:p-28 p-6 gap-5 bg-transparent" :class="{ 'dark': isDarkMode, 'red-theme': isRedMode }">
+  <div class="h-[100dvh] flex flex-col md:p-28 p-4 md:gap-5 gap-3 bg-transparent" :class="{ 'dark': isDarkMode, 'red-theme': isRedMode }">
     <!-- Header -->
     <div class="flex justify-between items-start ">
       <div class="flex items-center">
         <div>
-          <p class="md:text-[40px] text-2xl font-thin text-gray-900 dark:text-gray-100">Tene Coulibaly</p>
-          <div ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5 flex gap-1">
-            <SynonymReveal 
-              :baseText="$t('role').split(' & ')[0] || 'Developer'" 
-              :synonyms="$tm('synonyms.dev')" 
-            />
-            <span>&</span>
-            <SynonymReveal 
-              :baseText="$t('role').split(' & ')[1] || 'Designer'" 
-              :synonyms="$tm('synonyms.design')" 
+          <p class="md:text-[40px] text-xl font-thin text-gray-900 dark:text-gray-100">Tene Coulibaly</p>
+          <div ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">
+            <SynonymReveal
+              :baseText="$t('role')"
+              :synonyms="$tm('synonyms.dev')"
             />
           </div>
         </div>
@@ -39,7 +34,7 @@
 
     <!-- Navigation -->
     <div class="flex-1 flex lg:flex-row flex-col min-h-0 overflow-hidden">
-      <nav ref="navMenu" class="lg:w-1/4 w-full flex flex-col justify-center gap-1.5 mb-6 lg:mb-0 shrink-0">
+      <nav ref="navMenu" class="lg:w-1/4 w-full flex lg:flex-col flex-row lg:justify-center lg:gap-1.5 gap-4 lg:mb-0 mb-2 shrink-0 lg:overflow-visible overflow-x-auto whitespace-nowrap scrollbar-hide lg:pr-0 pr-5">
         <router-link 
           active-class="font-bold" 
           class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
@@ -81,35 +76,32 @@
       <div 
         ref="contentWrapper"
         class="flex-1 text-center relative text-gray-900 dark:text-gray-100 h-full"
-        :class="['timeline', 'playground'].includes(route.name) ? 'overflow-hidden' : 'overflow-y-auto scroll-container scroll-smooth'"
+        :class="['timeline', 'playground', 'project'].includes(route.name) ? 'overflow-hidden' : 'overflow-y-auto scroll-container scroll-smooth'"
       >
         <div  
           class="w-full"
-          :class="['timeline', 'playground'].includes(route.name) ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-8'"
+          :class="['timeline', 'playground', 'project'].includes(route.name) ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-4 md:py-8'"
         >
           <slot></slot>
         </div>
       </div>
-      <div class="w-1/4">
+      <div class="w-1/4 hidden lg:block">
         <DailyQuote />
       </div>
     </div>
 
     <!-- Footer -->
-    <div class="flex justify-between items-end">
-      <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-        <div class="flex items-center gap-1.5">
-          <div class="w-3 h-3 rounded-full bg-custom-red dot"></div>
-          <p class="text-gray-700 dark:text-gray-300">
-            <span class="md:hidden"><ScrambleText :text="$t('status.available_short')" /></span>
-            <span class="hidden md:inline"><ScrambleText :text="$t('status.available')" /></span>
-          </p>
-        </div>
-        
+    <div class="flex justify-between items-center text-xs md:text-sm">
+      <div class="flex items-center gap-2 md:gap-4">
+        <p class="text-gray-700 dark:text-gray-300">
+          <span class="md:hidden"><ScrambleText :text="$t('status.available_short')" /></span>
+          <span class="hidden md:inline"><ScrambleText :text="$t('status.available')" /></span>
+        </p>
+
         <div class="hidden md:block w-px h-4 bg-gray-300 dark:bg-gray-700"></div>
-        
-        <LocalTime />
-        <WeatherWidget />
+
+        <span class="hidden md:inline"><LocalTime /></span>
+        <span class="hidden md:inline"><WeatherWidget /></span>
       </div>
 
       <!-- Toggle Mode Clair/Sombre -->
@@ -181,6 +173,7 @@ const isScrollingInsideSlot = (event) => {
 
 // Gérer le scroll de la souris sur PC
 const handleScroll = (event) => {
+  if (route.name === 'project') return;
   if (isScrolling || isScrollingInsideSlot(event)) return; // Bloque le changement de route si on est dans un élément scrollable
   isScrolling = true;
 
@@ -214,6 +207,7 @@ const handleTouchStart = (event) => {
 };
 
 const handleTouchMove = (event) => {
+  if (route.name === 'project') return;
   let deltaY = event.touches[0].clientY - startY;
   if (isScrolling || isScrollingInsideSlot(event)) return;
 
@@ -243,11 +237,13 @@ const handleTouchMove = (event) => {
 
 // Ajouter/Supprimer l'écouteur de scroll
 onMounted(() => {
-  // Vérifie si l'écran est mobile
   const isMobile = window.innerWidth <= 768;
 
-  if (isMobile) {
+  if (!isMobile) {
+    // Desktop : scroll wheel change de page
     window.addEventListener("wheel", handleScroll, { passive: true });
+  } else {
+    // Mobile : touch change de page
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
   }
@@ -255,9 +251,10 @@ onMounted(() => {
 
 onUnmounted(() => {
   const isMobile = window.innerWidth <= 768;
-  
-  if (isMobile) {
+
+  if (!isMobile) {
     window.removeEventListener("wheel", handleScroll);
+  } else {
     window.removeEventListener("touchstart", handleTouchStart);
     window.removeEventListener("touchmove", handleTouchMove);
   }
@@ -320,6 +317,13 @@ watchEffect(() => {
 
 .hscreen{
   height: calc(100vh - calc(100vh - 100%))
+}
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 </style>

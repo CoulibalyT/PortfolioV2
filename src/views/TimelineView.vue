@@ -95,6 +95,9 @@
 import { onMounted, nextTick } from 'vue';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useSeo } from '@/composables/useSeo'
+
+useSeo('timeline', '/timeline')
 
 gsap.registerPlugin(ScrollTrigger);
 

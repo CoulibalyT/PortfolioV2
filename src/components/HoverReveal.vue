@@ -15,7 +15,7 @@
           height: '180px',
         }"
       >
-        <img :src="image" class="w-full h-full object-cover" />
+        <img :src="image" alt="Aperçu du projet" class="w-full h-full object-cover" />
       </div>
     </Teleport>
   </span>
