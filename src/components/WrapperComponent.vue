@@ -246,20 +246,9 @@ const handleTouchMove = (event) => {
 
 // Ajouter/Supprimer l'écouteur de scroll
 onMounted(() => {
-  // Scroll/touch page change disabled on mobile
-  const isMobile = window.innerWidth <= 768;
-
-  if (!isMobile) {
-    window.addEventListener("wheel", handleScroll, { passive: false });
-  }
 });
 
 onUnmounted(() => {
-  const isMobile = window.innerWidth <= 768;
-
-  if (!isMobile) {
-    window.removeEventListener("wheel", handleScroll);
-  }
 });
 
 watch(() => route.path, () => {
