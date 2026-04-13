@@ -3,15 +3,15 @@
 
       <!-- Title Slide with Filter -->
       <div class="timeline-section h-full flex flex-col justify-center items-center snap-center">
-        <h2 class="text-5xl md:text-7xl font-bold mb-6 dark:text-white">{{ $t('timeline_section.title') }}</h2>
-        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-10">{{ $t('timeline_section.subtitle') }}</p>
+        <h2 class="text-3xl md:text-7xl font-bold mb-4 md:mb-6 dark:text-white">{{ $t('timeline_section.title') }}</h2>
+        <p class="text-base md:text-2xl text-gray-600 dark:text-gray-400 mb-6 md:mb-10">{{ $t('timeline_section.subtitle') }}</p>
 
         <!-- Filter buttons -->
-        <div class="flex gap-3">
+        <div class="flex gap-2 md:gap-3 flex-wrap justify-center">
           <button
             @click="setFilter('all')"
             :class="[
-              'px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border',
+              'px-4 py-1.5 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border',
               activeFilter === 'all'
                 ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
                 : 'bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
@@ -20,7 +20,7 @@
           <button
             @click="setFilter('experience')"
             :class="[
-              'px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border',
+              'px-4 py-1.5 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border',
               activeFilter === 'experience'
                 ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
                 : 'bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
@@ -29,7 +29,7 @@
           <button
             @click="setFilter('education')"
             :class="[
-              'px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border',
+              'px-4 py-1.5 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border',
               activeFilter === 'education'
                 ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
                 : 'bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
