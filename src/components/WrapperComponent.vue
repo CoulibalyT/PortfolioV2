@@ -203,6 +203,7 @@ const handleScroll = (event) => {
 let startY = 0;
 
 const handleTouchStart = (event) => {
+  if (route.name === 'project') return;
   startY = event.touches[0].clientY;
 };
 
@@ -237,15 +238,11 @@ const handleTouchMove = (event) => {
 
 // Ajouter/Supprimer l'écouteur de scroll
 onMounted(() => {
+  // Scroll/touch page change disabled on mobile
   const isMobile = window.innerWidth <= 768;
 
   if (!isMobile) {
-    // Desktop : scroll wheel change de page
     window.addEventListener("wheel", handleScroll, { passive: false });
-  } else {
-    // Mobile : touch change de page
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
   }
 });
 
@@ -254,9 +251,6 @@ onUnmounted(() => {
 
   if (!isMobile) {
     window.removeEventListener("wheel", handleScroll);
-  } else {
-    window.removeEventListener("touchstart", handleTouchStart);
-    window.removeEventListener("touchmove", handleTouchMove);
   }
 });
 
