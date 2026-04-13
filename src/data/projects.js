@@ -143,6 +143,27 @@ export const projects = [
     ]
   },
   {
+    name: 'Portfolio Sync',
+    folder: 'portfolio-sync',
+    url: 'https://www.npmjs.com/package/portfolio-sync',
+    urlLabel: 'Voir sur npm',
+    description: {
+      fr: 'Outil CLI Node.js qui capture automatiquement des screenshots de projets web déployés, les optimise et détecte les changements via hash MD5. Supporte 5 types d\'authentification, CI/CD via GitHub Actions et 4 formats d\'image.',
+      en: 'Node.js CLI tool that automatically captures screenshots of deployed web projects, optimizes them and detects changes via MD5 hash. Supports 5 auth types, CI/CD via GitHub Actions and 4 image formats.',
+    },
+    tech: {
+      'Runtime': ['Node.js', 'Commander CLI'],
+      'Automation': ['Puppeteer', 'GitHub Actions', 'Cron'],
+      'Traitement image': ['Sharp', 'WebP', 'AVIF', 'JPEG', 'PNG'],
+      'Auth': ['Form', 'HTTP Basic', 'Bearer Token', 'Cookies', 'Custom Script'],
+      'Testing': ['node:test (natif)', 'MD5 hash diff'],
+      'UX': ['Chalk', 'Ora spinners', 'dotenv'],
+    },
+    images: [
+      { file: 'cli.webp', label: 'CLI Output' },
+    ]
+  },
+  {
     name: 'Daily Quote',
     folder: 'daily-quote',
     url: null,
