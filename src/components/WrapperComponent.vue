@@ -241,7 +241,7 @@ onMounted(() => {
 
   if (!isMobile) {
     // Desktop : scroll wheel change de page
-    window.addEventListener("wheel", handleScroll, { passive: true });
+    window.addEventListener("wheel", handleScroll, { passive: false });
   } else {
     // Mobile : touch change de page
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
