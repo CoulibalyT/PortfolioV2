@@ -120,6 +120,29 @@ export const projects = [
     ]
   },
   {
+    name: 'Autoomat',
+    folder: 'autoomat',
+    url: 'https://autoomat.vercel.app',
+    urlLabel: 'Voir le site',
+    description: {
+      fr: 'Site vitrine & outil métier pour un carrossier. Parcours sinistre guidé multi-étapes, devis en ligne avec upload photos et identification véhicule par plaque (API SIV), gestion assurance avec Google Sheets et emails automatisés. SEO local optimisé.',
+      en: 'Showcase website & business tool for an auto body shop. Multi-step claim journey, online quote with photo upload and vehicle lookup by plate (SIV API), insurance management with Google Sheets and automated emails. Local SEO optimized.',
+    },
+    tech: {
+      'Frontend': ['Next.js 15', 'TypeScript', 'Tailwind CSS 4', 'Framer Motion'],
+      'Backend': ['Server Actions', 'Route Handlers', 'Rate Limiting', 'API SIV'],
+      'Intégrations': ['Google Sheets', 'Google Drive', 'Calendly', 'WhatsApp Business'],
+      'SEO': ['JSON-LD', 'Open Graph', 'Sitemap dynamique', 'Schema.org'],
+      'Déploiement': ['Vercel', 'SSG'],
+    },
+    images: [
+      { file: 'home.webp', label: 'Accueil' },
+      { file: 'parcours-sinistre.webp', label: 'Parcours Sinistre' },
+      { file: 'devis-en-ligne.webp', label: 'Devis en ligne' },
+      { file: 'assurance.webp', label: 'Assurance' },
+    ]
+  },
+  {
     name: 'Daily Quote',
     folder: 'daily-quote',
     url: null,
