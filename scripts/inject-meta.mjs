@@ -15,8 +15,8 @@ const SITE = 'https://tene-coulibaly.vercel.app';
 const routes = [
   {
     path: '/',
-    title: { fr: 'Tene Coulibaly — Développeuse Full Stack | Portfolio' },
-    desc: { fr: 'Portfolio de Tene Coulibaly, développeuse Full Stack. Création d\'expériences web fluides, performantes et accessibles.' },
+    title: { fr: 'Tene Coulibaly — Développeuse Full Stack à Paris | Portfolio' },
+    desc: { fr: 'Tene Coulibaly, développeuse Full Stack à Paris. Vue.js, React, Next.js, Node.js, NestJS, TypeScript. En recherche de CDI dès septembre 2026.' },
   },
   {
     path: '/projects',
