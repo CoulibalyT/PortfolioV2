@@ -51,7 +51,7 @@
     "education": [
       {
         "year": "Jan 2025 - Oct 2026",
-        "title": "Master",
+        "title": "Architecte de Systèmes d'Information (Master)",
         "place": "ETNA",
         "description": "Master en cours."
       },
@@ -91,8 +91,8 @@
   "light": "claire",
    "red": "rouge",
   "status": {
-    "available": "Étudiante Développeuse Full Stack à INSEAD",
-    "available_short": "Étudiante à INSEAD"
+    "available": "En recherche de CDI (dès sept. 2026) / Alternante Full Stack à INSEAD",
+    "available_short": "En recherche de CDI"
   },
     "description": {
       "intro": "Salut, moi c’est Tene.",
@@ -122,7 +122,7 @@
   },
   "contact_section": {
     "title": "Restons en contact",
-    "text": "Bien que je ne sois pas actuellement à la recherche de nouvelles opportunités, ma boîte de réception est toujours ouverte. Que vous ayez une question ou juste pour dire bonjour, je ferai de mon mieux pour vous répondre !",
+    "text": "Actuellement en recherche d'un CDI en développement Full Stack pour septembre 2026. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger !",
     "cta": "Dire Bonjour"
   },
   "seo": {

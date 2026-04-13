@@ -328,10 +328,8 @@ function render() {
 
         const img = el.querySelector('img')
         if (img.dataset.src !== c.img) {
-          img.style.opacity = '0'
           img.src = c.img
           img.dataset.src = c.img
-          img.onload = () => { img.style.opacity = '1' }
         }
 
         const label = el.querySelector('.card-label')
@@ -563,10 +561,23 @@ function onKeyDown(e) {
   }
 }
 
+// Preload all project images so pool recycling is instant
+function preloadImages() {
+  const seen = new Set()
+  for (const c of cards) {
+    if (!seen.has(c.img)) {
+      seen.add(c.img)
+      const img = new Image()
+      img.src = c.img
+    }
+  }
+}
+
 onMounted(() => {
   // Scope overflow: hidden to this page
   document.body.classList.add('canvas-page-active')
 
+  preloadImages()
   initPool()
   render()
 
