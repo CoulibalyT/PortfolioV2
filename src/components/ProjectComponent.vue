@@ -252,7 +252,8 @@ function render() {
 
       const el = pool[poolIdx]
       el.style.display = 'block'
-      el.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), width 0.4s ease, height 0.4s ease'
+      el.style.transition = vw < 640 ? 'none' : 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), width 0.4s ease, height 0.4s ease'
+      el.style.willChange = 'transform'
       el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg)`
       el.style.width = cardW + 'px'
       el.style.height = cardH + 'px'
@@ -315,6 +316,7 @@ function render() {
         const el = pool[poolIdx]
         el.style.display = 'block'
         el.style.transition = 'none'
+        el.style.willChange = 'transform'
         el.style.transform = `translate3d(${screenX}px, ${screenY}px, 0) rotate(${c.rot}deg)`
         el.style.width = c.w + 'px'
         el.style.height = c.h + 'px'
@@ -486,12 +488,17 @@ function onTouchStart(e) {
   onPointerDown({ clientX: t.clientX, clientY: t.clientY })
 }
 
+let touchRafId = null
 function onTouchMove(e) {
   if (isOverlayElement(e.target)) return
   e.preventDefault()
   e.stopPropagation()
   const t = e.touches[0]
-  onPointerMove({ clientX: t.clientX, clientY: t.clientY })
+  if (touchRafId) return
+  touchRafId = requestAnimationFrame(() => {
+    onPointerMove({ clientX: t.clientX, clientY: t.clientY })
+    touchRafId = null
+  })
 }
 
 function onTouchEnd(e) {
