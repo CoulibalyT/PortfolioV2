@@ -11,8 +11,9 @@
       </a>
       
       <a
-        href="https://www.linkedin.com/in/tenecoulibaly/" 
-        target="_blank" 
+        href="https://www.linkedin.com/in/tenecoulibaly/"
+        target="_blank"
+        rel="noopener noreferrer"
         class="text-center flex gap-1 items-center justify-center relative group text-bold"
       >
         linkedIn
@@ -21,8 +22,9 @@
       </a>
 
       <a
-        href="https://github.com/CoulibalyT" 
-        target="_blank" 
+        href="https://github.com/CoulibalyT"
+        target="_blank"
+        rel="noopener noreferrer"
         class="text-center flex gap-1 items-center justify-center relative group text-bold"
       >
         gitHub
@@ -31,8 +33,9 @@
       </a>
 
       <a
-        href="/CV2-TeneCoulibaly.pdf" 
-        target="_blank" 
+        href="/CV2-TeneCoulibaly.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
         class="text-center flex gap-1 items-center justify-center relative group text-bold"
       >
         cv

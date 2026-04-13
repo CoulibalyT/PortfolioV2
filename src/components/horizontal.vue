@@ -73,7 +73,7 @@
             @click="triggerEasterEgg($event)"
           />
           
-          <a v-if="item.link" :href="item.link" target="_blank" class="absolute top-3 right-3 bg-white/90 dark:bg-black/90 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110 z-20">
+          <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer" class="absolute top-3 right-3 bg-white/90 dark:bg-black/90 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110 z-20">
             <ArrowUpRightIcon class="w-5 h-5 text-black dark:text-white"/>
           </a>
         </div>
