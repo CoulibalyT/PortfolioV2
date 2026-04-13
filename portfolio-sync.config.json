@@ -47,6 +47,18 @@
   "outputDir": "./public/images/projects/bento"
 },
     {
+      "name": "autoomat",
+      "url": "https://autoomat.vercel.app",
+      "pages": [
+        { "path": "/", "name": "home" },
+        { "path": "/parcours-sinistre", "name": "parcours-sinistre" },
+        { "path": "/devis-en-ligne", "name": "devis-en-ligne" },
+        { "path": "/assurance", "name": "assurance" }
+      ],
+      "viewport": { "width": 1920, "height": 1080 },
+      "outputDir": "./public/images/projects/autoomat"
+    },
+    {
       "name": "joyofsimple",
       "url": "https://joyofsimple-site.vercel.app",
       "pages": [
