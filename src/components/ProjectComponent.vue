@@ -44,8 +44,18 @@
       </Transition>
     </Teleport>
 
+    <!-- Hint -->
+    <Transition name="hint-fade">
+      <div v-if="showHint" class="canvas-hint">
+        {{ hintText }}
+      </div>
+    </Transition>
+  </div>
+
+  <!-- Teleported outside canvas-root so events don't conflict -->
+  <Teleport to="body">
     <!-- Filter bar -->
-    <div class="filter-bar" @mousedown.stop @touchstart.stop @click.stop>
+    <div class="filter-bar">
       <button
         :class="['filter-btn', { active: activeFilter === null }]"
         @click="setFilter(null)"
@@ -60,7 +70,7 @@
 
     <!-- Project Info Panel (collapsible) -->
     <Transition name="info-slide">
-      <div v-if="activeProject" class="project-info-panel" @mousedown.stop @touchstart.stop>
+      <div v-if="activeProject" class="project-info-panel">
         <div class="info-panel-header" @click="infoPanelOpen = !infoPanelOpen">
           <div class="info-panel-left">
             <h3 class="info-panel-name">{{ activeProject.name }}</h3>
@@ -79,10 +89,10 @@
           <p class="info-panel-desc">{{ activeProject.description?.[locale] || activeProject.description?.fr }}</p>
           <!-- Tech as categories (object) -->
           <div v-if="activeProject.tech && !Array.isArray(activeProject.tech)" class="info-panel-tech-grouped">
-            <div v-for="(techs, category) in activeProject.tech" :key="category" class="info-tech-group">
+            <div v-for="(techList, category) in activeProject.tech" :key="category" class="info-tech-group">
               <span class="info-tech-category">{{ category }}</span>
               <div class="info-tech-tags">
-                <span v-for="t in techs" :key="t" class="info-tech-tag">{{ t }}</span>
+                <span v-for="t in techList" :key="t" class="info-tech-tag">{{ t }}</span>
               </div>
             </div>
           </div>
@@ -93,14 +103,7 @@
         </div>
       </div>
     </Transition>
-
-    <!-- Hint -->
-    <Transition name="hint-fade">
-      <div v-if="showHint" class="canvas-hint">
-        {{ hintText }}
-      </div>
-    </Transition>
-  </div>
+  </Teleport>
 </template>
 
 <script setup>
@@ -129,6 +132,8 @@ const infoPanelOpen = ref(false)
 function setFilter(name) {
   activeFilter.value = activeFilter.value === name ? null : name
   infoPanelOpen.value = false
+  px = 0
+  py = 0
   render()
 }
 
@@ -201,16 +206,19 @@ function render() {
   if (filter) {
     const filtered = cards.filter(c => c.project === filter)
     const count = filtered.length
-    const PAD = 40
-    const TOP_PAD = 80
-    const BOTTOM_PAD = 140
+    const isMobileLayout = vw < 640
+    const PAD = isMobileLayout ? 16 : 40
+    const TOP_PAD = isMobileLayout ? 60 : 80
+    const BOTTOM_PAD = isMobileLayout ? 120 : 140
     const availW = vw - PAD * 2
     const availH = vh - TOP_PAD - BOTTOM_PAD
     const GAP = 18
 
-    // Pick cols based on count — fewer images = fewer cols = bigger cards
+    // Pick cols based on count + screen size
     let cols
-    if (count <= 1) cols = 1
+    if (isMobileLayout) {
+      cols = count <= 1 ? 1 : 2
+    } else if (count <= 1) cols = 1
     else if (count <= 3) cols = Math.min(count, 2)
     else if (count <= 6) cols = 3
     else cols = Math.min(count, 4)
@@ -234,12 +242,13 @@ function render() {
 
       // Subtle jitter for organic feel
       const seed = i * 7 + 13
-      const jx = Math.round(Math.sin(seed) * 6)
-      const jy = Math.round(Math.cos(seed) * 5)
-      const rot = Math.round(Math.sin(seed * 3) * 15) / 10
+      const jitterScale = isMobileLayout ? 0.4 : 1
+      const jx = Math.round(Math.sin(seed) * 6 * jitterScale)
+      const jy = Math.round(Math.cos(seed) * 5 * jitterScale)
+      const rot = Math.round(Math.sin(seed * 3) * 15 * jitterScale) / 10
 
-      const x = baseX + col * (cardW + GAP) + jx
-      const y = baseY + row * (cardH + GAP) + jy
+      const x = baseX + col * (cardW + GAP) + jx + px
+      const y = baseY + row * (cardH + GAP) + jy + py
 
       const el = pool[poolIdx]
       el.style.display = 'block'
@@ -348,8 +357,14 @@ function getPointerPos(e) {
   return { x: e.clientX, y: e.clientY }
 }
 
+function isOverlayElement(target) {
+  if (!target || !target.closest) return false
+  return target.closest('.floating-header, .filter-bar, .project-info-panel, .lightbox-overlay, .canvas-hint')
+}
+
 function onPointerDown(e) {
   if (e.button && e.button !== 0) return
+  if (isOverlayElement(e.target)) return
   const pos = getPointerPos(e)
   isDragging = true
   const root = canvasRoot.value
@@ -415,6 +430,10 @@ function onPointerUp() {
 }
 
 function handleTap(pos) {
+  // Check if tap was on an overlay element
+  const el = document.elementFromPoint(pos.x, pos.y)
+  if (el && isOverlayElement(el)) return
+
   for (let i = pool.length - 1; i >= 0; i--) {
     const el = pool[i]
     if (el.style.display === 'none' || !el._cardData) continue
@@ -460,6 +479,7 @@ function startMomentum() {
 // ---- Touch handling (1 finger = drag OR tap, distinguished by distance) ----
 
 function onTouchStart(e) {
+  if (isOverlayElement(e.target)) return
   e.preventDefault()
   e.stopPropagation()
   const t = e.touches[0]
@@ -467,6 +487,7 @@ function onTouchStart(e) {
 }
 
 function onTouchMove(e) {
+  if (isOverlayElement(e.target)) return
   e.preventDefault()
   e.stopPropagation()
   const t = e.touches[0]
@@ -474,6 +495,7 @@ function onTouchMove(e) {
 }
 
 function onTouchEnd(e) {
+  if (isOverlayElement(e.target)) return
   e.preventDefault()
   e.stopPropagation()
   onPointerUp()
@@ -497,6 +519,16 @@ function onMouseUp() {
 let wheelTimeout = null
 
 function onWheel(e) {
+  // When info panel is open, scroll the panel — not the canvas
+  if (infoPanelOpen.value) {
+    const panel = document.querySelector('.info-panel-body')
+    if (panel) {
+      e.preventDefault()
+      panel.scrollTop += e.deltaY
+    }
+    return
+  }
+
   e.preventDefault()
   px -= e.deltaX
   py -= e.deltaY
@@ -539,9 +571,9 @@ onMounted(() => {
     root.addEventListener('touchstart', onTouchStart, { passive: false })
     root.addEventListener('touchmove', onTouchMove, { passive: false })
     root.addEventListener('touchend', onTouchEnd, { passive: false })
-    root.addEventListener('wheel', onWheel, { passive: false })
   }
 
+  window.addEventListener('wheel', onWheel, { passive: false })
   window.addEventListener('keydown', onKeyDown)
 })
 
@@ -560,9 +592,9 @@ onUnmounted(() => {
     root.removeEventListener('touchstart', onTouchStart)
     root.removeEventListener('touchmove', onTouchMove)
     root.removeEventListener('touchend', onTouchEnd)
-    root.removeEventListener('wheel', onWheel)
   }
 
+  window.removeEventListener('wheel', onWheel)
   window.removeEventListener('keydown', onKeyDown)
 })
 </script>
@@ -674,11 +706,17 @@ body.canvas-page-active {
 }
 
 @media (max-width: 640px) {
+  .floating-header {
+    padding: 12px 16px;
+  }
+  .header-name-link {
+    font-size: 14px;
+  }
   .floating-nav {
-    gap: 14px;
+    gap: 10px;
   }
   .floating-nav a {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
@@ -959,7 +997,7 @@ body.canvas-page-active {
 /* ---- Project Info Panel ---- */
 .project-info-panel {
   position: fixed;
-  bottom: 90px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
@@ -968,10 +1006,43 @@ body.canvas-page-active {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
-  padding: 14px 18px;
+  padding: 12px 16px;
   max-width: 380px;
-  width: 90vw;
+  width: calc(100vw - 32px);
   pointer-events: auto;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .project-info-panel {
+    bottom: auto;
+    top: 60px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-height: calc(100vh - 140px);
+  }
+
+  .filter-bar {
+    bottom: 16px !important;
+    padding: 4px 6px !important;
+    max-width: calc(100vw - 24px) !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start !important;
+  }
+
+  .filter-btn {
+    padding: 5px 12px !important;
+    font-size: 10px !important;
+  }
+
+  .filter-bar {
+    touch-action: pan-x !important;
+  }
+
+  .project-info-panel {
+    touch-action: pan-y !important;
+  }
 }
 
 .info-panel-header {
@@ -1002,8 +1073,10 @@ body.canvas-page-active {
 }
 
 .info-panel-body {
-  overflow: hidden;
-  max-height: 300px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  max-height: 50vh;
   margin-top: 12px;
   transition: max-height 0.4s ease, margin-top 0.3s ease, opacity 0.3s ease;
   opacity: 1;
@@ -1030,6 +1103,7 @@ body.canvas-page-active {
   letter-spacing: 0.02em;
   transition: opacity 0.2s;
   white-space: nowrap;
+  pointer-events: auto;
 }
 
 .info-panel-link:hover {
@@ -1060,10 +1134,6 @@ body.canvas-page-active {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-height: 150px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(200, 255, 0, 0.2) transparent;
 }
 
 .info-tech-group {
