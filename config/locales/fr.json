@@ -151,6 +151,20 @@
       "description": "Expérimentations créatives et explorations 3D par Tene Coulibaly : particules, galaxie, ADN et plus."
     }
   },
+  "not_found": {
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "back": "Retour à l'accueil"
+  },
+  "projects_nav": {
+    "all": "Tous",
+    "hint": "Glisser pour explorer",
+    "live": "Live",
+    "see": "Voir",
+    "link": "Lien",
+    "see_site": "Voir le site",
+    "details": "Détails du projet",
+    "close": "Fermer"
+  },
   "copied": "Copié !",
   "quotes": [
     { "text": "La simplicité est la sophistication suprême.", "author": "Leonardo da Vinci" },

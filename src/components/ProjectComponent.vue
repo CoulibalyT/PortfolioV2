@@ -4,11 +4,11 @@
     <header class="floating-header" @mousedown.stop @touchstart.stop>
       <router-link to="/" class="header-name-link">Tene Coulibaly</router-link>
       <nav class="floating-nav">
-        <router-link to="/">{{ locale === 'fr' ? 'Moi' : 'Me' }}</router-link>
-        <router-link to="/skills">{{ locale === 'fr' ? 'Compétences' : 'Skills' }}</router-link>
-        <router-link to="/timeline">{{ locale === 'fr' ? 'Parcours' : 'Timeline' }}</router-link>
-        <router-link to="/contact">Contact</router-link>
-        <router-link to="/playground">{{ locale === 'fr' ? 'Labo' : 'Lab' }}</router-link>
+        <router-link to="/">{{ $t('menu.me') }}</router-link>
+        <router-link to="/skills">{{ $t('menu.skills') }}</router-link>
+        <router-link to="/timeline">{{ $t('menu.timeline') }}</router-link>
+        <router-link to="/contact">{{ $t('menu.contact') }}</router-link>
+        <router-link to="/playground">{{ $t('menu.playground') }}</router-link>
       </nav>
     </header>
 
@@ -38,7 +38,7 @@
                 {{ lightboxData.urlLabel || 'Voir le site' }} →
               </a>
             </div>
-            <button class="lightbox-close" @click="closeLightbox" aria-label="Fermer">&times;</button>
+            <button class="lightbox-close" @click="closeLightbox" :aria-label="$t('projects_nav.close')">&times;</button>
           </div>
         </div>
       </Transition>
@@ -60,7 +60,7 @@
         :class="['filter-btn', { active: activeFilter === null }]"
         :aria-pressed="activeFilter === null"
         @click="setFilter(null)"
-      >{{ locale === 'fr' ? 'Tous' : 'All' }}</button>
+      >{{ $t('projects_nav.all') }}</button>
       <button
         v-for="name in projectNames"
         :key="name"
@@ -83,7 +83,7 @@
               {{ activeProject.urlSecondaryLabel || 'Lien' }} ↗
             </a>
           </div>
-          <button class="info-panel-toggle" :class="{ open: infoPanelOpen }" :aria-expanded="infoPanelOpen" aria-label="Détails du projet">
+          <button class="info-panel-toggle" :class="{ open: infoPanelOpen }" :aria-expanded="infoPanelOpen" :aria-label="$t('projects_nav.details')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
         </div>
@@ -140,9 +140,8 @@ function setFilter(name) {
   render()
 }
 
-const hintText = computed(() =>
-  locale.value === 'fr' ? 'Glisser pour explorer' : 'Drag to explore'
-)
+const { t } = useI18n()
+const hintText = computed(() => t('projects_nav.hint'))
 
 const activeProject = computed(() => {
   if (!activeFilter.value) return null

@@ -166,6 +166,64 @@ for (const route of routes) {
   html = html.replace(/(<meta name="twitter:title" content=")[^"]*"/, `$1${title}"`);
   html = html.replace(/(<meta name="twitter:description" content=")[^"]*"/, `$1${desc}"`);
 
+  // Inject JSON-LD structured data
+  const jsonLd = [];
+
+  // WebSite schema (all pages)
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Tene Coulibaly — Portfolio',
+    url: SITE,
+    description: 'Portfolio de Tene Coulibaly, développeuse Full Stack à Paris',
+    author: { '@type': 'Person', name: 'Tene Coulibaly' },
+    inLanguage: ['fr', 'en'],
+  });
+
+  // BreadcrumbList (subpages)
+  if (path !== '/') {
+    const pageName = title.split('—')[0].trim();
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE },
+        { '@type': 'ListItem', position: 2, name: pageName, item: url },
+      ]
+    });
+  }
+
+  // Person schema (home only)
+  if (path === '/') {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      mainEntity: {
+        '@type': 'Person',
+        '@id': `${SITE}/#person`,
+        name: 'Tene Coulibaly',
+        url: SITE,
+        jobTitle: 'Développeuse Full Stack',
+        description: 'Développeuse Full Stack à Paris, en recherche de CDI dès septembre 2026.',
+        knowsAbout: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP', 'PostgreSQL', 'Docker', 'Flutter', 'Prisma', 'Tailwind CSS'],
+        address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressRegion: 'Île-de-France', addressCountry: 'FR' },
+        alumniOf: [
+          { '@type': 'EducationalOrganization', name: 'ETNA' },
+          { '@type': 'EducationalOrganization', name: 'Epitech' },
+        ],
+        worksFor: { '@type': 'Organization', name: 'INSEAD' },
+        sameAs: ['https://github.com/CoulibalyT', 'https://www.linkedin.com/in/tenecoulibaly/'],
+        email: 'coulibaly.tene00@gmail.com',
+      }
+    });
+  }
+
+  const jsonLdScript = jsonLd.map(schema =>
+    `<script type="application/ld+json">${JSON.stringify(schema)}</script>`
+  ).join('\n    ');
+
+  html = html.replace('</head>', `    ${jsonLdScript}\n  </head>`);
+
   // Inject static HTML content before <div id="app">
   if (content) {
     html = html.replace('<div id="app"></div>', `<div id="app">${content}</div>`);
