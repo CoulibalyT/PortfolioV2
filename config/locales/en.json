@@ -151,6 +151,20 @@
       "description": "Creative coding experiments and 3D explorations by Tene Coulibaly: particles, galaxy, DNA and more."
     }
   },
+  "not_found": {
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "back": "Return Home"
+  },
+  "projects_nav": {
+    "all": "All",
+    "hint": "Drag to explore",
+    "live": "Live",
+    "see": "See",
+    "link": "Link",
+    "see_site": "See site",
+    "details": "Project details",
+    "close": "Close"
+  },
   "copied": "Copied!",
   "quotes": [
     { "text": "Simplicity is the ultimate sophistication.", "author": "Leonardo da Vinci" },
