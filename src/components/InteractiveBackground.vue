@@ -76,8 +76,10 @@ const animate = () => {
     container.value.style.setProperty('--y', `${currentY}px`);
   }
 
-  requestAnimationFrame(animate);
+  rafId = requestAnimationFrame(animate);
 };
+
+let rafId = null;
 
 onMounted(() => {
   window.addEventListener('mousemove', onMouseMove);
@@ -100,6 +102,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', onMouseMove);
+  if (rafId) cancelAnimationFrame(rafId);
 });
 </script>
 

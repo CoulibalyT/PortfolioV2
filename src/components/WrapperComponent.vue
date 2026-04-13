@@ -138,122 +138,22 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted, onUnmounted, watch , watchEffect, nextTick} from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { ref, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useTheme } from "../composables/useTheme";
 import ScrambleText from "./ScrambleText.vue";
 import LocalTime from "./LocalTime.vue";
 import WeatherWidget from "./WeatherWidget.vue";
 import SynonymReveal from "./SynonymReveal.vue";
 import DailyQuote from "./DailyQuote.vue";
-
-
-const currentLanguage = ref(localStorage.getItem("language") || "fr");
-const roleText = ref(null);
-const navMenu = ref(null);
-const contentWrapper = ref(null);
-
-
-gsap.registerPlugin(ScrollToPlugin);
-
-const router = useRouter();
-const route = useRoute();
-const { isDarkMode, isRedMode, toggleDarkMode, toggleRedMode } = useTheme();
 import { setI18nLanguage } from "../../config/i18n";
 
+const currentLanguage = ref(localStorage.getItem("language") || "fr");
+const contentWrapper = ref(null);
 
-const routes = ["/", "/projects", "/skills", "/timeline", "/contact", "/playground"]; // Liste des routes
-let isScrolling = false;
-
-// Vérifie si on scrolle à l'intérieur d'un élément avec du scroll actif
-const isScrollingInsideSlot = (event) => {
-  let target = event.target;
-  while (target !== document.body) {
-    if (target.scrollHeight > target.clientHeight || target.scrollWidth > target.clientWidth) {
-      return true; // Un élément scrollable capture l'événement
-    }
-    target = target.parentElement;
-  }
-  return false; // L'utilisateur scrolle sur la page principale
-};
-
-// Gérer le scroll de la souris sur PC
-const handleScroll = (event) => {
-  if (route.name === 'project') return;
-  if (isScrolling || isScrollingInsideSlot(event)) return; // Bloque le changement de route si on est dans un élément scrollable
-  isScrolling = true;
-
-  let index = routes.indexOf(route.path);
-  if (event.deltaY > 0 && index < routes.length - 1) {
-    index++; // Scroll bas → Page suivante
-  } else if (event.deltaY < 0 && index > 0) {
-    index--; // Scroll haut → Page précédente
-  }
-
-  if (routes[index] !== route.path) {
-    gsap.to(window, {
-      duration: 0.7,
-      scrollTo: { y: 0, autoKill: false },
-      ease: "power2.inOut",
-      onComplete: () => {
-        router.push(routes[index]);
-        isScrolling = false;
-      },
-    });
-  } else {
-    isScrolling = false;
-  }
-};
-
-// Gérer le scroll tactile sur mobile
-let startY = 0;
-
-const handleTouchStart = (event) => {
-  if (route.name === 'project') return;
-  startY = event.touches[0].clientY;
-};
-
-const handleTouchMove = (event) => {
-  if (route.name === 'project') return;
-  let deltaY = event.touches[0].clientY - startY;
-  if (isScrolling || isScrollingInsideSlot(event)) return;
-
-  isScrolling = true;
-  let index = routes.indexOf(route.path);
-
-  if (deltaY < -50 && index < routes.length - 1) {
-    index++;
-  } else if (deltaY > 50 && index > 0) {
-    index--;
-  }
-
-  if (routes[index] !== route.path) {
-    gsap.to(window, {
-      duration: 1,
-      scrollTo: { y: 0, autoKill: false },
-      ease: "power2.inOut",
-      onComplete: () => {
-        router.push(routes[index]);
-        isScrolling = false;
-      },
-    });
-  } else {
-    isScrolling = false;
-  }
-};
-
-// Ajouter/Supprimer l'écouteur de scroll
-onMounted(() => {
-});
-
-onUnmounted(() => {
-});
-
-watch(() => route.path, () => {
-  gsap.to(window, { scrollTo: { y: 0, autoKill: false }, duration: 0.5, ease: "power2.inOut" });
-});
+const route = useRoute();
+const { isDarkMode, isRedMode, toggleDarkMode, toggleRedMode } = useTheme();
 
 const setLanguage = (lang) => {
   if (currentLanguage.value === lang) return;

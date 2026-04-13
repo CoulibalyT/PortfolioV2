@@ -1,5 +1,5 @@
 <template>
-  <span class="scramble-text">{{ displayedText }}</span>
+  <span class="scramble-text" :aria-label="text" role="text">{{ displayedText }}</span>
 </template>
 
 <script setup>

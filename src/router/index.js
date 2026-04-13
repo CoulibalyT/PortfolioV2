@@ -1,12 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import ContactView from '@/views/ContactView.vue'
-import ProjectView from '@/views/ProjectView.vue'
-import SplashScreen from "@/views/SplashScreen.vue";
-import SkillsView from '@/views/SkillsView.vue';
-import TimelineView from '@/views/TimelineView.vue';
-import NotFoundView from '@/views/NotFoundView.vue';
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,32 +6,32 @@ const router = createRouter({
     {
       path: "/splash",
       name: "SplashScreen",
-      component: SplashScreen,
+      component: () => import("@/views/SplashScreen.vue"),
     },
     {
       path: '/',
       name: 'me',
-      component: HomeView,
+      component: () => import('@/views/HomeView.vue'),
     },
     {
       path: '/projects',
       name: 'project',
-      component: ProjectView,
+      component: () => import('@/views/ProjectView.vue'),
     },
     {
       path: '/skills',
       name: 'skills',
-      component: SkillsView,
+      component: () => import('@/views/SkillsView.vue'),
     },
     {
       path: '/timeline',
       name: 'timeline',
-      component: TimelineView,
+      component: () => import('@/views/TimelineView.vue'),
     },
     {
       path: '/contact',
       name: 'contact',
-      component: ContactView,
+      component: () => import('@/views/ContactView.vue'),
     },
     {
       path: '/playground',
@@ -49,24 +41,15 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
-      component: NotFoundView,
+      component: () => import('@/views/NotFoundView.vue'),
     },
-    
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue'),
-    // },
   ],
 
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition; // Garde la position précédente si l'utilisateur revient en arrière
+      return savedPosition;
     } else {
-      return { top: 0, behavior: "smooth" }; // Scroll fluide vers le haut
+      return { top: 0, behavior: "smooth" };
     }
   },
 })

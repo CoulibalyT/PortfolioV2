@@ -10,6 +10,7 @@
         <div class="flex gap-2 md:gap-3 flex-wrap justify-center">
           <button
             @click="setFilter('all')"
+            :aria-pressed="activeFilter === 'all'"
             :class="[
               'px-4 py-1.5 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border',
               activeFilter === 'all'
@@ -19,6 +20,7 @@
           >{{ $t('timeline_section.filter_all') }}</button>
           <button
             @click="setFilter('experience')"
+            :aria-pressed="activeFilter === 'experience'"
             :class="[
               'px-4 py-1.5 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border',
               activeFilter === 'experience'
@@ -28,6 +30,7 @@
           >{{ $t('timeline_section.experience_title') }}</button>
           <button
             @click="setFilter('education')"
+            :aria-pressed="activeFilter === 'education'"
             :class="[
               'px-4 py-1.5 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border',
               activeFilter === 'education'
