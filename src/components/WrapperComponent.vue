@@ -39,37 +39,37 @@
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/"
-          @click="playClick"
+
         ><ScrambleText :text="$t('menu.me')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/projects"
-          @click="playClick"
+
         ><ScrambleText :text="$t('menu.projects')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/skills"
-          @click="playClick"
+
         ><ScrambleText :text="$t('menu.skills')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/timeline"
-          @click="playClick"
+
         ><ScrambleText :text="$t('menu.timeline')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/contact"
-          @click="playClick"
+
         ><ScrambleText :text="$t('menu.contact')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/playground"
-          @click="playClick"
+
         ><ScrambleText :text="$t('menu.playground')" /></router-link>
       </nav>
 
@@ -133,7 +133,6 @@ import { useRouter, useRoute } from "vue-router";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useTheme } from "../composables/useTheme";
-import { useSound } from "../composables/useSound";
 import ScrambleText from "./ScrambleText.vue";
 import LocalTime from "./LocalTime.vue";
 import WeatherWidget from "./WeatherWidget.vue";
@@ -152,7 +151,6 @@ gsap.registerPlugin(ScrollToPlugin);
 const router = useRouter();
 const route = useRoute();
 const { isDarkMode, isRedMode, toggleDarkMode, toggleRedMode } = useTheme();
-const { playClick } = useSound();
 import { setI18nLanguage } from "../../config/i18n";
 
 
