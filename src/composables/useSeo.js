@@ -2,7 +2,7 @@ import { useHead } from '@unhead/vue';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const SITE_URL = 'https://tenecoulibaly.com';
+const SITE_URL = 'https://tene-coulibaly.vercel.app';
 
 export function useSeo(pageKey, path = '/') {
   const { t } = useI18n();

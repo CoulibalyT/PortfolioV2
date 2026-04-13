@@ -13,12 +13,12 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: 'Tene Coulibaly',
-        url: 'https://tenecoulibaly.com',
+        url: 'https://tene-coulibaly.vercel.app',
         jobTitle: 'Full Stack Developer',
         knowsAbout: ['Vue.js', 'React', 'Node.js', 'TypeScript', 'Docker', 'JavaScript'],
         sameAs: [
-          'https://github.com/tenecoulibaly',
-          'https://linkedin.com/in/tenecoulibaly'
+          'https://github.com/CoulibalyT',
+          'https://www.linkedin.com/in/tenecoulibaly/'
         ]
       })
     }

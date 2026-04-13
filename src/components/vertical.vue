@@ -16,7 +16,7 @@
             </span>
           </div>
         </div>
-        <a v-if="project.link" :href="project.link" target="_blank" 
+        <a v-if="project.link" :href="project.link" target="_blank" rel="noopener noreferrer"
            class="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-full"
            :class="{ '!bg-white/10': isRedMode }">
           <ArrowUpRightIcon class="w-4 h-4 text-black dark:text-white" :class="{ '!text-white': isRedMode }" />
