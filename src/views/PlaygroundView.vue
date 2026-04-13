@@ -47,20 +47,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import { useSeo } from '@/composables/useSeo'
 
 useSeo('playground', '/playground')
-import ParticleCloud from '@/components/playground/ParticleCloud.vue';
-import TorusKnot from '@/components/playground/TorusKnot.vue';
-import WavyGrid from '@/components/playground/WavyGrid.vue';
-import DNAHelix from '@/components/playground/DNAHelix.vue';
-import Galaxy from '@/components/playground/Galaxy.vue';
-import MagneticField from '@/components/playground/MagneticField.vue';
+import GlobeExplorer from '@/components/playground/GlobeExplorer.vue';
+import SolarSystem from '@/components/playground/SolarSystem.vue';
+import ParticleMorph from '@/components/playground/ParticleMorph.vue';
 
 const experiments = [
-  { name: 'Particles', component: ParticleCloud },
-  { name: 'Torus Knot', component: TorusKnot },
-  { name: 'Wavy Grid', component: WavyGrid },
-  { name: 'DNA Helix', component: DNAHelix },
-  { name: 'Galaxy', component: Galaxy },
-  { name: 'Magnetic Field', component: MagneticField }
+  { name: 'Globe', component: GlobeExplorer },
+  { name: 'Solar System', component: SolarSystem },
+  { name: 'Morphing', component: ParticleMorph },
 ];
 
 const currentIndex = ref(0);
