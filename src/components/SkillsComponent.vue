@@ -64,10 +64,18 @@
     const { isRedMode } = useTheme();
 
     const techSkills = [
-        'Vue.js', 'Nuxt', 'React', 'Next.js',
-        'TypeScript', 'Node.js', 'PHP', 'PostgreSQL',
-        'Docker', 'Vercel', 'Postman',
-        'GSAP', 'Tailwind CSS', 'Figma', 'Git/GitHub'
+        // Frontend
+        'Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'GSAP',
+        // Backend
+        'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP',
+        // Data
+        'PostgreSQL', 'SQL Server', 'Prisma', 'TypeORM', 'Doctrine',
+        // Mobile
+        'Flutter', 'Dart',
+        // DevOps
+        'Docker', 'Nginx', 'Jenkins', 'Git/GitHub',
+        // Outils
+        'Figma', 'Postman', 'Vercel',
     ];
 
     const learningSkills = ['Three.js', 'Deep AI'];
@@ -76,6 +84,8 @@
         'skills_section.skills.agile',
         'skills_section.skills.cicd',
         'skills_section.skills.testing',
+        'skills_section.skills.security',
+        'skills_section.skills.api_design',
         'skills_section.skills.problem_solving',
         'skills_section.skills.autonomy',
     ];

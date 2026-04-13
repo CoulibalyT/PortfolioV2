@@ -58,18 +58,38 @@
       >{{ name }}</button>
     </div>
 
-    <!-- Project Info Panel -->
+    <!-- Project Info Panel (collapsible) -->
     <Transition name="info-slide">
-      <div v-if="activeProject" class="project-info-panel">
-        <div class="info-panel-header">
-          <h3 class="info-panel-name">{{ activeProject.name }}</h3>
-          <a v-if="activeProject.url" :href="activeProject.url" target="_blank" rel="noopener noreferrer" class="info-panel-link">
-            {{ activeProject.urlLabel || 'Voir' }} ↗
-          </a>
+      <div v-if="activeProject" class="project-info-panel" @mousedown.stop @touchstart.stop>
+        <div class="info-panel-header" @click="infoPanelOpen = !infoPanelOpen">
+          <div class="info-panel-left">
+            <h3 class="info-panel-name">{{ activeProject.name }}</h3>
+            <a v-if="activeProject.url" :href="activeProject.url" target="_blank" rel="noopener noreferrer" class="info-panel-link" @click.stop>
+              {{ activeProject.urlLabel || 'Voir' }} ↗
+            </a>
+            <a v-if="activeProject.urlSecondary" :href="activeProject.urlSecondary" target="_blank" rel="noopener noreferrer" class="info-panel-link info-panel-link-secondary" @click.stop>
+              {{ activeProject.urlSecondaryLabel || 'Lien' }} ↗
+            </a>
+          </div>
+          <button class="info-panel-toggle" :class="{ open: infoPanelOpen }">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
         </div>
-        <p class="info-panel-desc">{{ activeProject.description?.[locale] || activeProject.description?.fr }}</p>
-        <div class="info-panel-tech">
-          <span v-for="t in activeProject.tech" :key="t" class="info-tech-tag">{{ t }}</span>
+        <div class="info-panel-body" :class="{ collapsed: !infoPanelOpen }">
+          <p class="info-panel-desc">{{ activeProject.description?.[locale] || activeProject.description?.fr }}</p>
+          <!-- Tech as categories (object) -->
+          <div v-if="activeProject.tech && !Array.isArray(activeProject.tech)" class="info-panel-tech-grouped">
+            <div v-for="(techs, category) in activeProject.tech" :key="category" class="info-tech-group">
+              <span class="info-tech-category">{{ category }}</span>
+              <div class="info-tech-tags">
+                <span v-for="t in techs" :key="t" class="info-tech-tag">{{ t }}</span>
+              </div>
+            </div>
+          </div>
+          <!-- Tech as flat array -->
+          <div v-else-if="activeProject.tech" class="info-panel-tech">
+            <span v-for="t in activeProject.tech" :key="t" class="info-tech-tag">{{ t }}</span>
+          </div>
         </div>
       </div>
     </Transition>
@@ -104,9 +124,11 @@ const cardsContainer = ref(null)
 const lightboxData = ref(null)
 const showHint = ref(true)
 const activeFilter = ref(null)
+const infoPanelOpen = ref(false)
 
 function setFilter(name) {
   activeFilter.value = activeFilter.value === name ? null : name
+  infoPanelOpen.value = false
   render()
 }
 
@@ -166,19 +188,101 @@ function render() {
   const vw = root.clientWidth
   const vh = root.clientHeight
   const margin = 80
+  const filter = activeFilter.value
 
   // Update dot grid position
   if (dotGrid.value) {
     dotGrid.value.style.backgroundPosition = `${px % 24}px ${py % 24}px`
   }
 
+  let poolIdx = 0
+
+  // ---- FILTERED MODE: fill viewport, bigger cards when fewer images ----
+  if (filter) {
+    const filtered = cards.filter(c => c.project === filter)
+    const count = filtered.length
+    const PAD = 40
+    const TOP_PAD = 80
+    const BOTTOM_PAD = 140
+    const availW = vw - PAD * 2
+    const availH = vh - TOP_PAD - BOTTOM_PAD
+    const GAP = 18
+
+    // Pick cols based on count — fewer images = fewer cols = bigger cards
+    let cols
+    if (count <= 1) cols = 1
+    else if (count <= 3) cols = Math.min(count, 2)
+    else if (count <= 6) cols = 3
+    else cols = Math.min(count, 4)
+
+    const rows = Math.ceil(count / cols)
+
+    // Cards fill available space
+    const cardW = Math.floor((availW - (cols - 1) * GAP) / cols)
+    const cardH = Math.floor((availH - (rows - 1) * GAP) / rows)
+
+    const gridW = cols * cardW + (cols - 1) * GAP
+    const gridH = rows * cardH + (rows - 1) * GAP
+    const baseX = (vw - gridW) / 2
+    const baseY = TOP_PAD + (availH - gridH) / 2
+
+    for (let i = 0; i < filtered.length; i++) {
+      if (poolIdx >= pool.length) break
+      const c = filtered[i]
+      const col = i % cols
+      const row = Math.floor(i / cols)
+
+      // Subtle jitter for organic feel
+      const seed = i * 7 + 13
+      const jx = Math.round(Math.sin(seed) * 6)
+      const jy = Math.round(Math.cos(seed) * 5)
+      const rot = Math.round(Math.sin(seed * 3) * 15) / 10
+
+      const x = baseX + col * (cardW + GAP) + jx
+      const y = baseY + row * (cardH + GAP) + jy
+
+      const el = pool[poolIdx]
+      el.style.display = 'block'
+      el.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), width 0.4s ease, height 0.4s ease'
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg)`
+      el.style.width = cardW + 'px'
+      el.style.height = cardH + 'px'
+      el.style.opacity = '1'
+      el.style.filter = 'none'
+      el.style.borderColor = 'rgba(200, 255, 0, 0.2)'
+
+      const img = el.querySelector('img')
+      if (img.dataset.src !== c.img) {
+        img.src = c.img
+        img.dataset.src = c.img
+      }
+
+      const label = el.querySelector('.card-label')
+      const project = el.querySelector('.card-project')
+      if (label.textContent !== c.label) label.textContent = c.label
+      if (project.textContent !== c.project) project.textContent = c.project
+
+      const badge = el.querySelector('.card-badge')
+      if (badge) badge.style.display = c.url ? 'block' : 'none'
+
+      el._cardData = c
+      poolIdx++
+    }
+
+    // Hide rest
+    for (let i = poolIdx; i < pool.length; i++) {
+      pool[i].style.display = 'none'
+    }
+    return
+  }
+
+  // ---- NORMAL MODE: infinite tiled canvas ----
+
   // Calculate visible tiles
   const startTileX = Math.floor(-px / TILE_W) - 1
   const endTileX = Math.floor((-px + vw) / TILE_W) + 1
   const startTileY = Math.floor(-py / TILE_H) - 1
   const endTileY = Math.floor((-py + vh) / TILE_H) + 1
-
-  let poolIdx = 0
 
   for (let ty = startTileY; ty <= endTileY; ty++) {
     for (let tx = startTileX; tx <= endTileX; tx++) {
@@ -201,9 +305,13 @@ function render() {
 
         const el = pool[poolIdx]
         el.style.display = 'block'
+        el.style.transition = 'none'
         el.style.transform = `translate3d(${screenX}px, ${screenY}px, 0) rotate(${c.rot}deg)`
         el.style.width = c.w + 'px'
         el.style.height = c.h + 'px'
+        el.style.opacity = '1'
+        el.style.filter = 'none'
+        el.style.borderColor = ''
 
         const img = el.querySelector('img')
         if (img.dataset.src !== c.img) {
@@ -218,21 +326,6 @@ function render() {
 
         const badge = el.querySelector('.card-badge')
         if (badge) badge.style.display = c.url ? 'block' : 'none'
-
-        // Apply filter
-        const filter = activeFilter.value
-        if (filter && c.project !== filter) {
-          el.style.opacity = '0.15'
-          el.style.filter = 'grayscale(0.8)'
-        } else if (filter && c.project === filter) {
-          el.style.opacity = '1'
-          el.style.filter = 'none'
-          el.style.borderColor = 'rgba(200, 255, 0, 0.2)'
-        } else {
-          el.style.opacity = '1'
-          el.style.filter = 'none'
-          el.style.borderColor = ''
-        }
 
         el._cardData = c
         poolIdx++
@@ -259,6 +352,8 @@ function onPointerDown(e) {
   if (e.button && e.button !== 0) return
   const pos = getPointerPos(e)
   isDragging = true
+  const root = canvasRoot.value
+  if (root) root.classList.add('is-moving')
   dragDistance = 0
   pointerStartX = pos.x
   pointerStartY = pos.y
@@ -307,6 +402,8 @@ function onPointerMove(e) {
 function onPointerUp() {
   if (!isDragging) return
   isDragging = false
+  const root = canvasRoot.value
+  if (root) root.classList.remove('is-moving')
 
   if (dragDistance < DRAG_THRESHOLD) {
     const pos = { x: pointerStartX, y: pointerStartY }
@@ -338,12 +435,16 @@ function closeLightbox() {
 }
 
 function startMomentum() {
+  const root = canvasRoot.value
+  if (root) root.classList.add('is-moving')
+
   const step = () => {
     vx *= FRICTION
     vy *= FRICTION
 
     if (Math.abs(vx) < 0.1 && Math.abs(vy) < 0.1) {
       animId = null
+      if (root) root.classList.remove('is-moving')
       return
     }
 
@@ -392,6 +493,26 @@ function onMouseUp() {
   onPointerUp()
 }
 
+// ---- Trackpad / wheel scroll ----
+let wheelTimeout = null
+
+function onWheel(e) {
+  e.preventDefault()
+  px -= e.deltaX
+  py -= e.deltaY
+  render()
+
+  // Disable hover during scroll
+  const root = canvasRoot.value
+  if (root && !root.classList.contains('is-moving')) {
+    root.classList.add('is-moving')
+  }
+  clearTimeout(wheelTimeout)
+  wheelTimeout = setTimeout(() => {
+    if (root) root.classList.remove('is-moving')
+  }, 150)
+}
+
 // ---- Keyboard ----
 function onKeyDown(e) {
   if (e.key === 'Escape' && lightboxData.value) {
@@ -418,6 +539,7 @@ onMounted(() => {
     root.addEventListener('touchstart', onTouchStart, { passive: false })
     root.addEventListener('touchmove', onTouchMove, { passive: false })
     root.addEventListener('touchend', onTouchEnd, { passive: false })
+    root.addEventListener('wheel', onWheel, { passive: false })
   }
 
   window.addEventListener('keydown', onKeyDown)
@@ -438,6 +560,7 @@ onUnmounted(() => {
     root.removeEventListener('touchstart', onTouchStart)
     root.removeEventListener('touchmove', onTouchMove)
     root.removeEventListener('touchend', onTouchEnd)
+    root.removeEventListener('wheel', onWheel)
   }
 
   window.removeEventListener('keydown', onKeyDown)
@@ -591,10 +714,14 @@ body.canvas-page-active {
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.canvas-card:hover {
+.canvas-root:not(.is-moving) .canvas-card:hover {
   box-shadow: 0 0 24px rgba(200, 255, 0, 0.15), 0 0 0 1px rgba(200, 255, 0, 0.3);
   border-color: rgba(200, 255, 0, 0.4);
   z-index: 10;
+}
+
+.canvas-root.is-moving .canvas-card {
+  pointer-events: none;
 }
 
 .canvas-card img {
@@ -604,9 +731,10 @@ body.canvas-page-active {
   display: block;
   transition: transform 0.3s ease, filter 0.3s ease;
   pointer-events: none;
+  background: #ffffff;
 }
 
-.canvas-card:hover img {
+.canvas-root:not(.is-moving) .canvas-card:hover img {
   transform: scale(1.05);
   filter: brightness(1.1) saturate(1.15);
 }
@@ -630,7 +758,7 @@ body.canvas-page-active {
   pointer-events: none;
 }
 
-.canvas-card:hover .card-badge {
+.canvas-root:not(.is-moving) .canvas-card:hover .card-badge {
   opacity: 1;
   transform: translateY(0);
 }
@@ -650,7 +778,7 @@ body.canvas-page-active {
   transition: transform 0.3s ease;
 }
 
-.canvas-card:hover .card-overlay {
+.canvas-root:not(.is-moving) .canvas-card:hover .card-overlay {
   transform: translateY(0);
 }
 
@@ -839,9 +967,9 @@ body.canvas-page-active {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 20px 24px;
-  max-width: 480px;
+  border-radius: 14px;
+  padding: 14px 18px;
+  max-width: 380px;
   width: 90vw;
   pointer-events: auto;
 }
@@ -850,11 +978,45 @@ body.canvas-page-active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.info-panel-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info-panel-toggle {
+  background: none;
+  border: none;
+  color: rgba(240, 236, 228, 0.5);
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.3s ease;
+  display: flex;
+}
+
+.info-panel-toggle.open {
+  transform: rotate(180deg);
+}
+
+.info-panel-body {
+  overflow: hidden;
+  max-height: 300px;
+  margin-top: 12px;
+  transition: max-height 0.4s ease, margin-top 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.info-panel-body.collapsed {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
 }
 
 .info-panel-name {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   color: #f0ece4;
   letter-spacing: -0.01em;
@@ -875,17 +1037,53 @@ body.canvas-page-active {
   text-decoration: underline;
 }
 
+.info-panel-link-secondary {
+  color: rgba(240, 236, 228, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 8px;
+}
+
 .info-panel-desc {
-  font-size: 13px;
+  font-size: 11px;
   color: rgba(240, 236, 228, 0.65);
-  line-height: 1.5;
-  margin-bottom: 14px;
+  line-height: 1.45;
+  margin-bottom: 10px;
 }
 
 .info-panel-tech {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.info-panel-tech-grouped {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200, 255, 0, 0.2) transparent;
+}
+
+.info-tech-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.info-tech-category {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(240, 236, 228, 0.4);
+}
+
+.info-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
 }
 
 .info-tech-tag {

@@ -316,9 +316,10 @@ watchEffect(() => {
 }
 
 .nav-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  width: fit-content;
 }
 
 .nav-link::before {

@@ -29,19 +29,19 @@
     "experience": [
       {
         "year": "April 2025 - Present",
-        "title": "Student Developer",
+        "title": "Full Stack Developer (Student)",
         "place": "INSEAD",
         "description": "Development of internal tools and web applications."
       },
       {
         "year": "2023 - 2025",
-        "title": "Developer",
+        "title": "Full Stack Developer",
         "place": "CAPTAG",
         "description": "Carbon module (Vue 3 · Node.js · API Climeet). Autonomous project, agile collaboration."
       },
       {
         "year": "2022 - 2023",
-        "title": "Web Developer",
+        "title": "Full Stack Developer",
         "place": "Sayse",
         "description": "SaaS Development (React.js · TypeScript · Node.js · Docker)."
       },
@@ -56,7 +56,7 @@
       {
         "year": "Jan 2025 - Oct 2026",
         "title": "Master's Degree",
-        "place": "INSEAD",
+        "place": "ETNA",
         "description": "Master's degree in progress."
       },
       {
@@ -111,11 +111,13 @@
     "workflow": "Workflow & Mindset",
     "learning": "Currently Learning",
     "skills": {
-      "agile": "Agile/Scrum",
+      "agile": "Agile Methodology",
       "cicd": "CI/CD",
-      "testing": "Testing & Debugging",
+      "testing": "Testing (Jest, Vitest, Playwright)",
+      "security": "Security (JWT, SAML, RBAC)",
+      "api_design": "REST API Architecture",
       "problem_solving": "Problem Solving",
-      "autonomy": "Self-directed & Work-study"
+      "autonomy": "Autonomy & Initiative"
     }
   },
   "contact_section": {
