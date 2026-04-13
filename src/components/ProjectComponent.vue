@@ -263,8 +263,10 @@ function render() {
 
       const img = el.querySelector('img')
       if (img.dataset.src !== c.img) {
+        img.style.opacity = '0'
         img.src = c.img
         img.dataset.src = c.img
+        img.onload = () => { img.style.opacity = '1' }
       }
 
       const label = el.querySelector('.card-label')
@@ -326,8 +328,10 @@ function render() {
 
         const img = el.querySelector('img')
         if (img.dataset.src !== c.img) {
+          img.style.opacity = '0'
           img.src = c.img
           img.dataset.src = c.img
+          img.onload = () => { img.style.opacity = '1' }
         }
 
         const label = el.querySelector('.card-label')
@@ -774,7 +778,7 @@ body.canvas-page-active {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.2s ease;
   pointer-events: none;
   background: #ffffff;
 }
