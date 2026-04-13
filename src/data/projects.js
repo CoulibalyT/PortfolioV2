@@ -52,6 +52,7 @@ export const projects = [
       { file: 'login.webp',      label: 'Login' },
       { file: 'dashboard.webp',  label: 'Dashboard' },
       { file: 'challenges.webp', label: 'Challenges' },
+      { file: 'create-challenge.webp', label: 'Création de challenge' },
       { file: 'explore.webp',    label: 'Explorer' },
       { file: 'community.webp',  label: 'Communauté' },
       { file: 'projects.webp',   label: 'Projets' },
