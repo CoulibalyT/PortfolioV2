@@ -1,7 +1,7 @@
 <template>
   <div ref="canvasRoot" class="canvas-root">
     <!-- Floating header with nav -->
-    <header class="floating-header">
+    <header class="floating-header" @mousedown.stop @touchstart.stop>
       <router-link to="/" class="header-name-link">Tene Coulibaly</router-link>
       <nav class="floating-nav">
         <router-link to="/">{{ locale === 'fr' ? 'Moi' : 'Me' }}</router-link>
@@ -459,12 +459,19 @@ body.canvas-page-active {
   z-index: 100;
   padding: 16px 28px;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(8, 8, 10, 0.6), transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+:is(.dark .floating-header) {
+  background: linear-gradient(to bottom, rgba(8, 8, 10, 0.6), transparent);
+}
+
+:not(.dark) .floating-header {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
 }
 
 .header-name-link {
@@ -478,8 +485,17 @@ body.canvas-page-active {
   white-space: nowrap;
 }
 
+:not(.dark) .header-name-link {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
 .header-name-link:hover {
   color: #c8ff00;
+}
+
+:not(.dark) .header-name-link:hover {
+  color: #852C2C;
 }
 
 .floating-nav {
@@ -500,8 +516,17 @@ body.canvas-page-active {
   transition: color 0.3s;
 }
 
+:not(.dark) .floating-nav a {
+  color: rgba(0, 0, 0, 0.55);
+  font-weight: 600;
+}
+
 .floating-nav a:hover {
   color: #f0ece4;
+}
+
+:not(.dark) .floating-nav a:hover {
+  color: #000;
 }
 
 @media (max-width: 640px) {

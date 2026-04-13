@@ -4,7 +4,7 @@
     <div class="flex justify-between items-start ">
       <div class="flex items-center">
         <div>
-          <p class="md:text-[40px] text-xl font-thin text-gray-900 dark:text-gray-100">Tene Coulibaly</p>
+          <p class="md:text-[40px] text-xl font-thin text-black dark:text-gray-100">Tene Coulibaly</p>
           <div ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">
             <SynonymReveal
               :baseText="$t('role')"
@@ -13,21 +13,21 @@
           </div>
         </div>
         <div>
-          <p class="text-gray-700 dark:text-gray-300">/ˈte.ne/</p>
+          <p class="text-gray-950 dark:text-gray-300">/ˈte.ne/</p>
         </div>
       </div>
 
-      <div class="space-x-2 text-gray-700 dark:text-gray-300">
+      <div class="space-x-2 text-gray-950 dark:text-gray-300">
         <span 
           @click="setLanguage('fr')" 
           :class="{ 'font-bold': currentLanguage === 'fr' }"
-          class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
         >fr</span>
         -
         <span 
           @click="setLanguage('en')"   
           :class="{'font-bold': currentLanguage === 'en' }"
-          class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
         >en</span>
       </div>
     </div>
@@ -36,38 +36,38 @@
     <div class="flex-1 flex lg:flex-row flex-col min-h-0 overflow-hidden">
       <nav ref="navMenu" class="lg:w-1/4 w-full flex lg:flex-col flex-row lg:justify-center lg:gap-1.5 gap-4 lg:mb-0 mb-2 shrink-0 lg:overflow-visible overflow-x-auto whitespace-nowrap scrollbar-hide lg:pr-0 pr-5">
         <router-link 
-          active-class="font-bold" 
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          active-class="font-bold active-link"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/"
           @click="playClick"
         ><ScrambleText :text="$t('menu.me')" /></router-link>
         <router-link 
-          active-class="font-bold" 
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          active-class="font-bold active-link"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/projects"
           @click="playClick"
         ><ScrambleText :text="$t('menu.projects')" /></router-link>
         <router-link 
-          active-class="font-bold" 
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          active-class="font-bold active-link"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/skills"
           @click="playClick"
         ><ScrambleText :text="$t('menu.skills')" /></router-link>
         <router-link 
-          active-class="font-bold" 
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          active-class="font-bold active-link"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/timeline"
           @click="playClick"
         ><ScrambleText :text="$t('menu.timeline')" /></router-link>
         <router-link 
-          active-class="font-bold" 
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          active-class="font-bold active-link"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/contact"
           @click="playClick"
         ><ScrambleText :text="$t('menu.contact')" /></router-link>
         <router-link 
-          active-class="font-bold" 
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" 
+          active-class="font-bold active-link"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
           to="/playground"
           @click="playClick"
         ><ScrambleText :text="$t('menu.playground')" /></router-link>
@@ -93,7 +93,7 @@
     <!-- Footer -->
     <div class="flex justify-between items-center text-xs md:text-sm">
       <div class="flex items-center gap-2 md:gap-4">
-        <p class="text-gray-700 dark:text-gray-300">
+        <p class="text-gray-950 dark:text-gray-300">
           <span class="md:hidden"><ScrambleText :text="$t('status.available_short')" /></span>
           <span class="hidden md:inline"><ScrambleText :text="$t('status.available')" /></span>
         </p>
@@ -105,17 +105,17 @@
       </div>
 
       <!-- Toggle Mode Clair/Sombre -->
-      <div class="space-x-2 text-gray-700 dark:text-gray-300">
+      <div class="space-x-2 text-gray-950 dark:text-gray-300">
         <span 
           @click="toggleDarkMode(false)" 
           :class="{ 'font-bold': !isDarkMode && !isRedMode }"
-          class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
         >{{$t("light")}}</span>
         -
         <span 
           @click="toggleDarkMode(true)" 
           :class="{ 'font-bold': isDarkMode && !isRedMode }"
-          class="cursor-pointer hover:text-gray-900 dark:hover:text-gray-100"
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
         >{{$t("dark")}}</span>
         -
         <span 
@@ -313,6 +313,28 @@ watchEffect(() => {
 
 .font-bold {
   font-weight: bold;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  flex-shrink: 0;
+}
+
+.nav-link.active-link::before {
+  opacity: 1;
 }
 
 .hscreen{

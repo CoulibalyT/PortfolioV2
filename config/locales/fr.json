@@ -19,6 +19,7 @@
   "timeline_section": {
     "title": "Mon Parcours",
     "subtitle": "Le chemin qui m'a mené ici.",
+    "filter_all": "Tout",
     "experience_title": "Expériences Professionnelles",
     "education_title": "Formations",
     "experience": [

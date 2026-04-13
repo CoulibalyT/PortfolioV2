@@ -4,12 +4,12 @@
        ref="container">
     <div class="absolute inset-0 blur-[80px] md:blur-[120px]" :class="{ 'opacity-0': isRedMode }">
       <!-- Ambient Blobs -->
-      <div ref="blob1" class="absolute top-0 left-0 w-[50vw] h-[50vw] bg-purple-200 dark:bg-purple-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-70 animate-float"></div>
-      <div ref="blob2" class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-70 animate-float animation-delay-2000"></div>
-      <div ref="blob3" class="absolute bottom-0 left-1/4 w-[50vw] h-[50vw] bg-pink-200 dark:bg-indigo-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-70 animate-float animation-delay-4000"></div>
-      
+      <div ref="blob1" class="absolute top-0 left-0 w-[50vw] h-[50vw] bg-purple-200 dark:bg-purple-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-40 dark:opacity-70 animate-float"></div>
+      <div ref="blob2" class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-40 dark:opacity-70 animate-float animation-delay-2000"></div>
+      <div ref="blob3" class="absolute bottom-0 left-1/4 w-[50vw] h-[50vw] bg-pink-200 dark:bg-indigo-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-40 dark:opacity-70 animate-float animation-delay-4000"></div>
+
       <!-- Interactive Blob (Follows Mouse) -->
-      <div ref="interactiveBlob" class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-cyan-200 dark:bg-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-70 transition-opacity duration-500"></div>
+      <div ref="interactiveBlob" class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-cyan-200 dark:bg-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-40 dark:opacity-70 transition-opacity duration-500"></div>
     </div>
 
     <!-- Hidden Text Layer (Spotlight Effect) -->
