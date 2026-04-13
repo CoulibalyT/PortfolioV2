@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
+    "build": "vite build && node scripts/inject-meta.mjs",
+    "build:prerender": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "update-screenshots": "portfolio-sync capture"
   },

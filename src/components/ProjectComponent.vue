@@ -58,6 +58,22 @@
       >{{ name }}</button>
     </div>
 
+    <!-- Project Info Panel -->
+    <Transition name="info-slide">
+      <div v-if="activeProject" class="project-info-panel">
+        <div class="info-panel-header">
+          <h3 class="info-panel-name">{{ activeProject.name }}</h3>
+          <a v-if="activeProject.url" :href="activeProject.url" target="_blank" rel="noopener noreferrer" class="info-panel-link">
+            {{ activeProject.urlLabel || 'Voir' }} ↗
+          </a>
+        </div>
+        <p class="info-panel-desc">{{ activeProject.description?.[locale] || activeProject.description?.fr }}</p>
+        <div class="info-panel-tech">
+          <span v-for="t in activeProject.tech" :key="t" class="info-tech-tag">{{ t }}</span>
+        </div>
+      </div>
+    </Transition>
+
     <!-- Hint -->
     <Transition name="hint-fade">
       <div v-if="showHint" class="canvas-hint">
@@ -97,6 +113,11 @@ function setFilter(name) {
 const hintText = computed(() =>
   locale.value === 'fr' ? 'Glisser pour explorer' : 'Drag to explore'
 )
+
+const activeProject = computed(() => {
+  if (!activeFilter.value) return null
+  return projects.find(p => p.name === activeFilter.value) || null
+})
 
 // Pan state
 let px = 0
@@ -805,6 +826,87 @@ body.canvas-page-active {
   pointer-events: none;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+/* ---- Project Info Panel ---- */
+.project-info-panel {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  background: rgba(17, 17, 19, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 24px;
+  max-width: 480px;
+  width: 90vw;
+  pointer-events: auto;
+}
+
+.info-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.info-panel-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f0ece4;
+  letter-spacing: -0.01em;
+}
+
+.info-panel-link {
+  font-size: 12px;
+  color: #c8ff00;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.info-panel-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.info-panel-desc {
+  font-size: 13px;
+  color: rgba(240, 236, 228, 0.65);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.info-panel-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.info-tech-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(200, 255, 0, 0.12);
+  color: #c8ff00;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(200, 255, 0, 0.2);
+}
+
+.info-slide-enter-active,
+.info-slide-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.info-slide-enter-from,
+.info-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(10px);
 }
 
 .hint-fade-enter-active,

@@ -8,6 +8,11 @@ export const projects = [
     folder: 'skywalk',
     url: 'https://skywalk-chi.vercel.app',
     urlLabel: 'Voir le site',
+    description: {
+      fr: 'Plateforme communautaire pour les passionnés de voyage. Découverte de destinations, forum d\'échange et gestion de projets de voyages collaboratifs.',
+      en: 'Community platform for travel enthusiasts. Destination discovery, discussion forum and collaborative travel project management.',
+    },
+    tech: ['Vue.js', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
     images: [
       { file: 'home.webp',         label: 'Home' },
       { file: 'destinations.webp', label: 'Destinations' },
@@ -21,6 +26,11 @@ export const projects = [
     folder: 'bento',
     url: 'https://x.com/bento_designApp',
     urlLabel: 'Voir sur X',
+    description: {
+      fr: 'Plateforme de challenges créatifs pour designers. Soumission de projets, votes, classements, détection anti-IA multi-couches et plugin Figma intégré.',
+      en: 'Creative challenge platform for designers. Project submissions, voting, rankings, multi-layer AI detection and integrated Figma plugin.',
+    },
+    tech: ['Vue.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Tailwind CSS', 'Socket.io', 'Cloudinary'],
     images: [
       { file: 'home.webp',       label: 'Home' },
       { file: 'login.webp',      label: 'Login' },
@@ -38,6 +48,11 @@ export const projects = [
     folder: 'joyofsimple',
     url: 'https://joyofsimple-site.vercel.app',
     urlLabel: 'Voir le site',
+    description: {
+      fr: 'Site vitrine pour un studio de design minimaliste. Présentation de l\'approche créative et formulaire de contact.',
+      en: 'Showcase website for a minimalist design studio. Creative approach presentation and contact form.',
+    },
+    tech: ['Vue.js', 'GSAP', 'Tailwind CSS'],
     images: [
       { file: 'home.webp',     label: 'Home' },
       { file: 'contact.webp',  label: 'Contact' },
@@ -49,6 +64,11 @@ export const projects = [
     folder: 'footprint-calculator',
     url: null,
     urlLabel: null,
+    description: {
+      fr: 'Module de calcul d\'empreinte carbone développé en alternance chez CAPTAG. Formulaire multi-étapes connecté à l\'API Climeet pour estimer l\'impact environnemental.',
+      en: 'Carbon footprint calculator module built during work-study at CAPTAG. Multi-step form connected to the Climeet API to estimate environmental impact.',
+    },
+    tech: ['Vue.js', 'Node.js', 'API Climeet', 'Tailwind CSS'],
     images: [
       { file: 'home.webp',     label: 'Accueil' },
       { file: 'form.webp',     label: 'Formulaire' },
@@ -63,6 +83,11 @@ export const projects = [
     folder: 'daily-quote',
     url: null,
     urlLabel: null,
+    description: {
+      fr: 'Petite application affichant une citation inspirante différente chaque jour.',
+      en: 'Small app displaying a different inspirational quote every day.',
+    },
+    tech: ['Vue.js', 'CSS'],
     images: [
       { file: 'home.webp', label: 'App' },
     ]
