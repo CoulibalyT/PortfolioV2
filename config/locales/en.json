@@ -23,6 +23,7 @@
   "timeline_section": {
     "title": "My Journey",
     "subtitle": "The path that led me here.",
+    "filter_all": "All",
     "experience_title": "Professional Experience",
     "education_title": "Education",
     "experience": [
