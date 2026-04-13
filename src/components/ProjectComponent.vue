@@ -21,7 +21,7 @@
     <!-- Lightbox -->
     <Teleport to="body">
       <Transition name="lightbox-fade">
-        <div v-if="lightboxData" class="lightbox-overlay" @click="closeLightbox">
+        <div v-if="lightboxData" class="lightbox-overlay" @click="closeLightbox" @keydown="onLightboxKeydown" role="dialog" aria-modal="true" tabindex="-1" ref="lightboxRef">
           <div class="lightbox-content" @click.stop>
             <img :src="lightboxData.img" :alt="lightboxData.label" />
             <div class="lightbox-info">
@@ -38,7 +38,7 @@
                 {{ lightboxData.urlLabel || 'Voir le site' }} →
               </a>
             </div>
-            <button class="lightbox-close" @click="closeLightbox">&times;</button>
+            <button class="lightbox-close" @click="closeLightbox" aria-label="Fermer">&times;</button>
           </div>
         </div>
       </Transition>
@@ -58,12 +58,14 @@
     <div class="filter-bar">
       <button
         :class="['filter-btn', { active: activeFilter === null }]"
+        :aria-pressed="activeFilter === null"
         @click="setFilter(null)"
       >{{ locale === 'fr' ? 'Tous' : 'All' }}</button>
       <button
         v-for="name in projectNames"
         :key="name"
         :class="['filter-btn', { active: activeFilter === name }]"
+        :aria-pressed="activeFilter === name"
         @click="setFilter(name)"
       >{{ name }}</button>
     </div>
@@ -81,7 +83,7 @@
               {{ activeProject.urlSecondaryLabel || 'Lien' }} ↗
             </a>
           </div>
-          <button class="info-panel-toggle" :class="{ open: infoPanelOpen }">
+          <button class="info-panel-toggle" :class="{ open: infoPanelOpen }" :aria-expanded="infoPanelOpen" aria-label="Détails du projet">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
         </div>
@@ -107,7 +109,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
@@ -125,6 +127,7 @@ const canvasRoot = ref(null)
 const dotGrid = ref(null)
 const cardsContainer = ref(null)
 const lightboxData = ref(null)
+const lightboxRef = ref(null)
 const showHint = ref(true)
 const activeFilter = ref(null)
 const infoPanelOpen = ref(false)
@@ -263,9 +266,9 @@ function render() {
 
       const img = el.querySelector('img')
       if (img.dataset.src !== c.img) {
-        img.style.opacity = '0'
         img.src = c.img
         img.dataset.src = c.img
+        img.alt = `${c.project} — ${c.label}`
         img.onload = () => { img.style.opacity = '1' }
       }
 
@@ -330,6 +333,7 @@ function render() {
         if (img.dataset.src !== c.img) {
           img.src = c.img
           img.dataset.src = c.img
+          img.alt = `${c.project} — ${c.label}`
         }
 
         const label = el.querySelector('.card-label')
@@ -456,6 +460,21 @@ function handleTap(pos) {
 function closeLightbox() {
   lightboxData.value = null
 }
+
+// Focus trap for lightbox
+function onLightboxKeydown(e) {
+  if (e.key === 'Escape') closeLightbox()
+  if (e.key === 'Tab') {
+    const closeBtn = document.querySelector('.lightbox-close')
+    if (closeBtn) { e.preventDefault(); closeBtn.focus(); }
+  }
+}
+
+watch(lightboxData, (val) => {
+  if (val) {
+    nextTick(() => { lightboxRef.value?.focus(); });
+  }
+});
 
 function startMomentum() {
   const root = canvasRoot.value

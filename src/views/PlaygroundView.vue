@@ -14,26 +14,31 @@
     </div>
 
     <!-- Navigation Arrows -->
-    <button 
+    <button
       @click="prevExperiment"
+      aria-label="Expérience précédente"
       class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all hover:scale-110"
     >
       <ChevronLeftIcon class="w-8 h-8" />
     </button>
 
-    <button 
+    <button
       @click="nextExperiment"
+      aria-label="Expérience suivante"
       class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all hover:scale-110"
     >
       <ChevronRightIcon class="w-8 h-8" />
     </button>
 
     <!-- Experiment Switcher (Dots) -->
-    <div class="absolute bottom-10 left-0 right-0 flex justify-center gap-4 z-20">
-      <button 
-        v-for="(exp, index) in experiments" 
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center gap-4 z-20" role="tablist">
+      <button
+        v-for="(exp, index) in experiments"
         :key="index"
         @click="currentIndex = index"
+        :aria-label="exp.name"
+        :aria-selected="currentIndex === index"
+        role="tab"
         class="w-3 h-3 rounded-full transition-all duration-300"
         :class="currentIndex === index ? 'bg-white scale-125' : 'bg-white/30 hover:bg-white/60'"
       ></button>

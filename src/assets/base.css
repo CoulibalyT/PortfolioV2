@@ -1,5 +1,4 @@
 /* color palette from <https://github.com/vuejs/theme> */
-@import url('https://fonts.cdnfonts.com/css/pp-neue-montreal');
 
 @import "tailwindcss";
 
@@ -133,7 +132,7 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family: 'PP Neue Montreal', sans-serif;
+  font-family: 'Geist', sans-serif;
 
   font-size: 15px;
   text-rendering: optimizeLegibility;

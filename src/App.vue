@@ -4,13 +4,17 @@
     <InteractiveBackground />
     <KonamiHint />
     <CustomCursor />
+
+    <!-- Skip nav link for accessibility -->
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+
     <div ref="overlay" :class="['transition-overlay', { 'dark-overlay': isDarkMode }]" >
       <p class="overlay-text">{{ transitionText }}</p>
     </div>
-    
+
     <WrapperComponent v-if="route.name !== 'SplashScreen' && route.name !== 'project'">
       <router-view v-slot="{ Component, route }">
-        <component :is="Component" :key="route.path" class="page" />
+        <component :is="Component" :key="route.path" class="page" id="main-content" />
       </router-view>
     </WrapperComponent>
     <router-view v-else />
@@ -18,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, onMounted } from "vue";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import gsap from "gsap";
 import { useI18n } from "vue-i18n";
@@ -28,19 +32,20 @@ import NoiseOverlay from "@/components/NoiseOverlay.vue";
 import KonamiHint from "@/components/KonamiHint.vue";
 import WrapperComponent from "@/components/WrapperComponent.vue";
 import { useKonamiCode } from "@/composables/useKonamiCode";
+import { useTheme } from "@/composables/useTheme";
 
 const overlay = ref(null);
 const router = useRouter();
 const route = useRoute();
 const { t } = useI18n();
 const isTransitioning = ref(false);
-const isDarkMode = ref(localStorage.getItem("theme") === "dark");
+const { isDarkMode } = useTheme();
 const transitionText = ref("");
 
-onMounted(() => {});
+// Respect prefers-reduced-motion
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 useKonamiCode(async () => {
-  // Easter Egg Trigger
   const confetti = (await import('canvas-confetti')).default;
   const duration = 3000;
   const end = Date.now() + duration;
@@ -65,12 +70,6 @@ useKonamiCode(async () => {
       requestAnimationFrame(frame);
     }
   }());
-  
-  // Optional: Invert colors temporarily
-  document.documentElement.style.filter = 'invert(1)';
-  setTimeout(() => {
-    document.documentElement.style.filter = '';
-  }, 500);
 });
 
 router.beforeEach(async (to, from, next) => {
@@ -82,10 +81,9 @@ router.beforeEach(async (to, from, next) => {
     return;
   }
 
-  if (isTransitioning.value) return; 
+  if (isTransitioning.value) return;
   isTransitioning.value = true;
 
-  // Set text based on route name
   if (to.name) {
     const keyMap = {
       'me': 'menu.me',
@@ -99,30 +97,46 @@ router.beforeEach(async (to, from, next) => {
     transitionText.value = key ? t(key) : '';
   }
 
-  await gsap.to(overlay.value, {
-    y: "0%",
-    duration: 0.6,
-    ease: "power2.inOut",
-  });
+  if (!prefersReducedMotion) {
+    await gsap.to(overlay.value, {
+      y: "0%",
+      duration: 0.6,
+      ease: "power2.inOut",
+    });
+  }
 
   next();
 
-  await gsap.to(overlay.value, {
-    y: "-100%",
-    duration: 0.6,
-    ease: "power2.inOut",
-    delay: 0.2, 
-  });
+  if (!prefersReducedMotion) {
+    await gsap.to(overlay.value, {
+      y: "-100%",
+      duration: 0.6,
+      ease: "power2.inOut",
+      delay: 0.2,
+    });
+  }
 
   isTransitioning.value = false;
-});
-
-watchEffect(() => {
-  isDarkMode.value = localStorage.getItem("theme") === "dark";
 });
 </script>
 
 <style scoped>
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 10000;
+  font-size: 14px;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 .transition-overlay {
   position: fixed;
   top: 0;
