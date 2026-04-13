@@ -50,14 +50,12 @@ export const projects = [
     images: [
       { file: 'home.webp',       label: 'Home' },
       { file: 'login.webp',      label: 'Login' },
-      { file: 'dashboard.webp',  label: 'Dashboard' },
       { file: 'challenges.webp', label: 'Challenges' },
       { file: 'create-challenge.webp', label: 'Création de challenge' },
       { file: 'explore.webp',    label: 'Explorer' },
       { file: 'community.webp',  label: 'Communauté' },
       { file: 'projects.webp',   label: 'Projets' },
       { file: 'settings.webp',   label: 'Paramètres' },
-      { file: 'values.webp',     label: 'Values' },
     ]
   },
   {
