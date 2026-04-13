@@ -1,5 +1,5 @@
 <template>
-  <div class="konami-hint fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-2 opacity-10 pointer-events-none z-0 select-none mix-blend-difference">
+  <div class="konami-hint fixed top-4 right-4 flex gap-1.5 opacity-10 pointer-events-none z-0 select-none mix-blend-difference">
     <div class="key">↑</div>
     <div class="key">↑</div>
     <div class="key">↓</div>

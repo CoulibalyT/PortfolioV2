@@ -9,10 +9,17 @@ export const projects = [
     url: 'https://skywalk-chi.vercel.app',
     urlLabel: 'Voir le site',
     description: {
-      fr: 'Plateforme communautaire pour les passionnés de voyage. Découverte de destinations, forum d\'échange et gestion de projets de voyages collaboratifs.',
-      en: 'Community platform for travel enthusiasts. Destination discovery, discussion forum and collaborative travel project management.',
+      fr: 'Plateforme full-stack d\'aide à l\'expatriation. Exploration de destinations, gestion de projet, comparaison de villes, recherche d\'emploi, coût de la vie et forum communautaire modéré par IA. 24 modules backend, 110+ endpoints, 8 APIs externes.',
+      en: 'Full-stack expatriation platform. Destination exploration, project management, city comparison, job search, cost of living and AI-moderated community forum. 24 backend modules, 110+ endpoints, 8 external APIs.',
     },
-    tech: ['Vue.js', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
+    tech: {
+      'Frontend': ['React 19', 'TypeScript', 'Vite', 'React Router', 'TanStack Query', 'Tailwind CSS', 'i18next', '@dnd-kit', 'Axios'],
+      'Backend': ['NestJS', 'TypeScript', 'TypeORM', 'PostgreSQL', 'Passport JWT', 'Swagger', 'Nodemailer', 'node-cache'],
+      'APIs externes': ['OpenAI Moderation', 'Adzuna Jobs', 'Numbeo', 'GeoDB Cities', 'REST Countries', 'OECD', 'OpenWeather', 'ExchangeRate'],
+      'Sécurité': ['JWT', 'bcrypt', 'Helmet', 'CORS', 'Rate Limiting', 'RBAC', 'Modération IA'],
+      'DevOps': ['Docker', 'Docker Compose', 'Nginx', 'GitHub Actions', 'GitLab CI', 'Render', 'Vercel', 'Supabase'],
+      'Testing / Qualité': ['Jest', 'Vitest', 'Playwright', 'Testing Library', 'Supertest', 'ESLint', 'Prettier', 'Husky', 'Commitlint'],
+    },
     images: [
       { file: 'home.webp',         label: 'Home' },
       { file: 'destinations.webp', label: 'Destinations' },
@@ -24,13 +31,22 @@ export const projects = [
   {
     name: 'Bento',
     folder: 'bento',
-    url: 'https://x.com/bento_designApp',
-    urlLabel: 'Voir sur X',
+    url: 'https://bento-sable.vercel.app/',
+    urlLabel: 'Voir le site',
+    urlSecondary: 'https://x.com/bento_designApp',
+    urlSecondaryLabel: 'Voir sur X',
     description: {
       fr: 'Plateforme de challenges créatifs pour designers. Soumission de projets, votes, classements, détection anti-IA multi-couches et plugin Figma intégré.',
       en: 'Creative challenge platform for designers. Project submissions, voting, rankings, multi-layer AI detection and integrated Figma plugin.',
     },
-    tech: ['Vue.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Tailwind CSS', 'Socket.io', 'Cloudinary'],
+    tech: {
+      'Frontend': ['Vue 3', 'Vite', 'Vue Router', 'Pinia', 'TanStack Query', 'Tailwind CSS', 'i18n'],
+      'Backend': ['Node.js', 'NestJS', 'Express', 'Prisma ORM', 'PostgreSQL', 'JWT', 'OAuth 2.0', 'Socket.io', 'Zod'],
+      'IA / Sécurité': ['Hugging Face API', 'Détection IA multi-couches', 'FFT Analysis', 'Anti-plagiat', 'Helmet', 'Rate Limiting'],
+      'Cloud / DevOps': ['Cloudinary', 'SendGrid', 'Vercel', 'Heroku', 'Docker', 'PM2', 'CI/CD'],
+      'Plugin': ['Figma Plugin API', 'TypeScript'],
+      'Testing / Qualité': ['Jest', 'Supertest', 'SEO', 'Web Vitals', 'GA4'],
+    },
     images: [
       { file: 'home.webp',       label: 'Home' },
       { file: 'login.webp',      label: 'Login' },
@@ -79,15 +95,45 @@ export const projects = [
     ]
   },
   {
+    name: 'APOL (INSEAD)',
+    folder: 'scholarship',
+    url: null,
+    urlLabel: null,
+    description: {
+      fr: 'Application web d\'entreprise développée pour INSEAD gérant le cycle complet des candidatures aux programmes diplômants (MBA, EMBA, MIM), les admissions et la gestion des bourses. 6 bundles Symfony, SSO ADFS, intégrations PeopleSoft, DocuSign, Kira Talent.',
+      en: 'Enterprise web application built for INSEAD managing the full application cycle for degree programs (MBA, EMBA, MIM), admissions and scholarship management. 6 Symfony bundles, ADFS SSO, PeopleSoft, DocuSign, Kira Talent integrations.',
+    },
+    tech: {
+      'Backend': ['Symfony 6.4', 'PHP 8.1', 'Doctrine ORM', 'Twig', 'PHPUnit'],
+      'Base de données': ['Microsoft SQL Server', 'Doctrine Migrations'],
+      'Frontend': ['jQuery', 'Bootstrap', 'DataTables', 'Select2', 'Chart.js', 'CKEditor'],
+      'Auth / Sécurité': ['ADFS', 'SAML 2.0', 'SSO', 'RBAC', 'CSRF', 'SHA512', 'Snyk', 'BurpSuite'],
+      'Intégrations': ['PeopleSoft (SOAP)', 'DocuSign', 'Kira Talent', 'Eloqua', 'Worldpay', 'MuleSoft'],
+      'DevOps': ['Jenkins', 'Windows IIS', 'INT/UAT/PROD', 'PHPSpreadsheet', 'dompdf', 'wkhtmltopdf'],
+    },
+    images: [
+      { file: 'main.webp',              label: 'Dashboard' },
+      { file: 'list.webp',              label: 'Liste des candidatures' },
+      { file: 'scholarship-create.webp', label: 'Création de bourse' },
+      { file: 'evaluator.webp',         label: 'Évaluation' },
+      { file: 'reports.webp',           label: 'Rapports' },
+    ]
+  },
+  {
     name: 'Daily Quote',
     folder: 'daily-quote',
     url: null,
     urlLabel: null,
     description: {
-      fr: 'Petite application affichant une citation inspirante différente chaque jour.',
-      en: 'Small app displaying a different inspirational quote every day.',
+      fr: 'Application mobile cross-platform affichant des citations inspirantes avec thème dynamique jour/nuit basé sur la météo, synthèse vocale et widgets natifs pour l\'écran d\'accueil.',
+      en: 'Cross-platform mobile app displaying inspirational quotes with dynamic day/night theme based on weather, text-to-speech and native home screen widgets.',
     },
-    tech: ['Vue.js', 'CSS'],
+    tech: {
+      'Mobile': ['Flutter', 'Dart', 'Material 3'],
+      'Natif': ['Kotlin', 'Swift', 'WidgetKit', 'AppWidget'],
+      'APIs': ['Open-Meteo', 'DummyJSON', 'Geolocator', 'Text-to-Speech'],
+      'Fonctionnalités': ['Cache hors-ligne', 'Notifications locales', 'Partage natif'],
+    },
     images: [
       { file: 'home.webp', label: 'App' },
     ]
@@ -107,7 +153,7 @@ function seededRange(seed, min, max) {
   return min + seededRandom(seed) * (max - min)
 }
 
-function generateCards(projectList, cols = 4) {
+function generateCards(projectList, cols = 5) {
   // 1. Flatten all images into a single list
   const flat = []
   for (const project of projectList) {
@@ -125,12 +171,21 @@ function generateCards(projectList, cols = 4) {
   // 2. Deterministic interleaved shuffle (spread projects apart)
   const shuffled = interleaveShuffle(flat)
 
+  // 2.5 Pad to fill last row — duplicate random cards so no empty cells
+  const remainder = shuffled.length % cols
+  if (remainder !== 0) {
+    const needed = cols - remainder
+    for (let i = 0; i < needed; i++) {
+      shuffled.push({ ...shuffled[i] })
+    }
+  }
+
   // 3. Layout constants
-  const GAP = 30
-  const MARGIN = 20
-  const MIN_W = 280, MAX_W = 360
-  const MIN_H = 230, MAX_H = 290
-  const JITTER = 15
+  const GAP = 16
+  const MARGIN = 10
+  const MIN_W = 250, MAX_W = 320
+  const MIN_H = 190, MAX_H = 250
+  const JITTER = 8
 
   // 4. Generate card sizes first to compute grid cell dimensions
   const cardSizes = shuffled.map((_, i) => ({
