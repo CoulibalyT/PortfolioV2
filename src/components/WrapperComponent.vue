@@ -18,17 +18,21 @@
       </div>
 
       <div class="space-x-2 text-gray-950 dark:text-gray-300">
-        <span 
-          @click="setLanguage('fr')" 
+        <button
+          @click="setLanguage('fr')"
           :class="{ 'font-bold': currentLanguage === 'fr' }"
-          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
-        >fr</span>
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100 bg-transparent border-none p-0 text-inherit"
+          :aria-label="'Français'"
+          :aria-pressed="currentLanguage === 'fr'"
+        >fr</button>
         -
-        <span 
-          @click="setLanguage('en')"   
+        <button
+          @click="setLanguage('en')"
           :class="{'font-bold': currentLanguage === 'en' }"
-          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
-        >en</span>
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100 bg-transparent border-none p-0 text-inherit"
+          :aria-label="'English'"
+          :aria-pressed="currentLanguage === 'en'"
+        >en</button>
       </div>
     </div>
 
@@ -106,23 +110,29 @@
 
       <!-- Toggle Mode Clair/Sombre -->
       <div class="space-x-2 text-gray-950 dark:text-gray-300">
-        <span 
-          @click="toggleDarkMode(false)" 
+        <button
+          @click="toggleDarkMode(false)"
           :class="{ 'font-bold': !isDarkMode && !isRedMode }"
-          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
-        >{{$t("light")}}</span>
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100 bg-transparent border-none p-0 text-inherit"
+          :aria-label="$t('light')"
+          :aria-pressed="!isDarkMode && !isRedMode"
+        >{{$t("light")}}</button>
         -
-        <span 
-          @click="toggleDarkMode(true)" 
+        <button
+          @click="toggleDarkMode(true)"
           :class="{ 'font-bold': isDarkMode && !isRedMode }"
-          class="cursor-pointer hover:text-black dark:hover:text-gray-100"
-        >{{$t("dark")}}</span>
+          class="cursor-pointer hover:text-black dark:hover:text-gray-100 bg-transparent border-none p-0 text-inherit"
+          :aria-label="$t('dark')"
+          :aria-pressed="isDarkMode && !isRedMode"
+        >{{$t("dark")}}</button>
         -
-        <span 
-          @click="toggleRedMode()" 
+        <button
+          @click="toggleRedMode()"
           :class="{ 'font-bold': isRedMode, 'text-custom-red': !isRedMode }"
-          class="cursor-pointer hover:text-custom-red"
-        >red</span>
+          class="cursor-pointer hover:text-custom-red bg-transparent border-none p-0 text-inherit"
+          aria-label="Red theme"
+          :aria-pressed="isRedMode"
+        >red</button>
       </div>
     </div>
   </div>

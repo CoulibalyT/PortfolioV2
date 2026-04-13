@@ -1,5 +1,9 @@
 <template>
-    <div class="w-full max-w-md flex flex-col items-start gap-2 px-4 md:px-0">
+    <div class="w-full max-w-md flex flex-col items-start gap-4 px-4 md:px-0">
+      <div class="mb-2">
+        <h2 class="text-2xl md:text-4xl font-bold dark:text-white mb-1">{{ $t('contact_section.title') }}</h2>
+        <p class="text-sm md:text-base text-gray-500 dark:text-gray-400">{{ $t('contact_section.text') }}</p>
+      </div>
       <a
         href="mailto:coulibaly.tene00@gmail.com"
         @click="copyEmail"
@@ -84,7 +88,7 @@ const copyEmail = (e) => {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: black; 
+  background-color: currentColor;
   transition: width 0.3s ease-in-out;
 }
 
