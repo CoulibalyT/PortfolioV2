@@ -6,13 +6,10 @@ import tailwindcssVite from "@tailwindcss/vite";
 import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(async ({ mode }) => ({
   plugins: [
     vue(),
-    mode === 'development' && (async () => {
-      const { default: devtools } = await import('vite-plugin-vue-devtools')
-      return devtools()
-    })(),
+    mode === 'development' && (await import('vite-plugin-vue-devtools')).default(),
     tailwindcssVite(),
   ].filter(Boolean),
   resolve: {

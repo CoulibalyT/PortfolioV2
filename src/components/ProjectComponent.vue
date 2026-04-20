@@ -261,7 +261,7 @@ function render() {
       el.style.height = cardH + 'px'
       el.style.opacity = '1'
       el.style.filter = 'none'
-      el.style.borderColor = 'rgba(200, 255, 0, 0.2)'
+      el.style.borderColor = 'rgba(240, 236, 228, 0.25)'
 
       const img = el.querySelector('img')
       if (img.dataset.src !== c.img) {
@@ -682,11 +682,11 @@ body.canvas-page-active {
   align-items: center;
 }
 
-:is(.dark .floating-header) {
+html.dark .floating-header {
   background: linear-gradient(to bottom, rgba(8, 8, 10, 0.6), transparent);
 }
 
-:not(.dark) .floating-header {
+html:not(.dark) .floating-header {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
 }
 
@@ -701,16 +701,16 @@ body.canvas-page-active {
   white-space: nowrap;
 }
 
-:not(.dark) .header-name-link {
+html:not(.dark) .header-name-link {
   color: #1a1a1a;
   font-weight: 500;
 }
 
 .header-name-link:hover {
-  color: #c8ff00;
+  color: #852C2C;
 }
 
-:not(.dark) .header-name-link:hover {
+html:not(.dark) .header-name-link:hover {
   color: #852C2C;
 }
 
@@ -732,7 +732,7 @@ body.canvas-page-active {
   transition: color 0.3s;
 }
 
-:not(.dark) .floating-nav a {
+html:not(.dark) .floating-nav a {
   color: rgba(0, 0, 0, 0.55);
   font-weight: 600;
 }
@@ -741,7 +741,7 @@ body.canvas-page-active {
   color: #f0ece4;
 }
 
-:not(.dark) .floating-nav a:hover {
+html:not(.dark) .floating-nav a:hover {
   color: #000;
 }
 
@@ -793,8 +793,8 @@ body.canvas-page-active {
 }
 
 .canvas-root:not(.is-moving) .canvas-card:hover {
-  box-shadow: 0 0 24px rgba(200, 255, 0, 0.15), 0 0 0 1px rgba(200, 255, 0, 0.3);
-  border-color: rgba(200, 255, 0, 0.4);
+  box-shadow: 0 0 24px rgba(240, 236, 228, 0.12), 0 0 0 1px rgba(240, 236, 228, 0.35);
+  border-color: rgba(240, 236, 228, 0.5);
   z-index: 10;
 }
 
@@ -822,7 +822,7 @@ body.canvas-page-active {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(200, 255, 0, 0.9);
+  background: rgba(240, 236, 228, 0.92);
   color: #08080a;
   font-size: 11px;
   font-weight: 600;
@@ -868,7 +868,7 @@ body.canvas-page-active {
 
 .card-project {
   font-size: 12px;
-  color: #c8ff00;
+  color: rgba(240, 236, 228, 0.7);
 }
 
 /* ---- Lightbox ---- */
@@ -916,13 +916,13 @@ body.canvas-page-active {
 
 .lightbox-project {
   font-size: 14px;
-  color: #c8ff00;
+  color: rgba(240, 236, 228, 0.7);
 }
 
 .lightbox-link {
   display: inline-block;
   margin-top: 12px;
-  color: #c8ff00;
+  color: #f0ece4;
   font-size: 14px;
   font-weight: 400;
   text-decoration: none;
@@ -949,16 +949,55 @@ body.canvas-page-active {
 }
 
 .lightbox-close:hover {
-  color: #c8ff00;
+  color: #852C2C;
 }
 
-.lightbox-fade-enter-active,
-.lightbox-fade-leave-active {
+.lightbox-fade-enter-active {
   transition: opacity 0.3s ease;
+}
+.lightbox-fade-leave-active {
+  transition: opacity 0.25s ease;
 }
 .lightbox-fade-enter-from,
 .lightbox-fade-leave-to {
   opacity: 0;
+}
+
+.lightbox-fade-enter-active .lightbox-content {
+  animation: zoomIn 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.lightbox-fade-leave-active .lightbox-content {
+  animation: zoomOut 0.25s ease-in;
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-fade-enter-active .lightbox-content,
+  .lightbox-fade-leave-active .lightbox-content {
+    animation: none;
+  }
 }
 
 /* ---- Filter bar ---- */
@@ -1010,7 +1049,7 @@ body.canvas-page-active {
 }
 
 .filter-btn.active {
-  background: #c8ff00;
+  background: #f0ece4;
   color: #08080a;
   font-weight: 500;
 }
@@ -1137,7 +1176,7 @@ body.canvas-page-active {
 
 .info-panel-link {
   font-size: 12px;
-  color: #c8ff00;
+  color: #f0ece4;
   text-decoration: none;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -1201,10 +1240,10 @@ body.canvas-page-active {
   font-weight: 500;
   padding: 3px 10px;
   border-radius: 100px;
-  background: rgba(200, 255, 0, 0.12);
-  color: #c8ff00;
+  background: rgba(240, 236, 228, 0.08);
+  color: rgba(240, 236, 228, 0.85);
   letter-spacing: 0.02em;
-  border: 1px solid rgba(200, 255, 0, 0.2);
+  border: 1px solid rgba(240, 236, 228, 0.18);
 }
 
 .info-slide-enter-active,
