@@ -59,6 +59,27 @@
       "outputDir": "./public/images/projects/autoomat"
     },
     {
+      "name": "intake",
+      "url": "https://it-assistance-jj.vercel.app",
+      "auth": {
+        "type": "custom",
+        "navigateTo": "/auth/signin",
+        "scriptFile": "./scripts/auth/intake.cjs",
+        "waitFor": 1000
+      },
+      "pages": [
+        { "path": "/", "name": "home", "expectedUrlPattern": "vercel\\.app/?$" },
+        { "path": "/intake", "name": "check-in", "expectedUrlPattern": "/intake$" },
+        { "path": "/technician", "name": "technician", "expectedUrlPattern": "/technician$" },
+        { "path": "/manager", "name": "manager", "expectedUrlPattern": "/manager$" },
+        { "path": "/maintenance", "name": "maintenance", "expectedUrlPattern": "/maintenance$" },
+        { "path": "/maintenance/programmes", "name": "programmes", "expectedUrlPattern": "/maintenance/programmes$" },
+        { "path": "/maintenance/export", "name": "export", "expectedUrlPattern": "/maintenance/export$" }
+      ],
+      "viewport": { "width": 1920, "height": 1080 },
+      "outputDir": "./public/images/projects/intake"
+    },
+    {
       "name": "joyofsimple",
       "url": "https://joyofsimple-site.vercel.app",
       "pages": [
