@@ -4,6 +4,34 @@
 
 export const projects = [
   {
+    name: 'NØIR HAUS',
+    folder: 'noir-haus',
+    url: 'https://noir-inky.vercel.app/',
+    urlLabel: 'Voir le défilé',
+    urlSecondary: 'https://github.com/CoulibalyT/noir',
+    urlSecondaryLabel: 'Voir sur GitHub',
+    description: {
+      fr: 'Défilé de haute couture en 3D, scrollable et bilingue. Quatre looks CLO3D mis en scène avec caméra orbitale, post-FX cinématographique et finale T-bar. Audio procédural Web Audio, transitions GSAP scroll-driven, soumissions ouvertes aux créateurs.',
+      en: 'Scroll-driven 3D haute couture runway, bilingual. Four CLO3D looks staged with orbital camera, cinematic post-FX and T-bar finale. Procedural Web Audio, GSAP scroll-driven transitions, open submissions for creators.',
+    },
+    tech: {
+      'Langage & build': ['TypeScript (strict)', 'Vite', 'HTML5', 'CSS3'],
+      'Rendu 3D': ['Three.js r170', 'WebGLRenderer', 'PBR materials', 'IBL', 'GLSL shaders'],
+      'Post-FX': ['postprocessing (pmndrs)', 'Bloom', 'Chromatic Aberration', 'Vignette', 'Noise', 'Dissolve custom', 'ColorGrade custom', 'Anamorphic'],
+      'Loaders & assets': ['GLTFLoader', 'MeshoptDecoder', 'EXRLoader', 'PMREMGenerator', 'Reflector', 'RectAreaLight', 'InstancedMesh'],
+      'Animation': ['GSAP', 'ScrollTrigger', 'AnimationMixer', 'CSS keyframes'],
+      'Audio': ['Web Audio API', 'OscillatorNode', 'ConvolverNode', 'LFO'],
+      'i18n & UX': ['Dictionnaire FR/EN maison', 'navigator.language', 'localStorage', 'Feature flags URL-driven'],
+      'Déploiement': ['Vercel', 'GitHub', 'Cache immutable', 'Preload HDR + GLB'],
+    },
+    images: [
+      { file: 'noir-haus-aw26-heritage.webp', label: 'Héritage' },
+      { file: 'noir-haus-aw26-dentelle.webp', label: 'Dentelle' },
+      { file: 'noir-haus-aw26-givre.webp',    label: 'Givre' },
+      { file: 'noir-haus-aw26-clown.webp',    label: 'Clown' },
+    ]
+  },
+  {
     name: 'Skywalk',
     folder: 'skywalk',
     url: 'https://skywalk-chi.vercel.app',
@@ -116,6 +144,35 @@ export const projects = [
       { file: 'scholarship-create.webp', label: 'Création de bourse' },
       { file: 'evaluator.webp',         label: 'Évaluation' },
       { file: 'reports.webp',           label: 'Rapports' },
+    ]
+  },
+  {
+    name: 'Intake (INSEAD)',
+    folder: 'intake',
+    url: null,
+    urlLabel: null,
+    description: {
+      fr: 'Application interne de gestion du support IT pour INSEAD. Check-in étudiants par badge/email, file d\'attente technicien temps réel, dashboards manager (KPIs, tendances, word cloud) et outils admin (configuration, exports CSV). Architecture multi-base (MySQL local / PostgreSQL-Supabase prod) avec accès role-based scoped par campus.',
+      en: 'Internal IT support operations app for INSEAD. Badge/email student check-in, live technician queue, manager analytics dashboards (KPIs, trends, word cloud) and admin tooling (config, CSV exports). Multi-database architecture (MySQL local / PostgreSQL-Supabase prod) with campus-aware role-based access.',
+    },
+    tech: {
+      'Frontend': ['Next.js 15', 'React 19', 'TypeScript 5', 'Tailwind CSS 3', 'Framer Motion', 'Recharts'],
+      'Backend': ['Route Handlers', 'Server Actions', 'Zod'],
+      'Data': ['Prisma 6', 'MySQL', 'PostgreSQL', 'Supabase'],
+      'Auth / Sécurité': ['NextAuth v5', 'Microsoft Entra ID (SSO)', 'JWT', 'RBAC', 'Campus-aware middleware'],
+      'Intégrations': ['Power BI Embed', 'SMTP', 'Alertes email'],
+      'Observabilité': ['Sentry'],
+      'Testing': ['Playwright (E2E)', 'ESLint'],
+      'Déploiement': ['Vercel', 'Supabase'],
+    },
+    images: [
+      { file: 'home.webp',        label: 'Accueil' },
+      { file: 'check-in.webp',    label: 'Check-in étudiant' },
+      { file: 'technician.webp',  label: 'Queue technicien' },
+      { file: 'manager.webp',     label: 'Dashboard analytics' },
+      { file: 'maintenance.webp', label: 'Admin hub' },
+      { file: 'programmes.webp',  label: 'Gestion programmes' },
+      { file: 'export.webp',      label: 'Export CSV' },
     ]
   },
   {
