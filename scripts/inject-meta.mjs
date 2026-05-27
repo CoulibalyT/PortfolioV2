@@ -168,12 +168,44 @@ const routes = [
         </ul>
       </main>`,
   },
+  {
+    // Commercial landing page, FR-only (no EN equivalent)
+    path: '/offre',
+    title: 'Création de sites web pour commerces et artisans à Paris — Tene Coulibaly',
+    desc: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€. Premier appel gratuit.",
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <h1>Création de sites web pour commerces et artisans à Paris</h1>
+        <p>Je suis Tene Coulibaly, développeuse Full Stack freelance basée en Île-de-France. Je crée des sites web sur mesure pour commerçants, artisans et entrepreneurs locaux qui veulent enfin exister en ligne.</p>
+        <h2>Mes offres</h2>
+        <ul>
+          <li><strong>Pack Vitrine — à partir de 800€</strong> : site one-page moderne, responsive, SEO de base, formulaire de contact, livraison en 2 semaines.</li>
+          <li><strong>Pack Business — à partir de 1500€</strong> : site multi-pages, blog intégré, fiche Google Business, réservation en ligne, livraison en 3-4 semaines.</li>
+          <li><strong>Pack Premium — sur devis</strong> : application web sur mesure, espace client, paiement en ligne, accompagnement SEO 3 mois, maintenance 6 mois.</li>
+        </ul>
+        <h2>Pour qui</h2>
+        <p>Coiffeurs, garages, restaurants, boutiques, artisans BTP, professions libérales. Toute petite entreprise qui veut être trouvée sur Google par ses futurs clients locaux.</p>
+        <h2>Cas client — Autoomat (garage à Ivry-sur-Seine)</h2>
+        <p>Site moderne en Next.js avec SEO local, système de prise de RDV en ligne via Calendly, blog avec articles SEO et API plaque d'immatriculation intégrée pour des devis automatiques.</p>
+        <h2>Comment ça marche</h2>
+        <ol>
+          <li>Appel découverte (15 min gratuit)</li>
+          <li>Maquette validée avant développement</li>
+          <li>Développement avec suivi</li>
+          <li>Mise en ligne + formation</li>
+        </ol>
+        <h2>Contact</h2>
+        <p>Email : <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a>. Auto-entrepreneuse, TVA non applicable (art. 293 B du CGI).</p>
+      </main>`,
+    frPath: null,
+  },
 ];
 
 // Mark French routes with locale + frPath (used for hreflang pair resolution)
+// Pages with explicit frPath: null are FR-only (no EN equivalent) and skip hreflang.
 for (const r of routes) {
   r.locale = 'fr';
-  r.frPath = r.path;
+  if (r.frPath === undefined) r.frPath = r.path;
 }
 
 // Build per-project routes dynamically from src/data/projects.js (FR)
@@ -358,9 +390,14 @@ for (const route of allRoutes) {
   const url = `${SITE}${path === '/' ? '' : path}`;
   const canonical = path === '/' ? `${SITE}/` : `${SITE}${path}`;
 
-  // hreflang pair (always points FR <-> EN equivalents)
-  const frHref = route.frPath === '/' ? `${SITE}/` : `${SITE}${route.frPath}`;
-  const enHref = route.frPath === '/' ? `${SITE}/en` : `${SITE}/en${route.frPath}`;
+  // hreflang pair — skipped for FR-only pages where frPath is explicitly null
+  const hasAlternate = route.frPath !== null && route.frPath !== undefined;
+  const frHref = hasAlternate
+    ? (route.frPath === '/' ? `${SITE}/` : `${SITE}${route.frPath}`)
+    : null;
+  const enHref = hasAlternate
+    ? (route.frPath === '/' ? `${SITE}/en` : `${SITE}/en${route.frPath}`)
+    : null;
 
   let html = baseHtml;
 
@@ -373,23 +410,35 @@ for (const route of allRoutes) {
     `<meta name="description" content="${desc}">`
   );
 
-  // Replace canonical AND inject hreflang block right after it
-  const hreflang = [
-    `<link rel="alternate" hreflang="fr" href="${frHref}">`,
-    `    <link rel="alternate" hreflang="en" href="${enHref}">`,
-    `    <link rel="alternate" hreflang="x-default" href="${frHref}">`,
-  ].join('\n    ');
-  html = html.replace(
-    /<link rel="canonical" href="[^"]*">/,
-    `<link rel="canonical" href="${canonical}">\n    ${hreflang}`
-  );
+  // Replace canonical AND inject hreflang block right after it (only when applicable)
+  if (hasAlternate) {
+    const hreflang = [
+      `<link rel="alternate" hreflang="fr" href="${frHref}">`,
+      `    <link rel="alternate" hreflang="en" href="${enHref}">`,
+      `    <link rel="alternate" hreflang="x-default" href="${frHref}">`,
+    ].join('\n    ');
+    html = html.replace(
+      /<link rel="canonical" href="[^"]*">/,
+      `<link rel="canonical" href="${canonical}">\n    ${hreflang}`
+    );
+  } else {
+    html = html.replace(
+      /<link rel="canonical" href="[^"]*">/,
+      `<link rel="canonical" href="${canonical}">`
+    );
+  }
 
   // Replace OG tags
   html = html.replace(/(<meta property="og:title" content=")[^"]*"/, `$1${title}"`);
   html = html.replace(/(<meta property="og:description" content=")[^"]*"/, `$1${desc}"`);
   html = html.replace(/(<meta property="og:url" content=")[^"]*"/, `$1${url}"`);
   html = html.replace(/(<meta property="og:locale" content=")[^"]*"/, `$1${isEn ? 'en_US' : 'fr_FR'}"`);
-  html = html.replace(/(<meta property="og:locale:alternate" content=")[^"]*"/, `$1${isEn ? 'fr_FR' : 'en_US'}"`);
+  if (hasAlternate) {
+    html = html.replace(/(<meta property="og:locale:alternate" content=")[^"]*"/, `$1${isEn ? 'fr_FR' : 'en_US'}"`);
+  } else {
+    // Drop the og:locale:alternate tag entirely for single-locale pages
+    html = html.replace(/\s*<meta property="og:locale:alternate" content="[^"]*">\n?/, '\n    ');
+  }
 
   // Replace lang attribute on html tag
   html = html.replace(/<html[^>]*\blang="[^"]*"/, m => m.replace(/lang="[^"]*"/, `lang="${locale}"`));
@@ -432,6 +481,44 @@ for (const route of allRoutes) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: items,
+    });
+  }
+
+  // Service + FAQ schemas for the commercial /offre landing page
+  if (path === '/offre') {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      '@id': `${SITE}/offre#service`,
+      name: 'Tene Coulibaly — Création de sites web',
+      description: "Création de sites web sur mesure pour commerçants, artisans et entrepreneurs locaux en Île-de-France.",
+      url: `${SITE}/offre`,
+      image: `${SITE}/images/og-image.webp`,
+      provider: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Tene Coulibaly' },
+      areaServed: [
+        { '@type': 'City', name: 'Paris' },
+        { '@type': 'AdministrativeArea', name: 'Île-de-France' },
+        { '@type': 'Country', name: 'France' },
+      ],
+      priceRange: '€€',
+      offers: [
+        { '@type': 'Offer', name: 'Pack Vitrine', description: 'Site one-page moderne, responsive, optimisé Google, formulaire de contact.', price: 800, priceCurrency: 'EUR', priceSpecification: { '@type': 'PriceSpecification', valueAddedTaxIncluded: false } },
+        { '@type': 'Offer', name: 'Pack Business', description: 'Site multi-pages, blog, fiche Google Business, intégration réservation.', price: 1500, priceCurrency: 'EUR', priceSpecification: { '@type': 'PriceSpecification', valueAddedTaxIncluded: false } },
+        { '@type': 'Offer', name: 'Pack Premium', description: 'Application web sur mesure avec fonctionnalités avancées et accompagnement SEO.', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR', description: 'Sur devis' } },
+      ],
+      contactPoint: { '@type': 'ContactPoint', email: 'contact@tenecoulibaly.fr', contactType: 'sales', availableLanguage: ['French'] },
+    });
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: "Combien de temps ça prend de A à Z ?", acceptedAnswer: { '@type': 'Answer', text: "Entre 2 semaines (Pack Vitrine) et 4 semaines (Pack Business). Le Pack Premium dépend du périmètre, on en discute lors du premier appel." } },
+        { '@type': 'Question', name: "Je n'y connais rien en informatique, c'est un problème ?", acceptedAnswer: { '@type': 'Answer', text: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre commerce, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir." } },
+        { '@type': 'Question', name: "Est-ce que je pourrai modifier mon site moi-même ?", acceptedAnswer: { '@type': 'Answer', text: "Oui. Selon le pack, je vous mets en place une interface simple (style Notion ou Strapi) pour modifier vos textes, ajouter des photos ou un article de blog. Je vous forme à la livraison." } },
+        { '@type': 'Question', name: "Pourquoi pas juste une page Facebook ou Instagram ?", acceptedAnswer: { '@type': 'Answer', text: "Parce que vous n'êtes pas propriétaire de votre audience. Demain, Meta change l'algorithme ou ferme votre page — vous perdez tout. Un site web vous appartient, apparaît sur Google quand on cherche votre métier, et donne confiance." } },
+        { '@type': 'Question', name: "C'est quoi le SEO dont tu parles ?", acceptedAnswer: { '@type': 'Answer', text: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Ivry ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local." } },
+        { '@type': 'Question', name: "Et si je veux des modifications après la livraison ?", acceptedAnswer: { '@type': 'Answer', text: "Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance ou des interventions à la demande. Pas d'abonnement obligatoire." } },
+      ],
     });
   }
 
@@ -513,23 +600,27 @@ for (const route of allRoutes) {
 const today = new Date().toISOString().split('T')[0];
 const sitemapEntries = allRoutes.map(r => {
   const loc = r.path === '/' ? `${SITE}/` : `${SITE}${r.path}`;
-  const frHref = r.frPath === '/' ? `${SITE}/` : `${SITE}${r.frPath}`;
-  const enHref = r.frPath === '/' ? `${SITE}/en` : `${SITE}/en${r.frPath}`;
-  const basePath = r.frPath;
+  const hasAlt = r.frPath !== null && r.frPath !== undefined;
+  const basePath = r.frPath ?? r.path;
   let priority = '0.7';
   if (basePath === '/') priority = '1.0';
   else if (basePath === '/projects') priority = '0.9';
+  else if (basePath === '/offre') priority = '0.95';
   else if (r.project) priority = '0.7';
   else if (basePath === '/contact') priority = '0.6';
   else if (basePath === '/playground') priority = '0.5';
   // EN pages slightly lower than FR canonical (signals FR is primary)
   if (r.locale === 'en') priority = (parseFloat(priority) - 0.1).toFixed(1);
   const changefreq = basePath === '/contact' ? 'yearly' : 'monthly';
+  const altLinks = hasAlt
+    ? [
+        `    <xhtml:link rel="alternate" hreflang="fr" href="${r.frPath === '/' ? `${SITE}/` : `${SITE}${r.frPath}`}"/>`,
+        `    <xhtml:link rel="alternate" hreflang="en" href="${r.frPath === '/' ? `${SITE}/en` : `${SITE}/en${r.frPath}`}"/>`,
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${r.frPath === '/' ? `${SITE}/` : `${SITE}${r.frPath}`}"/>`,
+      ].join('\n')
+    : '';
   return `  <url>
-    <loc>${loc}</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="${frHref}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${enHref}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${frHref}"/>
+    <loc>${loc}</loc>${altLinks ? '\n' + altLinks : ''}
     <lastmod>${today}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>

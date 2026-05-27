@@ -6,6 +6,7 @@ const SkillsView = () => import('@/views/SkillsView.vue')
 const TimelineView = () => import('@/views/TimelineView.vue')
 const ContactView = () => import('@/views/ContactView.vue')
 const PlaygroundView = () => import('@/views/PlaygroundView.vue')
+const OfferView = () => import('@/views/OfferView.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,7 @@ const router = createRouter({
     { path: '/timeline', name: 'timeline', component: TimelineView, meta: { locale: 'fr' } },
     { path: '/contact', name: 'contact', component: ContactView, meta: { locale: 'fr' } },
     { path: '/playground', name: 'playground', component: PlaygroundView, meta: { locale: 'fr' } },
+    { path: '/offre', name: 'offer', component: OfferView, meta: { locale: 'fr' } },
 
     // English routes (same components, locale meta drives i18n switch)
     { path: '/en', name: 'me-en', component: HomeView, meta: { locale: 'en' } },

@@ -63,18 +63,24 @@
           to="/timeline"
 
         ><ScrambleText :text="$t('menu.timeline')" /></router-link>
-        <router-link 
+        <router-link
           active-class="font-bold active-link"
-          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
           to="/contact"
 
         ><ScrambleText :text="$t('menu.contact')" /></router-link>
-        <router-link 
+        <router-link
           active-class="font-bold active-link"
-          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
           to="/playground"
 
         ><ScrambleText :text="$t('menu.playground')" /></router-link>
+        <router-link
+          active-class="font-bold active-link"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
+          to="/offre"
+
+        ><ScrambleText :text="$t('menu.offer')" /></router-link>
       </nav>
 
       <div 
