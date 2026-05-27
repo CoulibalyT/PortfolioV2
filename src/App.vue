@@ -13,7 +13,7 @@
       <p class="overlay-text">{{ transitionText }}</p>
     </div>
 
-    <WrapperComponent v-if="!['project', 'project-detail', 'project-en', 'project-detail-en'].includes(route.name)">
+    <WrapperComponent v-if="!['project', 'project-detail', 'project-en', 'project-detail-en', 'offer'].includes(route.name)">
       <router-view v-slot="{ Component, route }">
         <component :is="Component" :key="route.path" class="page" id="main-content" />
       </router-view>
