@@ -13,7 +13,7 @@
       <p class="overlay-text">{{ transitionText }}</p>
     </div>
 
-    <WrapperComponent v-if="!['project', 'project-detail'].includes(route.name)">
+    <WrapperComponent v-if="!['project', 'project-detail', 'project-en', 'project-detail-en'].includes(route.name)">
       <router-view v-slot="{ Component, route }">
         <component :is="Component" :key="route.path" class="page" id="main-content" />
       </router-view>
@@ -35,6 +35,7 @@ import SplashOverlay from "@/components/SplashOverlay.vue";
 import WrapperComponent from "@/components/WrapperComponent.vue";
 import { useKonamiCode } from "@/composables/useKonamiCode";
 import { useTheme } from "@/composables/useTheme";
+import { setI18nLanguage } from "../config/i18n";
 
 const overlay = ref(null);
 const router = useRouter();
@@ -87,6 +88,10 @@ useKonamiCode(async () => {
 });
 
 router.beforeEach(async (to, from, next) => {
+  // Locale switch based on route meta (URL is the source of truth)
+  const targetLocale = to.meta?.locale || 'fr';
+  setI18nLanguage(targetLocale);
+
   if (isTransitioning.value) return;
   isTransitioning.value = true;
 

@@ -170,7 +170,13 @@ const routes = [
   },
 ];
 
-// Build per-project routes dynamically from src/data/projects.js
+// Mark French routes with locale + frPath (used for hreflang pair resolution)
+for (const r of routes) {
+  r.locale = 'fr';
+  r.frPath = r.path;
+}
+
+// Build per-project routes dynamically from src/data/projects.js (FR)
 const projectRoutes = projectsData.map(project => ({
   path: `/projects/${project.folder}`,
   title: `${project.name} — Projet Full Stack par Tene Coulibaly`,
@@ -188,16 +194,173 @@ const projectRoutes = projectsData.map(project => ({
         <div>${renderImages(project)}</div>
       </main>`,
   project,
+  locale: 'fr',
+  frPath: `/projects/${project.folder}`,
 }));
 
-const allRoutes = [...routes, ...projectRoutes];
+// English mirror of the 6 main pages — content fully translated for indexability
+const enRoutes = [
+  {
+    path: '/en',
+    title: 'Tene Coulibaly — Full Stack Developer in Paris | Portfolio',
+    desc: "Tene Coulibaly, Full Stack Developer in Paris. Vue.js, React, Next.js, Node.js, NestJS, TypeScript. Looking for a permanent position starting September 2026.",
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <h1>Tene Coulibaly — Full Stack Developer in Paris</h1>
+        <p>Hi, I'm Tene. Full Stack Developer (work-study) at INSEAD, studying at ETNA. I build web applications from back-end to interface — clean, performant, and user-focused.</p>
+        <p>Create, optimize, innovate: three words that guide my approach to development. Looking for a permanent Full Stack position starting September 2026.</p>
+        <h2>Skills</h2>
+        <p>Vue.js, Nuxt, React, Next.js, TypeScript, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Tailwind CSS, GSAP, Figma, Git</p>
+        <h2>Projects</h2>
+        <ul>
+          <li><strong>Skywalk</strong> — Full-stack expatriation platform. React 19, NestJS, TypeORM, PostgreSQL, 8 external APIs, 110+ endpoints. <a href="https://skywalk-chi.vercel.app">Visit the site</a></li>
+          <li><strong>Bento</strong> — Creative challenge platform for designers. Vue 3, NestJS, Prisma, PostgreSQL, AI detection, Figma plugin. <a href="https://bento-sable.vercel.app">Visit the site</a></li>
+          <li><strong>APOL (INSEAD)</strong> — Enterprise web app for application and scholarship management. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, PeopleSoft, DocuSign.</li>
+          <li><strong>Autoomat</strong> — Website and business tools for an auto body shop. Next.js 15, TypeScript, Tailwind CSS, SIV API, Google Sheets. <a href="https://autoomat.vercel.app">Visit the site</a></li>
+          <li><strong>Footprint Calculator</strong> — Carbon footprint calculation module. Vue.js, Node.js, Climeet API.</li>
+          <li><strong>Portfolio Sync</strong> — Node.js CLI for automatic project screenshot capture. Puppeteer, Sharp, GitHub Actions. <a href="https://www.npmjs.com/package/portfolio-sync">View on npm</a></li>
+          <li><strong>Daily Quote</strong> — Cross-platform mobile app. Flutter, Dart, Kotlin, Swift, WidgetKit.</li>
+          <li><strong>Joy of Simple</strong> — Minimalist design studio website. Vue.js, GSAP, Tailwind CSS. <a href="https://joyofsimple-site.vercel.app">Visit the site</a></li>
+        </ul>
+        <h2>Experience</h2>
+        <ul>
+          <li>2025 - Present: Full Stack Developer (Student) — INSEAD</li>
+          <li>2023 - 2025: Full Stack Developer — CAPTAG</li>
+          <li>2022 - 2023: Full Stack Developer — Sayse</li>
+        </ul>
+        <h2>Education</h2>
+        <ul>
+          <li>2025 - 2026: Information Systems Architect (Master's) — ETNA</li>
+          <li>2023 - 2025: Application Designer Developer (BSc+3) — ETNA</li>
+          <li>2021 - 2023: Web Developer (BSc+2) — Epitech</li>
+        </ul>
+        <h2>Contact</h2>
+        <p>Email: coulibaly.tene00@gmail.com | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
+      </main>`,
+  },
+  {
+    path: '/en/projects',
+    title: 'Projects — Tene Coulibaly',
+    desc: 'Explore projects by Tene Coulibaly: web applications, SaaS, carbon modules and more.',
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <h1>Projects by Tene Coulibaly</h1>
+        <article><h2>Skywalk</h2><p>Full-stack expatriation platform. Destination exploration, project management, city comparison, job search, AI-moderated community forum. React 19, NestJS, TypeORM, PostgreSQL, 8 external APIs, 110+ endpoints, Docker, GitHub Actions.</p></article>
+        <article><h2>Bento</h2><p>Creative challenge platform for designers. Project submissions, voting, rankings, multi-layer AI detection and integrated Figma plugin. Vue 3, NestJS, Prisma, PostgreSQL, Socket.io, Cloudinary, Jest.</p></article>
+        <article><h2>APOL (INSEAD)</h2><p>Enterprise web app managing the full cycle of degree program applications, admissions and scholarship management. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, SAML 2.0, PeopleSoft, DocuSign, Jenkins.</p></article>
+        <article><h2>Autoomat</h2><p>Website and business tools for an auto body shop. Guided claim journey, online quote with SIV API, insurance management via Google Sheets. Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Vercel.</p></article>
+        <article><h2>Footprint Calculator</h2><p>Carbon footprint calculation module built at CAPTAG. Vue.js, Node.js, Climeet API.</p></article>
+        <article><h2>Portfolio Sync</h2><p>Node.js CLI tool for automatic web project screenshot capture. Puppeteer, Sharp, Commander, GitHub Actions.</p></article>
+        <article><h2>Daily Quote</h2><p>Cross-platform mobile app with dynamic day/night theme, text-to-speech and native widgets. Flutter, Dart, Kotlin, Swift, WidgetKit.</p></article>
+        <article><h2>Joy of Simple</h2><p>Showcase website for a minimalist design studio. Vue.js, GSAP, Tailwind CSS.</p></article>
+      </main>`,
+  },
+  {
+    path: '/en/skills',
+    title: 'Skills — Tene Coulibaly',
+    desc: 'Tech stack and skills of Tene Coulibaly: Vue.js, React, Node.js, TypeScript, Docker and more.',
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <h1>Technical Skills of Tene Coulibaly</h1>
+        <h2>Tech Stack</h2>
+        <p>Vue.js, Nuxt, React, Next.js, TypeScript, Tailwind CSS, GSAP, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Git/GitHub, Figma, Postman, Vercel</p>
+        <h2>Workflow</h2>
+        <p>Agile methodology, CI/CD, Testing (Jest, Vitest, Playwright), Security (JWT, SAML, RBAC), REST API architecture, Problem solving, Autonomy</p>
+        <h2>Currently learning</h2>
+        <p>Three.js, Deep AI</p>
+      </main>`,
+  },
+  {
+    path: '/en/timeline',
+    title: 'Timeline — Tene Coulibaly',
+    desc: 'Professional journey and education of Tene Coulibaly: INSEAD, CAPTAG, Sayse, Epitech, ETNA.',
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <h1>Tene Coulibaly's Journey</h1>
+        <h2>Professional Experience</h2>
+        <article><h3>Full Stack Developer (Student) — INSEAD (2025 - Present)</h3></article>
+        <article><h3>Full Stack Developer — CAPTAG (2023 - 2025)</h3><p>Carbon module (Vue 3, Node.js, Climeet API). Autonomous project, agile collaboration.</p></article>
+        <article><h3>Full Stack Developer — Sayse (2022 - 2023)</h3><p>SaaS development (React.js, TypeScript, Node.js, Docker).</p></article>
+        <article><h3>Volunteer — French Red Cross (2019 - 2020)</h3></article>
+        <h2>Education</h2>
+        <article><h3>Information Systems Architect (Master's) — ETNA (2025 - 2026)</h3></article>
+        <article><h3>Application Designer Developer (BSc+3) — ETNA (2023 - 2025)</h3></article>
+        <article><h3>Web Developer (BSc+2) — Epitech (2021 - 2023)</h3></article>
+      </main>`,
+  },
+  {
+    path: '/en/contact',
+    title: 'Contact — Tene Coulibaly',
+    desc: 'Get in touch with Tene Coulibaly, Full Stack Developer in Paris, to discuss opportunities or just say hello.',
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <h1>Contact Tene Coulibaly</h1>
+        <p>Currently looking for a permanent Full Stack Developer position starting September 2026. Feel free to reach out to discuss opportunities or simply say hello.</p>
+        <ul>
+          <li>Email: <a href="mailto:coulibaly.tene00@gmail.com">coulibaly.tene00@gmail.com</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/tenecoulibaly/">linkedin.com/in/tenecoulibaly</a></li>
+          <li>GitHub: <a href="https://github.com/CoulibalyT">github.com/CoulibalyT</a></li>
+        </ul>
+      </main>`,
+  },
+  {
+    path: '/en/playground',
+    title: 'The Lab — Tene Coulibaly',
+    desc: 'Creative experiments and 3D explorations by Tene Coulibaly: interactive globe, solar system, morphing particles.',
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <h1>The Lab — 3D Experiments</h1>
+        <p>A space for my creative experiments and 3D explorations with Three.js.</p>
+        <ul>
+          <li>Interactive Earth globe with Paris location marker</li>
+          <li>Navigable solar system with 8 planets</li>
+          <li>Particles morphing between sphere, cube, torus, DNA and heart</li>
+        </ul>
+      </main>`,
+  },
+];
+
+for (const r of enRoutes) {
+  r.locale = 'en';
+  r.frPath = r.path === '/en' ? '/' : r.path.replace(/^\/en/, '');
+}
+
+// English per-project pages — use project.description.en already present in src/data/projects.js
+const enProjectRoutes = projectsData.map(project => ({
+  path: `/en/projects/${project.folder}`,
+  title: `${project.name} — Full Stack Project by Tene Coulibaly`,
+  desc: truncate(project.description.en, 160),
+  content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <nav><a href="/en">Home</a> &rsaquo; <a href="/en/projects">Projects</a> &rsaquo; ${escapeHtml(project.name)}</nav>
+        <h1>${escapeHtml(project.name)}</h1>
+        <p>${escapeHtml(project.description.en)}</p>
+        ${project.url ? `<p><a href="${project.url}" rel="noopener" target="_blank">${escapeHtml(project.urlLabel)}</a></p>` : ''}
+        ${project.urlSecondary ? `<p><a href="${project.urlSecondary}" rel="noopener" target="_blank">${escapeHtml(project.urlSecondaryLabel)}</a></p>` : ''}
+        <h2>Tech stack</h2>
+        ${renderTech(project)}
+        <h2>Screenshots</h2>
+        <div>${renderImages(project)}</div>
+      </main>`,
+  project,
+  locale: 'en',
+  frPath: `/projects/${project.folder}`,
+}));
+
+const allRoutes = [...routes, ...projectRoutes, ...enRoutes, ...enProjectRoutes];
 
 const baseHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
 
 for (const route of allRoutes) {
   const { title, desc, content, path } = route;
+  const locale = route.locale || 'fr';
+  const isEn = locale === 'en';
   const url = `${SITE}${path === '/' ? '' : path}`;
   const canonical = path === '/' ? `${SITE}/` : `${SITE}${path}`;
+
+  // hreflang pair (always points FR <-> EN equivalents)
+  const frHref = route.frPath === '/' ? `${SITE}/` : `${SITE}${route.frPath}`;
+  const enHref = route.frPath === '/' ? `${SITE}/en` : `${SITE}/en${route.frPath}`;
 
   let html = baseHtml;
 
@@ -210,16 +373,26 @@ for (const route of allRoutes) {
     `<meta name="description" content="${desc}">`
   );
 
-  // Replace canonical
+  // Replace canonical AND inject hreflang block right after it
+  const hreflang = [
+    `<link rel="alternate" hreflang="fr" href="${frHref}">`,
+    `    <link rel="alternate" hreflang="en" href="${enHref}">`,
+    `    <link rel="alternate" hreflang="x-default" href="${frHref}">`,
+  ].join('\n    ');
   html = html.replace(
     /<link rel="canonical" href="[^"]*">/,
-    `<link rel="canonical" href="${canonical}">`
+    `<link rel="canonical" href="${canonical}">\n    ${hreflang}`
   );
 
   // Replace OG tags
   html = html.replace(/(<meta property="og:title" content=")[^"]*"/, `$1${title}"`);
   html = html.replace(/(<meta property="og:description" content=")[^"]*"/, `$1${desc}"`);
   html = html.replace(/(<meta property="og:url" content=")[^"]*"/, `$1${url}"`);
+  html = html.replace(/(<meta property="og:locale" content=")[^"]*"/, `$1${isEn ? 'en_US' : 'fr_FR'}"`);
+  html = html.replace(/(<meta property="og:locale:alternate" content=")[^"]*"/, `$1${isEn ? 'fr_FR' : 'en_US'}"`);
+
+  // Replace lang attribute on html tag
+  html = html.replace(/<html[^>]*\blang="[^"]*"/, m => m.replace(/lang="[^"]*"/, `lang="${locale}"`));
 
   // Replace Twitter tags
   html = html.replace(/(<meta name="twitter:title" content=")[^"]*"/, `$1${title}"`);
@@ -234,17 +407,23 @@ for (const route of allRoutes) {
     '@type': 'WebSite',
     name: 'Tene Coulibaly — Portfolio',
     url: SITE,
-    description: 'Portfolio de Tene Coulibaly, développeuse Full Stack à Paris',
+    description: isEn
+      ? 'Portfolio of Tene Coulibaly, Full Stack Developer in Paris'
+      : 'Portfolio de Tene Coulibaly, développeuse Full Stack à Paris',
     author: { '@type': 'Person', name: 'Tene Coulibaly' },
     inLanguage: ['fr', 'en'],
   });
 
-  // BreadcrumbList (subpages)
-  if (path !== '/') {
+  // BreadcrumbList (subpages — skip the two locale roots)
+  if (path !== '/' && path !== '/en') {
     const pageName = title.split('—')[0].trim();
-    const items = [{ '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE }];
+    const homeName = isEn ? 'Home' : 'Accueil';
+    const projectsName = isEn ? 'Projects' : 'Projets';
+    const homeUrl = isEn ? `${SITE}/en` : SITE;
+    const projectsUrl = isEn ? `${SITE}/en/projects` : `${SITE}/projects`;
+    const items = [{ '@type': 'ListItem', position: 1, name: homeName, item: homeUrl }];
     if (route.project) {
-      items.push({ '@type': 'ListItem', position: 2, name: 'Projets', item: `${SITE}/projects` });
+      items.push({ '@type': 'ListItem', position: 2, name: projectsName, item: projectsUrl });
       items.push({ '@type': 'ListItem', position: 3, name: route.project.name, item: url });
     } else {
       items.push({ '@type': 'ListItem', position: 2, name: pageName, item: url });
@@ -256,7 +435,7 @@ for (const route of allRoutes) {
     });
   }
 
-  // CreativeWork schema for project detail pages
+  // CreativeWork schema for project detail pages (description matches page locale)
   if (route.project) {
     const p = route.project;
     jsonLd.push({
@@ -264,28 +443,31 @@ for (const route of allRoutes) {
       '@type': 'CreativeWork',
       name: p.name,
       url: url,
-      description: p.description.fr,
+      description: isEn ? p.description.en : p.description.fr,
       creator: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Tene Coulibaly' },
-      inLanguage: 'fr',
+      inLanguage: locale,
       image: p.images.map(img => `${SITE}/images/projects/${p.folder}/${img.file}`),
       keywords: flatTechList(p).join(', '),
       ...(p.url && { sameAs: [p.url] }),
     });
   }
 
-  // Person schema (home only)
-  if (path === '/') {
+  // Person schema (home only — both FR and EN root)
+  if (path === '/' || path === '/en') {
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'ProfilePage',
+      inLanguage: locale,
       mainEntity: {
         '@type': 'Person',
         '@id': `${SITE}/#person`,
         name: 'Tene Coulibaly',
         url: SITE,
         image: `${SITE}/images/og-image.webp`,
-        jobTitle: 'Développeuse Full Stack',
-        description: 'Développeuse Full Stack à Paris, en recherche de CDI dès septembre 2026.',
+        jobTitle: isEn ? 'Full Stack Developer' : 'Développeuse Full Stack',
+        description: isEn
+          ? 'Full Stack Developer based in Paris, looking for a permanent position starting September 2026.'
+          : 'Développeuse Full Stack à Paris, en recherche de CDI dès septembre 2026.',
         knowsAbout: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP', 'PostgreSQL', 'Docker', 'Flutter', 'Prisma', 'Tailwind CSS', 'Three.js', 'GSAP'],
         address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressRegion: 'Île-de-France', addressCountry: 'FR' },
         nationality: { '@type': 'Country', name: 'France' },
@@ -327,26 +509,34 @@ for (const route of allRoutes) {
   }
 }
 
-// Generate sitemap.xml dynamically from all routes (including per-project pages)
+// Generate sitemap.xml dynamically — includes FR + EN URLs with xhtml:link hreflang annotations
 const today = new Date().toISOString().split('T')[0];
 const sitemapEntries = allRoutes.map(r => {
   const loc = r.path === '/' ? `${SITE}/` : `${SITE}${r.path}`;
+  const frHref = r.frPath === '/' ? `${SITE}/` : `${SITE}${r.frPath}`;
+  const enHref = r.frPath === '/' ? `${SITE}/en` : `${SITE}/en${r.frPath}`;
+  const basePath = r.frPath;
   let priority = '0.7';
-  if (r.path === '/') priority = '1.0';
-  else if (r.path === '/projects') priority = '0.9';
+  if (basePath === '/') priority = '1.0';
+  else if (basePath === '/projects') priority = '0.9';
   else if (r.project) priority = '0.7';
-  else if (r.path === '/contact') priority = '0.6';
-  else if (r.path === '/playground') priority = '0.5';
-  const changefreq = r.path === '/contact' ? 'yearly' : 'monthly';
+  else if (basePath === '/contact') priority = '0.6';
+  else if (basePath === '/playground') priority = '0.5';
+  // EN pages slightly lower than FR canonical (signals FR is primary)
+  if (r.locale === 'en') priority = (parseFloat(priority) - 0.1).toFixed(1);
+  const changefreq = basePath === '/contact' ? 'yearly' : 'monthly';
   return `  <url>
     <loc>${loc}</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="${frHref}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${enHref}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${frHref}"/>
     <lastmod>${today}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
 }).join('\n');
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemapEntries}
 </urlset>
 `;
