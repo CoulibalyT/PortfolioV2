@@ -1,0 +1,90 @@
+# Tene Coulibaly
+
+> Développeuse Full Stack à Paris (Vue.js, React, Next.js, Node.js, NestJS, TypeScript). En recherche de CDI dès septembre 2026.
+
+## À propos
+
+Salut, moi c'est Tene. Développeuse Full Stack en alternance chez INSEAD, étudiante à l'ETNA. Je construis des applications web du back-end à l'interface — propres, performantes, et pensées pour les utilisateurs. Créer, optimiser, innover : trois mots qui guident ma vision du développement.
+
+## Profil
+
+- Nom : Tene Coulibaly
+- Rôle : Développeuse Full Stack
+- Localisation : Paris, Île-de-France, France
+- Email : coulibaly.tene00@gmail.com
+- LinkedIn : https://www.linkedin.com/in/tenecoulibaly/
+- GitHub : https://github.com/CoulibalyT
+- npm : https://www.npmjs.com/package/portfolio-sync
+- Portfolio : https://www.tenecoulibaly.fr
+- Disponibilité : CDI à partir de septembre 2026
+
+## Stack technique
+
+- Front-end : Vue.js, Nuxt, React, Next.js, TypeScript, Tailwind CSS, GSAP, Three.js
+- Back-end : Node.js, NestJS, Express, Symfony, PHP
+- Bases de données : PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine
+- Mobile : Flutter, Dart, Kotlin, Swift, WidgetKit
+- DevOps : Docker, Nginx, Jenkins, GitHub Actions, Vercel
+- Outils : Git, Figma, Postman
+- Méthodologie : Agile, CI/CD, Tests (Jest, Vitest, Playwright), Sécurité (JWT, SAML, RBAC), Architecture API REST
+
+## Expérience professionnelle
+
+- 2025 — Présent : Développeuse Full Stack Étudiante (alternance) chez INSEAD
+- 2023 — 2025 : Développeuse Full Stack chez CAPTAG (module carbone Vue 3 / Node.js / API Climeet)
+- 2022 — 2023 : Développeuse Full Stack chez Sayse (SaaS React / TypeScript / Node.js / Docker)
+- 2019 — 2020 : Bénévole à la Croix-Rouge Française
+
+## Formation
+
+- 2025 — 2026 : Architecte de Systèmes d'Information (Master) à l'ETNA
+- 2023 — 2025 : Concepteur Développeur d'Applications (Bac +3) à l'ETNA
+- 2021 — 2023 : Développeuse Web (Bac +2) à Epitech
+
+## Projets
+
+### Skywalk
+Plateforme full-stack d'aide à l'expatriation : exploration de destinations, gestion de projet, comparaison de villes, recherche d'emploi, forum communautaire modéré par IA.
+- Stack : React 19, NestJS, TypeORM, PostgreSQL, 8 APIs externes, 110+ endpoints, Docker, GitHub Actions
+- Lien : https://skywalk-chi.vercel.app
+
+### Bento
+Plateforme de challenges créatifs pour designers : soumission de projets, votes, classements, détection anti-IA multi-couches et plugin Figma intégré.
+- Stack : Vue 3, NestJS, Prisma, PostgreSQL, Socket.io, Cloudinary, Jest
+- Lien : https://bento-sable.vercel.app
+
+### APOL (INSEAD)
+Application web d'entreprise gérant le cycle complet des candidatures aux programmes diplômants, les admissions et la gestion des bourses.
+- Stack : Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, SAML 2.0, PeopleSoft, DocuSign, Jenkins
+
+### Autoomat
+Site vitrine et outils métier pour carrossier automobile : parcours sinistre guidé, devis en ligne avec API SIV, gestion assurance.
+- Stack : Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Vercel, Google Sheets
+- Lien : https://autoomat.vercel.app
+
+### Portfolio Sync
+Outil CLI Node.js de capture automatique de screenshots de projets web.
+- Stack : Puppeteer, Sharp, Commander, GitHub Actions
+- Lien : https://www.npmjs.com/package/portfolio-sync
+
+### Footprint Calculator
+Module de calcul d'empreinte carbone développé chez CAPTAG.
+- Stack : Vue.js, Node.js, API Climeet
+
+### Daily Quote
+Application mobile cross-platform avec thème dynamique jour/nuit, synthèse vocale et widgets natifs.
+- Stack : Flutter, Dart, Kotlin, Swift, WidgetKit
+
+### Joy of Simple
+Site vitrine pour un studio de design minimaliste.
+- Stack : Vue.js, GSAP, Tailwind CSS
+- Lien : https://joyofsimple-site.vercel.app
+
+## Pages du portfolio
+
+- Accueil : https://www.tenecoulibaly.fr/
+- Projets : https://www.tenecoulibaly.fr/projects
+- Compétences : https://www.tenecoulibaly.fr/skills
+- Parcours : https://www.tenecoulibaly.fr/timeline
+- Contact : https://www.tenecoulibaly.fr/contact
+- Le Labo (expérimentations 3D) : https://www.tenecoulibaly.fr/playground

@@ -133,7 +133,7 @@ const html = `
     <div class="name">Tene Coulibaly</div>
     <div class="role">Développeuse Full Stack</div>
     <div class="accent-line"></div>
-    <div class="url">tene-coulibaly.vercel.app</div>
+    <div class="url">www.tenecoulibaly.fr</div>
   </div>
 </body>
 </html>
