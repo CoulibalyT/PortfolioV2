@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SplashOverlay v-if="showSplash" @complete="showSplash = false" />
     <NoiseOverlay />
     <InteractiveBackground />
     <KonamiHint />
@@ -12,7 +13,7 @@
       <p class="overlay-text">{{ transitionText }}</p>
     </div>
 
-    <WrapperComponent v-if="route.name !== 'SplashScreen' && route.name !== 'project'">
+    <WrapperComponent v-if="!['project', 'project-detail'].includes(route.name)">
       <router-view v-slot="{ Component, route }">
         <component :is="Component" :key="route.path" class="page" id="main-content" />
       </router-view>
@@ -22,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import gsap from "gsap";
 import { useI18n } from "vue-i18n";
@@ -30,6 +31,7 @@ import CustomCursor from "@/components/CustomCursor.vue";
 import InteractiveBackground from "@/components/InteractiveBackground.vue";
 import NoiseOverlay from "@/components/NoiseOverlay.vue";
 import KonamiHint from "@/components/KonamiHint.vue";
+import SplashOverlay from "@/components/SplashOverlay.vue";
 import WrapperComponent from "@/components/WrapperComponent.vue";
 import { useKonamiCode } from "@/composables/useKonamiCode";
 import { useTheme } from "@/composables/useTheme";
@@ -41,9 +43,21 @@ const { t } = useI18n();
 const isTransitioning = ref(false);
 const { isDarkMode } = useTheme();
 const transitionText = ref("");
+const showSplash = ref(false);
 
 // Respect prefers-reduced-motion
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Show splash only on first visit per tab, skip for external referrers and reduced-motion users
+onMounted(() => {
+  if (prefersReducedMotion) return;
+  if (sessionStorage.getItem('hasShownSplash')) return;
+  const referrer = document.referrer;
+  const isExternal = referrer && !referrer.includes(location.hostname);
+  if (isExternal) return;
+  showSplash.value = true;
+  sessionStorage.setItem('hasShownSplash', 'true');
+});
 
 useKonamiCode(async () => {
   const confetti = (await import('canvas-confetti')).default;
@@ -73,14 +87,6 @@ useKonamiCode(async () => {
 });
 
 router.beforeEach(async (to, from, next) => {
-  // Splash Screen Redirection Logic
-  const hasShownSplash = sessionStorage.getItem('hasShownSplash');
-  if (!hasShownSplash && to.path !== "/splash") {
-    sessionStorage.setItem('redirectPath', to.fullPath);
-    next("/splash");
-    return;
-  }
-
   if (isTransitioning.value) return;
   isTransitioning.value = true;
 
