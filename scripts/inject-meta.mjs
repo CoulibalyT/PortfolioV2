@@ -4,13 +4,22 @@
  * so search engines see real content without executing JavaScript.
  * Works on Vercel build without Puppeteer/Chrome.
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
-const SITE = 'https://tene-coulibaly.vercel.app';
+
+// Load VITE_SITE_URL from .env locally, fallback to process.env (Vercel)
+const envPath = join(__dirname, '..', '.env');
+if (existsSync(envPath)) {
+  for (const line of readFileSync(envPath, 'utf-8').split('\n')) {
+    const match = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*)\s*$/);
+    if (match && !process.env[match[1]]) process.env[match[1]] = match[2];
+  }
+}
+const SITE = process.env.VITE_SITE_URL || 'https://www.tenecoulibaly.fr';
 
 const routes = [
   {
@@ -240,5 +249,94 @@ for (const route of routes) {
     console.log(`  -> ${path}/index.html`);
   }
 }
+
+// Prerender noindex routes (SPA shell only, marked noindex)
+const noindexRoutes = ['/splash'];
+for (const path of noindexRoutes) {
+  const html = baseHtml.replace(
+    '</head>',
+    '    <meta name="robots" content="noindex">\n  </head>'
+  );
+  const dir = join(DIST, path);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, 'index.html'), html, 'utf-8');
+  console.log(`  -> ${path}/index.html (noindex)`);
+}
+
+// Generate sitemap.xml dynamically from routes
+const today = new Date().toISOString().split('T')[0];
+const sitemapEntries = routes.map(r => {
+  const loc = r.path === '/' ? `${SITE}/` : `${SITE}${r.path}`;
+  const priority = r.path === '/' ? '1.0' : r.path === '/projects' ? '0.9' : r.path === '/contact' ? '0.6' : '0.7';
+  const changefreq = r.path === '/contact' ? 'yearly' : 'monthly';
+  return `  <url>
+    <loc>${loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}).join('\n');
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapEntries}
+</urlset>
+`;
+writeFileSync(join(DIST, 'sitemap.xml'), sitemap, 'utf-8');
+console.log('  -> sitemap.xml');
+
+// Generate robots.txt with named AI bots explicitly allowed
+const robots = `User-agent: *
+Allow: /
+
+# AI crawlers (explicit allow for clarity)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`;
+writeFileSync(join(DIST, 'robots.txt'), robots, 'utf-8');
+console.log('  -> robots.txt');
+
+// Generate 404.html (served by Vercel with HTTP 404 status when no route matches)
+const notFoundHtml = baseHtml
+  .replace(/<title>[^<]*<\/title>/, '<title>404 — Page introuvable | Tene Coulibaly</title>')
+  .replace(
+    /<meta name="description" content="[^"]*">/,
+    '<meta name="description" content="Cette page n\'existe pas. Retour au portfolio de Tene Coulibaly.">'
+  )
+  .replace('</head>', '    <meta name="robots" content="noindex">\n  </head>')
+  .replace(
+    '<div id="app"></div>',
+    `<div id="app"><main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false"><h1>404 — Page introuvable</h1><p>La page demandée n'existe pas. <a href="/">Retour à l'accueil</a></p></main></div>`
+  );
+writeFileSync(join(DIST, '404.html'), notFoundHtml, 'utf-8');
+console.log('  -> 404.html');
 
 console.log('SEO injection complete!');
