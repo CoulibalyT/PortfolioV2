@@ -4,11 +4,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/splash",
-      name: "SplashScreen",
-      component: () => import("@/views/SplashScreen.vue"),
-    },
-    {
       path: '/',
       name: 'me',
       component: () => import('@/views/HomeView.vue'),
@@ -16,6 +11,11 @@ const router = createRouter({
     {
       path: '/projects',
       name: 'project',
+      component: () => import('@/views/ProjectView.vue'),
+    },
+    {
+      path: '/projects/:slug',
+      name: 'project-detail',
       component: () => import('@/views/ProjectView.vue'),
     },
     {

@@ -7,6 +7,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { projects as projectsData } from '../src/data/projects.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
@@ -20,6 +21,33 @@ if (existsSync(envPath)) {
   }
 }
 const SITE = process.env.VITE_SITE_URL || 'https://www.tenecoulibaly.fr';
+
+// Helpers for per-project pages
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function truncate(s, n = 160) {
+  return s.length > n ? s.substring(0, n - 1).trimEnd() + '…' : s;
+}
+function renderTech(project) {
+  if (Array.isArray(project.tech)) {
+    return `<ul>${project.tech.map(t => `<li>${escapeHtml(t)}</li>`).join('')}</ul>`;
+  }
+  return Object.entries(project.tech).map(([cat, items]) =>
+    `<h3>${escapeHtml(cat)}</h3><ul>${items.map(t => `<li>${escapeHtml(t)}</li>`).join('')}</ul>`
+  ).join('');
+}
+function renderImages(project, limit = null) {
+  const imgs = limit ? project.images.slice(0, limit) : project.images;
+  return imgs.map(img =>
+    `<img src="/images/projects/${project.folder}/${img.file}" alt="${escapeHtml(project.name)} — ${escapeHtml(img.label)}" loading="lazy" width="1280" height="800">`
+  ).join('');
+}
+function flatTechList(project) {
+  return Array.isArray(project.tech)
+    ? project.tech
+    : Object.values(project.tech).flat();
+}
 
 const routes = [
   {
@@ -142,9 +170,31 @@ const routes = [
   },
 ];
 
+// Build per-project routes dynamically from src/data/projects.js
+const projectRoutes = projectsData.map(project => ({
+  path: `/projects/${project.folder}`,
+  title: `${project.name} — Projet Full Stack par Tene Coulibaly`,
+  desc: truncate(project.description.fr, 160),
+  content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <nav><a href="/">Accueil</a> &rsaquo; <a href="/projects">Projets</a> &rsaquo; ${escapeHtml(project.name)}</nav>
+        <h1>${escapeHtml(project.name)}</h1>
+        <p>${escapeHtml(project.description.fr)}</p>
+        ${project.url ? `<p><a href="${project.url}" rel="noopener" target="_blank">${escapeHtml(project.urlLabel)}</a></p>` : ''}
+        ${project.urlSecondary ? `<p><a href="${project.urlSecondary}" rel="noopener" target="_blank">${escapeHtml(project.urlSecondaryLabel)}</a></p>` : ''}
+        <h2>Stack technique</h2>
+        ${renderTech(project)}
+        <h2>Captures d'écran</h2>
+        <div>${renderImages(project)}</div>
+      </main>`,
+  project,
+}));
+
+const allRoutes = [...routes, ...projectRoutes];
+
 const baseHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
 
-for (const route of routes) {
+for (const route of allRoutes) {
   const { title, desc, content, path } = route;
   const url = `${SITE}${path === '/' ? '' : path}`;
   const canonical = path === '/' ? `${SITE}/` : `${SITE}${path}`;
@@ -192,13 +242,34 @@ for (const route of routes) {
   // BreadcrumbList (subpages)
   if (path !== '/') {
     const pageName = title.split('—')[0].trim();
+    const items = [{ '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE }];
+    if (route.project) {
+      items.push({ '@type': 'ListItem', position: 2, name: 'Projets', item: `${SITE}/projects` });
+      items.push({ '@type': 'ListItem', position: 3, name: route.project.name, item: url });
+    } else {
+      items.push({ '@type': 'ListItem', position: 2, name: pageName, item: url });
+    }
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE },
-        { '@type': 'ListItem', position: 2, name: pageName, item: url },
-      ]
+      itemListElement: items,
+    });
+  }
+
+  // CreativeWork schema for project detail pages
+  if (route.project) {
+    const p = route.project;
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: p.name,
+      url: url,
+      description: p.description.fr,
+      creator: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Tene Coulibaly' },
+      inLanguage: 'fr',
+      image: p.images.map(img => `${SITE}/images/projects/${p.folder}/${img.file}`),
+      keywords: flatTechList(p).join(', '),
+      ...(p.url && { sameAs: [p.url] }),
     });
   }
 
@@ -212,16 +283,22 @@ for (const route of routes) {
         '@id': `${SITE}/#person`,
         name: 'Tene Coulibaly',
         url: SITE,
+        image: `${SITE}/images/og-image.webp`,
         jobTitle: 'Développeuse Full Stack',
         description: 'Développeuse Full Stack à Paris, en recherche de CDI dès septembre 2026.',
-        knowsAbout: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP', 'PostgreSQL', 'Docker', 'Flutter', 'Prisma', 'Tailwind CSS'],
+        knowsAbout: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP', 'PostgreSQL', 'Docker', 'Flutter', 'Prisma', 'Tailwind CSS', 'Three.js', 'GSAP'],
         address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressRegion: 'Île-de-France', addressCountry: 'FR' },
+        nationality: { '@type': 'Country', name: 'France' },
         alumniOf: [
           { '@type': 'EducationalOrganization', name: 'ETNA' },
           { '@type': 'EducationalOrganization', name: 'Epitech' },
         ],
         worksFor: { '@type': 'Organization', name: 'INSEAD' },
-        sameAs: ['https://github.com/CoulibalyT', 'https://www.linkedin.com/in/tenecoulibaly/'],
+        sameAs: [
+          'https://github.com/CoulibalyT',
+          'https://www.linkedin.com/in/tenecoulibaly/',
+          'https://www.npmjs.com/package/portfolio-sync',
+        ],
         email: 'coulibaly.tene00@gmail.com',
       }
     });
@@ -250,24 +327,16 @@ for (const route of routes) {
   }
 }
 
-// Prerender noindex routes (SPA shell only, marked noindex)
-const noindexRoutes = ['/splash'];
-for (const path of noindexRoutes) {
-  const html = baseHtml.replace(
-    '</head>',
-    '    <meta name="robots" content="noindex">\n  </head>'
-  );
-  const dir = join(DIST, path);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), html, 'utf-8');
-  console.log(`  -> ${path}/index.html (noindex)`);
-}
-
-// Generate sitemap.xml dynamically from routes
+// Generate sitemap.xml dynamically from all routes (including per-project pages)
 const today = new Date().toISOString().split('T')[0];
-const sitemapEntries = routes.map(r => {
+const sitemapEntries = allRoutes.map(r => {
   const loc = r.path === '/' ? `${SITE}/` : `${SITE}${r.path}`;
-  const priority = r.path === '/' ? '1.0' : r.path === '/projects' ? '0.9' : r.path === '/contact' ? '0.6' : '0.7';
+  let priority = '0.7';
+  if (r.path === '/') priority = '1.0';
+  else if (r.path === '/projects') priority = '0.9';
+  else if (r.project) priority = '0.7';
+  else if (r.path === '/contact') priority = '0.6';
+  else if (r.path === '/playground') priority = '0.5';
   const changefreq = r.path === '/contact' ? 'yearly' : 'monthly';
   return `  <url>
     <loc>${loc}</loc>
