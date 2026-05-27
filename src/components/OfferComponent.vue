@@ -129,7 +129,7 @@ useHead({
 </script>
 
 <template>
-  <div class="offer-page min-h-screen bg-[#08080a] text-[#f0ece4]">
+  <div class="offer-page h-screen overflow-y-auto overflow-x-hidden scroll-smooth bg-[#08080a] text-[#f0ece4]">
     <a href="#contact" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-[#c8ff00] focus:text-black focus:px-4 focus:py-2 focus:rounded">
       Aller au contact
     </a>

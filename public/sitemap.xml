@@ -1,39 +1,297 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.tenecoulibaly.fr/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/"/>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tenecoulibaly.fr/projects</loc>
-    <lastmod>2026-04-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects"/>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.tenecoulibaly.fr/skills</loc>
-    <lastmod>2026-04-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/skills"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/skills"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/skills"/>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.tenecoulibaly.fr/timeline</loc>
-    <lastmod>2026-04-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/timeline"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/timeline"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/timeline"/>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.tenecoulibaly.fr/contact</loc>
-    <lastmod>2026-04-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/contact"/>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.tenecoulibaly.fr/playground</loc>
-    <lastmod>2026-04-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/playground"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/playground"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/playground"/>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/offre</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/noir-haus</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/noir-haus"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/noir-haus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/noir-haus"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/skywalk</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/skywalk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/skywalk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/skywalk"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/bento</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/bento"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/bento"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/bento"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/joyofsimple</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/joyofsimple"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/joyofsimple"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/joyofsimple"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/footprint-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/footprint-calculator"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/footprint-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/footprint-calculator"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/scholarship</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/scholarship"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/scholarship"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/scholarship"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/intake</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/intake"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/intake"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/intake"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/autoomat</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/autoomat"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/autoomat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/autoomat"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/portfolio-sync</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/portfolio-sync"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/portfolio-sync"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/portfolio-sync"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/projects/daily-quote</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/daily-quote"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/daily-quote"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/daily-quote"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/skills</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/skills"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/skills"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/skills"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/timeline</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/timeline"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/timeline"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/timeline"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/contact"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/playground</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/playground"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/playground"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/playground"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/noir-haus</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/noir-haus"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/noir-haus"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/noir-haus"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/skywalk</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/skywalk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/skywalk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/skywalk"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/bento</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/bento"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/bento"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/bento"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/joyofsimple</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/joyofsimple"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/joyofsimple"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/joyofsimple"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/footprint-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/footprint-calculator"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/footprint-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/footprint-calculator"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/scholarship</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/scholarship"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/scholarship"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/scholarship"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/intake</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/intake"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/intake"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/intake"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/autoomat</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/autoomat"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/autoomat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/autoomat"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/portfolio-sync</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/portfolio-sync"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/portfolio-sync"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/portfolio-sync"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.tenecoulibaly.fr/en/projects/daily-quote</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/projects/daily-quote"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/projects/daily-quote"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/projects/daily-quote"/>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
