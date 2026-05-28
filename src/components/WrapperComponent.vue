@@ -72,12 +72,6 @@
         <router-link
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
-          to="/playground"
-
-        ><ScrambleText :text="$t('menu.playground')" /></router-link>
-        <router-link
-          active-class="font-bold active-link"
-          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
           to="/offre"
 
         ><ScrambleText :text="$t('menu.offer')" /></router-link>
@@ -113,6 +107,13 @@
         <span class="hidden md:inline"><LocalTime /></span>
         <span class="hidden md:inline"><WeatherWidget /></span>
       </div>
+
+      <!-- Lien discret vers Le Labo (Easter egg / expérimentations 3D) -->
+      <router-link
+        to="/playground"
+        class="hidden md:inline text-gray-400 dark:text-gray-600 hover:text-gray-950 dark:hover:text-gray-300 transition-colors text-xs"
+        :aria-label="$t('menu.playground')"
+      >·{{ $t('menu.playground') }}·</router-link>
 
       <!-- Toggle Mode Clair/Sombre -->
       <div class="space-x-2 text-gray-950 dark:text-gray-300">

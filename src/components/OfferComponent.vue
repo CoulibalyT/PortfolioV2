@@ -6,7 +6,6 @@ import { useHead } from '@unhead/vue'
 const PRICES = {
   vitrine: 800,
   business: 1500,
-  // premium = sur devis
 }
 
 const EMAIL = 'contact@tenecoulibaly.fr'
@@ -36,7 +35,7 @@ const faqs = [
   },
   {
     q: "C'est quoi le SEO dont tu parles ?",
-    a: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape \"coiffeur Paris 11\" ou \"garage Ivry\". Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local. L'objectif : être trouvé par les bonnes personnes près de chez vous.",
+    a: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Ivry ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local. L'objectif : être trouvé par les bonnes personnes près de chez vous.",
   },
   {
     q: "Et si je veux des modifications après la livraison ?",
@@ -62,7 +61,6 @@ const calcEstimate = computed(() => {
   return base
 })
 
-// --- Pre-built mailto URL ---
 const mailtoUrl = computed(() => {
   const subject = encodeURIComponent('Projet de site web — demande de devis')
   const body = encodeURIComponent(
@@ -78,7 +76,6 @@ const mailtoUrl = computed(() => {
   return `mailto:${EMAIL}?subject=${subject}&body=${body}`
 })
 
-// --- IntersectionObserver fade-in ---
 onMounted(() => {
   if (typeof window === 'undefined') return
   const observer = new IntersectionObserver(
@@ -95,59 +92,43 @@ onMounted(() => {
   document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el))
 })
 
-// --- SEO meta (title/description handled at runtime for SPA navigation;
-//     JSON-LD schemas are injected at prerender time by scripts/inject-meta.mjs to be visible to non-JS crawlers) ---
 useHead({
   title: 'Création de sites web pour commerces et artisans à Paris — Tene Coulibaly',
   htmlAttrs: { lang: 'fr' },
   meta: [
-    {
-      name: 'description',
-      content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€. Premier appel gratuit.",
-    },
+    { name: 'description', content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€. Premier appel gratuit." },
     { property: 'og:type', content: 'website' },
     { property: 'og:locale', content: 'fr_FR' },
     { property: 'og:title', content: 'Création de sites web pour commerces et artisans — Tene Coulibaly' },
-    {
-      property: 'og:description',
-      content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€.",
-    },
+    { property: 'og:description', content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€." },
     { property: 'og:url', content: `${SITE_URL}/offre` },
     { property: 'og:image', content: `${SITE_URL}/images/og-image.webp` },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'Création de sites web pour commerces et artisans — Tene Coulibaly' },
-    {
-      name: 'twitter:description',
-      content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. À partir de 800€.",
-    },
+    { name: 'twitter:description', content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. À partir de 800€." },
     { name: 'twitter:image', content: `${SITE_URL}/images/og-image.webp` },
   ],
-  link: [
-    { rel: 'canonical', href: `${SITE_URL}/offre` },
-  ],
+  link: [{ rel: 'canonical', href: `${SITE_URL}/offre` }],
 })
 </script>
 
 <template>
-  <div class="offer-page h-screen overflow-y-auto overflow-x-hidden scroll-smooth bg-[#08080a] text-[#f0ece4]">
-    <a href="#contact" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-[#c8ff00] focus:text-black focus:px-4 focus:py-2 focus:rounded">
+  <div class="offer-page bg-white text-black dark:bg-black dark:text-gray-100">
+    <a href="#contact" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-black focus:text-white focus:px-4 focus:py-2 dark:focus:bg-white dark:focus:text-black">
       Aller au contact
     </a>
 
-    <!-- Mini header -->
-    <header class="sticky top-0 z-30 backdrop-blur-md bg-[#08080a]/80 border-b border-white/5">
-      <div class="max-w-6xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-        <router-link to="/" class="text-sm md:text-base font-medium tracking-tight hover:text-[#c8ff00] transition-colors">
-          ← Tene Coulibaly
+    <!-- ============================== HEADER ============================== -->
+    <header class="sticky top-0 z-30 bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-5 flex items-center justify-between">
+        <router-link to="/" class="text-sm md:text-base hover:opacity-60 transition-opacity">
+          <span class="opacity-50">←</span> Tene Coulibaly
         </router-link>
-        <div class="flex items-center gap-4 text-sm">
-          <router-link to="/projects" class="hidden sm:inline text-white/60 hover:text-white transition-colors">
-            Mes projets
+        <div class="flex items-center gap-6 md:gap-10 text-sm">
+          <router-link to="/projects" class="hidden sm:inline opacity-60 hover:opacity-100 transition-opacity">
+            Projets
           </router-link>
-          <a
-            :href="mailtoUrl"
-            class="bg-[#c8ff00] text-black px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-medium hover:bg-[#d4ff33] transition-colors text-xs md:text-sm"
-          >
+          <a :href="mailtoUrl" class="underline underline-offset-4 hover:no-underline">
             Me contacter
           </a>
         </div>
@@ -155,379 +136,283 @@ useHead({
     </header>
 
     <!-- ============================== HERO ============================== -->
-    <section class="relative px-4 md:px-8 pt-20 md:pt-32 pb-16 md:pb-24 overflow-hidden">
-      <div class="max-w-4xl mx-auto text-center fade-in-up">
-        <p class="text-[#c8ff00] text-sm md:text-base font-medium tracking-widest uppercase mb-6">
+    <section class="min-h-[85vh] flex items-center px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <div class="max-w-7xl mx-auto w-full fade-in-up">
+        <p class="text-xs md:text-sm uppercase tracking-[0.25em] opacity-50 mb-10 md:mb-16">
           Création de sites web · Paris &amp; Île-de-France
         </p>
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-thin leading-[1.1] tracking-tight mb-6 md:mb-8">
-          Votre commerce mérite<br>
-          <span class="font-medium">d'exister en ligne.</span>
+        <h1 class="font-thin tracking-tight leading-[0.95] text-5xl sm:text-6xl md:text-8xl lg:text-[8.5rem]">
+          Votre commerce<br>
+          mérite d'exister<br>
+          en ligne.
         </h1>
-        <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed">
+        <p class="mt-12 md:mt-20 max-w-2xl text-lg md:text-2xl font-thin leading-relaxed opacity-70">
           Je crée des sites modernes, rapides et optimisés pour les commerces et artisans.
           De la maquette à la mise en ligne, je m'occupe de tout.
         </p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
-          <a
-            :href="mailtoUrl"
-            class="w-full sm:w-auto bg-[#c8ff00] text-black px-8 py-4 rounded-xl font-medium text-base hover:bg-[#d4ff33] transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Premier appel gratuit (15 min)
+        <div class="mt-12 md:mt-16 flex flex-col sm:flex-row gap-6 md:gap-10 text-base md:text-lg">
+          <a :href="mailtoUrl" class="inline-flex items-center gap-3 underline underline-offset-[6px] decoration-1 hover:no-underline transition w-fit">
+            Premier appel gratuit (15 min) <span aria-hidden="true">→</span>
           </a>
-          <a
-            href="#packs"
-            class="w-full sm:w-auto px-8 py-4 rounded-xl font-medium text-base border border-white/15 hover:bg-white/5 transition-colors"
-          >
-            Voir les tarifs
+          <a href="#packs" class="inline-flex items-center gap-3 opacity-50 hover:opacity-100 transition w-fit">
+            Voir les tarifs <span aria-hidden="true">↓</span>
           </a>
-        </div>
-
-        <!-- Trust strip -->
-        <div class="mt-12 md:mt-16 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-white/40">
-          <span>✓ Devis transparent</span>
-          <span>✓ Sans abonnement caché</span>
-          <span>✓ Vous êtes propriétaire du site</span>
         </div>
       </div>
     </section>
 
     <!-- ============================== PROBLEM ============================== -->
-    <section class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 fade-in-up">
-          <h2 class="text-3xl md:text-5xl font-thin leading-tight mb-4">
-            Vos clients vous cherchent.
+    <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16 md:mb-24 grid md:grid-cols-12 gap-8">
+          <p class="md:col-span-3 text-xs uppercase tracking-[0.25em] opacity-50 pt-2">Le constat</p>
+          <h2 class="md:col-span-9 text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
+            Vos clients vous cherchent.<br>
+            <span class="opacity-50">Est-ce qu'ils vous trouvent ?</span>
           </h2>
-          <p class="text-xl md:text-2xl text-white/50">Est-ce qu'ils vous trouvent ?</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8 hover:border-white/10 transition-colors">
-            <div class="text-3xl mb-4" aria-hidden="true">🔍</div>
-            <h3 class="text-lg md:text-xl font-medium mb-2">Invisibles sur Google</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
+        <ol class="divide-y divide-gray-100 dark:divide-gray-900">
+          <li class="fade-in-up grid md:grid-cols-12 gap-6 md:gap-8 py-8 md:py-12">
+            <span class="md:col-span-2 text-xs md:text-sm uppercase tracking-[0.25em] opacity-30 font-mono pt-1">01</span>
+            <h3 class="md:col-span-4 text-2xl md:text-3xl font-thin">Invisibles sur Google</h3>
+            <p class="md:col-span-6 text-base md:text-lg opacity-60 leading-relaxed">
               Vos futurs clients tapent &laquo;&nbsp;coiffeur près de chez moi&nbsp;&raquo; ou &laquo;&nbsp;garage Ivry&nbsp;&raquo; — et atterrissent chez vos concurrents.
             </p>
-          </div>
-
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8 hover:border-white/10 transition-colors">
-            <div class="text-3xl mb-4" aria-hidden="true">📱</div>
-            <h3 class="text-lg md:text-xl font-medium mb-2">Un site qui date</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
+          </li>
+          <li class="fade-in-up grid md:grid-cols-12 gap-6 md:gap-8 py-8 md:py-12">
+            <span class="md:col-span-2 text-xs md:text-sm uppercase tracking-[0.25em] opacity-30 font-mono pt-1">02</span>
+            <h3 class="md:col-span-4 text-2xl md:text-3xl font-thin">Un site qui date</h3>
+            <p class="md:col-span-6 text-base md:text-lg opacity-60 leading-relaxed">
               Votre site existant ne s'affiche pas sur mobile, charge en 8 secondes, et donne une image vieillotte de votre commerce.
             </p>
-          </div>
-
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8 hover:border-white/10 transition-colors">
-            <div class="text-3xl mb-4" aria-hidden="true">📉</div>
-            <h3 class="text-lg md:text-xl font-medium mb-2">Otage des réseaux sociaux</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
+          </li>
+          <li class="fade-in-up grid md:grid-cols-12 gap-6 md:gap-8 py-8 md:py-12">
+            <span class="md:col-span-2 text-xs md:text-sm uppercase tracking-[0.25em] opacity-30 font-mono pt-1">03</span>
+            <h3 class="md:col-span-4 text-2xl md:text-3xl font-thin">Otage des réseaux</h3>
+            <p class="md:col-span-6 text-base md:text-lg opacity-60 leading-relaxed">
               Vous postez sur Instagram ou Facebook mais l'algorithme décide qui vous voit. Demain, il change — vous perdez votre audience.
             </p>
-          </div>
-
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8 hover:border-white/10 transition-colors">
-            <div class="text-3xl mb-4" aria-hidden="true">⏰</div>
-            <h3 class="text-lg md:text-xl font-medium mb-2">Pas le temps pour ça</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
-              Vous avez un commerce à faire tourner. Comprendre WordPress, gérer un hébergement, coder du HTML — c'est pas votre métier.
+          </li>
+          <li class="fade-in-up grid md:grid-cols-12 gap-6 md:gap-8 py-8 md:py-12">
+            <span class="md:col-span-2 text-xs md:text-sm uppercase tracking-[0.25em] opacity-30 font-mono pt-1">04</span>
+            <h3 class="md:col-span-4 text-2xl md:text-3xl font-thin">Pas le temps pour ça</h3>
+            <p class="md:col-span-6 text-base md:text-lg opacity-60 leading-relaxed">
+              Vous avez un commerce à faire tourner. WordPress, hébergement, HTML — c'est pas votre métier.
             </p>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <!-- ============================== PACKS ============================== -->
-    <section id="packs" class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 fade-in-up">
-          <p class="text-[#c8ff00] text-xs md:text-sm font-medium tracking-widest uppercase mb-3">Mes offres</p>
-          <h2 class="text-3xl md:text-5xl font-thin leading-tight mb-4">
-            Un pack pour chaque projet
-          </h2>
-          <p class="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
-            Prix HT, TVA non applicable (art. 293 B du CGI). Tous les packs incluent l'hébergement la première année.
-          </p>
+    <section id="packs" class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16 md:mb-24 grid md:grid-cols-12 gap-8">
+          <p class="md:col-span-3 text-xs uppercase tracking-[0.25em] opacity-50 pt-2">Tarifs</p>
+          <div class="md:col-span-9">
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
+              Trois packs, <span class="opacity-50">aucune surprise.</span>
+            </h2>
+            <p class="mt-6 max-w-xl text-sm md:text-base opacity-60 leading-relaxed">
+              Prix HT. TVA non applicable, art. 293 B du CGI. Tous les packs incluent l'hébergement la première année.
+            </p>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-          <!-- Pack Vitrine -->
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8 flex flex-col hover:border-white/10 transition-colors">
-            <div class="mb-6">
-              <h3 class="text-2xl font-medium mb-2">Vitrine</h3>
-              <p class="text-white/50 text-sm">Pour démarrer en ligne simplement</p>
-            </div>
-            <div class="mb-6">
-              <span class="text-4xl font-thin">{{ PRICES.vitrine }}€</span>
-              <span class="text-white/40 text-sm ml-1">à partir de</span>
-            </div>
-            <ul class="flex-1 space-y-3 mb-8 text-sm md:text-base">
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Site one-page moderne et responsive</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Design sur mesure (pas de template)</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Optimisé Google (SEO de base)</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Formulaire de contact</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Mise en ligne incluse</span>
-              </li>
-              <li class="flex gap-3 text-white/50">
-                <span class="shrink-0" aria-hidden="true">⏱</span>
-                <span>Livraison en 2 semaines</span>
-              </li>
+        <div class="grid md:grid-cols-3 fade-in-up">
+          <article class="border-t border-gray-200 dark:border-gray-800 md:border-r pt-10 md:pt-16 pb-10 md:pr-10 lg:pr-14">
+            <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-4">Pack 01</p>
+            <h3 class="text-3xl md:text-4xl font-thin mb-8">Vitrine</h3>
+            <p class="text-5xl md:text-6xl font-thin mb-2">{{ PRICES.vitrine }}€</p>
+            <p class="text-xs opacity-50 mb-10">à partir de</p>
+            <ul class="space-y-3 text-sm md:text-base opacity-80 mb-12">
+              <li>— Site one-page moderne et responsive</li>
+              <li>— Design sur mesure (pas de template)</li>
+              <li>— Optimisé Google (SEO de base)</li>
+              <li>— Formulaire de contact</li>
+              <li>— Mise en ligne incluse</li>
+              <li class="opacity-60">— Livraison en 2 semaines</li>
             </ul>
-            <a
-              :href="mailtoUrl"
-              class="block text-center w-full px-6 py-3 rounded-xl border border-white/15 hover:bg-white/5 transition-colors font-medium"
-            >
-              Demander un devis
+            <a :href="mailtoUrl" class="inline-flex items-center gap-3 underline underline-offset-4 hover:no-underline">
+              Demander un devis <span aria-hidden="true">→</span>
             </a>
-          </div>
+          </article>
 
-          <!-- Pack Business (featured) -->
-          <div class="fade-in-up relative bg-[#111113] border-2 border-[#c8ff00] rounded-2xl p-6 md:p-8 flex flex-col md:scale-105 md:shadow-[0_0_40px_-12px_rgba(200,255,0,0.3)]">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#c8ff00] text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-              Populaire
-            </div>
-            <div class="mb-6">
-              <h3 class="text-2xl font-medium mb-2">Business</h3>
-              <p class="text-white/50 text-sm">Pour développer votre activité en ligne</p>
-            </div>
-            <div class="mb-6">
-              <span class="text-4xl font-thin">{{ PRICES.business }}€</span>
-              <span class="text-white/40 text-sm ml-1">à partir de</span>
-            </div>
-            <ul class="flex-1 space-y-3 mb-8 text-sm md:text-base">
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Site multi-pages (jusqu'à 5 pages)</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Tout le Pack Vitrine, en plus complet</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Blog intégré</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Fiche Google Business optimisée</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Intégration réservation (Calendly ou similaire)</span>
-              </li>
-              <li class="flex gap-3 text-white/50">
-                <span class="shrink-0" aria-hidden="true">⏱</span>
-                <span>Livraison en 3 à 4 semaines</span>
-              </li>
+          <article class="border-t border-gray-900 dark:border-gray-100 md:border-r pt-10 md:pt-16 pb-10 md:px-10 lg:px-14 relative">
+            <p class="text-xs uppercase tracking-[0.25em] mb-4">★ Recommandé</p>
+            <h3 class="text-3xl md:text-4xl font-thin mb-8">Business</h3>
+            <p class="text-5xl md:text-6xl font-thin mb-2">{{ PRICES.business }}€</p>
+            <p class="text-xs opacity-50 mb-10">à partir de</p>
+            <ul class="space-y-3 text-sm md:text-base opacity-80 mb-12">
+              <li>— Site multi-pages (jusqu'à 5 pages)</li>
+              <li>— Tout le Pack Vitrine, en plus complet</li>
+              <li>— Blog intégré</li>
+              <li>— Fiche Google Business optimisée</li>
+              <li>— Intégration réservation (Calendly, etc.)</li>
+              <li class="opacity-60">— Livraison en 3 à 4 semaines</li>
             </ul>
-            <a
-              :href="mailtoUrl"
-              class="block text-center w-full px-6 py-3 rounded-xl bg-[#c8ff00] text-black font-medium hover:bg-[#d4ff33] transition-colors"
-            >
-              Choisir ce pack
+            <a :href="mailtoUrl" class="inline-flex items-center gap-3 underline underline-offset-4 hover:no-underline">
+              Choisir ce pack <span aria-hidden="true">→</span>
             </a>
-          </div>
+          </article>
 
-          <!-- Pack Premium -->
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8 flex flex-col hover:border-white/10 transition-colors">
-            <div class="mb-6">
-              <h3 class="text-2xl font-medium mb-2">Premium</h3>
-              <p class="text-white/50 text-sm">Pour des besoins sur mesure</p>
-            </div>
-            <div class="mb-6">
-              <span class="text-4xl font-thin">Sur devis</span>
-            </div>
-            <ul class="flex-1 space-y-3 mb-8 text-sm md:text-base">
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Application web sur mesure</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Tout le Pack Business, plus loin</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Espace client, paiement en ligne, API…</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Accompagnement SEO 3 mois</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="text-[#c8ff00] shrink-0" aria-hidden="true">✓</span>
-                <span>Maintenance incluse 6 mois</span>
-              </li>
-              <li class="flex gap-3 text-white/50">
-                <span class="shrink-0" aria-hidden="true">⏱</span>
-                <span>Délai discuté ensemble</span>
-              </li>
+          <article class="border-t border-gray-200 dark:border-gray-800 pt-10 md:pt-16 pb-10 md:pl-10 lg:pl-14">
+            <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-4">Pack 03</p>
+            <h3 class="text-3xl md:text-4xl font-thin mb-8">Premium</h3>
+            <p class="text-5xl md:text-6xl font-thin mb-2">Sur devis</p>
+            <p class="text-xs opacity-50 mb-10">selon périmètre</p>
+            <ul class="space-y-3 text-sm md:text-base opacity-80 mb-12">
+              <li>— Application web sur mesure</li>
+              <li>— Tout le Pack Business, plus loin</li>
+              <li>— Espace client, paiement, API…</li>
+              <li>— Accompagnement SEO 3 mois</li>
+              <li>— Maintenance incluse 6 mois</li>
+              <li class="opacity-60">— Délai discuté ensemble</li>
             </ul>
-            <a
-              :href="mailtoUrl"
-              class="block text-center w-full px-6 py-3 rounded-xl border border-white/15 hover:bg-white/5 transition-colors font-medium"
-            >
-              Discutons-en
+            <a :href="mailtoUrl" class="inline-flex items-center gap-3 underline underline-offset-4 hover:no-underline">
+              Discutons-en <span aria-hidden="true">→</span>
             </a>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- ============================== CASE STUDY ============================== -->
-    <section class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 fade-in-up">
-          <p class="text-[#c8ff00] text-xs md:text-sm font-medium tracking-widest uppercase mb-3">Cas client</p>
-          <h2 class="text-3xl md:text-5xl font-thin leading-tight">
-            Autoomat <span class="text-white/40">— Garage à Ivry-sur-Seine</span>
+    <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16 md:mb-24 grid md:grid-cols-12 gap-8">
+          <p class="md:col-span-3 text-xs uppercase tracking-[0.25em] opacity-50 pt-2">Cas client</p>
+          <h2 class="md:col-span-9 text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
+            Autoomat<br>
+            <span class="opacity-50">Garage à Ivry-sur-Seine.</span>
           </h2>
         </div>
 
-        <div class="bg-[#111113] border border-white/5 rounded-2xl overflow-hidden fade-in-up">
-          <div class="grid md:grid-cols-2">
-            <!-- Screenshot -->
-            <div class="bg-[#08080a] flex items-center justify-center p-6 md:p-10 border-b md:border-b-0 md:border-r border-white/5">
-              <img
-                src="/images/projects/autoomat/home.webp"
-                alt="Capture d'écran du site Autoomat — garage de carrosserie à Ivry-sur-Seine"
-                width="800"
-                height="600"
-                loading="lazy"
-                class="rounded-lg w-full h-auto shadow-2xl"
-              />
-            </div>
-
-            <!-- Content -->
-            <div class="p-6 md:p-10 flex flex-col justify-center">
-              <h3 class="text-sm font-medium text-[#c8ff00] uppercase tracking-widest mb-3">Le besoin</h3>
-              <p class="text-white/70 mb-6 leading-relaxed">
+        <div class="grid md:grid-cols-12 gap-12 md:gap-16 fade-in-up">
+          <div class="md:col-span-7 order-2 md:order-1">
+            <img
+              src="/images/projects/autoomat/home.webp"
+              alt="Capture d'écran du site Autoomat — garage de carrosserie à Ivry-sur-Seine"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="w-full h-auto border border-gray-200 dark:border-gray-800"
+            />
+          </div>
+          <div class="md:col-span-5 order-1 md:order-2 space-y-10">
+            <div>
+              <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-3">Le besoin</p>
+              <p class="text-base md:text-lg leading-relaxed opacity-80">
                 Aucune présence en ligne. Des clients potentiels passaient devant le garage sans savoir qu'il existait, et ne le trouvaient pas sur Google.
               </p>
-
-              <h3 class="text-sm font-medium text-[#c8ff00] uppercase tracking-widest mb-3">Ce que j'ai fait</h3>
-              <ul class="space-y-2 text-white/70 mb-6 leading-relaxed">
-                <li class="flex gap-3"><span class="text-[#c8ff00] shrink-0" aria-hidden="true">→</span>Site moderne, optimisé mobile</li>
-                <li class="flex gap-3"><span class="text-[#c8ff00] shrink-0" aria-hidden="true">→</span>SEO local (ranking sur &laquo;&nbsp;carrosserie Ivry-sur-Seine&nbsp;&raquo;)</li>
-                <li class="flex gap-3"><span class="text-[#c8ff00] shrink-0" aria-hidden="true">→</span>Prise de RDV en ligne (Calendly)</li>
-                <li class="flex gap-3"><span class="text-[#c8ff00] shrink-0" aria-hidden="true">→</span>Blog SEO + fiche Google Business liée</li>
-                <li class="flex gap-3"><span class="text-[#c8ff00] shrink-0" aria-hidden="true">→</span>Devis automatique via API plaque d'immatriculation</li>
-              </ul>
-
-              <h3 class="text-sm font-medium text-[#c8ff00] uppercase tracking-widest mb-3">Résultat</h3>
-              <p class="text-white/70 leading-relaxed mb-6">
-                Un site professionnel qui donne confiance dès la première visite, visible sur Google quand les automobilistes du coin cherchent un carrossier, avec des prises de RDV qui tombent toutes seules.
-              </p>
-
-              <a
-                href="https://autoomat.vercel.app"
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center gap-2 text-[#c8ff00] hover:underline font-medium w-fit"
-              >
-                Voir le site Autoomat
-                <span aria-hidden="true">↗</span>
-              </a>
             </div>
+            <div>
+              <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-3">Livré</p>
+              <ul class="space-y-2 text-base md:text-lg opacity-80 leading-relaxed">
+                <li>— Site moderne, optimisé mobile</li>
+                <li>— SEO local sur les bonnes requêtes</li>
+                <li>— Prise de RDV en ligne</li>
+                <li>— Blog SEO + fiche Google Business</li>
+                <li>— Devis automatique via API plaque</li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-3">Résultat</p>
+              <p class="text-base md:text-lg leading-relaxed opacity-80">
+                Un site professionnel qui donne confiance dès la première visite, visible sur Google quand les automobilistes du coin cherchent un carrossier.
+              </p>
+            </div>
+            <a
+              href="https://autoomat.vercel.app"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-3 underline underline-offset-4 hover:no-underline pt-2"
+            >
+              Voir le site Autoomat <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============================== PROCESS ============================== -->
-    <section class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 fade-in-up">
-          <p class="text-[#c8ff00] text-xs md:text-sm font-medium tracking-widest uppercase mb-3">Comment ça marche</p>
-          <h2 class="text-3xl md:text-5xl font-thin leading-tight">
-            Simple, transparent, sans surprise
+    <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16 md:mb-24 grid md:grid-cols-12 gap-8">
+          <p class="md:col-span-3 text-xs uppercase tracking-[0.25em] opacity-50 pt-2">Méthode</p>
+          <h2 class="md:col-span-9 text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
+            Simple, transparent,<br>
+            <span class="opacity-50">sans surprise.</span>
           </h2>
         </div>
 
-        <div class="grid md:grid-cols-4 gap-6 md:gap-4">
-          <div class="fade-in-up relative">
-            <div class="text-[#c8ff00] text-5xl font-thin mb-4">01</div>
-            <h3 class="text-lg font-medium mb-2">Appel découverte</h3>
-            <p class="text-white/60 text-sm leading-relaxed">
+        <ol class="grid md:grid-cols-4 gap-12 md:gap-6 fade-in-up">
+          <li>
+            <p class="text-xs uppercase tracking-[0.25em] opacity-30 font-mono mb-6">01</p>
+            <h3 class="text-xl md:text-2xl font-thin mb-3">Appel découverte</h3>
+            <p class="text-sm md:text-base opacity-60 leading-relaxed">
               15 minutes gratuites pour comprendre votre projet et vos besoins. Sans engagement.
             </p>
-          </div>
-          <div class="fade-in-up relative">
-            <div class="text-[#c8ff00] text-5xl font-thin mb-4">02</div>
-            <h3 class="text-lg font-medium mb-2">Maquette</h3>
-            <p class="text-white/60 text-sm leading-relaxed">
+          </li>
+          <li>
+            <p class="text-xs uppercase tracking-[0.25em] opacity-30 font-mono mb-6">02</p>
+            <h3 class="text-xl md:text-2xl font-thin mb-3">Maquette</h3>
+            <p class="text-sm md:text-base opacity-60 leading-relaxed">
               Je vous montre le design avant de coder. Vous validez, on ajuste.
             </p>
-          </div>
-          <div class="fade-in-up relative">
-            <div class="text-[#c8ff00] text-5xl font-thin mb-4">03</div>
-            <h3 class="text-lg font-medium mb-2">Développement</h3>
-            <p class="text-white/60 text-sm leading-relaxed">
+          </li>
+          <li>
+            <p class="text-xs uppercase tracking-[0.25em] opacity-30 font-mono mb-6">03</p>
+            <h3 class="text-xl md:text-2xl font-thin mb-3">Développement</h3>
+            <p class="text-sm md:text-base opacity-60 leading-relaxed">
               Je construis votre site. Vous suivez l'avancement et donnez votre avis.
             </p>
-          </div>
-          <div class="fade-in-up relative">
-            <div class="text-[#c8ff00] text-5xl font-thin mb-4">04</div>
-            <h3 class="text-lg font-medium mb-2">Mise en ligne</h3>
-            <p class="text-white/60 text-sm leading-relaxed">
+          </li>
+          <li>
+            <p class="text-xs uppercase tracking-[0.25em] opacity-30 font-mono mb-6">04</p>
+            <h3 class="text-xl md:text-2xl font-thin mb-3">Mise en ligne</h3>
+            <p class="text-sm md:text-base opacity-60 leading-relaxed">
               Votre site est live. Je vous forme pour le gérer en toute autonomie.
             </p>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <!-- ============================== WHY ME ============================== -->
-    <section class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 fade-in-up">
-          <p class="text-[#c8ff00] text-xs md:text-sm font-medium tracking-widest uppercase mb-3">Pourquoi moi</p>
-          <h2 class="text-3xl md:text-5xl font-thin leading-tight">
-            Pas une agence. Pas un thème acheté 50€.
+    <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto">
+        <div class="fade-in-up mb-16 md:mb-24 grid md:grid-cols-12 gap-8">
+          <p class="md:col-span-3 text-xs uppercase tracking-[0.25em] opacity-50 pt-2">Pourquoi moi</p>
+          <h2 class="md:col-span-9 text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
+            Pas une agence.<br>
+            <span class="opacity-50">Pas un thème acheté 50€.</span>
           </h2>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8">
-            <div class="text-2xl mb-3" aria-hidden="true">👋</div>
-            <h3 class="text-lg font-medium mb-2">Vous parlez directement à la développeuse</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
-              Pas de chef de projet, pas de sous-traitance offshore. La personne qui code votre site est celle avec qui vous discutez.
+        <div class="grid md:grid-cols-2 gap-12 md:gap-x-20 md:gap-y-16 fade-in-up">
+          <div>
+            <h3 class="text-xl md:text-2xl font-thin mb-4">Vous parlez à la développeuse</h3>
+            <p class="text-base md:text-lg opacity-60 leading-relaxed">
+              Pas de chef de projet, pas de sous-traitance. La personne qui code votre site est celle avec qui vous discutez.
             </p>
           </div>
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8">
-            <div class="text-2xl mb-3" aria-hidden="true">📍</div>
-            <h3 class="text-lg font-medium mb-2">Basée à Paris, je connais les commerces locaux</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
+          <div>
+            <h3 class="text-xl md:text-2xl font-thin mb-4">Basée à Paris</h3>
+            <p class="text-base md:text-lg opacity-60 leading-relaxed">
               J'habite en Île-de-France et je fréquente les commerces du quartier. Je comprends vos clients parce que j'en suis une.
             </p>
           </div>
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8">
-            <div class="text-2xl mb-3" aria-hidden="true">⚙️</div>
-            <h3 class="text-lg font-medium mb-2">Site codé sur mesure</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
+          <div>
+            <h3 class="text-xl md:text-2xl font-thin mb-4">Site codé sur mesure</h3>
+            <p class="text-base md:text-lg opacity-60 leading-relaxed">
               Pas un WordPress avec un thème générique. Votre site est unique, rapide, et fait pour durer.
             </p>
           </div>
-          <div class="fade-in-up bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8">
-            <div class="text-2xl mb-3" aria-hidden="true">🔓</div>
-            <h3 class="text-lg font-medium mb-2">Vous êtes propriétaire</h3>
-            <p class="text-white/60 leading-relaxed text-sm md:text-base">
+          <div>
+            <h3 class="text-xl md:text-2xl font-thin mb-4">Vous êtes propriétaire</h3>
+            <p class="text-base md:text-lg opacity-60 leading-relaxed">
               Pas d'abonnement obligatoire, pas de plateforme qui vous tient en otage. Le code et le contenu vous appartiennent.
             </p>
           </div>
@@ -535,121 +420,92 @@ useHead({
       </div>
     </section>
 
-    <!-- ============================== CALCULATOR (bonus) ============================== -->
-    <section class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-10 md:mb-12 fade-in-up">
-          <p class="text-[#c8ff00] text-xs md:text-sm font-medium tracking-widest uppercase mb-3">Estimation rapide</p>
-          <h2 class="text-3xl md:text-5xl font-thin leading-tight mb-4">
-            Combien coûterait votre site ?
+    <!-- ============================== CALCULATOR ============================== -->
+    <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-3xl mx-auto fade-in-up">
+        <div class="mb-12 md:mb-16">
+          <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-6">Estimation rapide</p>
+          <h2 class="text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
+            Combien ça coûte ?
           </h2>
-          <p class="text-base md:text-lg text-white/50">
-            Quelques questions pour avoir un ordre de grandeur. Le vrai devis est gratuit et sur mesure.
+          <p class="mt-6 text-base md:text-lg opacity-60 leading-relaxed">
+            Quelques questions pour avoir un ordre de grandeur. Le vrai devis reste gratuit et sur mesure.
           </p>
         </div>
 
-        <div class="bg-[#111113] border border-white/5 rounded-2xl p-6 md:p-8 fade-in-up">
-          <div class="space-y-6 mb-8">
-            <!-- Pages -->
-            <div>
-              <label class="block text-sm font-medium mb-3">
-                Combien de pages ? <span class="text-white/40 font-normal">({{ calc.pages }})</span>
-              </label>
-              <input
-                v-model.number="calc.pages"
-                type="range"
-                min="1"
-                max="10"
-                class="w-full accent-[#c8ff00]"
-                aria-label="Nombre de pages"
-              />
-              <div class="flex justify-between text-xs text-white/40 mt-1">
-                <span>1 page</span>
-                <span>10 pages</span>
-              </div>
-            </div>
-
-            <!-- Toggles -->
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-3">
-              <label class="flex items-center gap-3 p-3 md:p-4 bg-[#08080a] rounded-xl cursor-pointer hover:bg-[#0a0a0c] transition-colors">
-                <input
-                  v-model="calc.blog"
-                  type="checkbox"
-                  class="w-4 h-4 accent-[#c8ff00] shrink-0"
-                />
-                <span class="text-sm">Blog intégré</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 md:p-4 bg-[#08080a] rounded-xl cursor-pointer hover:bg-[#0a0a0c] transition-colors">
-                <input
-                  v-model="calc.booking"
-                  type="checkbox"
-                  class="w-4 h-4 accent-[#c8ff00] shrink-0"
-                />
-                <span class="text-sm">Réservation en ligne</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 md:p-4 bg-[#08080a] rounded-xl cursor-pointer hover:bg-[#0a0a0c] transition-colors">
-                <input
-                  v-model="calc.multilingual"
-                  type="checkbox"
-                  class="w-4 h-4 accent-[#c8ff00] shrink-0"
-                />
-                <span class="text-sm">Bilingue (FR + EN)</span>
-              </label>
-              <label class="flex items-center gap-3 p-3 md:p-4 bg-[#08080a] rounded-xl cursor-pointer hover:bg-[#0a0a0c] transition-colors">
-                <input
-                  v-model="calc.ecommerce"
-                  type="checkbox"
-                  class="w-4 h-4 accent-[#c8ff00] shrink-0"
-                />
-                <span class="text-sm">Boutique en ligne</span>
-              </label>
+        <div class="space-y-10 mb-12">
+          <div>
+            <label class="flex items-baseline justify-between text-base md:text-lg mb-4">
+              <span>Combien de pages&nbsp;?</span>
+              <span class="text-sm opacity-50 font-mono">{{ calc.pages }}</span>
+            </label>
+            <input
+              v-model.number="calc.pages"
+              type="range"
+              min="1"
+              max="10"
+              class="w-full"
+              aria-label="Nombre de pages"
+            />
+            <div class="flex justify-between text-xs opacity-30 mt-2 font-mono">
+              <span>1</span>
+              <span>10</span>
             </div>
           </div>
 
-          <!-- Result -->
-          <div class="bg-[#08080a] rounded-xl p-6 text-center border border-[#c8ff00]/20">
-            <p class="text-white/50 text-sm mb-2">Estimation</p>
-            <p class="text-4xl md:text-5xl font-thin mb-1">
-              à partir de <span class="text-[#c8ff00] font-medium">{{ calcEstimate }}€</span>
-            </p>
-            <p class="text-xs text-white/40">HT, TVA non applicable</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-4">
+            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
+              <span class="text-base">Blog intégré</span>
+              <input v-model="calc.blog" type="checkbox" class="w-4 h-4" />
+            </label>
+            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
+              <span class="text-base">Réservation en ligne</span>
+              <input v-model="calc.booking" type="checkbox" class="w-4 h-4" />
+            </label>
+            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
+              <span class="text-base">Bilingue (FR + EN)</span>
+              <input v-model="calc.multilingual" type="checkbox" class="w-4 h-4" />
+            </label>
+            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
+              <span class="text-base">Boutique en ligne</span>
+              <input v-model="calc.ecommerce" type="checkbox" class="w-4 h-4" />
+            </label>
           </div>
-
-          <a
-            :href="mailtoUrl"
-            class="block text-center w-full mt-6 px-6 py-4 rounded-xl bg-[#c8ff00] text-black font-medium hover:bg-[#d4ff33] transition-colors"
-          >
-            Obtenir un devis précis
-          </a>
         </div>
+
+        <div class="border-t border-gray-900 dark:border-gray-100 pt-10 flex items-baseline justify-between">
+          <span class="text-xs uppercase tracking-[0.25em] opacity-50">Estimation HT</span>
+          <span class="text-5xl md:text-7xl font-thin">{{ calcEstimate }}€</span>
+        </div>
+
+        <a :href="mailtoUrl" class="inline-flex items-center gap-3 mt-10 underline underline-offset-4 hover:no-underline">
+          Obtenir un devis précis <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
 
     <!-- ============================== FAQ ============================== -->
-    <section class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 fade-in-up">
-          <p class="text-[#c8ff00] text-xs md:text-sm font-medium tracking-widest uppercase mb-3">FAQ</p>
-          <h2 class="text-3xl md:text-5xl font-thin leading-tight">
-            Les questions que vous vous posez
+    <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-4xl mx-auto">
+        <div class="fade-in-up mb-16 md:mb-24">
+          <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-6">Questions</p>
+          <h2 class="text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
+            Les questions qu'on me pose<br>
+            <span class="opacity-50">le plus souvent.</span>
           </h2>
         </div>
 
-        <div class="space-y-3 fade-in-up">
-          <div
-            v-for="(faq, i) in faqs"
-            :key="i"
-            class="bg-[#111113] border border-white/5 rounded-xl overflow-hidden hover:border-white/10 transition-colors"
-          >
+        <ul class="divide-y divide-gray-200 dark:divide-gray-800 fade-in-up">
+          <li v-for="(faq, i) in faqs" :key="i">
             <button
               @click="toggleFaq(i)"
-              class="w-full px-5 md:px-6 py-4 md:py-5 flex items-center justify-between text-left gap-4 hover:bg-white/[0.02] transition-colors"
+              class="w-full py-6 md:py-8 flex items-center justify-between text-left gap-6 group"
               :aria-expanded="openFaqIndex === i"
               :aria-controls="`faq-answer-${i}`"
             >
-              <span class="font-medium text-sm md:text-base">{{ faq.q }}</span>
+              <span class="text-lg md:text-xl font-thin">{{ faq.q }}</span>
               <span
-                class="text-[#c8ff00] text-xl transition-transform shrink-0"
+                class="text-2xl font-thin opacity-60 transition-transform shrink-0"
                 :class="openFaqIndex === i ? 'rotate-45' : ''"
                 aria-hidden="true"
               >+</span>
@@ -657,82 +513,116 @@ useHead({
             <div
               v-show="openFaqIndex === i"
               :id="`faq-answer-${i}`"
-              class="px-5 md:px-6 pb-5 md:pb-6 text-white/60 leading-relaxed text-sm md:text-base"
+              class="pb-8 md:pb-10 pr-12 text-base md:text-lg opacity-70 leading-relaxed max-w-3xl"
             >
               {{ faq.a }}
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- ============================== CONTACT ============================== -->
-    <section id="contact" class="px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-3xl mx-auto text-center fade-in-up">
-        <h2 class="text-3xl md:text-5xl font-thin leading-tight mb-4">
-          Prêt à passer en ligne ?
+    <section id="contact" class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-4xl mx-auto text-center fade-in-up">
+        <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-8">Contact</p>
+        <h2 class="text-4xl md:text-6xl lg:text-8xl font-thin leading-[0.95] mb-12">
+          On en discute ?
         </h2>
-        <p class="text-lg md:text-xl text-white/60 mb-10 md:mb-12">
-          Premier appel de 15 minutes, gratuit et sans engagement.<br>
+        <p class="text-lg md:text-2xl font-thin opacity-70 leading-relaxed mb-16 max-w-2xl mx-auto">
+          Premier appel de 15 minutes, gratuit et sans engagement.<br class="hidden md:block">
           On parle de votre projet, je vous dis ce que je peux faire.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-3 justify-center mb-10">
-          <a
-            :href="mailtoUrl"
-            class="bg-[#c8ff00] text-black px-8 py-4 rounded-xl font-medium text-base hover:bg-[#d4ff33] transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Écrivez-moi
-          </a>
-        </div>
+        <a
+          :href="mailtoUrl"
+          class="inline-block text-xl md:text-3xl underline underline-offset-[8px] decoration-1 hover:no-underline mb-12"
+        >
+          {{ EMAIL }} →
+        </a>
 
-        <div class="text-white/50 text-sm mb-10">
-          Ou écrivez directement à
-          <a :href="`mailto:${EMAIL}`" class="text-[#c8ff00] hover:underline font-medium">
-            {{ EMAIL }}
+        <div class="flex justify-center gap-8 text-sm opacity-50">
+          <a href="https://www.linkedin.com/in/tenecoulibaly/" target="_blank" rel="noopener" class="hover:opacity-100 transition-opacity">
+            LinkedIn ↗
           </a>
-        </div>
-
-        <div class="flex justify-center gap-6 text-sm text-white/40">
-          <a
-            href="https://www.linkedin.com/in/tenecoulibaly/"
-            target="_blank"
-            rel="noopener"
-            class="hover:text-white/80 transition-colors"
-          >LinkedIn ↗</a>
-          <a
-            href="https://github.com/CoulibalyT"
-            target="_blank"
-            rel="noopener"
-            class="hover:text-white/80 transition-colors"
-          >GitHub ↗</a>
-          <router-link to="/" class="hover:text-white/80 transition-colors">Portfolio</router-link>
+          <a href="https://github.com/CoulibalyT" target="_blank" rel="noopener" class="hover:opacity-100 transition-opacity">
+            GitHub ↗
+          </a>
+          <router-link to="/" class="hover:opacity-100 transition-opacity">
+            Portfolio
+          </router-link>
         </div>
       </div>
     </section>
 
     <!-- ============================== FOOTER ============================== -->
-    <footer class="px-4 md:px-8 py-8 border-t border-white/5 text-center text-xs text-white/30">
-      <p>
-        Tene Coulibaly · Développeuse Full Stack freelance · Paris
-        <br class="md:hidden">
-        <span class="hidden md:inline"> · </span>
-        Auto-entrepreneuse — TVA non applicable, art. 293 B du CGI
-      </p>
+    <footer class="px-6 md:px-12 lg:px-20 py-12 border-t border-gray-100 dark:border-gray-900 text-xs opacity-40">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-3 md:gap-6 md:items-center md:justify-between">
+        <p>Tene Coulibaly · Développeuse Full Stack freelance · Paris</p>
+        <p>Auto-entrepreneuse — TVA non applicable, art. 293 B du CGI</p>
+      </div>
     </footer>
   </div>
 </template>
+
+<style>
+/* Global overrides scoped to the offer landing page only. Can't use <style scoped>
+   because the rules need to win over base.css's top-level universal selector,
+   which sits outside any @layer and therefore wins over Tailwind v4's layered
+   utilities (mx-auto, margin shorthand, etc.). */
+body:has(.offer-page) {
+  overflow: auto !important;
+  height: auto !important;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+/* Restore horizontal-centering utilities — base.css's `* { margin: 0 }` at top
+   level beats Tailwind v4's layered .mx-auto. */
+.offer-page .mx-auto,
+.offer-page [class*="mx-auto"] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Restore vertical margin utilities (mb-*, mt-*, my-*) inside offer-page —
+   same reason as above. Targets common ones used in this component. */
+.offer-page .mb-2 { margin-bottom: 0.5rem !important; }
+.offer-page .mb-3 { margin-bottom: 0.75rem !important; }
+.offer-page .mb-4 { margin-bottom: 1rem !important; }
+.offer-page .mb-6 { margin-bottom: 1.5rem !important; }
+.offer-page .mb-8 { margin-bottom: 2rem !important; }
+.offer-page .mb-10 { margin-bottom: 2.5rem !important; }
+.offer-page .mb-12 { margin-bottom: 3rem !important; }
+.offer-page .mb-16 { margin-bottom: 4rem !important; }
+.offer-page .mb-24 { margin-bottom: 6rem !important; }
+.offer-page .mt-2 { margin-top: 0.5rem !important; }
+.offer-page .mt-6 { margin-top: 1.5rem !important; }
+.offer-page .mt-10 { margin-top: 2.5rem !important; }
+.offer-page .mt-12 { margin-top: 3rem !important; }
+.offer-page .mt-16 { margin-top: 4rem !important; }
+.offer-page .mt-20 { margin-top: 5rem !important; }
+.offer-page .ml-1 { margin-left: 0.25rem !important; }
+@media (min-width: 768px) {
+  .offer-page .md\:mb-8 { margin-bottom: 2rem !important; }
+  .offer-page .md\:mb-12 { margin-bottom: 3rem !important; }
+  .offer-page .md\:mb-16 { margin-bottom: 4rem !important; }
+  .offer-page .md\:mb-24 { margin-bottom: 6rem !important; }
+  .offer-page .md\:mt-16 { margin-top: 4rem !important; }
+  .offer-page .md\:mt-20 { margin-top: 5rem !important; }
+  .offer-page .md\:mt-32 { margin-top: 8rem !important; }
+}
+</style>
 
 <style scoped>
 .offer-page {
   font-feature-settings: 'ss01', 'cv01';
 }
 
-/* Scroll-triggered fade-in */
 .fade-in-up {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 .fade-in-up.in-view {
   opacity: 1;
@@ -747,11 +637,9 @@ useHead({
   }
 }
 
-/* Range slider visual tweaks */
 input[type='range'] {
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
+  height: 1px;
+  background: rgba(128, 128, 128, 0.3);
   appearance: none;
   cursor: pointer;
 }
@@ -759,16 +647,20 @@ input[type='range']::-webkit-slider-thumb {
   appearance: none;
   width: 18px;
   height: 18px;
-  background: #c8ff00;
+  background: currentColor;
   border-radius: 50%;
   cursor: pointer;
 }
 input[type='range']::-moz-range-thumb {
   width: 18px;
   height: 18px;
-  background: #c8ff00;
+  background: currentColor;
   border-radius: 50%;
   cursor: pointer;
   border: none;
+}
+
+input[type='checkbox'] {
+  accent-color: currentColor;
 }
 </style>
