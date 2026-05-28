@@ -84,13 +84,22 @@
   color: white;
 }
 
-/* Override Tailwind classes for red theme */
+/* Override Tailwind classes for red theme — keep text readable on the red background.
+   Covers all gray shades used across the portfolio (text + hover states). */
+:root.red-theme .text-gray-950,
 :root.red-theme .text-gray-900,
 :root.red-theme .text-gray-700,
+:root.red-theme .text-gray-600,
 :root.red-theme .text-gray-500,
+:root.red-theme .text-gray-400,
 :root.red-theme .dark\:text-gray-100,
 :root.red-theme .dark\:text-gray-300,
-:root.red-theme .dark\:text-gray-400 {
+:root.red-theme .dark\:text-gray-400,
+:root.red-theme .dark\:text-gray-600,
+:root.red-theme .hover\:text-black:hover,
+:root.red-theme .dark\:hover\:text-gray-100:hover,
+:root.red-theme .dark\:hover\:text-gray-300:hover,
+:root.red-theme .hover\:text-gray-950:hover {
   color: white !important;
 }
 
