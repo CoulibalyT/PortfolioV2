@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: "C'est quoi le SEO dont tu parles ?",
-    a: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Ivry ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local. L'objectif : être trouvé par les bonnes personnes près de chez vous.",
+    a: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Paris 12 ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local. L'objectif : être trouvé par les bonnes personnes près de chez vous.",
   },
   {
     q: "Et si je veux des modifications après la livraison ?",
@@ -139,7 +139,7 @@ useHead({
     <section class="min-h-[85vh] flex items-center px-6 md:px-12 lg:px-20 py-24 md:py-32">
       <div class="max-w-7xl mx-auto w-full fade-in-up">
         <p class="text-xs md:text-sm uppercase tracking-[0.25em] opacity-50 mb-10 md:mb-16">
-          Création de sites web · Paris &amp; Île-de-France
+          Création de sites web · Paris
         </p>
         <h1 class="font-thin tracking-tight leading-[0.95] text-5xl sm:text-6xl md:text-8xl lg:text-[8.5rem]">
           Votre commerce<br>
@@ -177,7 +177,7 @@ useHead({
             <span class="md:col-span-2 text-xs md:text-sm uppercase tracking-[0.25em] opacity-30 font-mono pt-1">01</span>
             <h3 class="md:col-span-4 text-2xl md:text-3xl font-thin">Invisibles sur Google</h3>
             <p class="md:col-span-6 text-base md:text-lg opacity-60 leading-relaxed">
-              Vos futurs clients tapent &laquo;&nbsp;coiffeur près de chez moi&nbsp;&raquo; ou &laquo;&nbsp;garage Ivry&nbsp;&raquo; — et atterrissent chez vos concurrents.
+              Vos futurs clients tapent &laquo;&nbsp;coiffeur près de chez moi&nbsp;&raquo; ou &laquo;&nbsp;garage Paris 12&nbsp;&raquo; — et atterrissent chez vos concurrents.
             </p>
           </li>
           <li class="fade-in-up grid md:grid-cols-12 gap-6 md:gap-8 py-8 md:py-12">
@@ -401,7 +401,7 @@ useHead({
           <div>
             <h3 class="text-xl md:text-2xl font-thin mb-4">Basée à Paris</h3>
             <p class="text-base md:text-lg opacity-60 leading-relaxed">
-              J'habite en Île-de-France et je fréquente les commerces du quartier. Je comprends vos clients parce que j'en suis une.
+              J'habite à Paris et je fréquente les commerces du quartier. Je comprends vos clients parce que j'en suis une.
             </p>
           </div>
           <div>

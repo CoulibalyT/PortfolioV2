@@ -176,7 +176,7 @@ const routes = [
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Création de sites web pour commerces et artisans à Paris</h1>
-        <p>Je suis Tene Coulibaly, développeuse Full Stack freelance basée en Île-de-France. Je crée des sites web sur mesure pour commerçants, artisans et entrepreneurs locaux qui veulent enfin exister en ligne.</p>
+        <p>Je suis Tene Coulibaly, développeuse Full Stack freelance basée à Paris. Je crée des sites web sur mesure pour commerçants, artisans et entrepreneurs locaux qui veulent enfin exister en ligne.</p>
         <h2>Mes offres</h2>
         <ul>
           <li><strong>Pack Vitrine — à partir de 800€</strong> : site one-page moderne, responsive, SEO de base, formulaire de contact, livraison en 2 semaines.</li>
@@ -516,7 +516,7 @@ for (const route of allRoutes) {
         { '@type': 'Question', name: "Je n'y connais rien en informatique, c'est un problème ?", acceptedAnswer: { '@type': 'Answer', text: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre commerce, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir." } },
         { '@type': 'Question', name: "Est-ce que je pourrai modifier mon site moi-même ?", acceptedAnswer: { '@type': 'Answer', text: "Oui. Selon le pack, je vous mets en place une interface simple (style Notion ou Strapi) pour modifier vos textes, ajouter des photos ou un article de blog. Je vous forme à la livraison." } },
         { '@type': 'Question', name: "Pourquoi pas juste une page Facebook ou Instagram ?", acceptedAnswer: { '@type': 'Answer', text: "Parce que vous n'êtes pas propriétaire de votre audience. Demain, Meta change l'algorithme ou ferme votre page — vous perdez tout. Un site web vous appartient, apparaît sur Google quand on cherche votre métier, et donne confiance." } },
-        { '@type': 'Question', name: "C'est quoi le SEO dont tu parles ?", acceptedAnswer: { '@type': 'Answer', text: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Ivry ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local." } },
+        { '@type': 'Question', name: "C'est quoi le SEO dont tu parles ?", acceptedAnswer: { '@type': 'Answer', text: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Paris 12 ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local." } },
         { '@type': 'Question', name: "Et si je veux des modifications après la livraison ?", acceptedAnswer: { '@type': 'Answer', text: "Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance ou des interventions à la demande. Pas d'abonnement obligatoire." } },
       ],
     });
