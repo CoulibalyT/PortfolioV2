@@ -97,7 +97,8 @@
   "red": "red",
   "description": {
     "intro": "Hi, I’m Tene.",
-    "2intro":"Full Stack Developer on a work-study program at Insead, student at ETNA. I build web applications from back-end to interface — clean, performant, and designed for users."
+    "2intro":"I build end to end: the server-side logic, the user-facing experience. To me, a good product is first a simple one.",
+    "3intro":"Full Stack · work-study at INSEAD · ETNA."
   },
   "projects_section": {
     "title": "Selected Works",

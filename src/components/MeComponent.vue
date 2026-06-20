@@ -5,6 +5,9 @@
             <br class="mb-4 block content-['']">
             <SmoothReveal :text="$t('description.2intro')" :delay="0.5" />
         </p>
+        <p class="mt-4 text-gray-500 dark:text-gray-500 text-left text-sm md:text-base leading-relaxed">
+            <SmoothReveal :text="$t('description.3intro')" :delay="1" />
+        </p>
     </div>
 </template>
 

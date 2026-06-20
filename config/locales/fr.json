@@ -97,7 +97,8 @@
   },
     "description": {
       "intro": "Salut, moi c’est Tene.",
-      "2intro":"Développeuse Full Stack en alternance chez Insead, étudiante à l’ETNA. Je construis des applications web du back-end à l’interface — propres, performantes, et pensées pour les utilisateurs."
+      "2intro":"Je code de bout en bout : la logique côté serveur, l’expérience côté utilisateur. Pour moi, un bon produit est d’abord un produit simple.",
+      "3intro":"Full Stack · alternance chez INSEAD · ETNA."
     },
   "projects_section": {
     "title": "Projets Sélectionnés",
