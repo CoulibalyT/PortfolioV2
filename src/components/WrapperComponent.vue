@@ -41,32 +41,32 @@
       <nav ref="navMenu" class="lg:w-1/4 w-full flex lg:flex-col flex-row lg:justify-center lg:gap-1.5 gap-4 lg:mb-0 mb-2 shrink-0 lg:overflow-visible overflow-x-auto whitespace-nowrap scrollbar-hide lg:pr-0 pr-5">
         <router-link 
           active-class="font-bold active-link"
-          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
-          to="/"
+          class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
+          :to="localePath('/')"
 
         ><ScrambleText :text="$t('menu.me')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
-          to="/projects"
+          :to="localePath('/projects')"
 
         ><ScrambleText :text="$t('menu.projects')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
-          to="/skills"
+          :to="localePath('/skills')"
 
         ><ScrambleText :text="$t('menu.skills')" /></router-link>
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100" 
-          to="/timeline"
+          :to="localePath('/timeline')"
 
         ><ScrambleText :text="$t('menu.timeline')" /></router-link>
         <router-link
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
-          to="/contact"
+          :to="localePath('/contact')"
 
         ><ScrambleText :text="$t('menu.contact')" /></router-link>
         <router-link
@@ -110,7 +110,7 @@
 
       <!-- Lien discret vers Le Labo (Easter egg / expérimentations 3D) -->
       <router-link
-        to="/playground"
+        :to="localePath('/playground')"
         class="hidden md:inline text-gray-400 dark:text-gray-600 hover:text-gray-950 dark:hover:text-gray-300 transition-colors text-xs"
         :aria-label="$t('menu.playground')"
       >·{{ $t('menu.playground') }}·</router-link>
@@ -145,8 +145,8 @@
   </div>
 </template>
 <script setup>
-import { ref, watchEffect } from "vue";
-import { useRoute } from "vue-router";
+import { ref, computed, watchEffect } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import gsap from "gsap";
 import { useTheme } from "../composables/useTheme";
 import ScrambleText from "./ScrambleText.vue";
@@ -156,14 +156,31 @@ import SynonymReveal from "./SynonymReveal.vue";
 import DailyQuote from "./DailyQuote.vue";
 import { setI18nLanguage } from "../../config/i18n";
 
-const currentLanguage = ref(localStorage.getItem("language") || "fr");
 const contentWrapper = ref(null);
 
 const route = useRoute();
+const router = useRouter();
 const { isDarkMode, isRedMode, toggleDarkMode, toggleRedMode } = useTheme();
+
+// L'URL est la source de vérité pour la langue (cf. router.beforeEach dans App.vue)
+const currentLanguage = computed(() => route.meta?.locale || "fr");
+
+// Préfixe les liens de nav selon la langue courante
+const localePath = (path) =>
+  currentLanguage.value === "en" ? (path === "/" ? "/en" : `/en${path}`) : path;
 
 const setLanguage = (lang) => {
   if (currentLanguage.value === lang) return;
+
+  // URL équivalente dans l'autre langue (préfixe /en)
+  let target = lang === "en"
+    ? (route.path === "/" ? "/en" : `/en${route.path}`)
+    : (route.path.replace(/^\/en(?=\/|$)/, "") || "/");
+
+  // Repli si la page n'a pas d'équivalent (ex : /offre est FR-only)
+  if (router.resolve(target).name === "not-found") {
+    target = lang === "en" ? "/en" : "/";
+  }
 
   const tl = gsap.timeline();
 
@@ -176,9 +193,8 @@ const setLanguage = (lang) => {
   });
 
   tl.call(() => {
-    currentLanguage.value = lang;
-    setI18nLanguage(lang);
     localStorage.setItem("language", lang);
+    router.push(target); // beforeEach (App.vue) applique la locale i18n depuis l'URL
   });
 
   // Blur in content
@@ -187,11 +203,11 @@ const setLanguage = (lang) => {
     filter: "blur(0px)",
     duration: 0.5,
     ease: "power2.out",
-    delay: 0.1 
+    delay: 0.1
   });
 };
 
-// Appliquer la langue au chargement
+// Garantit que i18n suit toujours la langue de l'URL
 watchEffect(() => {
   setI18nLanguage(currentLanguage.value);
 });
