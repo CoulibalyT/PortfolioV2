@@ -62,9 +62,23 @@
         @click="setFilter(null)"
       >{{ $t('projects_nav.all') }}</button>
       <button
-        v-for="name in projectNames"
+        v-for="name in primaryNames"
         :key="name"
         :class="['filter-btn', { active: activeFilter === name }]"
+        :aria-pressed="activeFilter === name"
+        @click="setFilter(name)"
+      >{{ name }}</button>
+      <!-- Groupe repliable « Autres projets » (projets secondaires) -->
+      <button
+        v-if="secondaryNames.length"
+        :class="['filter-btn', 'filter-btn-others', { active: othersOpen }]"
+        :aria-expanded="othersOpen"
+        @click="othersOpen = !othersOpen"
+      >{{ $t('projects_nav.others') }} {{ othersOpen ? '−' : '+' }}</button>
+      <button
+        v-for="name in (othersOpen ? secondaryNames : [])"
+        :key="name"
+        :class="['filter-btn', 'filter-btn-secondary', { active: activeFilter === name }]"
         :aria-pressed="activeFilter === name"
         @click="setFilter(name)"
       >{{ name }}</button>
@@ -114,9 +128,11 @@ import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 
-import { projects, projectCards, TILE_W, TILE_H } from '@/data/projects'
+import { projects, projectCards, TILE_W, TILE_H, allImageCards } from '@/data/projects'
 const cards = projectCards
-const projectNames = projects.map(p => p.name)
+const primaryNames = projects.filter(p => p.tier !== 'secondary').map(p => p.name)
+const secondaryNames = projects.filter(p => p.tier === 'secondary').map(p => p.name)
+const othersOpen = ref(false)
 const FRICTION = 0.93
 const DRAG_THRESHOLD = 3
 
@@ -206,7 +222,7 @@ function render() {
 
   // ---- FILTERED MODE: fill viewport, bigger cards when fewer images ----
   if (filter) {
-    const filtered = cards.filter(c => c.project === filter)
+    const filtered = allImageCards.filter(c => c.project === filter)
     const count = filtered.length
     const isMobileLayout = vw < 640
     const PAD = isMobileLayout ? 16 : 40
@@ -1052,6 +1068,21 @@ html:not(.dark) .floating-nav a:hover {
   background: #f0ece4;
   color: #08080a;
   font-weight: 500;
+}
+
+/* Projets secondaires (« Autres projets ») : visuellement atténués */
+.filter-btn-others {
+  opacity: 0.55;
+  font-style: italic;
+}
+.filter-btn-secondary {
+  opacity: 0.6;
+}
+.filter-btn-others:hover,
+.filter-btn-secondary:hover,
+.filter-btn-others.active,
+.filter-btn-secondary.active {
+  opacity: 1;
 }
 
 /* ---- Hint ---- */

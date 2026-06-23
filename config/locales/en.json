@@ -159,6 +159,7 @@
   },
   "projects_nav": {
     "all": "All",
+    "others": "Other projects",
     "hint": "Drag to explore",
     "live": "Live",
     "see": "See",

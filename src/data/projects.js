@@ -88,6 +88,7 @@ export const projects = [
   },
   {
     name: 'Joy of Simple',
+    tier: 'secondary',
     folder: 'joyofsimple',
     url: 'https://joyofsimple-site.vercel.app',
     urlLabel: 'Voir le site',
@@ -100,25 +101,6 @@ export const projects = [
       { file: 'home.webp',     label: 'Home' },
       { file: 'contact.webp',  label: 'Contact' },
       { file: 'approche.webp', label: 'Approche' },
-    ]
-  },
-  {
-    name: 'Footprint Calculator',
-    folder: 'footprint-calculator',
-    url: null,
-    urlLabel: null,
-    description: {
-      fr: 'Module de calcul d\'empreinte carbone développé en alternance chez CAPTAG. Formulaire multi-étapes connecté à l\'API Climeet pour estimer l\'impact environnemental.',
-      en: 'Carbon footprint calculator module built during work-study at CAPTAG. Multi-step form connected to the Climeet API to estimate environmental impact.',
-    },
-    tech: ['Vue.js', 'Node.js', 'API Climeet', 'Tailwind CSS'],
-    images: [
-      { file: 'home.webp',     label: 'Accueil' },
-      { file: 'form.webp',     label: 'Formulaire' },
-      { file: 'details.webp',  label: 'Détails' },
-      { file: 'finalize.webp', label: 'Résultats' },
-      { file: 'choose.webp',   label: 'Sélection' },
-      { file: 'overview.webp', label: 'Vue globale' },
     ]
   },
   {
@@ -200,6 +182,7 @@ export const projects = [
   },
   {
     name: 'Portfolio Sync',
+    tier: 'secondary',
     folder: 'portfolio-sync',
     url: 'https://www.npmjs.com/package/portfolio-sync',
     urlLabel: 'Voir sur npm',
@@ -221,6 +204,7 @@ export const projects = [
   },
   {
     name: 'Daily Quote',
+    tier: 'secondary',
     folder: 'daily-quote',
     url: null,
     urlLabel: null,
@@ -253,8 +237,7 @@ function seededRange(seed, min, max) {
   return min + seededRandom(seed) * (max - min)
 }
 
-function generateCards(projectList, cols = 5) {
-  // 1. Flatten all images into a single list
+function flattenImages(projectList) {
   const flat = []
   for (const project of projectList) {
     for (const image of project.images) {
@@ -267,6 +250,12 @@ function generateCards(projectList, cols = 5) {
       })
     }
   }
+  return flat
+}
+
+function generateCards(projectList, cols = 5) {
+  // 1. Flatten all images into a single list
+  const flat = flattenImages(projectList)
 
   // 2. Deterministic interleaved shuffle (spread projects apart)
   const shuffled = interleaveShuffle(flat)
@@ -406,8 +395,15 @@ function interleaveShuffle(items) {
 // Generate and export
 // ============================================================
 
-const { cards, tileW, tileH } = generateCards(projects)
+// Le collage principal (bento) ne contient QUE les projets primaires.
+// Les projets "secondary" sont accessibles via le filtre « Autres projets »,
+// rendus à la demande depuis allImageCards.
+const primaryProjects = projects.filter(p => p.tier !== 'secondary')
+const { cards, tileW, tileH } = generateCards(primaryProjects)
 
 export const projectCards = cards
 export const TILE_W = tileW
 export const TILE_H = tileH
+
+// Liste plate de TOUTES les images (primaires + secondaires) pour la vue filtrée
+export const allImageCards = flattenImages(projects)
