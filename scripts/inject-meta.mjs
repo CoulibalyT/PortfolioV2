@@ -383,8 +383,9 @@ for (const route of allRoutes) {
   const { title, desc, content, path } = route;
   const locale = route.locale || 'fr';
   const isEn = locale === 'en';
-  const url = `${SITE}${path === '/' ? '' : path}`;
   const canonical = path === '/' ? `${SITE}/` : `${SITE}${path}`;
+  // og:url et URLs JSON-LD alignées sur le canonical (cohérence, ex. slash final de la home)
+  const url = canonical;
 
   // hreflang pair — skipped for FR-only pages where frPath is explicitly null
   const hasAlternate = route.frPath !== null && route.frPath !== undefined;
