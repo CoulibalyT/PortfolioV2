@@ -38,6 +38,19 @@
                     </div>
                 </div>
 
+                <!-- Languages -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 md:mb-6" :class="{ 'text-white/60': isRedMode }">{{ $t('skills_section.languages_title') }}</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <template v-for="lang in languages" :key="lang">
+                            <div class="px-4 py-2 bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 text-gray-600 dark:text-gray-400 text-xs uppercase tracking-wider hover:border-gray-400 dark:hover:border-gray-600 transition-colors duration-300"
+                                 :class="{ '!bg-white/10 !border-white/20 !text-white hover:!border-white': isRedMode }">
+                                {{ $t(lang) }}
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
                 <!-- Currently Learning -->
                 <div>
                     <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 md:mb-6" :class="{ 'text-white/60': isRedMode }">{{ $t('skills_section.learning') }}</h3>
@@ -79,6 +92,12 @@
     ];
 
     const learningSkills = ['Three.js', 'Deep AI'];
+
+    const languages = [
+        'skills_section.lang_french',
+        'skills_section.lang_english',
+        'skills_section.lang_soninke',
+    ];
 
     const softSkills = [
         'skills_section.skills.agile',
