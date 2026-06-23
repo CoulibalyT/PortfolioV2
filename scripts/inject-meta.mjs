@@ -67,7 +67,6 @@ const routes = [
           <li><strong>Bento</strong> — Plateforme de challenges créatifs pour designers. Vue 3, NestJS, Prisma, PostgreSQL, détection IA, plugin Figma. <a href="https://bento-sable.vercel.app">Voir le site</a></li>
           <li><strong>APOL (INSEAD)</strong> — Application web d'entreprise pour la gestion des candidatures et bourses. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, PeopleSoft, DocuSign.</li>
           <li><strong>Autoomat</strong> — Site vitrine et outils métier pour carrossier. Next.js 15, TypeScript, Tailwind CSS, API SIV, Google Sheets. <a href="https://autoomat.vercel.app">Voir le site</a></li>
-          <li><strong>Footprint Calculator</strong> — Module de calcul d'empreinte carbone. Vue.js, Node.js, API Climeet.</li>
           <li><strong>Portfolio Sync</strong> — Outil CLI Node.js de capture automatique de screenshots. Puppeteer, Sharp, GitHub Actions. <a href="https://www.npmjs.com/package/portfolio-sync">Voir sur npm</a></li>
           <li><strong>Daily Quote</strong> — Application mobile cross-platform. Flutter, Dart, Kotlin, Swift, WidgetKit.</li>
           <li><strong>Joy of Simple</strong> — Site vitrine design minimaliste. Vue.js, GSAP, Tailwind CSS. <a href="https://joyofsimple-site.vercel.app">Voir le site</a></li>
@@ -99,7 +98,6 @@ const routes = [
         <article><h2>Bento</h2><p>Plateforme de challenges créatifs pour designers. Soumission de projets, votes, classements, détection anti-IA multi-couches et plugin Figma intégré. Vue 3, NestJS, Prisma, PostgreSQL, Socket.io, Cloudinary, Jest.</p></article>
         <article><h2>APOL (INSEAD)</h2><p>Application web d'entreprise gérant le cycle complet des candidatures aux programmes diplômants, les admissions et la gestion des bourses. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, SAML 2.0, PeopleSoft, DocuSign, Jenkins.</p></article>
         <article><h2>Autoomat</h2><p>Site vitrine et outils métier pour carrossier automobile. Parcours sinistre guidé, devis en ligne avec API SIV, gestion assurance Google Sheets. Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Vercel.</p></article>
-        <article><h2>Footprint Calculator</h2><p>Module de calcul d'empreinte carbone développé chez CAPTAG. Vue.js, Node.js, API Climeet.</p></article>
         <article><h2>Portfolio Sync</h2><p>Outil CLI Node.js de capture automatique de screenshots de projets web. Puppeteer, Sharp, Commander, GitHub Actions.</p></article>
         <article><h2>Daily Quote</h2><p>Application mobile cross-platform avec thème dynamique jour/nuit, synthèse vocale et widgets natifs. Flutter, Dart, Kotlin, Swift, WidgetKit.</p></article>
         <article><h2>Joy of Simple</h2><p>Site vitrine pour un studio de design minimaliste. Vue.js, GSAP, Tailwind CSS.</p></article>
@@ -249,7 +247,6 @@ const enRoutes = [
           <li><strong>Bento</strong> — Creative challenge platform for designers. Vue 3, NestJS, Prisma, PostgreSQL, AI detection, Figma plugin. <a href="https://bento-sable.vercel.app">Visit the site</a></li>
           <li><strong>APOL (INSEAD)</strong> — Enterprise web app for application and scholarship management. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, PeopleSoft, DocuSign.</li>
           <li><strong>Autoomat</strong> — Website and business tools for an auto body shop. Next.js 15, TypeScript, Tailwind CSS, SIV API, Google Sheets. <a href="https://autoomat.vercel.app">Visit the site</a></li>
-          <li><strong>Footprint Calculator</strong> — Carbon footprint calculation module. Vue.js, Node.js, Climeet API.</li>
           <li><strong>Portfolio Sync</strong> — Node.js CLI for automatic project screenshot capture. Puppeteer, Sharp, GitHub Actions. <a href="https://www.npmjs.com/package/portfolio-sync">View on npm</a></li>
           <li><strong>Daily Quote</strong> — Cross-platform mobile app. Flutter, Dart, Kotlin, Swift, WidgetKit.</li>
           <li><strong>Joy of Simple</strong> — Minimalist design studio website. Vue.js, GSAP, Tailwind CSS. <a href="https://joyofsimple-site.vercel.app">Visit the site</a></li>
@@ -281,7 +278,6 @@ const enRoutes = [
         <article><h2>Bento</h2><p>Creative challenge platform for designers. Project submissions, voting, rankings, multi-layer AI detection and integrated Figma plugin. Vue 3, NestJS, Prisma, PostgreSQL, Socket.io, Cloudinary, Jest.</p></article>
         <article><h2>APOL (INSEAD)</h2><p>Enterprise web app managing the full cycle of degree program applications, admissions and scholarship management. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, SAML 2.0, PeopleSoft, DocuSign, Jenkins.</p></article>
         <article><h2>Autoomat</h2><p>Website and business tools for an auto body shop. Guided claim journey, online quote with SIV API, insurance management via Google Sheets. Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Vercel.</p></article>
-        <article><h2>Footprint Calculator</h2><p>Carbon footprint calculation module built at CAPTAG. Vue.js, Node.js, Climeet API.</p></article>
         <article><h2>Portfolio Sync</h2><p>Node.js CLI tool for automatic web project screenshot capture. Puppeteer, Sharp, Commander, GitHub Actions.</p></article>
         <article><h2>Daily Quote</h2><p>Cross-platform mobile app with dynamic day/night theme, text-to-speech and native widgets. Flutter, Dart, Kotlin, Swift, WidgetKit.</p></article>
         <article><h2>Joy of Simple</h2><p>Showcase website for a minimalist design studio. Vue.js, GSAP, Tailwind CSS.</p></article>

@@ -159,6 +159,7 @@
   },
   "projects_nav": {
     "all": "Tous",
+    "others": "Autres projets",
     "hint": "Glisser pour explorer",
     "live": "Live",
     "see": "Voir",
