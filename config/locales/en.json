@@ -32,25 +32,25 @@
         "year": "April 2025 - Present",
         "title": "Full Stack Developer (Student)",
         "place": "INSEAD",
-        "description": "Development of internal tools and web applications."
+        "description": "Admission and scholarship platforms (APOL & Scholarships), across development and design. PHP/Symfony, UI/UX, Figma."
       },
       {
         "year": "2023 - 2025",
         "title": "Full Stack Developer",
         "place": "CAPTAG",
-        "description": "Carbon module (Vue 3 · Node.js · API Climeet). Autonomous project, agile collaboration."
+        "description": "Sole developer on the carbon footprint calculation module (Vue 3 · Node.js · API Climeet), from design to deployment."
       },
       {
         "year": "2022 - 2023",
         "title": "Full Stack Developer",
         "place": "Sayse",
-        "description": "SaaS Development (React.js · TypeScript · Node.js · Docker)."
+        "description": "SD-WAN network monitoring SaaS (React · TypeScript · Node.js · Docker): device management and real-time remote control."
       },
       {
         "year": "2019 - 2020",
-        "title": "Volunteer",
+        "title": "Social Shop Manager",
         "place": "French Red Cross",
-        "description": "Reception, social shop management, human contact."
+        "description": "Welcoming beneficiaries, managing the social shop and administrative support."
       }
     ],
     "education": [
@@ -112,6 +112,10 @@
     "tech_stack": "Tech Stack",
     "workflow": "Workflow & Mindset",
     "learning": "Currently Learning",
+    "languages_title": "Languages",
+    "lang_french": "French — Native",
+    "lang_english": "English — Professional",
+    "lang_soninke": "Soninké — Fluent",
     "skills": {
       "agile": "Agile Methodology",
       "cicd": "CI/CD",
