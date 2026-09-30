@@ -8,6 +8,18 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { projects as projectsData } from '../src/data/projects.js';
+import {
+  OFFER_EMAIL,
+  OFFER_PHONE,
+  OFFER_PHONE_HREF,
+  OFFER_WHATSAPP_URL,
+  OFFER_PRICES,
+  OFFER_INSTALLMENTS,
+  OFFER_MAINTENANCE,
+  OFFER_HOURLY_RATE,
+  OFFER_SEO,
+  AUTOOMAT_URL,
+} from '../src/data/offer.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
@@ -52,17 +64,18 @@ function flatTechList(project) {
 const routes = [
   {
     path: '/',
-    title: 'Tene Coulibaly — Développeuse Full Stack à Paris | Portfolio',
-    desc: 'Tene Coulibaly, développeuse Full Stack à Paris. Vue.js, React, Next.js, Node.js, NestJS, TypeScript. En recherche de CDI dès septembre 2026.',
+    title: 'Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris',
+    desc: 'Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès octobre 2026 — CDI ou missions freelance.',
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
-        <h1>Tene Coulibaly — Développeuse Full Stack à Paris</h1>
+        <h1>Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris</h1>
         <p>Salut, moi c'est Tene. Développeuse Full Stack en alternance chez INSEAD, étudiante à l'ETNA. Je construis des applications web du back-end à l'interface — propres, performantes, et pensées pour les utilisateurs.</p>
-        <p>Créer, optimiser, innover : trois mots qui guident ma vision du développement. En recherche d'un CDI en développement Full Stack pour septembre 2026.</p>
+        <p>Créer, optimiser, innover : trois mots qui guident ma vision du développement. Disponible dès octobre 2026 — CDI ou missions freelance.</p>
         <h2>Compétences</h2>
         <p>Vue.js, Nuxt, React, Next.js, TypeScript, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Tailwind CSS, GSAP, Figma, Git</p>
         <h2>Projets</h2>
         <ul>
+          <li><strong>NØIR HAUS</strong> — Défilé de haute couture en 3D, scrollable et bilingue. Three.js, WebGL, GSAP, TypeScript. <a href="https://noir-inky.vercel.app/">Voir le défilé</a></li>
           <li><strong>Skywalk</strong> — Plateforme full-stack d'aide à l'expatriation. React 19, NestJS, TypeORM, PostgreSQL, 8 APIs externes, 110+ endpoints. <a href="https://skywalk-chi.vercel.app">Voir le site</a></li>
           <li><strong>Bento</strong> — Plateforme de challenges créatifs pour designers. Vue 3, NestJS, Prisma, PostgreSQL, détection IA, plugin Figma. <a href="https://bento-sable.vercel.app">Voir le site</a></li>
           <li><strong>APOL (INSEAD)</strong> — Application web d'entreprise pour la gestion des candidatures et bourses. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, PeopleSoft, DocuSign.</li>
@@ -84,7 +97,7 @@ const routes = [
           <li>2021 - 2023 : Développeuse Web (Bac +2) — Epitech</li>
         </ul>
         <h2>Contact</h2>
-        <p>Email : coulibaly.tene00@gmail.com | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
+        <p>Email : contact@tenecoulibaly.fr | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
       </main>`,
   },
   {
@@ -94,6 +107,7 @@ const routes = [
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Projets de Tene Coulibaly</h1>
+        <article><h2>NØIR HAUS</h2><p>Défilé de haute couture en 3D, scrollable et bilingue. Quatre looks CLO3D mis en scène avec caméra orbitale, post-FX cinématographique et finale T-bar. Audio procédural Web Audio, transitions GSAP scroll-driven, soumissions ouvertes aux créateurs. TypeScript, Three.js, WebGL, GLSL, GSAP ScrollTrigger, Web Audio API, Vercel.</p></article>
         <article><h2>Skywalk</h2><p>Plateforme full-stack d'aide à l'expatriation. Exploration de destinations, gestion de projet, comparaison de villes, recherche d'emploi, forum communautaire modéré par IA. React 19, NestJS, TypeORM, PostgreSQL, 8 APIs externes, 110+ endpoints, Docker, GitHub Actions.</p></article>
         <article><h2>Bento</h2><p>Plateforme de challenges créatifs pour designers. Soumission de projets, votes, classements, détection anti-IA multi-couches et plugin Figma intégré. Vue 3, NestJS, Prisma, PostgreSQL, Socket.io, Cloudinary, Jest.</p></article>
         <article><h2>APOL (INSEAD)</h2><p>Application web d'entreprise gérant le cycle complet des candidatures aux programmes diplômants, les admissions et la gestion des bourses. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, SAML 2.0, PeopleSoft, DocuSign, Jenkins.</p></article>
@@ -111,11 +125,11 @@ const routes = [
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Compétences techniques de Tene Coulibaly</h1>
         <h2>Stack Technique</h2>
-        <p>Vue.js, Nuxt, React, Next.js, TypeScript, Tailwind CSS, GSAP, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Git/GitHub, Figma, Postman, Vercel</p>
+        <p>Vue.js, Nuxt, NestJS, TypeScript, Three.js, WebGL, GSAP, UI/UX Design, React, Next.js, Tailwind CSS, Node.js, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Git/GitHub, Figma, Postman, Vercel</p>
         <h2>Workflow</h2>
         <p>Méthodologie Agile, CI/CD, Tests (Jest, Vitest, Playwright), Sécurité (JWT, SAML, RBAC), Architecture API REST, Résolution de problèmes, Autonomie</p>
         <h2>En apprentissage</h2>
-        <p>Three.js, Deep AI</p>
+        <p>Deep AI</p>
       </main>`,
   },
   {
@@ -139,13 +153,13 @@ const routes = [
   {
     path: '/contact',
     title: 'Contact — Tene Coulibaly',
-    desc: 'Contactez Tene Coulibaly, développeuse Full Stack à Paris, pour discuter d\'opportunités ou simplement échanger.',
+    desc: 'Contactez Tene Coulibaly, développeuse Full Stack & Web Designer à Paris, pour discuter d\'opportunités ou simplement échanger.',
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Contacter Tene Coulibaly</h1>
-        <p>Actuellement en recherche d'un CDI en développement Full Stack pour septembre 2026. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger.</p>
+        <p>Disponible dès octobre 2026 — CDI ou missions freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger.</p>
         <ul>
-          <li>Email : <a href="mailto:coulibaly.tene00@gmail.com">coulibaly.tene00@gmail.com</a></li>
+          <li>Email : <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a></li>
           <li>LinkedIn : <a href="https://www.linkedin.com/in/tenecoulibaly/">linkedin.com/in/tenecoulibaly</a></li>
           <li>GitHub : <a href="https://github.com/CoulibalyT">github.com/CoulibalyT</a></li>
         </ul>
@@ -169,22 +183,34 @@ const routes = [
   {
     // Commercial landing page, FR-only (no EN equivalent)
     path: '/offre',
-    title: 'Création de sites web pour commerces et artisans à Paris — Tene Coulibaly',
-    desc: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€. Premier appel gratuit.",
+    title: OFFER_SEO.title,
+    desc: OFFER_SEO.description,
+    keywords: OFFER_SEO.keywords,
+    // Own og:site_name + social title so shared links don't read as "Portfolio"
+    siteName: OFFER_SEO.siteName,
+    socialTitle: OFFER_SEO.socialTitle,
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Création de sites web pour commerces et artisans à Paris</h1>
-        <p>Je suis Tene Coulibaly, développeuse Full Stack freelance basée à Paris. Je crée des sites web sur mesure pour commerçants, artisans et entrepreneurs locaux qui veulent enfin exister en ligne.</p>
+        <p>Je suis Tene Coulibaly, développeuse Full Stack freelance basée à Paris. Je crée des sites web sur mesure pour commerçants, artisans et entrepreneurs locaux de Paris, de Seine-Saint-Denis et d'Île-de-France qui veulent enfin exister en ligne.</p>
         <h2>Mes offres</h2>
         <ul>
-          <li><strong>Pack Vitrine — à partir de 800€</strong> : site one-page moderne, responsive, SEO de base, formulaire de contact, livraison en 2 semaines.</li>
-          <li><strong>Pack Business — à partir de 1500€</strong> : site multi-pages, blog intégré, fiche Google Business, réservation en ligne, livraison en 3-4 semaines.</li>
+          <li><strong>Pack Vitrine — à partir de ${OFFER_PRICES.vitrine}€</strong> (ou ${OFFER_INSTALLMENTS.count} × ${OFFER_INSTALLMENTS.vitrine} € sans frais) : site one-page moderne, responsive, SEO de base, formulaire de contact, livraison en 2 semaines.</li>
+          <li><strong>Pack Business — à partir de ${OFFER_PRICES.business}€</strong> (ou ${OFFER_INSTALLMENTS.count} × ${OFFER_INSTALLMENTS.business} € sans frais) : site multi-pages, blog intégré, fiche Google Business, réservation en ligne, livraison en 3-4 semaines.</li>
           <li><strong>Pack Premium — sur devis</strong> : application web sur mesure, espace client, paiement en ligne, accompagnement SEO 3 mois, maintenance 6 mois.</li>
         </ul>
+        <h2>Maintenance &amp; hébergement — à partir de ${OFFER_MAINTENANCE.essentiel} €/mois</h2>
+        <ul>
+          <li><strong>Essentiel — ${OFFER_MAINTENANCE.essentiel} €/mois</strong> : hébergement, nom de domaine, certificat SSL, sauvegardes, surveillance, petites corrections.</li>
+          <li><strong>Suivi — ${OFFER_MAINTENANCE.suivi} €/mois</strong> : tout l'Essentiel + 1 h de modifications par mois (horaires, photos, promos, nouvelles prestations) + mise à jour de la fiche Google Business.</li>
+        </ul>
+        <p>Sans engagement, résiliable à tout moment. Hébergement inclus la première année.</p>
         <h2>Pour qui</h2>
         <p>Coiffeurs, garages, restaurants, boutiques, artisans BTP, professions libérales. Toute petite entreprise qui veut être trouvée sur Google par ses futurs clients locaux.</p>
         <h2>Cas client — Autoomat (garage à Ivry-sur-Seine)</h2>
-        <p>Site moderne en Next.js avec SEO local, système de prise de RDV en ligne via Calendly, blog avec articles SEO et API plaque d'immatriculation intégrée pour des devis automatiques.</p>
+        <p>Site moderne en Next.js avec SEO local, système de prise de RDV en ligne via Calendly, blog avec articles SEO et API plaque d'immatriculation intégrée pour des devis automatiques. <a href="${AUTOOMAT_URL}" rel="noopener">Voir le site Autoomat</a></p>
+        <img src="/images/offre/autoomat-desktop.webp" alt="Site Autoomat sur ordinateur : page d'accueil du garage de carrosserie à Ivry-sur-Seine" loading="lazy" width="1440" height="900">
+        <img src="/images/offre/autoomat-devis-mobile.webp" alt="Site Autoomat sur mobile : devis en ligne avec identification du véhicule par plaque d'immatriculation" loading="lazy" width="780" height="1688">
         <h2>Comment ça marche</h2>
         <ol>
           <li>Appel découverte (15 min gratuit)</li>
@@ -193,7 +219,7 @@ const routes = [
           <li>Mise en ligne + formation</li>
         </ol>
         <h2>Contact</h2>
-        <p>Email : <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a>. Auto-entrepreneuse, TVA non applicable (art. 293 B du CGI).</p>
+        <p>Téléphone : <a href="${OFFER_PHONE_HREF}">${OFFER_PHONE.display}</a> | <a href="${escapeHtml(OFFER_WHATSAPP_URL)}" rel="noopener">WhatsApp</a> | Email : <a href="mailto:${OFFER_EMAIL}">${OFFER_EMAIL}</a>. Auto-entrepreneuse, TVA non applicable (art. 293 B du CGI).</p>
       </main>`,
     frPath: null,
   },
@@ -232,17 +258,18 @@ const projectRoutes = projectsData.map(project => ({
 const enRoutes = [
   {
     path: '/en',
-    title: 'Tene Coulibaly — Full Stack Developer in Paris | Portfolio',
-    desc: "Tene Coulibaly, Full Stack Developer in Paris. Vue.js, React, Next.js, Node.js, NestJS, TypeScript. Looking for a permanent position starting September 2026.",
+    title: 'Tene Coulibaly — Full Stack Developer & Web Designer in Paris',
+    desc: "Full Stack Developer & Web Designer in Paris. Web applications and immersive 3D experiences. Available from October 2026 — permanent role or freelance.",
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
-        <h1>Tene Coulibaly — Full Stack Developer in Paris</h1>
+        <h1>Tene Coulibaly — Full Stack Developer & Web Designer in Paris</h1>
         <p>Hi, I'm Tene. Full Stack Developer (work-study) at INSEAD, studying at ETNA. I build web applications from back-end to interface — clean, performant, and user-focused.</p>
-        <p>Create, optimize, innovate: three words that guide my approach to development. Looking for a permanent Full Stack position starting September 2026.</p>
+        <p>Create, optimize, innovate: three words that guide my approach to development. Available from October 2026 — permanent role or freelance.</p>
         <h2>Skills</h2>
         <p>Vue.js, Nuxt, React, Next.js, TypeScript, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Tailwind CSS, GSAP, Figma, Git</p>
         <h2>Projects</h2>
         <ul>
+          <li><strong>NØIR HAUS</strong> — Scroll-driven 3D haute couture runway, bilingual. Three.js, WebGL, GSAP, TypeScript. <a href="https://noir-inky.vercel.app/">View the runway</a></li>
           <li><strong>Skywalk</strong> — Full-stack expatriation platform. React 19, NestJS, TypeORM, PostgreSQL, 8 external APIs, 110+ endpoints. <a href="https://skywalk-chi.vercel.app">Visit the site</a></li>
           <li><strong>Bento</strong> — Creative challenge platform for designers. Vue 3, NestJS, Prisma, PostgreSQL, AI detection, Figma plugin. <a href="https://bento-sable.vercel.app">Visit the site</a></li>
           <li><strong>APOL (INSEAD)</strong> — Enterprise web app for application and scholarship management. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, PeopleSoft, DocuSign.</li>
@@ -264,7 +291,7 @@ const enRoutes = [
           <li>2021 - 2023: Web Developer (BSc+2) — Epitech</li>
         </ul>
         <h2>Contact</h2>
-        <p>Email: coulibaly.tene00@gmail.com | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
+        <p>Email: contact@tenecoulibaly.fr | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
       </main>`,
   },
   {
@@ -274,6 +301,7 @@ const enRoutes = [
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Projects by Tene Coulibaly</h1>
+        <article><h2>NØIR HAUS</h2><p>Scroll-driven 3D haute couture runway, bilingual. Four CLO3D looks staged with orbital camera, cinematic post-FX and T-bar finale. Procedural Web Audio, GSAP scroll-driven transitions, open submissions for creators. TypeScript, Three.js, WebGL, GLSL, GSAP ScrollTrigger, Web Audio API, Vercel.</p></article>
         <article><h2>Skywalk</h2><p>Full-stack expatriation platform. Destination exploration, project management, city comparison, job search, AI-moderated community forum. React 19, NestJS, TypeORM, PostgreSQL, 8 external APIs, 110+ endpoints, Docker, GitHub Actions.</p></article>
         <article><h2>Bento</h2><p>Creative challenge platform for designers. Project submissions, voting, rankings, multi-layer AI detection and integrated Figma plugin. Vue 3, NestJS, Prisma, PostgreSQL, Socket.io, Cloudinary, Jest.</p></article>
         <article><h2>APOL (INSEAD)</h2><p>Enterprise web app managing the full cycle of degree program applications, admissions and scholarship management. Symfony 6.4, PHP 8.1, SQL Server, ADFS SSO, SAML 2.0, PeopleSoft, DocuSign, Jenkins.</p></article>
@@ -291,11 +319,11 @@ const enRoutes = [
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Technical Skills of Tene Coulibaly</h1>
         <h2>Tech Stack</h2>
-        <p>Vue.js, Nuxt, React, Next.js, TypeScript, Tailwind CSS, GSAP, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Git/GitHub, Figma, Postman, Vercel</p>
+        <p>Vue.js, Nuxt, NestJS, TypeScript, Three.js, WebGL, GSAP, UI/UX Design, React, Next.js, Tailwind CSS, Node.js, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Git/GitHub, Figma, Postman, Vercel</p>
         <h2>Workflow</h2>
         <p>Agile methodology, CI/CD, Testing (Jest, Vitest, Playwright), Security (JWT, SAML, RBAC), REST API architecture, Problem solving, Autonomy</p>
         <h2>Currently learning</h2>
-        <p>Three.js, Deep AI</p>
+        <p>Deep AI</p>
       </main>`,
   },
   {
@@ -319,13 +347,13 @@ const enRoutes = [
   {
     path: '/en/contact',
     title: 'Contact — Tene Coulibaly',
-    desc: 'Get in touch with Tene Coulibaly, Full Stack Developer in Paris, to discuss opportunities or just say hello.',
+    desc: 'Get in touch with Tene Coulibaly, Full Stack Developer & Web Designer in Paris, to discuss opportunities or just say hello.',
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Contact Tene Coulibaly</h1>
-        <p>Currently looking for a permanent Full Stack Developer position starting September 2026. Feel free to reach out to discuss opportunities or simply say hello.</p>
+        <p>Available from October 2026 — permanent role or freelance missions. Feel free to reach out to discuss opportunities or simply say hello.</p>
         <ul>
-          <li>Email: <a href="mailto:coulibaly.tene00@gmail.com">coulibaly.tene00@gmail.com</a></li>
+          <li>Email: <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a></li>
           <li>LinkedIn: <a href="https://www.linkedin.com/in/tenecoulibaly/">linkedin.com/in/tenecoulibaly</a></li>
           <li>GitHub: <a href="https://github.com/CoulibalyT">github.com/CoulibalyT</a></li>
         </ul>
@@ -407,6 +435,11 @@ for (const route of allRoutes) {
     `<meta name="description" content="${desc}">`
   );
 
+  // Replace meta keywords only when the route defines its own (e.g. /offre — freelance positioning)
+  if (route.keywords) {
+    html = html.replace(/(<meta name="keywords" content=")[^"]*"/, `$1${route.keywords}"`);
+  }
+
   // Replace canonical AND inject hreflang block right after it (only when applicable)
   if (hasAlternate) {
     const hreflang = [
@@ -444,6 +477,15 @@ for (const route of allRoutes) {
   html = html.replace(/(<meta name="twitter:title" content=")[^"]*"/, `$1${title}"`);
   html = html.replace(/(<meta name="twitter:description" content=")[^"]*"/, `$1${desc}"`);
 
+  // Route-specific social identity (e.g. /offre — must not be labelled "Portfolio")
+  if (route.siteName) {
+    html = html.replace(/(<meta property="og:site_name" content=")[^"]*"/, `$1${route.siteName}"`);
+  }
+  if (route.socialTitle) {
+    html = html.replace(/(<meta property="og:title" content=")[^"]*"/, `$1${route.socialTitle}"`);
+    html = html.replace(/(<meta name="twitter:title" content=")[^"]*"/, `$1${route.socialTitle}"`);
+  }
+
   // Inject JSON-LD structured data
   const jsonLd = [];
 
@@ -454,8 +496,8 @@ for (const route of allRoutes) {
     name: 'Tene Coulibaly — Portfolio',
     url: SITE,
     description: isEn
-      ? 'Portfolio of Tene Coulibaly, Full Stack Developer in Paris'
-      : 'Portfolio de Tene Coulibaly, développeuse Full Stack à Paris',
+      ? 'Portfolio of Tene Coulibaly, Full Stack Developer & Web Designer in Paris'
+      : 'Portfolio de Tene Coulibaly, développeuse Full Stack & Web Designer à Paris',
     author: { '@type': 'Person', name: 'Tene Coulibaly' },
     inLanguage: ['fr', 'en'],
   });
@@ -488,22 +530,30 @@ for (const route of allRoutes) {
       '@type': 'ProfessionalService',
       '@id': `${SITE}/offre#service`,
       name: 'Tene Coulibaly — Création de sites web',
-      description: "Création de sites web sur mesure pour commerçants, artisans et entrepreneurs locaux en Île-de-France.",
+      description: "Création de sites web sur mesure pour commerçants, artisans et entrepreneurs locaux à Paris, en Seine-Saint-Denis et en Île-de-France.",
       url: `${SITE}/offre`,
       image: `${SITE}/images/og-image.webp`,
       provider: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Tene Coulibaly' },
+      email: OFFER_EMAIL,
+      telephone: OFFER_PHONE.e164,
       areaServed: [
         { '@type': 'City', name: 'Paris' },
+        { '@type': 'AdministrativeArea', name: 'Seine-Saint-Denis' },
         { '@type': 'AdministrativeArea', name: 'Île-de-France' },
-        { '@type': 'Country', name: 'France' },
       ],
-      priceRange: '€€',
-      offers: [
-        { '@type': 'Offer', name: 'Pack Vitrine', description: 'Site one-page moderne, responsive, optimisé Google, formulaire de contact.', price: 800, priceCurrency: 'EUR', priceSpecification: { '@type': 'PriceSpecification', valueAddedTaxIncluded: false } },
-        { '@type': 'Offer', name: 'Pack Business', description: 'Site multi-pages, blog, fiche Google Business, intégration réservation.', price: 1500, priceCurrency: 'EUR', priceSpecification: { '@type': 'PriceSpecification', valueAddedTaxIncluded: false } },
-        { '@type': 'Offer', name: 'Pack Premium', description: 'Application web sur mesure avec fonctionnalités avancées et accompagnement SEO.', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR', description: 'Sur devis' } },
-      ],
-      contactPoint: { '@type': 'ContactPoint', email: 'contact@tenecoulibaly.fr', contactType: 'sales', availableLanguage: ['French'] },
+      priceRange: `À partir de ${OFFER_PRICES.vitrine} €`,
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Création de sites web et maintenance',
+        itemListElement: [
+          { '@type': 'Offer', name: 'Pack Vitrine', description: `Site one-page moderne, responsive, optimisé Google, formulaire de contact. Paiement possible en ${OFFER_INSTALLMENTS.count} × ${OFFER_INSTALLMENTS.vitrine} € sans frais.`, price: OFFER_PRICES.vitrine, priceCurrency: 'EUR', priceSpecification: { '@type': 'PriceSpecification', price: OFFER_PRICES.vitrine, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+          { '@type': 'Offer', name: 'Pack Business', description: `Site multi-pages, blog, fiche Google Business, intégration réservation. Paiement possible en ${OFFER_INSTALLMENTS.count} × ${OFFER_INSTALLMENTS.business} € sans frais.`, price: OFFER_PRICES.business, priceCurrency: 'EUR', priceSpecification: { '@type': 'PriceSpecification', price: OFFER_PRICES.business, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+          { '@type': 'Offer', name: 'Pack Premium', description: 'Application web sur mesure avec fonctionnalités avancées et accompagnement SEO.', priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'EUR', description: 'Sur devis' } },
+          { '@type': 'Offer', name: 'Maintenance Essentiel', description: 'Hébergement, nom de domaine, certificat SSL, sauvegardes, surveillance, petites corrections. Sans engagement, résiliable à tout moment.', price: OFFER_MAINTENANCE.essentiel, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: OFFER_MAINTENANCE.essentiel, priceCurrency: 'EUR', unitCode: 'MON', unitText: 'mois', valueAddedTaxIncluded: false } },
+          { '@type': 'Offer', name: 'Maintenance Suivi', description: "Tout l'Essentiel + 1 h de modifications par mois (horaires, photos, promos, nouvelles prestations) + mise à jour de la fiche Google Business. Sans engagement, résiliable à tout moment.", price: OFFER_MAINTENANCE.suivi, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: OFFER_MAINTENANCE.suivi, priceCurrency: 'EUR', unitCode: 'MON', unitText: 'mois', valueAddedTaxIncluded: false } },
+        ],
+      },
+      contactPoint: { '@type': 'ContactPoint', email: OFFER_EMAIL, telephone: OFFER_PHONE.e164, contactType: 'sales', areaServed: 'FR', availableLanguage: ['French'] },
     });
     jsonLd.push({
       '@context': 'https://schema.org',
@@ -514,7 +564,7 @@ for (const route of allRoutes) {
         { '@type': 'Question', name: "Est-ce que je pourrai modifier mon site moi-même ?", acceptedAnswer: { '@type': 'Answer', text: "Oui. Selon le pack, je vous mets en place une interface simple (style Notion ou Strapi) pour modifier vos textes, ajouter des photos ou un article de blog. Je vous forme à la livraison." } },
         { '@type': 'Question', name: "Pourquoi pas juste une page Facebook ou Instagram ?", acceptedAnswer: { '@type': 'Answer', text: "Parce que vous n'êtes pas propriétaire de votre audience. Demain, Meta change l'algorithme ou ferme votre page — vous perdez tout. Un site web vous appartient, apparaît sur Google quand on cherche votre métier, et donne confiance." } },
         { '@type': 'Question', name: "C'est quoi le SEO dont tu parles ?", acceptedAnswer: { '@type': 'Answer', text: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Paris 12 ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local." } },
-        { '@type': 'Question', name: "Et si je veux des modifications après la livraison ?", acceptedAnswer: { '@type': 'Answer', text: "Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance ou des interventions à la demande. Pas d'abonnement obligatoire." } },
+        { '@type': 'Question', name: "Et si je veux des modifications après la livraison ?", acceptedAnswer: { '@type': 'Answer', text: `Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance (à partir de ${OFFER_MAINTENANCE.essentiel} €/mois) ou des interventions à la demande (${OFFER_HOURLY_RATE} €/h). Pas d'abonnement obligatoire.` } },
       ],
     });
   }
@@ -548,11 +598,11 @@ for (const route of allRoutes) {
         name: 'Tene Coulibaly',
         url: SITE,
         image: `${SITE}/images/og-image.webp`,
-        jobTitle: isEn ? 'Full Stack Developer' : 'Développeuse Full Stack',
+        jobTitle: isEn ? 'Full Stack Developer & Web Designer' : 'Développeuse Full Stack & Web Designer',
         description: isEn
-          ? 'Full Stack Developer based in Paris, looking for a permanent position starting September 2026.'
-          : 'Développeuse Full Stack à Paris, en recherche de CDI dès septembre 2026.',
-        knowsAbout: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP', 'PostgreSQL', 'Docker', 'Flutter', 'Prisma', 'Tailwind CSS', 'Three.js', 'GSAP'],
+          ? 'Full Stack Developer & Web Designer based in Paris, available from October 2026 for a permanent role or freelance missions.'
+          : 'Développeuse Full Stack & Web Designer à Paris, disponible dès octobre 2026 — CDI ou missions freelance.',
+        knowsAbout: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP', 'PostgreSQL', 'Docker', 'Flutter', 'Prisma', 'Tailwind CSS', 'Three.js', 'WebGL', 'GSAP', 'UI/UX Design'],
         address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressRegion: 'Île-de-France', addressCountry: 'FR' },
         nationality: { '@type': 'Country', name: 'France' },
         alumniOf: [
@@ -565,7 +615,7 @@ for (const route of allRoutes) {
           'https://www.linkedin.com/in/tenecoulibaly/',
           'https://www.npmjs.com/package/portfolio-sync',
         ],
-        email: 'coulibaly.tene00@gmail.com',
+        email: 'contact@tenecoulibaly.fr',
       }
     });
   }

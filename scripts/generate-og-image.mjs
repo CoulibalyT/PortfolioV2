@@ -131,7 +131,7 @@ const html = `
 
   <div class="content">
     <div class="name">Tene Coulibaly</div>
-    <div class="role">Développeuse Full Stack</div>
+    <div class="role">Développeuse Full Stack &amp; Web Designer</div>
     <div class="accent-line"></div>
     <div class="url">www.tenecoulibaly.fr</div>
   </div>

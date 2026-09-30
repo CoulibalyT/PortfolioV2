@@ -48,15 +48,47 @@
 },
     {
       "name": "autoomat",
-      "url": "https://autoomat.vercel.app",
+      "url": "https://www.autoomat.fr",
       "pages": [
         { "path": "/", "name": "home" },
         { "path": "/parcours-sinistre", "name": "parcours-sinistre" },
-        { "path": "/devis-en-ligne", "name": "devis-en-ligne" },
-        { "path": "/assurance", "name": "assurance" }
+        { "path": "/devis-en-ligne", "name": "devis-en-ligne" }
       ],
       "viewport": { "width": 1920, "height": 1080 },
       "outputDir": "./public/images/projects/autoomat"
+    },
+    {
+      "name": "autoomat-offre",
+      "url": "https://www.autoomat.fr",
+      "auth": {
+        "type": "custom",
+        "navigateTo": "/",
+        "scriptFile": "./scripts/auth/autoomat-cookies.cjs",
+        "waitFor": 500
+      },
+      "pages": [
+        { "path": "/", "name": "autoomat-desktop", "expectedUrlPattern": "autoomat\\.fr/?$" },
+        { "path": "/devis-en-ligne", "name": "autoomat-devis-desktop", "expectedUrlPattern": "/devis-en-ligne$" }
+      ],
+      "viewport": { "width": 1440, "height": 900 },
+      "outputDir": "./public/images/offre"
+    },
+    {
+      "name": "autoomat-offre-mobile",
+      "url": "https://www.autoomat.fr",
+      "auth": {
+        "type": "custom",
+        "navigateTo": "/",
+        "scriptFile": "./scripts/auth/autoomat-cookies.cjs",
+        "waitFor": 500
+      },
+      "pages": [
+        { "path": "/", "name": "autoomat-mobile", "expectedUrlPattern": "autoomat\\.fr/?$" },
+        { "path": "/devis-en-ligne", "name": "autoomat-devis-mobile", "expectedUrlPattern": "/devis-en-ligne$" },
+        { "path": "/parcours-sinistre", "name": "autoomat-sinistre-mobile", "expectedUrlPattern": "/parcours-sinistre$" }
+      ],
+      "viewport": { "width": 390, "height": 844, "deviceScaleFactor": 2, "isMobile": true, "hasTouch": true },
+      "outputDir": "./public/images/offre"
     },
     {
       "name": "intake",

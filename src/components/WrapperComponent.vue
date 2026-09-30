@@ -108,12 +108,21 @@
         <span class="hidden md:inline"><WeatherWidget /></span>
       </div>
 
-      <!-- Lien discret vers Le Labo (Easter egg / expérimentations 3D) -->
-      <router-link
-        :to="localePath('/playground')"
-        class="hidden md:inline text-gray-400 dark:text-gray-600 hover:text-gray-950 dark:hover:text-gray-300 transition-colors text-xs"
-        :aria-label="$t('menu.playground')"
-      >·{{ $t('menu.playground') }}·</router-link>
+      <div class="hidden md:flex items-center gap-4">
+        <!-- Lien vers l'offre freelance (/offre, FR-only) -->
+        <router-link
+          to="/offre"
+          class="text-gray-400 dark:text-gray-600 hover:text-gray-950 dark:hover:text-gray-300 transition-colors text-xs"
+          :aria-label="$t('menu.offer')"
+        >·{{ $t('menu.offer') }}·</router-link>
+
+        <!-- Lien discret vers Le Labo (Easter egg / expérimentations 3D) -->
+        <router-link
+          :to="localePath('/playground')"
+          class="text-gray-400 dark:text-gray-600 hover:text-gray-950 dark:hover:text-gray-300 transition-colors text-xs"
+          :aria-label="$t('menu.playground')"
+        >·{{ $t('menu.playground') }}·</router-link>
+      </div>
 
       <!-- Toggle Mode Clair/Sombre -->
       <div class="space-x-2 text-gray-950 dark:text-gray-300">
