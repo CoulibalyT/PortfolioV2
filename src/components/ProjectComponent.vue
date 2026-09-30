@@ -294,6 +294,7 @@ function render() {
 
       const badge = el.querySelector('.card-badge')
       if (badge) badge.style.display = c.url ? 'block' : 'none'
+      el.querySelector('.card-overlay').style.display = '' // pool elements may come from a cover
 
       el._cardData = c
       poolIdx++
@@ -308,24 +309,31 @@ function render() {
 
   // ---- NORMAL MODE: infinite tiled canvas ----
 
+  // Covers are wider than a phone screen: shrink the whole wall on mobile
+  const s = vw < 640 ? 0.62 : 1
+  const tileW = TILE_W * s
+  const tileH = TILE_H * s
+
   // Calculate visible tiles
-  const startTileX = Math.floor(-px / TILE_W) - 1
-  const endTileX = Math.floor((-px + vw) / TILE_W) + 1
-  const startTileY = Math.floor(-py / TILE_H) - 1
-  const endTileY = Math.floor((-py + vh) / TILE_H) + 1
+  const startTileX = Math.floor(-px / tileW) - 1
+  const endTileX = Math.floor((-px + vw) / tileW) + 1
+  const startTileY = Math.floor(-py / tileH) - 1
+  const endTileY = Math.floor((-py + vh) / tileH) + 1
 
   for (let ty = startTileY; ty <= endTileY; ty++) {
     for (let tx = startTileX; tx <= endTileX; tx++) {
       for (let ci = 0; ci < cards.length; ci++) {
         const c = cards[ci]
-        const screenX = c.tx + tx * TILE_W + px
-        const screenY = c.ty + ty * TILE_H + py
+        const w = c.w * s
+        const h = c.h * s
+        const screenX = c.tx * s + tx * tileW + px
+        const screenY = c.ty * s + ty * tileH + py
 
         // Frustum culling
         if (
-          screenX + c.w < -margin ||
+          screenX + w < -margin ||
           screenX > vw + margin ||
-          screenY + c.h < -margin ||
+          screenY + h < -margin ||
           screenY > vh + margin
         ) {
           continue
@@ -338,8 +346,8 @@ function render() {
         el.style.transition = 'none'
         el.style.willChange = 'transform'
         el.style.transform = `translate3d(${screenX}px, ${screenY}px, 0) rotate(${c.rot}deg)`
-        el.style.width = c.w + 'px'
-        el.style.height = c.h + 'px'
+        el.style.width = w + 'px'
+        el.style.height = h + 'px'
         el.style.opacity = '1'
         el.style.filter = 'none'
         el.style.borderColor = ''
@@ -356,8 +364,10 @@ function render() {
         if (label.textContent !== c.label) label.textContent = c.label
         if (project.textContent !== c.project) project.textContent = c.project
 
+        // Covers already show the project name, and clicking opens the project (not the site)
         const badge = el.querySelector('.card-badge')
-        if (badge) badge.style.display = c.url ? 'block' : 'none'
+        if (badge) badge.style.display = c.url && !c.isCover ? 'block' : 'none'
+        el.querySelector('.card-overlay').style.display = c.isCover ? 'none' : ''
 
         el._cardData = c
         poolIdx++
@@ -466,6 +476,11 @@ function handleTap(pos) {
       pos.x >= elRect.left && pos.x <= elRect.right &&
       pos.y >= elRect.top && pos.y <= elRect.bottom
     ) {
+      // Cover in the "All" wall → open that project's screens
+      if (el._cardData.isCover && !activeFilter.value) {
+        setFilter(el._cardData.project)
+        return
+      }
       lightboxData.value = { ...el._cardData }
       return
     }

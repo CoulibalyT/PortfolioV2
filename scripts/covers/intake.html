@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="base.css">
+<style>
+  :root {
+    --bg: linear-gradient(170deg, #CFE6DB 0%, #E2F0E9 55%, #F1F7F4 100%);
+    --ink: #0F2A20;
+    --muted: #54695F;
+    --green: #0F6B4F;
+    --shadow: rgba(15, 42, 32, .28);
+  }
+
+  /* Thermal queue ticket with torn bottom edge */
+  .ticket {
+    width: 380px;
+    background: #FDFDFB;
+    padding: 34px 34px 50px;
+    transform: rotate(-4deg);
+    text-align: center;
+    -webkit-mask:
+      linear-gradient(#000 0 0) top / 100% calc(100% - 14px) no-repeat,
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 20px 14px repeat-x;
+    border-radius: 4px 4px 0 0;
+  }
+  .t-brand { font-size: 15px; font-weight: 700; color: var(--green); }
+  .t-brand span { font-weight: 400; color: var(--muted); }
+  .t-label { font-size: 15px; color: var(--muted); margin-top: 26px; }
+  .t-number { font-size: 132px; font-weight: 800; letter-spacing: -.05em; line-height: .95; margin-top: 4px; }
+  .t-rule { border-top: 2px dashed #D6DED9; margin: 26px 0 20px; }
+  .t-rows { display: grid; gap: 12px; text-align: left; }
+  .t-row { display: flex; justify-content: space-between; font-size: 17px; }
+  .t-row span { color: var(--muted); }
+  .t-row b { font-weight: 650; }
+  .t-status {
+    margin-top: 24px; display: inline-flex; align-items: center; gap: 8px;
+    background: #E4F3EC; color: var(--green);
+    font-size: 15px; font-weight: 600; padding: 8px 14px; border-radius: 999px;
+  }
+  .t-status i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: block; }
+
+  .object { left: 130px; top: 190px; }
+  .caption { bottom: 80px; }
+</style>
+</head>
+<body>
+  <div class="name">Intake</div>
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">Application interne INSEAD</div>
+    </div>
+    <img src="../../public/images/projects/intake/technician.webp" alt="">
+  </div>
+
+  <div class="object">
+    <div class="ticket">
+      <div class="t-brand">INSEAD <span>IT Support</span></div>
+      <div class="t-label">Votre numéro</div>
+      <div class="t-number">042</div>
+      <div class="t-rule"></div>
+      <div class="t-rows">
+        <div class="t-row"><span>Sujet</span><b>Wi-Fi / Internet</b></div>
+        <div class="t-row"><span>Appareil</span><b>Smartphone</b></div>
+        <div class="t-row"><span>Campus</span><b>Fontainebleau</b></div>
+      </div>
+      <div class="t-status"><i></i>Technicien assigné</div>
+    </div>
+  </div>
+
+  <div class="caption">
+    <h1>Le support IT d'INSEAD, du badge au ticket résolu.</h1>
+    <p>Check-in par badge, file en temps réel et dashboards. Next.js, Prisma et Entra ID.</p>
+  </div>
+</body>
+</html>

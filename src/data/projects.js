@@ -6,6 +6,7 @@ export const projects = [
   {
     name: 'NØIR HAUS',
     folder: 'noir-haus',
+    cover: 'cover.webp',
     url: 'https://noir-inky.vercel.app/',
     urlLabel: 'Voir le défilé',
     urlSecondary: 'https://github.com/CoulibalyT/noir',
@@ -34,6 +35,7 @@ export const projects = [
   {
     name: 'Skywalk',
     folder: 'skywalk',
+    cover: 'cover.webp',
     url: 'https://skywalk-chi.vercel.app',
     urlLabel: 'Voir le site',
     description: {
@@ -59,6 +61,7 @@ export const projects = [
   {
     name: 'Bento',
     folder: 'bento',
+    cover: 'cover.webp',
     url: 'https://bento-sable.vercel.app/',
     urlLabel: 'Voir le site',
     urlSecondary: 'https://x.com/bento_designApp',
@@ -106,6 +109,7 @@ export const projects = [
   {
     name: 'APOL (INSEAD)',
     folder: 'scholarship',
+    cover: 'cover.webp',
     url: null,
     urlLabel: null,
     description: {
@@ -131,6 +135,7 @@ export const projects = [
   {
     name: 'Intake (INSEAD)',
     folder: 'intake',
+    cover: 'cover.webp',
     url: null,
     urlLabel: null,
     description: {
@@ -160,6 +165,7 @@ export const projects = [
   {
     name: 'Autoomat',
     folder: 'autoomat',
+    cover: 'cover.webp',
     url: 'https://autoomat.vercel.app',
     urlLabel: 'Voir le site',
     description: {
@@ -253,9 +259,19 @@ function flattenImages(projectList) {
   return flat
 }
 
-function generateCards(projectList, cols = 5) {
-  // 1. Flatten all images into a single list
-  const flat = flattenImages(projectList)
+// One card per project: its presentation cover (opens the project on click)
+function flattenCovers(projectList) {
+  return projectList.filter(p => p.cover).map(project => ({
+    img: `/images/projects/${project.folder}/${project.cover}`,
+    label: project.name,
+    project: project.name,
+    url: project.url || null,
+    urlLabel: project.urlLabel || null,
+    isCover: true,
+  }))
+}
+
+function generateCards(flat, cols = 5, size = {}) {
 
   // 2. Deterministic interleaved shuffle (spread projects apart)
   const shuffled = interleaveShuffle(flat)
@@ -272,15 +288,15 @@ function generateCards(projectList, cols = 5) {
   // 3. Layout constants
   const GAP = 16
   const MARGIN = 10
-  const MIN_W = 250, MAX_W = 320
-  const MIN_H = 190, MAX_H = 250
+  const { MIN_W = 250, MAX_W = 320, MIN_H = 190, MAX_H = 250, ratio = null } = size
   const JITTER = 8
 
   // 4. Generate card sizes first to compute grid cell dimensions
-  const cardSizes = shuffled.map((_, i) => ({
-    w: Math.round(seededRange(i * 3, MIN_W, MAX_W)),
-    h: Math.round(seededRange(i * 3 + 1, MIN_H, MAX_H)),
-  }))
+  // (a fixed ratio keeps covers uncropped, since cards use object-fit: cover)
+  const cardSizes = shuffled.map((_, i) => {
+    const w = Math.round(seededRange(i * 3, MIN_W, MAX_W))
+    return { w, h: ratio ? Math.round(w * ratio) : Math.round(seededRange(i * 3 + 1, MIN_H, MAX_H)) }
+  })
 
   const rows = Math.ceil(shuffled.length / cols)
 
@@ -354,6 +370,7 @@ function generateCards(projectList, cols = 5) {
       project: shuffled[i].project,
       url: shuffled[i].url,
       urlLabel: shuffled[i].urlLabel,
+      isCover: !!shuffled[i].isCover,
     })
   }
 
@@ -395,11 +412,12 @@ function interleaveShuffle(items) {
 // Generate and export
 // ============================================================
 
-// Le collage principal (bento) ne contient QUE les projets primaires.
-// Les projets "secondary" sont accessibles via le filtre « Autres projets »,
-// rendus à la demande depuis allImageCards.
+// Le collage principal (bento) ne contient QUE les couvertures des projets primaires
+// (1 carte par projet, format 16:10 des couvertures).
+// Les captures de chaque projet et les projets "secondary" sont rendus
+// à la demande depuis allImageCards via les filtres.
 const primaryProjects = projects.filter(p => p.tier !== 'secondary')
-const { cards, tileW, tileH } = generateCards(primaryProjects)
+const { cards, tileW, tileH } = generateCards(flattenCovers(primaryProjects), 3, { MIN_W: 440, MAX_W: 520, ratio: 0.625 })
 
 export const projectCards = cards
 export const TILE_W = tileW
