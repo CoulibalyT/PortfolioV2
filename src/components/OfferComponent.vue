@@ -1,14 +1,20 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
+import {
+  OFFER_EMAIL as EMAIL,
+  OFFER_PHONE as PHONE,
+  OFFER_PHONE_HREF as PHONE_HREF,
+  OFFER_WHATSAPP_URL as WHATSAPP_URL,
+  OFFER_PRICES as PRICES,
+  OFFER_INSTALLMENTS as INSTALLMENTS,
+  OFFER_MAINTENANCE as MAINTENANCE,
+  OFFER_HOURLY_RATE as HOURLY_RATE,
+  OFFER_SEO as SEO,
+  AUTOOMAT_URL,
+} from '@/data/offer.js'
 
-// --- Configurable pricing (edit here to update) ---
-const PRICES = {
-  vitrine: 800,
-  business: 1500,
-}
-
-const EMAIL = 'contact@tenecoulibaly.fr'
+// Pricing, phone and SEO copy live in src/data/offer.js (shared with scripts/inject-meta.mjs).
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.tenecoulibaly.fr'
 
 // --- FAQ state ---
@@ -39,7 +45,7 @@ const faqs = [
   },
   {
     q: "Et si je veux des modifications après la livraison ?",
-    a: "Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance (à partir de 50€/mois) ou des interventions à la demande (60€/h). Pas d'abonnement obligatoire.",
+    a: `Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance (à partir de ${MAINTENANCE.essentiel} €/mois) ou des interventions à la demande (${HOURLY_RATE} €/h). Pas d'abonnement obligatoire.`,
   },
 ]
 
@@ -52,7 +58,7 @@ const calc = ref({
   ecommerce: false,
 })
 const calcEstimate = computed(() => {
-  let base = 800
+  let base = PRICES.vitrine
   if (calc.value.pages > 1) base += (calc.value.pages - 1) * 200
   if (calc.value.blog) base += 300
   if (calc.value.booking) base += 250
@@ -93,19 +99,21 @@ onMounted(() => {
 })
 
 useHead({
-  title: 'Création de sites web pour commerces et artisans à Paris — Tene Coulibaly',
+  title: SEO.title,
   htmlAttrs: { lang: 'fr' },
   meta: [
-    { name: 'description', content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€. Premier appel gratuit." },
+    { name: 'description', content: SEO.description },
+    { name: 'keywords', content: SEO.keywords },
     { property: 'og:type', content: 'website' },
     { property: 'og:locale', content: 'fr_FR' },
-    { property: 'og:title', content: 'Création de sites web pour commerces et artisans — Tene Coulibaly' },
-    { property: 'og:description', content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. Design moderne, SEO local, à partir de 800€." },
+    { property: 'og:site_name', content: SEO.siteName },
+    { property: 'og:title', content: SEO.socialTitle },
+    { property: 'og:description', content: SEO.description },
     { property: 'og:url', content: `${SITE_URL}/offre` },
     { property: 'og:image', content: `${SITE_URL}/images/og-image.webp` },
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'Création de sites web pour commerces et artisans — Tene Coulibaly' },
-    { name: 'twitter:description', content: "Sites web sur mesure pour commerçants, artisans et entrepreneurs locaux. À partir de 800€." },
+    { name: 'twitter:title', content: SEO.socialTitle },
+    { name: 'twitter:description', content: SEO.description },
     { name: 'twitter:image', content: `${SITE_URL}/images/og-image.webp` },
   ],
   link: [{ rel: 'canonical', href: `${SITE_URL}/offre` }],
@@ -158,6 +166,15 @@ useHead({
             Voir les tarifs <span aria-hidden="true">↓</span>
           </a>
         </div>
+        <p class="mt-10 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-x-8 gap-y-4 text-base md:text-lg">
+          <span class="opacity-50">Plus simple de vive voix&nbsp;?</span>
+          <a :href="PHONE_HREF" class="inline-flex items-center gap-3 underline underline-offset-[6px] decoration-1 hover:no-underline transition w-fit">
+            <span class="sr-only">Appeler le</span> {{ PHONE.display }}
+          </a>
+          <a :href="WHATSAPP_URL" target="_blank" rel="noopener" class="inline-flex items-center gap-3 underline underline-offset-[6px] decoration-1 hover:no-underline transition w-fit">
+            WhatsApp <span aria-hidden="true">↗</span>
+          </a>
+        </p>
       </div>
     </section>
 
@@ -215,7 +232,7 @@ useHead({
               Trois packs, <span class="opacity-50">aucune surprise.</span>
             </h2>
             <p class="mt-6 max-w-xl text-sm md:text-base opacity-60 leading-relaxed">
-              Prix HT. TVA non applicable, art. 293 B du CGI. Tous les packs incluent l'hébergement la première année.
+              Auto-entrepreneuse, TVA non applicable (art. 293 B du CGI). Hébergement inclus la première année, puis maintenance optionnelle dès {{ MAINTENANCE.essentiel }}&nbsp;€/mois.
             </p>
           </div>
         </div>
@@ -225,7 +242,8 @@ useHead({
             <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-4">Pack 01</p>
             <h3 class="text-3xl md:text-4xl font-thin mb-8">Vitrine</h3>
             <p class="text-5xl md:text-6xl font-thin mb-2">{{ PRICES.vitrine }}€</p>
-            <p class="text-xs opacity-50 mb-10">à partir de</p>
+            <p class="text-xs opacity-50 mb-2">à partir de</p>
+            <p class="text-sm opacity-80 mb-10">ou {{ INSTALLMENTS.count }}&nbsp;×&nbsp;{{ INSTALLMENTS.vitrine }}&nbsp;€ sans frais</p>
             <ul class="space-y-3 text-sm md:text-base opacity-80 mb-12">
               <li>— Site one-page moderne et responsive</li>
               <li>— Design sur mesure (pas de template)</li>
@@ -243,7 +261,8 @@ useHead({
             <p class="text-xs uppercase tracking-[0.25em] mb-4">★ Recommandé</p>
             <h3 class="text-3xl md:text-4xl font-thin mb-8">Business</h3>
             <p class="text-5xl md:text-6xl font-thin mb-2">{{ PRICES.business }}€</p>
-            <p class="text-xs opacity-50 mb-10">à partir de</p>
+            <p class="text-xs opacity-50 mb-2">à partir de</p>
+            <p class="text-sm opacity-80 mb-10">ou {{ INSTALLMENTS.count }}&nbsp;×&nbsp;{{ INSTALLMENTS.business }}&nbsp;€ sans frais</p>
             <ul class="space-y-3 text-sm md:text-base opacity-80 mb-12">
               <li>— Site multi-pages (jusqu'à 5 pages)</li>
               <li>— Tout le Pack Vitrine, en plus complet</li>
@@ -261,7 +280,9 @@ useHead({
             <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-4">Pack 03</p>
             <h3 class="text-3xl md:text-4xl font-thin mb-8">Premium</h3>
             <p class="text-5xl md:text-6xl font-thin mb-2">Sur devis</p>
-            <p class="text-xs opacity-50 mb-10">selon périmètre</p>
+            <p class="text-xs opacity-50 mb-2">selon périmètre</p>
+            <!-- Empty line mirroring the installment line of the two other packs, so the feature lists stay aligned -->
+            <p class="text-sm mb-10" aria-hidden="true">&nbsp;</p>
             <ul class="space-y-3 text-sm md:text-base opacity-80 mb-12">
               <li>— Application web sur mesure</li>
               <li>— Tout le Pack Business, plus loin</li>
@@ -274,6 +295,40 @@ useHead({
               Discutons-en <span aria-hidden="true">→</span>
             </a>
           </article>
+        </div>
+
+        <!-- Maintenance & hébergement (abonnement mensuel optionnel) -->
+        <div class="fade-in-up mt-16 md:mt-32 grid md:grid-cols-12 gap-8">
+          <p class="md:col-span-3 text-xs uppercase tracking-[0.25em] opacity-50 pt-2">Après la mise en ligne</p>
+          <div class="md:col-span-9">
+            <h3 class="text-2xl md:text-4xl font-thin leading-[1.1]">
+              Maintenance &amp; hébergement — <span class="opacity-50">à partir de {{ MAINTENANCE.essentiel }}&nbsp;€/mois</span>
+            </h3>
+            <div class="mt-10 grid sm:grid-cols-2 gap-10 md:gap-14">
+              <article class="border-t border-gray-200 dark:border-gray-800 pt-8">
+                <h4 class="text-xs uppercase tracking-[0.25em] opacity-50 mb-4">Essentiel</h4>
+                <p class="text-3xl md:text-4xl font-thin mb-6">{{ MAINTENANCE.essentiel }}&nbsp;€<span class="text-base opacity-50">&nbsp;/mois</span></p>
+                <ul class="space-y-3 text-sm md:text-base opacity-80">
+                  <li>— Hébergement</li>
+                  <li>— Nom de domaine</li>
+                  <li>— Certificat SSL</li>
+                  <li>— Sauvegardes</li>
+                  <li>— Surveillance</li>
+                  <li>— Petites corrections</li>
+                </ul>
+              </article>
+              <article class="border-t border-gray-900 dark:border-gray-100 pt-8">
+                <h4 class="text-xs uppercase tracking-[0.25em] mb-4">Suivi</h4>
+                <p class="text-3xl md:text-4xl font-thin mb-6">{{ MAINTENANCE.suivi }}&nbsp;€<span class="text-base opacity-50">&nbsp;/mois</span></p>
+                <ul class="space-y-3 text-sm md:text-base opacity-80">
+                  <li>— Tout l'Essentiel</li>
+                  <li>— 1&nbsp;h de modifications par mois (horaires, photos, promos, nouvelles prestations)</li>
+                  <li>— Mise à jour de la fiche Google Business</li>
+                </ul>
+              </article>
+            </div>
+            <p class="mt-10 text-sm opacity-60">Sans engagement, résiliable à tout moment.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -291,14 +346,28 @@ useHead({
 
         <div class="grid md:grid-cols-12 gap-12 md:gap-16 fade-in-up">
           <div class="md:col-span-7 order-2 md:order-1">
-            <img
-              src="/images/projects/autoomat/home.webp"
-              alt="Capture d'écran du site Autoomat — garage de carrosserie à Ivry-sur-Seine"
-              width="1200"
-              height="800"
-              loading="lazy"
-              class="w-full h-auto border border-gray-200 dark:border-gray-800"
-            />
+            <!-- Desktop screenshot + phone mockup: stacked on mobile, overlapping from md up.
+                 Regenerate with `npm run screenshots:offre`. width/height reserve the space (no layout shift). -->
+            <div class="relative flex flex-col items-center gap-8 md:block md:pr-10 md:pb-14">
+              <img
+                src="/images/offre/autoomat-desktop.webp"
+                alt="Site Autoomat sur ordinateur : page d'accueil du garage de carrosserie à Ivry-sur-Seine"
+                width="1440"
+                height="900"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-auto border border-gray-200 dark:border-gray-800"
+              />
+              <img
+                src="/images/offre/autoomat-devis-mobile.webp"
+                alt="Site Autoomat sur mobile : devis en ligne avec identification du véhicule par plaque d'immatriculation"
+                width="780"
+                height="1688"
+                loading="lazy"
+                decoding="async"
+                class="w-[56%] max-w-[240px] h-auto md:absolute md:right-0 md:bottom-0 md:w-[25%] md:max-w-none rounded-[1.25rem] border-[5px] border-gray-900 dark:border-gray-700 bg-gray-900"
+              />
+            </div>
           </div>
           <div class="md:col-span-5 order-1 md:order-2 space-y-10">
             <div>
@@ -324,7 +393,7 @@ useHead({
               </p>
             </div>
             <a
-              href="https://autoomat.vercel.app"
+              :href="AUTOOMAT_URL"
               target="_blank"
               rel="noopener"
               class="inline-flex items-center gap-3 underline underline-offset-4 hover:no-underline pt-2"
@@ -534,6 +603,15 @@ useHead({
           On parle de votre projet, je vous dis ce que je peux faire.
         </p>
 
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-xl md:text-3xl mb-8">
+          <a :href="PHONE_HREF" class="underline underline-offset-[8px] decoration-1 hover:no-underline">
+            <span class="sr-only">Appeler le</span> {{ PHONE.display }}
+          </a>
+          <a :href="WHATSAPP_URL" target="_blank" rel="noopener" class="underline underline-offset-[8px] decoration-1 hover:no-underline">
+            WhatsApp <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
         <a
           :href="mailtoUrl"
           class="inline-block text-xl md:text-3xl underline underline-offset-[8px] decoration-1 hover:no-underline mb-12"
@@ -556,12 +634,25 @@ useHead({
     </section>
 
     <!-- ============================== FOOTER ============================== -->
-    <footer class="px-6 md:px-12 lg:px-20 py-12 border-t border-gray-100 dark:border-gray-900 text-xs opacity-40">
+    <footer class="px-6 md:px-12 lg:px-20 pt-12 pb-28 md:pb-12 border-t border-gray-100 dark:border-gray-900 text-xs opacity-40">
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-3 md:gap-6 md:items-center md:justify-between">
         <p>Tene Coulibaly · Développeuse Full Stack freelance · Paris</p>
         <p>Auto-entrepreneuse — TVA non applicable, art. 293 B du CGI</p>
       </div>
     </footer>
+
+    <!-- ============================== STICKY CALL BAR (mobile only) ============================== -->
+    <nav
+      aria-label="Contact rapide"
+      class="offer-call-bar md:hidden fixed bottom-0 inset-x-0 z-40 grid grid-cols-2 text-base border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-black"
+    >
+      <a :href="PHONE_HREF" class="py-4 text-center bg-black text-white dark:bg-white dark:text-black">
+        Appeler
+      </a>
+      <a :href="WHATSAPP_URL" target="_blank" rel="noopener" class="py-4 text-center text-black dark:text-gray-100">
+        WhatsApp
+      </a>
+    </nav>
   </div>
 </template>
 
@@ -575,6 +666,20 @@ body:has(.offer-page) {
   height: auto !important;
   min-height: 100vh;
   scroll-behavior: smooth;
+}
+
+/* Red theme: base.css only overrides plain .bg-white / .dark:bg-black, not the
+   translucent header (bg-white/90) nor the black "Appeler" button of the call bar. */
+:root.red-theme .offer-page header {
+  background-color: rgba(133, 44, 44, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+:root.red-theme .offer-call-bar {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+:root.red-theme .offer-call-bar a:first-child {
+  background-color: #fff;
+  color: #852C2C;
 }
 
 /* Restore horizontal-centering utilities — base.css's `* { margin: 0 }` at top
@@ -662,5 +767,15 @@ input[type='range']::-moz-range-thumb {
 
 input[type='checkbox'] {
   accent-color: currentColor;
+}
+
+/* Sticky call bar: keep clear of the iOS home indicator, and show keyboard focus
+   inside the bar (an outside outline would be clipped by the viewport edge). */
+.offer-call-bar {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.offer-call-bar a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -4px;
 }
 </style>

@@ -1,5 +1,5 @@
 {
-  "role": "Développeuse Full Stack",
+  "role": "Développeuse Full Stack & Web Designer",
   "synonyms": {
     "dev": ["Full Stack", "Front-End", "Back-End", "Creative Coder", "Problem Solver", "Tech Lead"]
   },
@@ -12,6 +12,7 @@
     "playground": "Le Labo",
     "offer": "Services"
   },
+  "offer_banner": "Vous êtes commerçant ou artisan ? Découvrez mes offres de création de site web",
   "playground": {
     "title": "Le Labo",
     "subtitle": "Un espace pour mes expérimentations créatives et explorations 3D.",
@@ -92,12 +93,12 @@
   "light": "claire",
    "red": "rouge",
   "status": {
-    "available": "En recherche de CDI (dès sept. 2026) / Alternante Full Stack à INSEAD",
-    "available_short": "En recherche de CDI"
+    "available": "Disponible dès octobre 2026 — CDI ou missions freelance",
+    "available_short": "Disponible dès oct. 2026"
   },
     "description": {
       "intro": "Salut, moi c’est Tene.",
-      "2intro":"Je code de bout en bout : la logique côté serveur, l’expérience côté utilisateur. Pour moi, un bon produit est d’abord un produit simple.",
+      "2intro":"Je conçois et développe des applications web et des expériences immersives (3D, animation), de bout en bout : la logique côté serveur, l’expérience côté utilisateur. Pour moi, un bon produit est d’abord un produit simple.",
       "3intro":"Full Stack · alternance chez INSEAD · ETNA."
     },
   "projects_section": {
@@ -128,13 +129,13 @@
   },
   "contact_section": {
     "title": "Restons en contact",
-    "text": "Actuellement en recherche d'un CDI en développement Full Stack pour septembre 2026. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger !",
+    "text": "Disponible dès octobre 2026 — CDI ou missions freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger !",
     "cta": "Dire Bonjour"
   },
   "seo": {
     "home": {
-      "title": "Tene Coulibaly — Développeuse Full Stack à Paris | Portfolio",
-      "description": "Tene Coulibaly, développeuse Full Stack à Paris (Vue, React, Node, TypeScript). En recherche de CDI dès septembre 2026."
+      "title": "Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris",
+      "description": "Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès octobre 2026 — CDI ou missions freelance."
     },
     "projects": {
       "title": "Projets — Tene Coulibaly",

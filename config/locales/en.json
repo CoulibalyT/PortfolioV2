@@ -1,5 +1,5 @@
 {
-  "role": "Full Stack Developer",
+  "role": "Full Stack Developer & Web Designer",
   "synonyms": {
     "dev": ["Full Stack", "Front-End", "Back-End", "Creative Coder", "Problem Solver", "Tech Lead"]
   },
@@ -12,13 +12,14 @@
     "playground": "The Lab",
     "offer": "Services"
   },
+  "offer_banner": "Shop owner or craftsperson? See my website packages (page in French)",
   "playground": {
     "title": "The Lab",
     "subtitle": "A space for creative coding experiments and 3D explorations.",
     "wip": "Work in Progress"
   },
   "status": {
-    "available": "Looking for a permanent position (from Sept. 2026) / Work-study at INSEAD",
+    "available": "Available from October 2026 — permanent role or freelance",
     "available_short": "Open to work"
   },
   "timeline_section": {
@@ -97,7 +98,7 @@
   "red": "red",
   "description": {
     "intro": "Hi, I’m Tene.",
-    "2intro":"I build end to end: the server-side logic, the user-facing experience. To me, a good product is first a simple one.",
+    "2intro":"I design and build web applications and immersive experiences (3D, animation), end to end: the server-side logic, the user-facing experience. To me, a good product is first a simple one.",
     "3intro":"Full Stack · work-study at INSEAD · ETNA."
   },
   "projects_section": {
@@ -128,13 +129,13 @@
   },
   "contact_section": {
     "title": "Let's Connect",
-    "text": "Currently looking for a permanent Full Stack Developer position starting September 2026. Feel free to reach out to discuss opportunities or just to connect!",
+    "text": "Available from October 2026 — permanent role or freelance missions. Feel free to reach out to discuss opportunities or just to connect!",
     "cta": "Say Hello"
   },
   "seo": {
     "home": {
-      "title": "Tene Coulibaly — Full Stack Developer in Paris | Portfolio",
-      "description": "Tene Coulibaly, Full Stack Developer in Paris (Vue, React, Node, TypeScript). Open to a permanent role from September 2026."
+      "title": "Tene Coulibaly — Full Stack Developer & Web Designer in Paris",
+      "description": "Full Stack Developer & Web Designer in Paris. Web applications and immersive 3D experiences. Available from October 2026 — permanent role or freelance."
     },
     "projects": {
       "title": "Projects — Tene Coulibaly",

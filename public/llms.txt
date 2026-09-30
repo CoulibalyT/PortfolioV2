@@ -1,6 +1,6 @@
 # Tene Coulibaly
 
-> Développeuse Full Stack à Paris (Vue.js, React, Next.js, Node.js, NestJS, TypeScript). En recherche de CDI dès septembre 2026.
+> Développeuse Full Stack & Web Designer à Paris (Vue.js, React, Next.js, Node.js, NestJS, TypeScript, Three.js). Disponible dès octobre 2026 — CDI ou missions freelance.
 
 ## À propos
 
@@ -9,14 +9,14 @@ Salut, moi c'est Tene. Développeuse Full Stack en alternance chez INSEAD, étud
 ## Profil
 
 - Nom : Tene Coulibaly
-- Rôle : Développeuse Full Stack
+- Rôle : Développeuse Full Stack & Web Designer
 - Localisation : Paris, Île-de-France, France
-- Email : coulibaly.tene00@gmail.com
+- Email : contact@tenecoulibaly.fr
 - LinkedIn : https://www.linkedin.com/in/tenecoulibaly/
 - GitHub : https://github.com/CoulibalyT
 - npm : https://www.npmjs.com/package/portfolio-sync
 - Portfolio : https://www.tenecoulibaly.fr
-- Disponibilité : CDI à partir de septembre 2026
+- Disponibilité : dès octobre 2026 — CDI ou missions freelance
 
 ## Stack technique
 
@@ -42,6 +42,11 @@ Salut, moi c'est Tene. Développeuse Full Stack en alternance chez INSEAD, étud
 - 2021 — 2023 : Développeuse Web (Bac +2) à Epitech
 
 ## Projets
+
+### NØIR HAUS
+Défilé de haute couture en 3D, scrollable et bilingue. Quatre looks CLO3D mis en scène avec caméra orbitale, post-FX cinématographique et finale T-bar. Audio procédural Web Audio, transitions GSAP scroll-driven, soumissions ouvertes aux créateurs.
+- Stack : TypeScript, Three.js, WebGL, GLSL, GSAP ScrollTrigger, Web Audio API, Vercel
+- Lien : https://noir-inky.vercel.app/
 
 ### Skywalk
 Plateforme full-stack d'aide à l'expatriation : exploration de destinations, gestion de projet, comparaison de villes, recherche d'emploi, forum communautaire modéré par IA.

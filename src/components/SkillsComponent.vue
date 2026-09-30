@@ -77,10 +77,14 @@
     const { isRedMode } = useTheme();
 
     const techSkills = [
+        // Core stack
+        'Vue.js', 'Nuxt', 'NestJS', 'TypeScript',
+        // 3D, animation & design
+        'Three.js', 'WebGL', 'GSAP', 'UI/UX Design',
         // Frontend
-        'Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'GSAP',
+        'React', 'Next.js', 'Tailwind CSS',
         // Backend
-        'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP',
+        'Node.js', 'Express', 'Symfony', 'PHP',
         // Data
         'PostgreSQL', 'SQL Server', 'Prisma', 'TypeORM', 'Doctrine',
         // Mobile
@@ -91,7 +95,7 @@
         'Figma', 'Postman', 'Vercel',
     ];
 
-    const learningSkills = ['Three.js', 'Deep AI'];
+    const learningSkills = ['Deep AI'];
 
     const languages = [
         'skills_section.lang_french',
