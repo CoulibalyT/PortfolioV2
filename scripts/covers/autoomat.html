@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="base.css">
+<style>
+  :root {
+    --bg: radial-gradient(ellipse 1000px 800px at 20% 30%, #22345A 0%, #121D36 70%);
+    --ink: #F3EEE6;
+    --muted: #A5AEC2;
+    --sand: #E8DFD0;
+    --eu: #1F3F9E;
+    --shadow: rgba(0, 0, 0, .55);
+  }
+
+  .stack { position: relative; width: 540px; }
+
+  /* Quote slip behind the plate */
+  .quote {
+    width: 460px;
+    background: var(--sand);
+    color: #1B2A4A;
+    border-radius: 16px;
+    padding: 28px 30px 110px;
+    transform: rotate(3deg);
+    margin-left: 50px;
+  }
+  .q-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .q-brand { font-size: 20px; font-weight: 700; }
+  .q-step { font-size: 14px; color: #6F6A60; }
+  .q-title { font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-top: 18px; }
+  .q-rows { margin-top: 16px; display: grid; gap: 10px; }
+  .q-row { display: flex; justify-content: space-between; font-size: 17px; padding-bottom: 10px; border-bottom: 1px solid rgba(27, 42, 74, .15); }
+  .q-row span { color: #6F6A60; }
+  .q-row b { font-weight: 650; }
+
+  /* French licence plate */
+  .plate {
+    position: absolute; left: 0; bottom: -46px;
+    width: 520px; height: 112px;
+    display: flex;
+    background: #fff; border-radius: 10px;
+    border: 3px solid #111;
+    transform: rotate(-3deg);
+    overflow: hidden;
+    box-shadow: 0 24px 40px -12px rgba(0, 0, 0, .6);
+  }
+  .band { width: 56px; background: var(--eu); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 12px; }
+  .band svg { margin-bottom: auto; margin-top: 12px; }
+  .band b { font-size: 26px; font-weight: 700; }
+  .plate-num { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 60px; font-weight: 700; color: #111; letter-spacing: .01em; white-space: nowrap; }
+  .band.right { justify-content: center; padding: 0; }
+  .band.right b { font-size: 20px; }
+
+  .object { top: 200px; }
+</style>
+</head>
+<body>
+  <div class="name">Autoomat</div>
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">autoomat.vercel.app</div>
+    </div>
+    <img src="../../public/images/projects/autoomat/home.webp" alt="">
+  </div>
+
+  <div class="object">
+    <div class="stack">
+      <div class="quote">
+        <div class="q-head">
+          <div class="q-brand">Autoomat</div>
+          <div class="q-step">Devis express</div>
+        </div>
+        <div class="q-title">Véhicule identifié</div>
+        <div class="q-rows">
+          <div class="q-row"><span>Photos reçues</span><b>2</b></div>
+          <div class="q-row"><span>Prise en charge</span><b>Assurance</b></div>
+          <div class="q-row"><span>Avance de frais</span><b>0 €</b></div>
+        </div>
+      </div>
+      <div class="plate">
+        <div class="band">
+          <svg width="30" height="30" viewBox="0 0 30 30"><g fill="#FFD84A">
+            <circle cx="15" cy="4" r="1.6"/><circle cx="20.5" cy="5.5" r="1.6"/><circle cx="24.5" cy="9.5" r="1.6"/><circle cx="26" cy="15" r="1.6"/><circle cx="24.5" cy="20.5" r="1.6"/><circle cx="20.5" cy="24.5" r="1.6"/><circle cx="15" cy="26" r="1.6"/><circle cx="9.5" cy="24.5" r="1.6"/><circle cx="5.5" cy="20.5" r="1.6"/><circle cx="4" cy="15" r="1.6"/><circle cx="5.5" cy="9.5" r="1.6"/><circle cx="9.5" cy="5.5" r="1.6"/></g></svg>
+          <b>F</b>
+        </div>
+        <div class="plate-num">AB-123-CD</div>
+        <div class="band right"><b>75</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption">
+    <h1>Réparer sa carrosserie sans gérer l'assurance.</h1>
+    <p>Parcours sinistre guidé, devis en ligne et identification par plaque. Next.js et API SIV.</p>
+  </div>
+</body>
+</html>

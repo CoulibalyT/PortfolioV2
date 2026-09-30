@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="base.css">
+<style>
+  :root {
+    --bg: linear-gradient(160deg, #EFE4F3 0%, #F7E3EC 55%, #FBEFF3 100%);
+    --ink: #17131C;
+    --muted: #6D6475;
+    --teal: #1BB5C9;
+    --violet: #6E5AE6;
+    --shadow: rgba(60, 30, 80, .30);
+  }
+
+  /* Leaderboard card */
+  .board {
+    width: 540px;
+    background: #fff;
+    border-radius: 24px;
+    padding: 28px 30px 26px;
+    transform: rotate(-3deg);
+  }
+  .board-head { display: flex; justify-content: space-between; align-items: center; }
+  .board-brand { font-size: 22px; font-weight: 700; color: #C98BB9; letter-spacing: -.02em; }
+  .board-live { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .board-live i { width: 8px; height: 8px; border-radius: 50%; background: #2BC48A; display: block; }
+  .board-title { font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin: 18px 0 20px; }
+  .rows { display: grid; gap: 10px; }
+  .row {
+    display: grid; grid-template-columns: 34px 44px 1fr auto; align-items: center; gap: 14px;
+    padding: 12px 14px; border-radius: 14px; background: #F7F4F9;
+  }
+  .row.first { background: linear-gradient(90deg, #EAF8FB, #F1EEFF); }
+  .rank { font-size: 22px; font-weight: 800; color: var(--ink); text-align: center; }
+  .avatar { width: 44px; height: 44px; border-radius: 12px; }
+  .who { font-size: 18px; font-weight: 600; }
+  .who small { display: block; font-size: 13px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+  .votes { font-size: 18px; font-weight: 700; }
+  .votes small { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+
+  /* Anti-AI stamp overlapping the card corner */
+  .stamp {
+    position: absolute; right: -84px; bottom: -58px;
+    width: 132px; height: 132px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; transform: rotate(12deg);
+    box-shadow: 0 16px 30px -10px rgba(23, 19, 28, .5);
+  }
+  .stamp svg { margin-bottom: 6px; }
+  .stamp b { font-size: 16px; font-weight: 700; line-height: 1.1; }
+  .stamp span { font-size: 12px; color: #BDB5C4; margin-top: 3px; }
+</style>
+</head>
+<body>
+  <div class="name">Bento</div>
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">bento-sable.vercel.app</div>
+    </div>
+    <img src="../../public/images/projects/bento/home.webp" alt="">
+  </div>
+
+  <div class="object">
+    <div class="board">
+      <div class="board-head">
+        <div class="board-brand">bento.</div>
+        <div class="board-live"><i></i>Votes en cours</div>
+      </div>
+      <div class="board-title">Redesign Spotify Wrapped 2025</div>
+      <div class="rows">
+        <div class="row first">
+          <div class="rank">1</div>
+          <div class="avatar" style="background: linear-gradient(135deg, #1BB5C9, #6E5AE6)"></div>
+          <div class="who">Maria L.<small>UX Designer</small></div>
+          <div class="votes">128<small>votes</small></div>
+        </div>
+        <div class="row">
+          <div class="rank">2</div>
+          <div class="avatar" style="background: linear-gradient(135deg, #F59BB8, #C06AD8)"></div>
+          <div class="who">Hugo D.<small>UI Designer</small></div>
+          <div class="votes">96<small>votes</small></div>
+        </div>
+        <div class="row">
+          <div class="rank">3</div>
+          <div class="avatar" style="background: linear-gradient(135deg, #FFC56B, #F2789A)"></div>
+          <div class="who">Léa P.<small>Illustratrice</small></div>
+          <div class="votes">71<small>votes</small></div>
+        </div>
+      </div>
+      <div class="stamp">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1BB5C9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <b>Fait main</b>
+        <span>Anti-IA vérifié</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption">
+    <h1>Des challenges de design où le talent se prouve.</h1>
+    <p>Votes, classements et détection anti-IA. Vue 3, NestJS et un plugin Figma.</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="base.css">
+<style>
+  :root {
+    --bg: linear-gradient(170deg, #D9E1E7 0%, #E8EDF0 60%, #F2F4F5 100%);
+    --ink: #13202B;
+    --muted: #5C6A75;
+    --green: #2E7D4F;
+    --shadow: rgba(19, 32, 43, .30);
+  }
+
+  /* Award letter */
+  .letter {
+    width: 520px;
+    background: #fff;
+    padding: 40px 44px 44px;
+    border-radius: 3px;
+    transform: rotate(-2.5deg);
+    position: relative;
+  }
+  .letter::before { /* second sheet peeking behind */
+    content: ''; position: absolute; inset: 0;
+    background: #fff; border-radius: 3px;
+    transform: rotate(4deg) translate(10px, 6px);
+    z-index: -1; box-shadow: 0 1px 3px rgba(19, 32, 43, .15);
+  }
+  .letter-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
+  .letter-org { font-size: 22px; font-weight: 800; letter-spacing: .02em; }
+  .letter-ref { font-size: 14px; color: var(--muted); }
+  .letter-kind { font-size: 15px; color: var(--muted); margin-top: 26px; }
+  .letter-title { font-size: 34px; font-weight: 700; letter-spacing: -.02em; margin-top: 4px; }
+  .lines { margin-top: 20px; display: grid; gap: 10px; }
+  .lines i { display: block; height: 9px; border-radius: 5px; background: #E8ECEF; }
+  .terms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; width: 300px; }
+  .terms dt { font-size: 13px; color: var(--muted); margin-bottom: 5px; }
+  .terms dd { font-size: 19px; font-weight: 650; }
+
+  .seal {
+    position: absolute; right: 30px; bottom: -40px;
+    width: 150px; height: 150px; border-radius: 50%;
+    border: 3px solid var(--green); color: var(--green);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transform: rotate(-14deg);
+    background: rgba(255, 255, 255, .85);
+    box-shadow: inset 0 0 0 6px rgba(255, 255, 255, .85), inset 0 0 0 7px var(--green);
+  }
+  .seal b { font-size: 25px; font-weight: 800; letter-spacing: .04em; }
+  .seal span { font-size: 13px; font-weight: 600; margin-top: 2px; }
+
+  .object { top: 230px; }
+</style>
+</head>
+<body>
+  <div class="name">APOL</div>
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="url">Application interne INSEAD</div>
+    </div>
+    <img src="../../public/images/projects/scholarship/evaluator.webp" alt="">
+  </div>
+
+  <div class="object">
+    <div class="letter">
+      <div class="letter-head">
+        <div class="letter-org">INSEAD</div>
+        <div class="letter-ref">Dossier #123</div>
+      </div>
+      <div class="letter-kind">Décision d'attribution</div>
+      <div class="letter-title">Bourse au mérite</div>
+      <div class="lines"><i></i><i style="width: 88%"></i><i style="width: 64%"></i></div>
+      <dl class="terms">
+        <div><dt>Programme</dt><dd>MBA</dd></div>
+        <div><dt>Montant</dt><dd>10 000 €</dd></div>
+      </dl>
+      <div class="seal"><b>ACCORDÉE</b><span>Comité 2025</span></div>
+    </div>
+  </div>
+
+  <div class="caption">
+    <h1>Candidatures et bourses INSEAD, de bout en bout.</h1>
+    <p>Admissions MBA, EMBA et MIM, évaluations, comités. Symfony, SSO ADFS et PeopleSoft.</p>
+  </div>
+</body>
+</html>

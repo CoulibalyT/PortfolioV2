@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('../../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('../../node_modules/@fontsource-variable/geist/files/geist-latin-ext-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  unicode-range: U+0100-024F, U+1E00-1EFF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1600px; height: 1000px; overflow: hidden; }
+body {
+  font-family: 'Geist', sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  position: relative;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Browser frame holding the real screenshot, bleeding off right/bottom */
+.browser {
+  position: absolute;
+  left: 600px; top: 170px;
+  width: 1400px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 40px 80px -30px var(--shadow, rgba(15, 27, 45, .35)), 0 0 0 1px rgba(15, 27, 45, .06);
+  overflow: hidden;
+}
+.browser-bar {
+  height: 44px;
+  display: flex; align-items: center;
+  padding: 0 18px;
+  border-bottom: 1px solid #E3E8EC;
+  background: #F7F9FA;
+}
+.dots { display: flex; gap: 7px; }
+.dots i { width: 11px; height: 11px; border-radius: 50%; background: #D5DCE1; display: block; }
+.url {
+  flex: 0 1 380px; margin: 0 auto;
+  height: 26px; border-radius: 8px; background: #ECF0F2;
+  font-size: 14px; color: #66727D;
+  display: flex; align-items: center; justify-content: center;
+}
+.browser img { display: block; width: 100%; }
+
+/* The object: sits over the screenshot, left column */
+.object {
+  position: absolute;
+  left: 88px; top: 250px;
+  filter: drop-shadow(0 30px 40px var(--shadow, rgba(15, 27, 45, .22))) drop-shadow(0 2px 4px rgba(15, 27, 45, .08));
+}
+
+.caption { position: absolute; left: 96px; bottom: 88px; width: 460px; }
+.caption h1 { font-size: 40px; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; text-wrap: balance; }
+.caption p { margin-top: 14px; font-size: 19px; line-height: 1.45; color: var(--muted); }
+
+/* Project name, big and heavy, in the empty band above the screenshot */
+.name {
+  position: absolute; left: 84px; top: 34px;
+  font-family: 'Geist', sans-serif;
+  font-size: 132px; font-weight: 900;
+  letter-spacing: -.05em; line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+}
