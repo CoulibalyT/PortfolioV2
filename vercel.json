@@ -2,6 +2,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/playground", "destination": "/", "permanent": true },
+    { "source": "/en/playground", "destination": "/en", "permanent": true },
     {
       "source": "/",
       "has": [{ "type": "host", "value": ".*\\.vercel\\.app" }],

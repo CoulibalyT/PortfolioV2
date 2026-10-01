@@ -80,11 +80,11 @@
       <div 
         ref="contentWrapper"
         class="flex-1 text-center relative text-gray-900 dark:text-gray-100 h-full"
-        :class="['timeline', 'playground', 'project'].includes(route.name) ? 'overflow-hidden' : 'overflow-y-auto scroll-container scroll-smooth'"
+        :class="['timeline', 'project'].includes(route.name) ? 'overflow-hidden' : 'overflow-y-auto scroll-container scroll-smooth'"
       >
         <div  
           class="w-full"
-          :class="['timeline', 'playground', 'project'].includes(route.name) ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-4 md:py-8'"
+          :class="['timeline', 'project'].includes(route.name) ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-4 md:py-8'"
         >
           <slot></slot>
         </div>
@@ -115,13 +115,6 @@
           class="text-gray-400 dark:text-gray-600 hover:text-gray-950 dark:hover:text-gray-300 transition-colors text-xs"
           :aria-label="$t('menu.offer')"
         >·{{ $t('menu.offer') }}·</router-link>
-
-        <!-- Lien discret vers Le Labo (Easter egg / expérimentations 3D) -->
-        <router-link
-          :to="localePath('/playground')"
-          class="text-gray-400 dark:text-gray-600 hover:text-gray-950 dark:hover:text-gray-300 transition-colors text-xs"
-          :aria-label="$t('menu.playground')"
-        >·{{ $t('menu.playground') }}·</router-link>
       </div>
 
       <!-- Toggle Mode Clair/Sombre -->

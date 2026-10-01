@@ -5,7 +5,6 @@ const ProjectView = () => import('@/views/ProjectView.vue')
 const SkillsView = () => import('@/views/SkillsView.vue')
 const TimelineView = () => import('@/views/TimelineView.vue')
 const ContactView = () => import('@/views/ContactView.vue')
-const PlaygroundView = () => import('@/views/PlaygroundView.vue')
 const OfferView = () => import('@/views/OfferView.vue')
 
 const router = createRouter({
@@ -18,7 +17,6 @@ const router = createRouter({
     { path: '/skills', name: 'skills', component: SkillsView, meta: { locale: 'fr' } },
     { path: '/timeline', name: 'timeline', component: TimelineView, meta: { locale: 'fr' } },
     { path: '/contact', name: 'contact', component: ContactView, meta: { locale: 'fr' } },
-    { path: '/playground', name: 'playground', component: PlaygroundView, meta: { locale: 'fr' } },
     { path: '/offre', name: 'offer', component: OfferView, meta: { locale: 'fr' } },
 
     // English routes (same components, locale meta drives i18n switch)
@@ -28,7 +26,6 @@ const router = createRouter({
     { path: '/en/skills', name: 'skills-en', component: SkillsView, meta: { locale: 'en' } },
     { path: '/en/timeline', name: 'timeline-en', component: TimelineView, meta: { locale: 'en' } },
     { path: '/en/contact', name: 'contact-en', component: ContactView, meta: { locale: 'en' } },
-    { path: '/en/playground', name: 'playground-en', component: PlaygroundView, meta: { locale: 'en' } },
 
     {
       path: '/:pathMatch(.*)*',

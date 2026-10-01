@@ -8,7 +8,6 @@
         <router-link to="/skills">{{ $t('menu.skills') }}</router-link>
         <router-link to="/timeline">{{ $t('menu.timeline') }}</router-link>
         <router-link to="/contact">{{ $t('menu.contact') }}</router-link>
-        <router-link to="/playground">{{ $t('menu.playground') }}</router-link>
       </nav>
     </header>
 

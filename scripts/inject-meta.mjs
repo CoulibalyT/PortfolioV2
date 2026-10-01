@@ -69,7 +69,7 @@ const routes = [
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris</h1>
-        <p>Salut, moi c'est Tene. Développeuse Full Stack en alternance chez INSEAD, étudiante à l'ETNA. Je construis des applications web du back-end à l'interface — propres, performantes, et pensées pour les utilisateurs.</p>
+        <p>Salut, moi c'est Tene. Développeuse Full Stack, diplômée d'un Master à l'ETNA après une alternance chez INSEAD. Je construis des applications web du back-end à l'interface — propres, performantes, et pensées pour les utilisateurs.</p>
         <p>Créer, optimiser, innover : trois mots qui guident ma vision du développement. Disponible dès octobre 2026 — CDI ou missions freelance.</p>
         <h2>Compétences</h2>
         <p>Vue.js, Nuxt, React, Next.js, TypeScript, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Tailwind CSS, GSAP, Figma, Git</p>
@@ -86,7 +86,7 @@ const routes = [
         </ul>
         <h2>Parcours</h2>
         <ul>
-          <li>2025 - Présent : Développeuse Full Stack Étudiante — INSEAD</li>
+          <li>2025 - 2026 : Développeuse Full Stack Étudiante — INSEAD</li>
           <li>2023 - 2025 : Développeuse Full Stack — CAPTAG</li>
           <li>2022 - 2023 : Développeuse Full Stack — Sayse</li>
         </ul>
@@ -140,7 +140,7 @@ const routes = [
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Parcours de Tene Coulibaly</h1>
         <h2>Expériences Professionnelles</h2>
-        <article><h3>Développeuse Full Stack Étudiante — INSEAD (2025 - Présent)</h3></article>
+        <article><h3>Développeuse Full Stack Étudiante — INSEAD (2025 - 2026)</h3></article>
         <article><h3>Développeuse Full Stack — CAPTAG (2023 - 2025)</h3><p>Module carbone (Vue 3, Node.js, API Climeet). Projet mené en autonomie, collaboration agile.</p></article>
         <article><h3>Développeuse Full Stack — Sayse (2022 - 2023)</h3><p>Développement SaaS (React.js, TypeScript, Node.js, Docker).</p></article>
         <article><h3>Bénévole — Croix-Rouge Française (2019 - 2020)</h3></article>
@@ -162,21 +162,6 @@ const routes = [
           <li>Email : <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a></li>
           <li>LinkedIn : <a href="https://www.linkedin.com/in/tenecoulibaly/">linkedin.com/in/tenecoulibaly</a></li>
           <li>GitHub : <a href="https://github.com/CoulibalyT">github.com/CoulibalyT</a></li>
-        </ul>
-      </main>`,
-  },
-  {
-    path: '/playground',
-    title: 'Le Labo — Tene Coulibaly',
-    desc: 'Expérimentations créatives et explorations 3D par Tene Coulibaly : globe interactif, système solaire, particules morphing.',
-    content: `
-      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
-        <h1>Le Labo — Expérimentations 3D</h1>
-        <p>Un espace pour mes expérimentations créatives et explorations 3D avec Three.js.</p>
-        <ul>
-          <li>Globe terrestre interactif avec localisation Paris</li>
-          <li>Système solaire navigable avec 8 planètes</li>
-          <li>Particules morphing entre sphère, cube, torus, ADN et cœur</li>
         </ul>
       </main>`,
   },
@@ -263,7 +248,7 @@ const enRoutes = [
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Tene Coulibaly — Full Stack Developer & Web Designer in Paris</h1>
-        <p>Hi, I'm Tene. Full Stack Developer (work-study) at INSEAD, studying at ETNA. I build web applications from back-end to interface — clean, performant, and user-focused.</p>
+        <p>Hi, I'm Tene. Full Stack Developer, Master's graduate from ETNA after a work-study at INSEAD. I build web applications from back-end to interface — clean, performant, and user-focused.</p>
         <p>Create, optimize, innovate: three words that guide my approach to development. Available from October 2026 — permanent role or freelance.</p>
         <h2>Skills</h2>
         <p>Vue.js, Nuxt, React, Next.js, TypeScript, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Tailwind CSS, GSAP, Figma, Git</p>
@@ -280,7 +265,7 @@ const enRoutes = [
         </ul>
         <h2>Experience</h2>
         <ul>
-          <li>2025 - Present: Full Stack Developer (Student) — INSEAD</li>
+          <li>2025 - 2026: Full Stack Developer (Student) — INSEAD</li>
           <li>2023 - 2025: Full Stack Developer — CAPTAG</li>
           <li>2022 - 2023: Full Stack Developer — Sayse</li>
         </ul>
@@ -334,7 +319,7 @@ const enRoutes = [
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Tene Coulibaly's Journey</h1>
         <h2>Professional Experience</h2>
-        <article><h3>Full Stack Developer (Student) — INSEAD (2025 - Present)</h3></article>
+        <article><h3>Full Stack Developer (Student) — INSEAD (2025 - 2026)</h3></article>
         <article><h3>Full Stack Developer — CAPTAG (2023 - 2025)</h3><p>Carbon module (Vue 3, Node.js, Climeet API). Autonomous project, agile collaboration.</p></article>
         <article><h3>Full Stack Developer — Sayse (2022 - 2023)</h3><p>SaaS development (React.js, TypeScript, Node.js, Docker).</p></article>
         <article><h3>Volunteer — French Red Cross (2019 - 2020)</h3></article>
@@ -356,21 +341,6 @@ const enRoutes = [
           <li>Email: <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a></li>
           <li>LinkedIn: <a href="https://www.linkedin.com/in/tenecoulibaly/">linkedin.com/in/tenecoulibaly</a></li>
           <li>GitHub: <a href="https://github.com/CoulibalyT">github.com/CoulibalyT</a></li>
-        </ul>
-      </main>`,
-  },
-  {
-    path: '/en/playground',
-    title: 'The Lab — Tene Coulibaly',
-    desc: 'Creative experiments and 3D explorations by Tene Coulibaly: interactive globe, solar system, morphing particles.',
-    content: `
-      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
-        <h1>The Lab — 3D Experiments</h1>
-        <p>A space for my creative experiments and 3D explorations with Three.js.</p>
-        <ul>
-          <li>Interactive Earth globe with Paris location marker</li>
-          <li>Navigable solar system with 8 planets</li>
-          <li>Particles morphing between sphere, cube, torus, DNA and heart</li>
         </ul>
       </main>`,
   },
@@ -655,7 +625,6 @@ const sitemapEntries = allRoutes.map(r => {
   else if (basePath === '/offre') priority = '0.95';
   else if (r.project) priority = '0.7';
   else if (basePath === '/contact') priority = '0.6';
-  else if (basePath === '/playground') priority = '0.5';
   // EN pages slightly lower than FR canonical (signals FR is primary)
   if (r.locale === 'en') priority = (parseFloat(priority) - 0.1).toFixed(1);
   const changefreq = basePath === '/contact' ? 'yearly' : 'monthly';
