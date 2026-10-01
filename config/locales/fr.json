@@ -9,15 +9,9 @@
     "contact": "Contact",
     "skills": "Compétences",
     "timeline": "Parcours",
-    "playground": "Le Labo",
-    "offer": "Services"
+    "offer": "Créer votre site"
   },
   "offer_banner": "Vous êtes commerçant ou artisan ? Découvrez mes offres de création de site web",
-  "playground": {
-    "title": "Le Labo",
-    "subtitle": "Un espace pour mes expérimentations créatives et explorations 3D.",
-    "wip": "En cours de développement"
-  },
   "timeline_section": {
     "title": "Mon Parcours",
     "subtitle": "Le chemin qui m'a mené ici.",
@@ -26,7 +20,7 @@
     "education_title": "Formations",
     "experience": [
       {
-        "year": "Avril 2025 - Présent",
+        "year": "Avril 2025 - Oct. 2026",
         "title": "Développeuse Full Stack Étudiante",
         "place": "INSEAD",
         "description": "Plateformes d'admission et de bourses (APOL & Scholarships), côté développement et design. PHP/Symfony, UI/UX, Figma."
@@ -55,7 +49,7 @@
         "year": "Jan 2025 - Oct 2026",
         "title": "Architecte de Systèmes d'Information (Master)",
         "place": "ETNA",
-        "description": "Master en cours."
+        "description": "Diplôme obtenu."
       },
       {
         "year": "2023 - 2025",
@@ -99,7 +93,7 @@
     "description": {
       "intro": "Salut, moi c’est Tene.",
       "2intro":"Je conçois et développe des applications web et des expériences immersives (3D, animation), de bout en bout : la logique côté serveur, l’expérience côté utilisateur. Pour moi, un bon produit est d’abord un produit simple.",
-      "3intro":"Full Stack · alternance chez INSEAD · ETNA."
+      "3intro":"Full Stack · diplômée de l’ETNA (Master) · ex-INSEAD."
     },
   "projects_section": {
     "title": "Projets Sélectionnés",
@@ -152,10 +146,6 @@
     "contact": {
       "title": "Contact — Tene Coulibaly",
       "description": "Contactez Tene Coulibaly pour discuter de vos projets web ou simplement dire bonjour."
-    },
-    "playground": {
-      "title": "Le Labo — Tene Coulibaly",
-      "description": "Expérimentations créatives et explorations 3D par Tene Coulibaly : particules, galaxie, ADN et plus."
     }
   },
   "not_found": {

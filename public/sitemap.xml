@@ -46,15 +46,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.tenecoulibaly.fr/playground</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/playground"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/playground"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/playground"/>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://www.tenecoulibaly.fr/offre</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -194,15 +185,6 @@
     <lastmod>2026-05-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.tenecoulibaly.fr/en/playground</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.tenecoulibaly.fr/playground"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.tenecoulibaly.fr/en/playground"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.tenecoulibaly.fr/playground"/>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.tenecoulibaly.fr/en/projects/noir-haus</loc>

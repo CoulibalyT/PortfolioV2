@@ -4,7 +4,7 @@
 
 ## À propos
 
-Salut, moi c'est Tene. Développeuse Full Stack en alternance chez INSEAD, étudiante à l'ETNA. Je construis des applications web du back-end à l'interface — propres, performantes, et pensées pour les utilisateurs. Créer, optimiser, innover : trois mots qui guident ma vision du développement.
+Salut, moi c'est Tene. Développeuse Full Stack, diplômée d'un Master à l'ETNA après une alternance chez INSEAD. Je construis des applications web du back-end à l'interface — propres, performantes, et pensées pour les utilisateurs. Créer, optimiser, innover : trois mots qui guident ma vision du développement.
 
 ## Profil
 
@@ -30,7 +30,7 @@ Salut, moi c'est Tene. Développeuse Full Stack en alternance chez INSEAD, étud
 
 ## Expérience professionnelle
 
-- 2025 — Présent : Développeuse Full Stack Étudiante (alternance) chez INSEAD
+- 2025 — 2026 : Développeuse Full Stack Étudiante (alternance) chez INSEAD
 - 2023 — 2025 : Développeuse Full Stack chez CAPTAG (module carbone Vue 3 / Node.js / API Climeet)
 - 2022 — 2023 : Développeuse Full Stack chez Sayse (SaaS React / TypeScript / Node.js / Docker)
 - 2019 — 2020 : Bénévole à la Croix-Rouge Française
@@ -92,4 +92,3 @@ Site vitrine pour un studio de design minimaliste.
 - Compétences : https://www.tenecoulibaly.fr/skills
 - Parcours : https://www.tenecoulibaly.fr/timeline
 - Contact : https://www.tenecoulibaly.fr/contact
-- Le Labo (expérimentations 3D) : https://www.tenecoulibaly.fr/playground

@@ -101,8 +101,7 @@ router.beforeEach(async (to, from, next) => {
       'project': 'menu.projects',
       'skills': 'menu.skills',
       'timeline': 'menu.timeline',
-      'contact': 'menu.contact',
-      'playground': 'menu.playground'
+      'contact': 'menu.contact'
     };
     const key = keyMap[to.name];
     transitionText.value = key ? t(key) : '';

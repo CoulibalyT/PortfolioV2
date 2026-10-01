@@ -1,9 +1,12 @@
 <template>
-  <span 
-    class="cursor-help inline-block"
+  <span
+    class="synonym-reveal cursor-help"
     @mouseenter="swapText"
     @mouseleave="resetText"
   >
+    <!-- Invisible copy of the base text: keeps the hover zone at full width,
+         so a shorter synonym can't slide out from under the cursor -->
+    <span class="synonym-ghost" aria-hidden="true">{{ baseText }}</span>
     <ScrambleText :text="currentText" :scrambleSpeed="25" />
   </span>
 </template>
@@ -39,3 +42,16 @@ const resetText = () => {
   currentText.value = props.baseText;
 };
 </script>
+
+<style scoped>
+.synonym-reveal {
+  display: inline-grid;
+}
+.synonym-reveal > * {
+  grid-area: 1 / 1;
+}
+.synonym-ghost {
+  visibility: hidden;
+  white-space: pre;
+}
+</style>

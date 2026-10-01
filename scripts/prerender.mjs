@@ -19,7 +19,6 @@ const ROUTES = [
   '/skills',
   '/timeline',
   '/contact',
-  '/playground',
 ];
 
 // Simple static file server for the dist folder (SPA mode)
