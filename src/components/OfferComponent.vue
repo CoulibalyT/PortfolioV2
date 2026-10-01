@@ -13,6 +13,7 @@ import {
   OFFER_SEO as SEO,
   AUTOOMAT_URL,
 } from '@/data/offer.js'
+import OfferFinder from '@/components/OfferFinder.vue'
 
 // Pricing, phone and SEO copy live in src/data/offer.js (shared with scripts/inject-meta.mjs).
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.tenecoulibaly.fr'
@@ -48,24 +49,6 @@ const faqs = [
     a: `Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance (à partir de ${MAINTENANCE.essentiel} €/mois) ou des interventions à la demande (${HOURLY_RATE} €/h). Pas d'abonnement obligatoire.`,
   },
 ]
-
-// --- Calculator state ---
-const calc = ref({
-  pages: 1,
-  blog: false,
-  booking: false,
-  multilingual: false,
-  ecommerce: false,
-})
-const calcEstimate = computed(() => {
-  let base = PRICES.vitrine
-  if (calc.value.pages > 1) base += (calc.value.pages - 1) * 200
-  if (calc.value.blog) base += 300
-  if (calc.value.booking) base += 250
-  if (calc.value.multilingual) base += 400
-  if (calc.value.ecommerce) base += 800
-  return base
-})
 
 const mailtoUrl = computed(() => {
   const subject = encodeURIComponent('Projet de site web — demande de devis')
@@ -162,6 +145,9 @@ useHead({
           <a :href="mailtoUrl" class="inline-flex items-center gap-3 underline underline-offset-[6px] decoration-1 hover:no-underline transition w-fit">
             Premier appel gratuit (15 min) <span aria-hidden="true">→</span>
           </a>
+          <a href="#trouver" class="inline-flex items-center gap-3 opacity-50 hover:opacity-100 transition w-fit">
+            Trouver ma formule <span aria-hidden="true">↓</span>
+          </a>
           <a href="#packs" class="inline-flex items-center gap-3 opacity-50 hover:opacity-100 transition w-fit">
             Voir les tarifs <span aria-hidden="true">↓</span>
           </a>
@@ -177,6 +163,9 @@ useHead({
         </p>
       </div>
     </section>
+
+    <!-- ============================== GUIDED FINDER ============================== -->
+    <OfferFinder />
 
     <!-- ============================== PROBLEM ============================== -->
     <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
@@ -486,70 +475,6 @@ useHead({
             </p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============================== CALCULATOR ============================== -->
-    <section class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
-      <div class="max-w-3xl mx-auto fade-in-up">
-        <div class="mb-12 md:mb-16">
-          <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-6">Estimation rapide</p>
-          <h2 class="text-3xl md:text-5xl lg:text-6xl font-thin leading-[1.05]">
-            Combien ça coûte ?
-          </h2>
-          <p class="mt-6 text-base md:text-lg opacity-60 leading-relaxed">
-            Quelques questions pour avoir un ordre de grandeur. Le vrai devis reste gratuit et sur mesure.
-          </p>
-        </div>
-
-        <div class="space-y-10 mb-12">
-          <div>
-            <label class="flex items-baseline justify-between text-base md:text-lg mb-4">
-              <span>Combien de pages&nbsp;?</span>
-              <span class="text-sm opacity-50 font-mono">{{ calc.pages }}</span>
-            </label>
-            <input
-              v-model.number="calc.pages"
-              type="range"
-              min="1"
-              max="10"
-              class="w-full"
-              aria-label="Nombre de pages"
-            />
-            <div class="flex justify-between text-xs opacity-30 mt-2 font-mono">
-              <span>1</span>
-              <span>10</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-4">
-            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
-              <span class="text-base">Blog intégré</span>
-              <input v-model="calc.blog" type="checkbox" class="w-4 h-4" />
-            </label>
-            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
-              <span class="text-base">Réservation en ligne</span>
-              <input v-model="calc.booking" type="checkbox" class="w-4 h-4" />
-            </label>
-            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
-              <span class="text-base">Bilingue (FR + EN)</span>
-              <input v-model="calc.multilingual" type="checkbox" class="w-4 h-4" />
-            </label>
-            <label class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-800 cursor-pointer hover:opacity-100 opacity-80 transition">
-              <span class="text-base">Boutique en ligne</span>
-              <input v-model="calc.ecommerce" type="checkbox" class="w-4 h-4" />
-            </label>
-          </div>
-        </div>
-
-        <div class="border-t border-gray-900 dark:border-gray-100 pt-10 flex items-baseline justify-between">
-          <span class="text-xs uppercase tracking-[0.25em] opacity-50">Estimation HT</span>
-          <span class="text-5xl md:text-7xl font-thin">{{ calcEstimate }}€</span>
-        </div>
-
-        <a :href="mailtoUrl" class="inline-flex items-center gap-3 mt-10 underline underline-offset-4 hover:no-underline">
-          Obtenir un devis précis <span aria-hidden="true">→</span>
-        </a>
       </div>
     </section>
 
