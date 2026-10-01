@@ -26,6 +26,13 @@ export const OFFER_INSTALLMENTS = {
   business: 500,
 }
 
+// "À partir de" prices for custom (Premium) projects, shown by the guided finder.
+export const OFFER_CUSTOM_FROM = {
+  shop: 2500,
+  booking: 2500, // booking with online payment, client accounts or several calendars
+  app: 5000,
+}
+
 // Monthly maintenance & hosting plans (€ / month, no commitment).
 export const OFFER_MAINTENANCE = {
   essentiel: 29,
