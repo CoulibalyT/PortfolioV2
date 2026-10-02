@@ -7,7 +7,7 @@ useSeo('home', '/')
 
 <template>
   <main class="w-full flex flex-col items-center gap-6 md:gap-8">
-    <!-- Entrée secondaire vers l'offre freelance (/offre, FR-only) pour les commerçants et artisans -->
+    <!-- Entrée secondaire vers l'offre freelance (/offre, FR-only) (tous publics : indépendants, commerces, associations, créateurs) -->
     <div class="w-full max-w-3xl px-4 md:px-0 text-left">
       <router-link to="/offre" class="offer-banner text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-100">
         <span>{{ $t('offer_banner') }}</span>

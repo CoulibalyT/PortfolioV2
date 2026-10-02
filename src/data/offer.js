@@ -11,7 +11,7 @@ export const OFFER_PHONE = {
 }
 export const OFFER_PHONE_HREF = `tel:${OFFER_PHONE.e164}`
 
-const WHATSAPP_MESSAGE = 'Bonjour, je suis intéressé(e) par un site web pour mon commerce'
+const WHATSAPP_MESSAGE = 'Bonjour, je suis intéressé(e) par un site web pour mon activité'
 export const OFFER_WHATSAPP_URL =
   `https://wa.me/${OFFER_PHONE.e164.replace('+', '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
@@ -47,10 +47,10 @@ export const AUTOOMAT_URL = 'https://www.autoomat.fr'
 // SEO — shared by the client-side useHead() and the static HTML written at build time.
 export const OFFER_SEO = {
   siteName: 'Tene Coulibaly — Création de sites web',
-  title: 'Création de sites web pour commerces et artisans à Paris — Tene Coulibaly',
-  socialTitle: 'Création de sites web pour commerces et artisans — Tene Coulibaly',
+  title: 'Création de sites web pour indépendants, commerces et artisans à Paris — Tene Coulibaly',
+  socialTitle: 'Création de sites web pour indépendants, commerces et artisans — Tene Coulibaly',
   description:
-    `Développeuse web freelance à Paris et Seine-Saint-Denis. Création de site internet pour commerces et artisans : site vitrine dès ${OFFER_PRICES.vitrine} €, RDV en ligne, SEO local.`,
+    `Développeuse web freelance à Paris et Seine-Saint-Denis. Création de site internet pour indépendants, commerces, artisans et associations : site vitrine dès ${OFFER_PRICES.vitrine} €, RDV en ligne, SEO local.`,
   keywords: [
     'création site web artisan Paris',
     'site internet commerce Île-de-France',
@@ -58,6 +58,9 @@ export const OFFER_SEO = {
     'création site vitrine Montreuil',
     'site web coiffeur Paris',
     'site web restaurant Paris',
+    'site web indépendant Paris',
+    'site internet association Seine-Saint-Denis',
+    'site web auteur artiste',
     'développeuse web freelance Les Lilas',
     'développeuse web indépendante Paris',
     'prise de rendez-vous en ligne',

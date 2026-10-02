@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: "Je n'y connais rien en informatique, c'est un problème ?",
-    a: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre commerce, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir.",
+    a: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre activité, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir.",
   },
   {
     q: "Est-ce que je pourrai modifier mon site moi-même ?",
@@ -133,12 +133,12 @@ useHead({
           Création de sites web · Paris
         </p>
         <h1 class="font-thin tracking-tight leading-[0.95] text-5xl sm:text-6xl md:text-8xl lg:text-[8.5rem]">
-          Votre commerce<br>
+          Votre activité<br>
           mérite d'exister<br>
           en ligne.
         </h1>
         <p class="mt-12 md:mt-20 max-w-2xl text-lg md:text-2xl font-thin leading-relaxed opacity-70">
-          Je crée des sites modernes, rapides et optimisés pour les commerces et artisans.
+          Je crée des sites modernes, rapides et optimisés pour les indépendants, commerces, artisans, associations et créateurs.
           De la maquette à la mise en ligne, je m'occupe de tout.
         </p>
         <div class="mt-12 md:mt-16 flex flex-col sm:flex-row gap-6 md:gap-10 text-base md:text-lg">
@@ -190,7 +190,7 @@ useHead({
             <span class="md:col-span-2 text-xs md:text-sm uppercase tracking-[0.25em] opacity-30 font-mono pt-1">02</span>
             <h3 class="md:col-span-4 text-2xl md:text-3xl font-thin">Un site qui date</h3>
             <p class="md:col-span-6 text-base md:text-lg opacity-60 leading-relaxed">
-              Votre site existant ne s'affiche pas sur mobile, charge en 8 secondes, et donne une image vieillotte de votre commerce.
+              Votre site existant ne s'affiche pas sur mobile, charge en 8 secondes, et donne une image vieillotte de votre activité.
             </p>
           </li>
           <li class="fade-in-up grid md:grid-cols-12 gap-6 md:gap-8 py-8 md:py-12">
@@ -204,7 +204,7 @@ useHead({
             <span class="md:col-span-2 text-xs md:text-sm uppercase tracking-[0.25em] opacity-30 font-mono pt-1">04</span>
             <h3 class="md:col-span-4 text-2xl md:text-3xl font-thin">Pas le temps pour ça</h3>
             <p class="md:col-span-6 text-base md:text-lg opacity-60 leading-relaxed">
-              Vous avez un commerce à faire tourner. WordPress, hébergement, HTML — c'est pas votre métier.
+              Vous avez une activité à faire tourner. WordPress, hébergement, HTML — c'est pas votre métier.
             </p>
           </li>
         </ol>
