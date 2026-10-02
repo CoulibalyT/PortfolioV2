@@ -11,9 +11,12 @@ import {
   OFFER_MAINTENANCE as MAINTENANCE,
   OFFER_HOURLY_RATE as HOURLY_RATE,
   OFFER_SEO as SEO,
+  OFFER_FAQ_TOP as FAQ_TOP,
   AUTOOMAT_URL,
 } from '@/data/offer.js'
 import OfferFinder from '@/components/OfferFinder.vue'
+import { OFFER_PAGES, OFFER_PAGE_PATH } from '@/data/offerPages.js'
+import '@/assets/offer-page.css'
 
 // Pricing, phone and SEO copy live in src/data/offer.js (shared with scripts/inject-meta.mjs).
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.tenecoulibaly.fr'
@@ -24,6 +27,7 @@ const toggleFaq = (i) => {
   openFaqIndex.value = openFaqIndex.value === i ? null : i
 }
 const faqs = [
+  ...FAQ_TOP,
   {
     q: "Combien de temps ça prend de A à Z ?",
     a: "Entre 2 semaines (Pack Vitrine) et 4 semaines (Pack Business). Le Pack Premium dépend du périmètre, on en discute lors du premier appel.",
@@ -516,6 +520,20 @@ useHead({
       </div>
     </section>
 
+    <!-- ============================== BY TRADE ============================== -->
+    <nav aria-label="Offres par métier" class="px-6 md:px-12 lg:px-20 py-24 md:py-32 border-t border-gray-100 dark:border-gray-900">
+      <div class="max-w-7xl mx-auto fade-in-up grid md:grid-cols-12 gap-8">
+        <p class="md:col-span-3 text-xs uppercase tracking-[0.25em] opacity-50 pt-2">Par métier</p>
+        <ul class="md:col-span-9 divide-y divide-gray-100 dark:divide-gray-900">
+          <li v-for="p in OFFER_PAGES" :key="p.slug">
+            <router-link :to="OFFER_PAGE_PATH(p.slug)" class="py-5 flex items-center justify-between gap-6 text-xl md:text-3xl font-thin opacity-70 hover:opacity-100 transition">
+              <span>{{ p.label }}</span><span aria-hidden="true" class="opacity-30">→</span>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
     <!-- ============================== CONTACT ============================== -->
     <section id="contact" class="px-6 md:px-12 lg:px-20 py-24 md:py-40 border-t border-gray-100 dark:border-gray-900">
       <div class="max-w-4xl mx-auto text-center fade-in-up">
@@ -580,69 +598,6 @@ useHead({
     </nav>
   </div>
 </template>
-
-<style>
-/* Global overrides scoped to the offer landing page only. Can't use <style scoped>
-   because the rules need to win over base.css's top-level universal selector,
-   which sits outside any @layer and therefore wins over Tailwind v4's layered
-   utilities (mx-auto, margin shorthand, etc.). */
-body:has(.offer-page) {
-  overflow: auto !important;
-  height: auto !important;
-  min-height: 100vh;
-  scroll-behavior: smooth;
-}
-
-/* Red theme: base.css only overrides plain .bg-white / .dark:bg-black, not the
-   translucent header (bg-white/90) nor the black "Appeler" button of the call bar. */
-:root.red-theme .offer-page header {
-  background-color: rgba(133, 44, 44, 0.9);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-:root.red-theme .offer-call-bar {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-:root.red-theme .offer-call-bar a:first-child {
-  background-color: #fff;
-  color: #852C2C;
-}
-
-/* Restore horizontal-centering utilities — base.css's `* { margin: 0 }` at top
-   level beats Tailwind v4's layered .mx-auto. */
-.offer-page .mx-auto,
-.offer-page [class*="mx-auto"] {
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-/* Restore vertical margin utilities (mb-*, mt-*, my-*) inside offer-page —
-   same reason as above. Targets common ones used in this component. */
-.offer-page .mb-2 { margin-bottom: 0.5rem !important; }
-.offer-page .mb-3 { margin-bottom: 0.75rem !important; }
-.offer-page .mb-4 { margin-bottom: 1rem !important; }
-.offer-page .mb-6 { margin-bottom: 1.5rem !important; }
-.offer-page .mb-8 { margin-bottom: 2rem !important; }
-.offer-page .mb-10 { margin-bottom: 2.5rem !important; }
-.offer-page .mb-12 { margin-bottom: 3rem !important; }
-.offer-page .mb-16 { margin-bottom: 4rem !important; }
-.offer-page .mb-24 { margin-bottom: 6rem !important; }
-.offer-page .mt-2 { margin-top: 0.5rem !important; }
-.offer-page .mt-6 { margin-top: 1.5rem !important; }
-.offer-page .mt-10 { margin-top: 2.5rem !important; }
-.offer-page .mt-12 { margin-top: 3rem !important; }
-.offer-page .mt-16 { margin-top: 4rem !important; }
-.offer-page .mt-20 { margin-top: 5rem !important; }
-.offer-page .ml-1 { margin-left: 0.25rem !important; }
-@media (min-width: 768px) {
-  .offer-page .md\:mb-8 { margin-bottom: 2rem !important; }
-  .offer-page .md\:mb-12 { margin-bottom: 3rem !important; }
-  .offer-page .md\:mb-16 { margin-bottom: 4rem !important; }
-  .offer-page .md\:mb-24 { margin-bottom: 6rem !important; }
-  .offer-page .md\:mt-16 { margin-top: 4rem !important; }
-  .offer-page .md\:mt-20 { margin-top: 5rem !important; }
-  .offer-page .md\:mt-32 { margin-top: 8rem !important; }
-}
-</style>
 
 <style scoped>
 .offer-page {

@@ -67,3 +67,21 @@ export const OFFER_SEO = {
     'SEO local',
   ].join(', '),
 }
+
+// Answer-first FAQ entries shown at the top of the /offre FAQ. Shared by the page
+// (OfferComponent.vue) and the build-time static HTML + FAQPage JSON-LD (inject-meta.mjs),
+// so search engines and AI assistants read the same short, factual answers.
+export const OFFER_FAQ_TOP = [
+  {
+    q: 'Combien coûte la création d’un site web ?',
+    a: `Un site vitrine démarre à ${OFFER_PRICES.vitrine} € (ou ${OFFER_INSTALLMENTS.count} × ${OFFER_INSTALLMENTS.vitrine} € sans frais). Un site de plusieurs pages avec blog et prise de rendez-vous démarre à ${OFFER_PRICES.business} € (ou ${OFFER_INSTALLMENTS.count} × ${OFFER_INSTALLMENTS.business} €). Une boutique en ligne ou une réservation avec paiement démarre à ${OFFER_CUSTOM_FROM.shop} €, une application sur mesure à ${OFFER_CUSTOM_FROM.app} €. La maintenance et l’hébergement sont à partir de ${OFFER_MAINTENANCE.essentiel} € par mois, sans engagement.`,
+  },
+  {
+    q: 'Pour qui créez-vous des sites web ?',
+    a: 'Pour toute activité qui veut être trouvée et contactée en ligne : commerces, artisans, indépendants et professions libérales, associations, auteurs, artistes et créateurs. Le projet peut être un site vitrine, une boutique en ligne, un système de réservation ou une application sur mesure.',
+  },
+  {
+    q: 'Travaillez-vous uniquement à Paris ?',
+    a: 'Non. Je suis basée à Paris et en Seine-Saint-Denis et je travaille avec des clients de toute l’Île-de-France. Tout le projet peut aussi se faire à distance (appel, visio, validation en ligne), donc je travaille avec des clients partout en France.',
+  },
+]
