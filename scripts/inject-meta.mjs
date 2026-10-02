@@ -18,8 +18,10 @@ import {
   OFFER_MAINTENANCE,
   OFFER_HOURLY_RATE,
   OFFER_SEO,
+  OFFER_FAQ_TOP,
   AUTOOMAT_URL,
 } from '../src/data/offer.js';
+import { OFFER_PAGES, OFFER_PAGE_PATH, offerPagePack } from '../src/data/offerPages.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
@@ -96,6 +98,8 @@ const routes = [
           <li>2023 - 2025 : Concepteur Développeur d'Applications (Bac +3) — ETNA</li>
           <li>2021 - 2023 : Développeuse Web (Bac +2) — Epitech</li>
         </ul>
+        <h2>Création de sites web (freelance)</h2>
+        <p>Je crée aussi des sites web pour indépendants, commerces, artisans, associations et créateurs, à Paris, en Île-de-France et à distance : site vitrine dès ${OFFER_PRICES.vitrine} €, site complet dès ${OFFER_PRICES.business} €, boutique en ligne et application sur mesure sur devis. <a href="/offre">Voir mes offres de création de site web</a></p>
         <h2>Contact</h2>
         <p>Email : contact@tenecoulibaly.fr | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
       </main>`,
@@ -192,6 +196,7 @@ const routes = [
         <p>Sans engagement, résiliable à tout moment. Hébergement inclus la première année.</p>
         <h2>Pour qui</h2>
         <p>Coiffeurs, garages, restaurants, boutiques, artisans BTP, professions libérales, mais aussi auteurs, artistes, coachs, formateurs et associations. Toute activité qui veut être trouvée sur Google par ses futurs clients.</p>
+        <ul>${OFFER_PAGES.map(p => `<li><a href="${OFFER_PAGE_PATH(p.slug)}">${escapeHtml(p.h1)}</a></li>`).join('')}</ul>
         <h2>Cas client — Autoomat (garage à Ivry-sur-Seine)</h2>
         <p>Site moderne en Next.js avec SEO local, système de prise de RDV en ligne via Calendly, blog avec articles SEO et API plaque d'immatriculation intégrée pour des devis automatiques. <a href="${AUTOOMAT_URL}" rel="noopener">Voir le site Autoomat</a></p>
         <img src="/images/offre/autoomat-desktop.webp" alt="Site Autoomat sur ordinateur : page d'accueil du garage de carrosserie à Ivry-sur-Seine" loading="lazy" width="1440" height="900">
@@ -203,6 +208,8 @@ const routes = [
           <li>Développement avec suivi</li>
           <li>Mise en ligne + formation</li>
         </ol>
+        <h2>Questions fréquentes</h2>
+        ${OFFER_FAQ_TOP.map(f => `<h3>${escapeHtml(f.q)}</h3><p>${escapeHtml(f.a)}</p>`).join('')}
         <h2>Contact</h2>
         <p>Téléphone : <a href="${OFFER_PHONE_HREF}">${OFFER_PHONE.display}</a> | <a href="${escapeHtml(OFFER_WHATSAPP_URL)}" rel="noopener">WhatsApp</a> | Email : <a href="mailto:${OFFER_EMAIL}">${OFFER_EMAIL}</a>. Auto-entrepreneuse, TVA non applicable (art. 293 B du CGI).</p>
       </main>`,
@@ -373,7 +380,41 @@ const enProjectRoutes = projectsData.map(project => ({
   frPath: `/projects/${project.folder}`,
 }));
 
-const allRoutes = [...routes, ...projectRoutes, ...enRoutes, ...enProjectRoutes];
+// One static page per trade (/offre/<slug>) — copy comes from src/data/offerPages.js (FR-only)
+const nicheRoutes = OFFER_PAGES.map(page => {
+  const pack = offerPagePack(page);
+  return {
+    path: OFFER_PAGE_PATH(page.slug),
+    title: page.title,
+    desc: page.description,
+    siteName: OFFER_SEO.siteName,
+    socialTitle: page.title,
+    content: `
+      <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
+        <nav><a href="/">Accueil</a> &rsaquo; <a href="/offre">Création de sites web</a> &rsaquo; ${escapeHtml(page.label)}</nav>
+        <h1>${escapeHtml(page.h1)}</h1>
+        <p>${escapeHtml(page.intro)}</p>
+        <h2>Ce que votre site doit faire</h2>
+        ${page.needs.map(n => `<h3>${escapeHtml(n.t)}</h3><p>${escapeHtml(n.d)}</p>`).join('')}
+        <h2>Ce que je mets en place</h2>
+        <ul>${page.includes.map(i => `<li>${escapeHtml(i)}</li>`).join('')}</ul>
+        <h2>Formule conseillée : ${pack.name}, à partir de ${pack.price} €</h2>
+        <p>Ou ${OFFER_INSTALLMENTS.count} × ${pack.installment} € sans frais. ${escapeHtml(page.packWhy)} <a href="/offre">Voir toutes les formules et les tarifs</a></p>
+        ${page.caseStudy ? `<h2>Cas client — Autoomat, carrosserie à Ivry-sur-Seine</h2><p>Parcours sinistre guidé, prise de rendez-vous en ligne et devis avec identification du véhicule par sa plaque d'immatriculation. <a href="${AUTOOMAT_URL}" rel="noopener">Voir le site Autoomat</a></p>` : ''}
+        <h2>Questions fréquentes</h2>
+        ${page.faq.map(f => `<h3>${escapeHtml(f.q)}</h3><p>${escapeHtml(f.a)}</p>`).join('')}
+        <h2>Aussi pour</h2>
+        <ul>${OFFER_PAGES.filter(p => p.slug !== page.slug).map(p => `<li><a href="${OFFER_PAGE_PATH(p.slug)}">${escapeHtml(p.h1)}</a></li>`).join('')}</ul>
+        <h2>Contact</h2>
+        <p>Téléphone : <a href="${OFFER_PHONE_HREF}">${OFFER_PHONE.display}</a> | Email : <a href="mailto:${OFFER_EMAIL}">${OFFER_EMAIL}</a>. Premier appel de 15 minutes gratuit et sans engagement.</p>
+      </main>`,
+    niche: page,
+    locale: 'fr',
+    frPath: null,
+  };
+});
+
+const allRoutes = [...routes, ...nicheRoutes, ...projectRoutes, ...enRoutes, ...enProjectRoutes];
 
 const baseHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
 
@@ -480,7 +521,10 @@ for (const route of allRoutes) {
     const homeUrl = isEn ? `${SITE}/en` : SITE;
     const projectsUrl = isEn ? `${SITE}/en/projects` : `${SITE}/projects`;
     const items = [{ '@type': 'ListItem', position: 1, name: homeName, item: homeUrl }];
-    if (route.project) {
+    if (route.niche) {
+      items.push({ '@type': 'ListItem', position: 2, name: 'Création de sites web', item: `${SITE}/offre` });
+      items.push({ '@type': 'ListItem', position: 3, name: route.niche.label, item: url });
+    } else if (route.project) {
       items.push({ '@type': 'ListItem', position: 2, name: projectsName, item: projectsUrl });
       items.push({ '@type': 'ListItem', position: 3, name: route.project.name, item: url });
     } else {
@@ -510,6 +554,7 @@ for (const route of allRoutes) {
         { '@type': 'City', name: 'Paris' },
         { '@type': 'AdministrativeArea', name: 'Seine-Saint-Denis' },
         { '@type': 'AdministrativeArea', name: 'Île-de-France' },
+        { '@type': 'Country', name: 'France' },
       ],
       priceRange: `À partir de ${OFFER_PRICES.vitrine} €`,
       hasOfferCatalog: {
@@ -529,6 +574,7 @@ for (const route of allRoutes) {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
+        ...OFFER_FAQ_TOP.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
         { '@type': 'Question', name: "Combien de temps ça prend de A à Z ?", acceptedAnswer: { '@type': 'Answer', text: "Entre 2 semaines (Pack Vitrine) et 4 semaines (Pack Business). Le Pack Premium dépend du périmètre, on en discute lors du premier appel." } },
         { '@type': 'Question', name: "Je n'y connais rien en informatique, c'est un problème ?", acceptedAnswer: { '@type': 'Answer', text: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre activité, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir." } },
         { '@type': 'Question', name: "Est-ce que je pourrai modifier mon site moi-même ?", acceptedAnswer: { '@type': 'Answer', text: "Oui. Selon le pack, je vous mets en place une interface simple (style Notion ou Strapi) pour modifier vos textes, ajouter des photos ou un article de blog. Je vous forme à la livraison." } },
@@ -536,6 +582,33 @@ for (const route of allRoutes) {
         { '@type': 'Question', name: "C'est quoi le SEO dont tu parles ?", acceptedAnswer: { '@type': 'Answer', text: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Paris 12 ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local." } },
         { '@type': 'Question', name: "Et si je veux des modifications après la livraison ?", acceptedAnswer: { '@type': 'Answer', text: `Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance (à partir de ${OFFER_MAINTENANCE.essentiel} €/mois) ou des interventions à la demande (${OFFER_HOURLY_RATE} €/h). Pas d'abonnement obligatoire.` } },
       ],
+    });
+  }
+
+  // Service + FAQ schemas for each trade page (/offre/<slug>)
+  if (route.niche) {
+    const page = route.niche;
+    const pack = offerPagePack(page);
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${url}#service`,
+      name: page.h1,
+      serviceType: 'Création de site web',
+      description: page.description,
+      url,
+      provider: { '@type': 'ProfessionalService', '@id': `${SITE}/offre#service`, name: 'Tene Coulibaly — Création de sites web' },
+      areaServed: [
+        { '@type': 'City', name: 'Paris' },
+        { '@type': 'AdministrativeArea', name: 'Île-de-France' },
+        { '@type': 'Country', name: 'France' },
+      ],
+      offers: { '@type': 'Offer', name: pack.name, price: pack.price, priceCurrency: 'EUR', description: `À partir de ${pack.price} €` },
+    });
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: page.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
     });
   }
 
@@ -623,6 +696,7 @@ const sitemapEntries = allRoutes.map(r => {
   if (basePath === '/') priority = '1.0';
   else if (basePath === '/projects') priority = '0.9';
   else if (basePath === '/offre') priority = '0.95';
+  else if (basePath.startsWith('/offre/')) priority = '0.85';
   else if (r.project) priority = '0.7';
   else if (basePath === '/contact') priority = '0.6';
   // EN pages slightly lower than FR canonical (signals FR is primary)

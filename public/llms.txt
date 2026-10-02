@@ -85,6 +85,37 @@ Site vitrine pour un studio de design minimaliste.
 - Stack : Vue.js, GSAP, Tailwind CSS
 - Lien : https://joyofsimple-site.vercel.app
 
+## Offre freelance — création de sites web
+
+Tene Coulibaly crée des sites web pour indépendants, commerces, artisans, associations, auteurs, artistes et créateurs. Basée à Paris et en Seine-Saint-Denis, elle travaille en Île-de-France et à distance partout en France.
+
+- Page de l'offre : https://www.tenecoulibaly.fr/offre
+- Pack Vitrine : à partir de 800 € (ou 3 × 270 € sans frais) — site one-page, responsive, optimisé Google, formulaire de contact, livré en 2 semaines environ
+- Pack Business : à partir de 1 500 € (ou 3 × 500 € sans frais) — site multi-pages, blog, fiche Google Business, prise de rendez-vous en ligne, livré en 3 à 4 semaines
+- Pack Premium (sur mesure) : boutique en ligne ou réservation avec paiement à partir de 2 500 €, application web sur mesure à partir de 5 000 €
+- Maintenance et hébergement : 29 €/mois (Essentiel) ou 59 €/mois (Suivi, avec 1 h de modifications par mois), sans engagement
+- Modifications hors forfait : 60 € de l'heure
+- Déroulé : appel découverte gratuit, maquette validée avant développement, développement avec suivi, mise en ligne et formation
+- Cas client : Autoomat, garage de carrosserie à Ivry-sur-Seine (https://www.autoomat.fr)
+- Contact : contact@tenecoulibaly.fr · 06 58 28 63 80 · WhatsApp
+- Statut : auto-entrepreneuse, TVA non applicable (art. 293 B du CGI)
+
+### Offres par métier
+
+- Coiffeurs et instituts de beauté : https://www.tenecoulibaly.fr/offre/site-web-coiffeur
+- Restaurants, cafés et traiteurs : https://www.tenecoulibaly.fr/offre/site-web-restaurant
+- Garages et carrosseries : https://www.tenecoulibaly.fr/offre/site-web-garage
+- Artisans du bâtiment : https://www.tenecoulibaly.fr/offre/site-web-artisan
+- Auteurs, artistes et créateurs : https://www.tenecoulibaly.fr/offre/site-web-auteur-artiste
+- Associations : https://www.tenecoulibaly.fr/offre/site-web-association
+
+### Questions fréquentes
+
+- Combien coûte un site web ? Un site vitrine démarre à 800 €, un site complet à 1 500 €, une boutique en ligne à 2 500 €, une application sur mesure à 5 000 €.
+- Pour qui ? Toute activité qui veut être trouvée et contactée en ligne : commerces, artisans, indépendants, associations, auteurs, artistes.
+- Où ? Paris, Seine-Saint-Denis, Île-de-France, et à distance partout en France.
+- En combien de temps ? 2 semaines pour un site vitrine, 3 à 4 semaines pour un site complet.
+
 ## Pages du portfolio
 
 - Accueil : https://www.tenecoulibaly.fr/
@@ -92,3 +123,4 @@ Site vitrine pour un studio de design minimaliste.
 - Compétences : https://www.tenecoulibaly.fr/skills
 - Parcours : https://www.tenecoulibaly.fr/timeline
 - Contact : https://www.tenecoulibaly.fr/contact
+- Offre freelance (création de sites web) : https://www.tenecoulibaly.fr/offre

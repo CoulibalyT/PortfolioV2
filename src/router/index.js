@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { findOfferPage } from '@/data/offerPages.js'
 
 const HomeView = () => import('@/views/HomeView.vue')
 const ProjectView = () => import('@/views/ProjectView.vue')
@@ -6,6 +7,7 @@ const SkillsView = () => import('@/views/SkillsView.vue')
 const TimelineView = () => import('@/views/TimelineView.vue')
 const ContactView = () => import('@/views/ContactView.vue')
 const OfferView = () => import('@/views/OfferView.vue')
+const OfferNicheView = () => import('@/views/OfferNicheView.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +20,17 @@ const router = createRouter({
     { path: '/timeline', name: 'timeline', component: TimelineView, meta: { locale: 'fr' } },
     { path: '/contact', name: 'contact', component: ContactView, meta: { locale: 'fr' } },
     { path: '/offre', name: 'offer', component: OfferView, meta: { locale: 'fr' } },
+    {
+      // One landing page per trade — slugs come from src/data/offerPages.js
+      path: '/offre/:slug',
+      name: 'offer-niche',
+      component: OfferNicheView,
+      meta: { locale: 'fr' },
+      beforeEnter: (to) =>
+        findOfferPage(to.params.slug)
+          ? true
+          : { name: 'not-found', params: { pathMatch: to.path.slice(1).split('/') }, replace: true },
+    },
 
     // English routes (same components, locale meta drives i18n switch)
     { path: '/en', name: 'me-en', component: HomeView, meta: { locale: 'en' } },
