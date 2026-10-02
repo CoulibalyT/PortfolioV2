@@ -3,6 +3,8 @@
 // The next step is option.next (single choice) or step.next; 'result' ends the flow.
 // Edit the copy freely; keep the values, they drive recommendOffer() below.
 
+import { OFFER_PRICES, OFFER_CUSTOM_FROM } from './offer.js'
+
 export const FINDER_START = 'start'
 
 export const FINDER_STEPS = {
@@ -179,12 +181,23 @@ export const FINDER_STEPS = {
   },
   r_platform: {
     q: 'Il est fait avec quoi ?',
-    next: 'v_size',
+    next: 'r_kind',
     options: [
       { value: 'wordpress', label: 'WordPress' },
       { value: 'builder', label: 'Wix, Squarespace ou Shopify' },
       { value: 'custom', label: 'Développé sur mesure' },
       { value: 'unknown', label: 'Je ne sais pas' },
+    ],
+  },
+
+  // Routes a redesign to the right branch (a shop redo is not a showcase redo)
+  r_kind: {
+    q: 'Aujourd’hui, c’est surtout…',
+    options: [
+      { value: 'site', label: 'Un site de présentation', next: 'v_size' },
+      { value: 'shop', label: 'Une boutique en ligne', next: 's_catalog' },
+      { value: 'booking', label: 'Un site avec réservation', next: 'b_type' },
+      { value: 'app', label: 'Une application ou un espace client', next: 'a_who' },
     ],
   },
 
@@ -231,7 +244,8 @@ export const FINDER_STEPS = {
   },
 }
 
-// answers: { [stepId]: value | value[] } → { pack: 'vitrine' | 'business' | 'premium', from, reason, maintenance }
+// answers: { [stepId]: value | value[] } → { pack: 'vitrine' | 'business' | 'premium', from, price, reason, notes, maintenance }
+// price: starting price in € (null = fully on quote); notes: extra sentences driven by budget and timing
 // from: key of OFFER_CUSTOM_FROM for Premium projects that have a starting price (null = fully on quote)
 export function recommendOffer(answers) {
   const has = (step, v) => [].concat(answers[step] ?? []).includes(v)
@@ -240,7 +254,9 @@ export function recommendOffer(answers) {
   const kind =
     start === 'unsure'
       ? { contact: 'vitrine', buy: 'shop', book: 'booking', login: 'app' }[goal]
-      : start
+      : start === 'redo'
+        ? { site: 'vitrine', shop: 'shop', booking: 'booking', app: 'app' }[answers.r_kind] ?? 'vitrine'
+        : start
 
   let pack = 'vitrine'
   let from = null
@@ -262,14 +278,19 @@ export function recommendOffer(answers) {
       ? 'Le paiement en ligne, les espaces clients ou plusieurs agendas demandent une réservation sur mesure.'
       : 'Le pack Business intègre la prise de rendez-vous en ligne dans un site complet.'
   } else if (kind === 'landing') {
-    pack = 'vitrine'
-    reason = 'Une page unique, pensée pour convertir : c’est le format du pack Vitrine.'
+    if (answers.l_goal === 'sell') {
+      pack = 'business'
+      reason = 'Une page de vente avec paiement en ligne part du pack Business ; le devis s’ajuste selon le mode de paiement.'
+    } else {
+      pack = 'vitrine'
+      reason = 'Une page unique, pensée pour convertir : c’est le format du pack Vitrine.'
+    }
   } else {
     // showcase site or redesign
     const size = answers.v_size
     if (size === 'many') {
-      pack = 'premium'
-      reason = 'Un site de plus de 5 pages se construit sur mesure, selon vos contenus.'
+      pack = 'business'
+      reason = 'Au-delà de 5 pages, on part du pack Business et le devis s’ajuste au nombre de pages et à vos contenus.'
     } else if (size === 'few' || ['blog', 'booking', 'english'].some(v => has('v_extras', v))) {
       pack = 'business'
       reason = size === 'few'
@@ -279,9 +300,24 @@ export function recommendOffer(answers) {
       pack = 'vitrine'
       reason = 'Une page claire suffit pour être trouvé·e sur Google et contacté·e : le pack Vitrine.'
     }
-    if (start === 'redo') reason = 'Pour refaire votre site : ' + reason.charAt(0).toLowerCase() + reason.slice(1)
+  }
+  if (start === 'redo') reason = 'Pour refaire votre site : ' + reason.charAt(0).toLowerCase() + reason.slice(1)
+
+  const price = OFFER_PRICES[pack] ?? OFFER_CUSTOM_FROM[from] ?? null
+
+  const notes = []
+  const budgetMax = { lt1k: 1000, '1k3k': 3000, '3k8k': 8000 }[answers.budget]
+  if (price && budgetMax && budgetMax < price) {
+    notes.push('Votre budget est en dessous du prix de départ de cette formule. Parlons-en : on peut commencer par une première version plus simple, puis la faire évoluer.')
+  }
+  if (answers.timing === 'asap') {
+    notes.push({
+      vitrine: 'Moins d’un mois, c’est tenable : le pack Vitrine se livre en 2 semaines environ.',
+      business: 'Comptez 3 à 4 semaines : pour tenir moins d’un mois, il faut démarrer vite et avoir vos contenus prêts.',
+      premium: 'Moins d’un mois, c’est court pour un projet sur mesure : on peut livrer une première version, puis compléter.',
+    }[pack])
   }
 
   const maintenance = { self: 'essentiel', managed: 'suivi' }[answers.after] ?? null
-  return { pack, from, reason, maintenance }
+  return { pack, from, price, reason, notes, maintenance }
 }

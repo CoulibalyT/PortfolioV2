@@ -5,9 +5,6 @@ import {
   OFFER_EMAIL as EMAIL,
   OFFER_PHONE as PHONE,
   OFFER_PHONE_HREF as PHONE_HREF,
-  OFFER_WHATSAPP_URL as WHATSAPP_URL,
-  OFFER_PRICES as PRICES,
-  OFFER_CUSTOM_FROM as CUSTOM_FROM,
   OFFER_MAINTENANCE as MAINTENANCE,
 } from '@/data/offer.js'
 
@@ -23,10 +20,7 @@ const questionRef = ref(null)
 const step = computed(() => FINDER_STEPS[current.value])
 const answers = computed(() => Object.fromEntries(history.value.map(h => [h.id, h.value])))
 const result = computed(() => (current.value === 'result' ? recommendOffer(answers.value) : null))
-const startingPrice = computed(() => {
-  if (!result.value) return null
-  return PRICES[result.value.pack] ?? CUSTOM_FROM[result.value.from] ?? null
-})
+const startingPrice = computed(() => result.value?.price ?? null)
 
 function labelsFor(id, value) {
   const opts = FINDER_STEPS[id].options
@@ -75,11 +69,11 @@ function restart() {
   goTo(FINDER_START)
 }
 
-const mailtoUrl = computed(() => {
+// Plain-text recap of the answers, shared by the e-mail, WhatsApp and the copy button
+const summary = computed(() => {
   if (!result.value) return ''
   const lines = history.value.map(h => `- ${FINDER_STEPS[h.id].q} ${labelsFor(h.id, h.value)}`)
-  const subject = encodeURIComponent(`Projet de site web — ${PACK_NAMES[result.value.pack]}`)
-  const body = encodeURIComponent(
+  return (
     'Bonjour Tene,\n\n' +
     'J’ai répondu au questionnaire sur votre site. Voici mon projet :\n\n' +
     lines.join('\n') + '\n\n' +
@@ -88,6 +82,27 @@ const mailtoUrl = computed(() => {
     '- Ma ville : \n\n' +
     'Cordialement,\n'
   )
+})
+
+const whatsappUrl = computed(() =>
+  `https://wa.me/${PHONE.e164.replace('+', '')}?text=${encodeURIComponent(summary.value)}`
+)
+
+const copied = ref(false)
+async function copySummary() {
+  try {
+    await navigator.clipboard.writeText(`${summary.value}\n${EMAIL}`)
+    copied.value = true
+    setTimeout(() => (copied.value = false), 2500)
+  } catch {
+    copied.value = false
+  }
+}
+
+const mailtoUrl = computed(() => {
+  if (!result.value) return ''
+  const subject = encodeURIComponent(`Projet de site web — ${PACK_NAMES[result.value.pack]}`)
+  const body = encodeURIComponent(summary.value)
   return `mailto:${EMAIL}?subject=${subject}&body=${body}`
 })
 </script>
@@ -178,6 +193,7 @@ const mailtoUrl = computed(() => {
             Le devis précis dépend de votre projet, on le fait ensemble.
           </p>
           <p class="mt-6 max-w-2xl text-base md:text-lg opacity-70 leading-relaxed">{{ result.reason }}</p>
+          <p v-for="note in result.notes" :key="note" class="mt-4 max-w-2xl text-base md:text-lg opacity-70 leading-relaxed">{{ note }}</p>
           <p v-if="result.maintenance" class="mt-4 max-w-2xl text-base md:text-lg opacity-70 leading-relaxed">
             Après la mise en ligne : maintenance {{ MAINTENANCE_NAMES[result.maintenance] }},
             {{ MAINTENANCE[result.maintenance] }}&nbsp;€/mois, sans engagement.
@@ -190,11 +206,14 @@ const mailtoUrl = computed(() => {
             <a :href="PHONE_HREF" class="inline-flex items-center gap-3 opacity-60 hover:opacity-100 transition w-fit">
               <span class="sr-only">Appeler le</span> {{ PHONE.display }}
             </a>
-            <a :href="WHATSAPP_URL" target="_blank" rel="noopener" class="inline-flex items-center gap-3 opacity-60 hover:opacity-100 transition w-fit">
+            <a :href="whatsappUrl" target="_blank" rel="noopener" class="inline-flex items-center gap-3 opacity-60 hover:opacity-100 transition w-fit">
               WhatsApp <span aria-hidden="true">↗</span>
             </a>
+            <button type="button" class="inline-flex items-center gap-3 opacity-60 hover:opacity-100 transition w-fit" @click="copySummary">
+              <span aria-live="polite">{{ copied ? 'Réponses copiées ✓' : 'Copier mes réponses' }}</span>
+            </button>
           </div>
-          <p class="mt-4 text-sm opacity-50">Vos réponses sont déjà dans l’e-mail, vous n’avez rien à réécrire.</p>
+          <p class="mt-4 text-sm opacity-50">Vos réponses sont déjà dans l’e-mail et le message WhatsApp, vous n’avez rien à réécrire.</p>
 
           <button type="button" class="mt-10 text-sm opacity-50 hover:opacity-100 transition" @click="restart">
             <span aria-hidden="true">↺</span> Recommencer
