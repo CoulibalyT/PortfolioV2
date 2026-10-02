@@ -176,8 +176,8 @@ const routes = [
     socialTitle: OFFER_SEO.socialTitle,
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
-        <h1>Création de sites web pour commerces et artisans à Paris</h1>
-        <p>Je suis Tene Coulibaly, développeuse Full Stack freelance basée à Paris. Je crée des sites web sur mesure pour commerçants, artisans et entrepreneurs locaux de Paris, de Seine-Saint-Denis et d'Île-de-France qui veulent enfin exister en ligne.</p>
+        <h1>Création de sites web pour indépendants, commerces et artisans à Paris</h1>
+        <p>Je suis Tene Coulibaly, développeuse Full Stack freelance basée à Paris. Je crée des sites web sur mesure pour indépendants, commerçants, artisans, associations et créateurs de Paris, de Seine-Saint-Denis et d'Île-de-France qui veulent enfin exister en ligne.</p>
         <h2>Mes offres</h2>
         <ul>
           <li><strong>Pack Vitrine — à partir de ${OFFER_PRICES.vitrine}€</strong> (ou ${OFFER_INSTALLMENTS.count} × ${OFFER_INSTALLMENTS.vitrine} € sans frais) : site one-page moderne, responsive, SEO de base, formulaire de contact, livraison en 2 semaines.</li>
@@ -191,7 +191,7 @@ const routes = [
         </ul>
         <p>Sans engagement, résiliable à tout moment. Hébergement inclus la première année.</p>
         <h2>Pour qui</h2>
-        <p>Coiffeurs, garages, restaurants, boutiques, artisans BTP, professions libérales. Toute petite entreprise qui veut être trouvée sur Google par ses futurs clients locaux.</p>
+        <p>Coiffeurs, garages, restaurants, boutiques, artisans BTP, professions libérales, mais aussi auteurs, artistes, coachs, formateurs et associations. Toute activité qui veut être trouvée sur Google par ses futurs clients.</p>
         <h2>Cas client — Autoomat (garage à Ivry-sur-Seine)</h2>
         <p>Site moderne en Next.js avec SEO local, système de prise de RDV en ligne via Calendly, blog avec articles SEO et API plaque d'immatriculation intégrée pour des devis automatiques. <a href="${AUTOOMAT_URL}" rel="noopener">Voir le site Autoomat</a></p>
         <img src="/images/offre/autoomat-desktop.webp" alt="Site Autoomat sur ordinateur : page d'accueil du garage de carrosserie à Ivry-sur-Seine" loading="lazy" width="1440" height="900">
@@ -500,7 +500,7 @@ for (const route of allRoutes) {
       '@type': 'ProfessionalService',
       '@id': `${SITE}/offre#service`,
       name: 'Tene Coulibaly — Création de sites web',
-      description: "Création de sites web sur mesure pour commerçants, artisans et entrepreneurs locaux à Paris, en Seine-Saint-Denis et en Île-de-France.",
+      description: "Création de sites web sur mesure pour indépendants, commerçants, artisans, associations et créateurs à Paris, en Seine-Saint-Denis et en Île-de-France.",
       url: `${SITE}/offre`,
       image: `${SITE}/images/og-image.webp`,
       provider: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Tene Coulibaly' },
@@ -530,7 +530,7 @@ for (const route of allRoutes) {
       '@type': 'FAQPage',
       mainEntity: [
         { '@type': 'Question', name: "Combien de temps ça prend de A à Z ?", acceptedAnswer: { '@type': 'Answer', text: "Entre 2 semaines (Pack Vitrine) et 4 semaines (Pack Business). Le Pack Premium dépend du périmètre, on en discute lors du premier appel." } },
-        { '@type': 'Question', name: "Je n'y connais rien en informatique, c'est un problème ?", acceptedAnswer: { '@type': 'Answer', text: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre commerce, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir." } },
+        { '@type': 'Question', name: "Je n'y connais rien en informatique, c'est un problème ?", acceptedAnswer: { '@type': 'Answer', text: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre activité, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir." } },
         { '@type': 'Question', name: "Est-ce que je pourrai modifier mon site moi-même ?", acceptedAnswer: { '@type': 'Answer', text: "Oui. Selon le pack, je vous mets en place une interface simple (style Notion ou Strapi) pour modifier vos textes, ajouter des photos ou un article de blog. Je vous forme à la livraison." } },
         { '@type': 'Question', name: "Pourquoi pas juste une page Facebook ou Instagram ?", acceptedAnswer: { '@type': 'Answer', text: "Parce que vous n'êtes pas propriétaire de votre audience. Demain, Meta change l'algorithme ou ferme votre page — vous perdez tout. Un site web vous appartient, apparaît sur Google quand on cherche votre métier, et donne confiance." } },
         { '@type': 'Question', name: "C'est quoi le SEO dont tu parles ?", acceptedAnswer: { '@type': 'Answer', text: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Paris 12 ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local." } },

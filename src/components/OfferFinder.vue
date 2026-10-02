@@ -107,7 +107,7 @@ const mailtoUrl = computed(() => {
       </div>
 
       <!-- Answers so far: click one to change it -->
-      <ol v-if="trail.length" class="flex flex-wrap gap-2 mb-10 md:mb-14" aria-label="Vos réponses">
+      <ol v-if="trail.length" class="flex flex-wrap gap-2 mb-12 md:mb-16" aria-label="Vos réponses">
         <li v-for="(item, i) in trail" :key="item.id">
           <button
             type="button"
@@ -124,9 +124,9 @@ const mailtoUrl = computed(() => {
           <h3 ref="questionRef" tabindex="-1" class="text-2xl md:text-4xl font-thin leading-tight outline-none">
             {{ step.q }}
           </h3>
-          <p v-if="step.hint" class="mt-3 text-sm opacity-50">{{ step.hint }}</p>
+          <p v-if="step.hint" class="mt-4 text-sm opacity-50">{{ step.hint }}</p>
 
-          <div class="mt-8 md:mt-10 grid sm:grid-cols-2 gap-3 md:gap-4">
+          <div class="mt-10 md:mt-16 grid sm:grid-cols-2 gap-4 md:gap-6">
             <button
               v-for="option in step.options"
               :key="option.value"
@@ -149,7 +149,7 @@ const mailtoUrl = computed(() => {
             </button>
           </div>
 
-          <div class="mt-10 flex items-center gap-8 text-base">
+          <div class="mt-12 md:mt-14 flex items-center gap-8 text-base">
             <button
               v-if="step.multi"
               type="button"
