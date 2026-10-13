@@ -37,7 +37,7 @@
       </a>
 
       <a
-        href="/CV2-TeneCoulibaly.pdf"
+        href="/CV_Tene_Coulibaly.pdf"
         target="_blank"
         rel="noopener noreferrer"
         class="text-center flex gap-1 items-center justify-center relative group text-bold"
