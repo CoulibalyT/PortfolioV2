@@ -101,6 +101,7 @@
           </button>
         </div>
         <div class="info-panel-body" :class="{ collapsed: !infoPanelOpen }">
+          <p v-if="activeProject.role" class="info-panel-role">{{ activeProject.role[locale] || activeProject.role.fr }}</p>
           <p class="info-panel-desc">{{ activeProject.description?.[locale] || activeProject.description?.fr }}</p>
           <!-- Tech as categories (object) -->
           <div v-if="activeProject.tech && !Array.isArray(activeProject.tech)" class="info-panel-tech-grouped">
@@ -124,8 +125,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed, watch, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 
 const { locale } = useI18n()
+const route = useRoute()
+const router = useRouter()
 
 import { projects, projectCards, TILE_W, TILE_H, allImageCards } from '@/data/projects'
 const cards = projectCards
@@ -153,7 +157,22 @@ function setFilter(name) {
   px = 0
   py = 0
   render()
+  syncUrl()
 }
+
+// Each opened project gets its own shareable URL: /projects/<folder> (or /en/projects/<folder>)
+function syncUrl() {
+  const base = route.meta?.locale === 'en' ? '/en/projects' : '/projects'
+  const folder = projects.find(p => p.name === activeFilter.value)?.folder
+  const target = folder ? `${base}/${folder}` : base
+  if (route.path !== target) router.replace(target)
+}
+
+function filterFromUrl() {
+  const slug = route.params.slug
+  activeFilter.value = (slug && projects.find(p => p.folder === slug)?.name) || null
+}
+filterFromUrl()
 
 const { t } = useI18n()
 const hintText = computed(() => t('projects_nav.hint'))
@@ -1239,6 +1258,14 @@ html:not(.dark) .floating-nav a:hover {
   color: rgba(240, 236, 228, 0.5);
   border-left: 1px solid rgba(255, 255, 255, 0.15);
   padding-left: 8px;
+}
+
+.info-panel-role {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(240, 236, 228, 0.9);
+  margin-bottom: 6px;
 }
 
 .info-panel-desc {

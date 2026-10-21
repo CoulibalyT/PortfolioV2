@@ -6,6 +6,10 @@ export const projects = [
   {
     name: 'NØIR HAUS',
     folder: 'noir-haus',
+    role: {
+      fr: 'Projet personnel · conçu et développé seule',
+      en: 'Personal project · designed and built solo',
+    },
     cover: 'cover.webp',
     url: 'https://noir-inky.vercel.app/',
     urlLabel: 'Voir le défilé',
@@ -35,6 +39,10 @@ export const projects = [
   {
     name: 'Skywalk',
     folder: 'skywalk',
+    role: {
+      fr: 'Projet personnel · conçu et développé seule',
+      en: 'Personal project · designed and built solo',
+    },
     cover: 'cover.webp',
     url: 'https://skywalk-chi.vercel.app',
     urlLabel: 'Voir le site',
@@ -61,6 +69,10 @@ export const projects = [
   {
     name: 'Bento',
     folder: 'bento',
+    role: {
+      fr: 'Projet personnel · conçu et développé seule',
+      en: 'Personal project · designed and built solo',
+    },
     cover: 'cover.webp',
     url: 'https://bento-sable.vercel.app/',
     urlLabel: 'Voir le site',
@@ -109,12 +121,16 @@ export const projects = [
   {
     name: 'APOL (INSEAD)',
     folder: 'scholarship',
+    role: {
+      fr: 'INSEAD · alternance · équipe de 3 développeurs, 1 testeur et 1 chef de projet',
+      en: 'INSEAD · work-study · team of 3 developers, 1 tester and 1 project manager',
+    },
     cover: 'cover.webp',
     url: null,
     urlLabel: null,
     description: {
-      fr: 'Application web d\'entreprise développée pour INSEAD gérant le cycle complet des candidatures aux programmes diplômants (MBA, EMBA, MIM), les admissions et la gestion des bourses. 6 bundles Symfony, SSO ADFS, intégrations PeopleSoft, DocuSign, Kira Talent.',
-      en: 'Enterprise web application built for INSEAD managing the full application cycle for degree programs (MBA, EMBA, MIM), admissions and scholarship management. 6 Symfony bundles, ADFS SSO, PeopleSoft, DocuSign, Kira Talent integrations.',
+      fr: 'Application web d\'entreprise développée pour INSEAD gérant le cycle complet des candidatures aux programmes diplômants (MBA, EMBA, MIM), les admissions et la gestion des bourses. 6 bundles Symfony, SSO ADFS, intégrations PeopleSoft, DocuSign, Kira Talent. Dématérialisation du « Company Application Form » : d\'un formulaire Word à un processus 100 % digital. Refonte de l\'interface Scholarships (étudiant et administrateur).',
+      en: 'Enterprise web application built for INSEAD managing the full application cycle for degree programs (MBA, EMBA, MIM), admissions and scholarship management. 6 Symfony bundles, ADFS SSO, PeopleSoft, DocuSign, Kira Talent integrations. Digitised the « Company Application Form »: from a Word document to a 100% digital process. Redesigned the Scholarships interface (student and admin).',
     },
     tech: {
       'Backend': ['Symfony 6.4', 'PHP 8.1', 'Doctrine ORM', 'Twig', 'PHPUnit'],
@@ -133,8 +149,39 @@ export const projects = [
     ]
   },
   {
+    name: 'ePortal (INSEAD)',
+    folder: 'eportal',
+    role: {
+      fr: 'INSEAD · alternance · conçu et développé seule',
+      en: 'INSEAD · work-study · designed and built solo',
+    },
+    cover: 'cover.webp',
+    url: null,
+    urlLabel: null,
+    description: {
+      fr: 'Refonte complète du portail Executive Education d\'INSEAD, où entreprises (B2B) et particuliers (B2C) achètent leurs formations puis les suivent. Un portail construit page après page pendant des années, sans cohérence d\'ensemble : j\'ai redonné une charte unique aux deux parcours, sans toucher au fonctionnement. Composants réutilisables, une seule couleur d\'action par écran, migration écran par écran et documentation complète pour l\'équipe. Intégré à Salesforce.',
+      en: 'Full redesign of INSEAD\'s Executive Education portal, where organisations (B2B) and individuals (B2C) buy their programmes and then follow them. A portal built page by page over the years with no overall consistency: I brought both journeys under a single design system without changing how anything works. Reusable components, one action colour per screen, screen-by-screen migration and full documentation for the team. Integrated into Salesforce.',
+    },
+    tech: {
+      'Plateforme': ['Salesforce', 'Lightning Web Components', 'Aura Components', 'Apex'],
+      'Design': ['UI/UX', 'Charte INSEAD 2025'],
+    },
+    images: [
+      { file: 'b2b.webp',                     label: 'Accueil B2B' },
+      { file: 'mylearning-enrolled.webp',     label: 'My Learning' },
+      { file: 'mylearning-applications.webp', label: 'Candidatures' },
+      { file: 'mylearning-reco.webp',         label: 'Recommandations' },
+      { file: 'search-certificates.webp',     label: 'Recherche certificats' },
+      { file: 'search-advancing.webp',        label: 'Recherche programmes' },
+    ]
+  },
+  {
     name: 'Intake (INSEAD)',
     folder: 'intake',
+    role: {
+      fr: 'Mission freelance · conçue et développée seule',
+      en: 'Freelance project · designed and built solo',
+    },
     cover: 'cover.webp',
     url: null,
     urlLabel: null,
@@ -165,8 +212,12 @@ export const projects = [
   {
     name: 'Autoomat',
     folder: 'autoomat',
+    role: {
+      fr: 'Mission freelance pour un carrossier · conçue et développée seule',
+      en: 'Freelance project for a body shop · designed and built solo',
+    },
     cover: 'cover.webp',
-    url: 'https://autoomat.vercel.app',
+    url: 'https://www.autoomat.fr',
     urlLabel: 'Voir le site',
     description: {
       fr: 'Site vitrine & outil métier pour un carrossier. Parcours sinistre guidé multi-étapes, devis en ligne avec upload photos et identification véhicule par plaque (API SIV), gestion assurance avec Google Sheets et emails automatisés. SEO local optimisé.',

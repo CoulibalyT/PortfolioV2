@@ -124,11 +124,22 @@ body.red-theme {
 }
 
 
+/* Margin reset lives in Tailwind's base layer: unlayered, it beat every spacing
+   utility (mb-*, space-y-*, mx-auto…) because unlayered CSS always wins over layers. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+  }
+}
+
+/* Kept unlayered on purpose: the current typography was designed with this reset
+   overriding font-* utilities. Moving it into the layer would restyle the whole site. */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
   font-weight: normal;
 }
 

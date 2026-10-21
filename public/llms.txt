@@ -1,6 +1,6 @@
 # Tene Coulibaly
 
-> Développeuse Full Stack & Web Designer à Paris (Vue.js, React, Next.js, Node.js, NestJS, TypeScript, Three.js). Disponible dès octobre 2026 — CDI ou missions freelance.
+> Développeuse Full Stack & Web Designer à Paris (Vue.js, React, Next.js, Node.js, NestJS, TypeScript, Three.js). Disponible dès octobre 2026 — CDI, CDD ou freelance.
 
 ## À propos
 
@@ -11,12 +11,12 @@ Salut, moi c'est Tene. Développeuse Full Stack, diplômée d'un Master à l'ETN
 - Nom : Tene Coulibaly
 - Rôle : Développeuse Full Stack & Web Designer
 - Localisation : Paris, Île-de-France, France
-- Email : contact@tenecoulibaly.fr
+- Email : coulibaly.tene00@gmail.com
 - LinkedIn : https://www.linkedin.com/in/tenecoulibaly/
 - GitHub : https://github.com/CoulibalyT
 - npm : https://www.npmjs.com/package/portfolio-sync
 - Portfolio : https://www.tenecoulibaly.fr
-- Disponibilité : dès octobre 2026 — CDI ou missions freelance
+- Disponibilité : dès octobre 2026 — CDI, CDD ou freelance
 
 ## Stack technique
 
@@ -65,7 +65,7 @@ Application web d'entreprise gérant le cycle complet des candidatures aux progr
 ### Autoomat
 Site vitrine et outils métier pour carrossier automobile : parcours sinistre guidé, devis en ligne avec API SIV, gestion assurance.
 - Stack : Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Vercel, Google Sheets
-- Lien : https://autoomat.vercel.app
+- Lien : https://www.autoomat.fr
 
 ### Portfolio Sync
 Outil CLI Node.js de capture automatique de screenshots de projets web.

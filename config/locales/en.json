@@ -12,8 +12,12 @@
     "offer": "Services"
   },
   "offer_banner": "Shop owner or craftsperson? See my website packages (page in French)",
+  "home_cta": {
+    "cv": "Download my CV",
+    "contact": "Get in touch"
+  },
   "status": {
-    "available": "Available from October 2026 — permanent role or freelance",
+    "available": "Available from October 2026 — permanent, fixed-term or freelance role",
     "available_short": "Open to work"
   },
   "timeline_section": {
@@ -25,9 +29,9 @@
     "experience": [
       {
         "year": "April 2025 - Oct. 2026",
-        "title": "Full Stack Developer (Student)",
+        "title": "Full Stack Developer (work-study)",
         "place": "INSEAD",
-        "description": "Admission and scholarship platforms (APOL & Scholarships), across development and design. PHP/Symfony, UI/UX, Figma."
+        "description": "Admission and scholarship platforms (APOL & Scholarships) as part of a team, and a full solo redesign of the Executive Education portal (ePortal) on Salesforce. PHP/Symfony, Salesforce (LWC, Aura, Apex), UI/UX, Figma."
       },
       {
         "year": "2023 - 2025",
@@ -92,8 +96,8 @@
   "red": "red",
   "description": {
     "intro": "Hi, I’m Tene.",
-    "2intro":"I design and build web applications and immersive experiences (3D, animation), end to end: the server-side logic, the user-facing experience. To me, a good product is first a simple one.",
-    "3intro":"Full Stack · ETNA graduate (Master’s) · ex-INSEAD."
+    "2intro": "I design and build web applications and immersive experiences (3D, animation), end to end: the server-side logic, the user-facing experience. To me, a good product is first a simple one.",
+    "3intro": "Full Stack · 3 years in production · ETNA Master’s degree · ex-INSEAD."
   },
   "projects_section": {
     "title": "Selected Works",
@@ -111,6 +115,31 @@
     "lang_french": "French — Native",
     "lang_english": "English — Professional",
     "lang_soninke": "Soninké — Fluent",
+    "board": {
+      "tagline": "the tools, and what I build with them",
+      "stamp": "AVAILABLE FROM OCT. 2026 · PERMANENT, FIXED-TERM OR FREELANCE · ",
+      "moved": "moved to the stack",
+      "sticker": "creative coder",
+      "projects_link": "see the projects",
+      "polaroids": {
+        "noir": "NØIR HAUS — 3D runway",
+        "intake": "Intake — INSEAD, in production",
+        "skywalk": "Skywalk — 110+ endpoints",
+        "bento": "Bento — Prisma + PostgreSQL",
+        "apol": "APOL — INSEAD, Jenkins CI",
+        "daily": "Daily Quote — Flutter app",
+        "eportal": "ePortal — INSEAD, Salesforce"
+      }
+    },
+    "categories": {
+      "front": "front-end",
+      "back": "back-end & APIs",
+      "data": "databases",
+      "creative": "3D & motion",
+      "devops": "devops & shipping",
+      "mobile": "mobile & design",
+      "salesforce": "salesforce"
+    },
     "skills": {
       "agile": "Agile Methodology",
       "cicd": "CI/CD",
@@ -123,13 +152,13 @@
   },
   "contact_section": {
     "title": "Let's Connect",
-    "text": "Available from October 2026 — permanent role or freelance missions. Feel free to reach out to discuss opportunities or just to connect!",
+    "text": "Available from October 2026 — permanent, fixed-term or freelance role. Feel free to reach out to discuss opportunities or just to connect!",
     "cta": "Say Hello"
   },
   "seo": {
     "home": {
       "title": "Tene Coulibaly — Full Stack Developer & Web Designer in Paris",
-      "description": "Full Stack Developer & Web Designer in Paris. Web applications and immersive 3D experiences. Available from October 2026 — permanent role or freelance."
+      "description": "Full Stack Developer & Web Designer in Paris. Web applications and immersive 3D experiences. Available from October 2026 — permanent, fixed-term or freelance role."
     },
     "projects": {
       "title": "Projects — Tene Coulibaly",

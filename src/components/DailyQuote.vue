@@ -8,23 +8,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useDailyQuote } from '@/composables/useDailyQuote';
 
-const { tm, locale } = useI18n();
-
-const currentQuote = computed(() => {
-  const quotes = tm('quotes');
-  if (!quotes || quotes.length === 0) return { text: '', author: '' };
-  
-  // Use day of year to pick a consistent quote for the day
-  const today = new Date();
-  const start = new Date(today.getFullYear(), 0, 0);
-  const diff = today - start;
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-  
-  const index = dayOfYear % quotes.length;
-  return quotes[index];
-});
+const { currentQuote } = useDailyQuote();
 </script>

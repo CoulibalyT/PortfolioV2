@@ -1,16 +1,25 @@
 <script setup>
 import MeComponent from '../components/MeComponent.vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { useSeo } from '@/composables/useSeo'
 
 useSeo('home', '/')
+
+const route = useRoute()
+const contactPath = computed(() => (route.meta?.locale === 'en' ? '/en/contact' : '/contact'))
 </script>
 
 <template>
   <main class="w-full flex flex-col items-center gap-6 md:gap-8">
-    <!-- Entrée secondaire vers l'offre freelance (/offre, FR-only) (tous publics : indépendants, commerces, associations, créateurs) -->
-    <div class="w-full max-w-3xl px-4 md:px-0 text-left">
-      <router-link to="/offre" class="offer-banner text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-100">
-        <span>{{ $t('offer_banner') }}</span>
+    <!-- Accueil = recruteurs : CV et contact en premier. L'offre freelance reste dans la nav et le footer -->
+    <div class="w-full max-w-3xl px-4 md:px-0 flex flex-wrap gap-2 text-left">
+      <a href="/CV_Tene_Coulibaly.pdf" target="_blank" rel="noopener" class="offer-banner text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-100">
+        <span>{{ $t('home_cta.cv') }}</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+      <router-link :to="contactPath" class="offer-banner text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-100">
+        <span>{{ $t('home_cta.contact') }}</span>
         <span aria-hidden="true">→</span>
       </router-link>
     </div>

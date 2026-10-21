@@ -11,7 +11,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ALL = ['noir-haus', 'skywalk', 'bento', 'scholarship', 'intake', 'autoomat'];
+const ALL = ['noir-haus', 'skywalk', 'bento', 'scholarship', 'intake', 'autoomat', 'eportal'];
 const names = process.argv.slice(2).length ? process.argv.slice(2) : ALL;
 
 const browser = await puppeteer.launch({ headless: true, args: ['--allow-file-access-from-files'] });

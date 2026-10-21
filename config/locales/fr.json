@@ -12,18 +12,22 @@
     "offer": "Créer votre site"
   },
   "offer_banner": "Indépendant, commerçant, artisan, association ? Découvrez mes offres de création de site web",
+  "home_cta": {
+    "cv": "Télécharger mon CV",
+    "contact": "Me contacter"
+  },
   "timeline_section": {
     "title": "Mon Parcours",
-    "subtitle": "Le chemin qui m'a mené ici.",
+    "subtitle": "Le chemin qui m'a menée ici.",
     "filter_all": "Tout",
     "experience_title": "Expériences Professionnelles",
     "education_title": "Formations",
     "experience": [
       {
         "year": "Avril 2025 - Oct. 2026",
-        "title": "Développeuse Full Stack Étudiante",
+        "title": "Développeuse Full Stack Alternante",
         "place": "INSEAD",
-        "description": "Plateformes d'admission et de bourses (APOL & Scholarships), côté développement et design. PHP/Symfony, UI/UX, Figma."
+        "description": "Plateformes d'admission et de bourses (APOL & Scholarships) en équipe, et refonte complète du portail Executive Education (ePortal), conçue seule sur Salesforce. PHP/Symfony, Salesforce (LWC, Aura, Apex), UI/UX, Figma."
       },
       {
         "year": "2023 - 2025",
@@ -85,16 +89,16 @@
   },
   "dark": "sombre",
   "light": "claire",
-   "red": "rouge",
+  "red": "rouge",
   "status": {
-    "available": "Disponible dès octobre 2026 — CDI ou missions freelance",
+    "available": "Disponible dès octobre 2026 — CDI, CDD ou freelance",
     "available_short": "Disponible dès oct. 2026"
   },
-    "description": {
-      "intro": "Salut, moi c’est Tene.",
-      "2intro":"Je conçois et développe des applications web et des expériences immersives (3D, animation), de bout en bout : la logique côté serveur, l’expérience côté utilisateur. Pour moi, un bon produit est d’abord un produit simple.",
-      "3intro":"Full Stack · diplômée de l’ETNA (Master) · ex-INSEAD."
-    },
+  "description": {
+    "intro": "Salut, moi c’est Tene.",
+    "2intro": "Je conçois et développe des applications web et des expériences immersives (3D, animation), de bout en bout : la logique côté serveur, l’expérience côté utilisateur. Pour moi, un bon produit est d’abord un produit simple.",
+    "3intro": "Full Stack · 3 ans d’expérience en production · Master ETNA (Bac+5) · ex-INSEAD."
+  },
   "projects_section": {
     "title": "Projets Sélectionnés",
     "subtitle": "Une sélection de projets qui me passionnent.",
@@ -111,6 +115,31 @@
     "lang_french": "Français — Natif",
     "lang_english": "Anglais — Professionnel",
     "lang_soninke": "Soninké — Courant",
+    "board": {
+      "tagline": "les outils, et ce que j'en fais",
+      "stamp": "DISPONIBLE DÈS OCTOBRE 2026 · CDI, CDD OU FREELANCE · ",
+      "moved": "passé dans la stack",
+      "sticker": "creative coder",
+      "projects_link": "voir les projets",
+      "polaroids": {
+        "noir": "NØIR HAUS — défilé 3D",
+        "intake": "Intake — INSEAD, en prod",
+        "skywalk": "Skywalk — 110+ endpoints",
+        "bento": "Bento — Prisma + PostgreSQL",
+        "apol": "APOL — INSEAD, CI Jenkins",
+        "daily": "Daily Quote — app Flutter",
+        "eportal": "ePortal — INSEAD, Salesforce"
+      }
+    },
+    "categories": {
+      "front": "front-end",
+      "back": "back-end & API",
+      "data": "bases de données",
+      "creative": "3D & animation",
+      "devops": "devops & prod",
+      "mobile": "mobile & design",
+      "salesforce": "salesforce"
+    },
     "skills": {
       "agile": "Méthodologie Agile",
       "cicd": "CI/CD",
@@ -123,13 +152,13 @@
   },
   "contact_section": {
     "title": "Restons en contact",
-    "text": "Disponible dès octobre 2026 — CDI ou missions freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger !",
+    "text": "Disponible dès octobre 2026 — CDI, CDD ou freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger !",
     "cta": "Dire Bonjour"
   },
   "seo": {
     "home": {
       "title": "Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris",
-      "description": "Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès octobre 2026 — CDI ou missions freelance."
+      "description": "Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès octobre 2026 — CDI, CDD ou freelance."
     },
     "projects": {
       "title": "Projets — Tene Coulibaly",

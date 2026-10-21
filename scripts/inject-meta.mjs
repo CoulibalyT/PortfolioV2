@@ -67,12 +67,12 @@ const routes = [
   {
     path: '/',
     title: 'Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris',
-    desc: 'Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès octobre 2026 — CDI ou missions freelance.',
+    desc: 'Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès octobre 2026 — CDI, CDD ou freelance.',
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris</h1>
         <p>Salut, moi c'est Tene. Développeuse Full Stack, diplômée d'un Master à l'ETNA après une alternance chez INSEAD. Je construis des applications web du back-end à l'interface — propres, performantes, et pensées pour les utilisateurs.</p>
-        <p>Créer, optimiser, innover : trois mots qui guident ma vision du développement. Disponible dès octobre 2026 — CDI ou missions freelance.</p>
+        <p>Créer, optimiser, innover : trois mots qui guident ma vision du développement. Disponible dès octobre 2026 — CDI, CDD ou freelance.</p>
         <h2>Compétences</h2>
         <p>Vue.js, Nuxt, React, Next.js, TypeScript, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Tailwind CSS, GSAP, Figma, Git</p>
         <h2>Projets</h2>
@@ -101,7 +101,7 @@ const routes = [
         <h2>Création de sites web (freelance)</h2>
         <p>Je crée aussi des sites web pour indépendants, commerces, artisans, associations et créateurs, à Paris, en Île-de-France et à distance : site vitrine dès ${OFFER_PRICES.vitrine} €, site complet dès ${OFFER_PRICES.business} €, boutique en ligne et application sur mesure sur devis. <a href="/offre">Voir mes offres de création de site web</a></p>
         <h2>Contact</h2>
-        <p>Email : contact@tenecoulibaly.fr | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
+        <p>Email : coulibaly.tene00@gmail.com | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
       </main>`,
   },
   {
@@ -161,9 +161,9 @@ const routes = [
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Contacter Tene Coulibaly</h1>
-        <p>Disponible dès octobre 2026 — CDI ou missions freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger.</p>
+        <p>Disponible dès octobre 2026 — CDI, CDD ou freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger.</p>
         <ul>
-          <li>Email : <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a></li>
+          <li>Email : <a href="mailto:coulibaly.tene00@gmail.com">coulibaly.tene00@gmail.com</a></li>
           <li>LinkedIn : <a href="https://www.linkedin.com/in/tenecoulibaly/">linkedin.com/in/tenecoulibaly</a></li>
           <li>GitHub : <a href="https://github.com/CoulibalyT">github.com/CoulibalyT</a></li>
         </ul>
@@ -251,12 +251,12 @@ const enRoutes = [
   {
     path: '/en',
     title: 'Tene Coulibaly — Full Stack Developer & Web Designer in Paris',
-    desc: "Full Stack Developer & Web Designer in Paris. Web applications and immersive 3D experiences. Available from October 2026 — permanent role or freelance.",
+    desc: "Full Stack Developer & Web Designer in Paris. Web applications and immersive 3D experiences. Available from October 2026 — permanent, fixed-term or freelance role.",
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Tene Coulibaly — Full Stack Developer & Web Designer in Paris</h1>
         <p>Hi, I'm Tene. Full Stack Developer, Master's graduate from ETNA after a work-study at INSEAD. I build web applications from back-end to interface — clean, performant, and user-focused.</p>
-        <p>Create, optimize, innovate: three words that guide my approach to development. Available from October 2026 — permanent role or freelance.</p>
+        <p>Create, optimize, innovate: three words that guide my approach to development. Available from October 2026 — permanent, fixed-term or freelance role.</p>
         <h2>Skills</h2>
         <p>Vue.js, Nuxt, React, Next.js, TypeScript, Node.js, NestJS, Express, Symfony, PHP, PostgreSQL, SQL Server, Prisma, TypeORM, Doctrine, Flutter, Dart, Docker, Nginx, Jenkins, Tailwind CSS, GSAP, Figma, Git</p>
         <h2>Projects</h2>
@@ -283,7 +283,7 @@ const enRoutes = [
           <li>2021 - 2023: Web Developer (BSc+2) — Epitech</li>
         </ul>
         <h2>Contact</h2>
-        <p>Email: contact@tenecoulibaly.fr | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
+        <p>Email: coulibaly.tene00@gmail.com | <a href="https://www.linkedin.com/in/tenecoulibaly/">LinkedIn</a> | <a href="https://github.com/CoulibalyT">GitHub</a></p>
       </main>`,
   },
   {
@@ -343,9 +343,9 @@ const enRoutes = [
     content: `
       <main style="position:absolute;left:-9999px;top:-9999px" aria-hidden="false">
         <h1>Contact Tene Coulibaly</h1>
-        <p>Available from October 2026 — permanent role or freelance missions. Feel free to reach out to discuss opportunities or simply say hello.</p>
+        <p>Available from October 2026 — permanent, fixed-term or freelance role. Feel free to reach out to discuss opportunities or simply say hello.</p>
         <ul>
-          <li>Email: <a href="mailto:contact@tenecoulibaly.fr">contact@tenecoulibaly.fr</a></li>
+          <li>Email: <a href="mailto:coulibaly.tene00@gmail.com">coulibaly.tene00@gmail.com</a></li>
           <li>LinkedIn: <a href="https://www.linkedin.com/in/tenecoulibaly/">linkedin.com/in/tenecoulibaly</a></li>
           <li>GitHub: <a href="https://github.com/CoulibalyT">github.com/CoulibalyT</a></li>
         </ul>
@@ -643,8 +643,8 @@ for (const route of allRoutes) {
         image: `${SITE}/images/og-image.webp`,
         jobTitle: isEn ? 'Full Stack Developer & Web Designer' : 'Développeuse Full Stack & Web Designer',
         description: isEn
-          ? 'Full Stack Developer & Web Designer based in Paris, available from October 2026 for a permanent role or freelance missions.'
-          : 'Développeuse Full Stack & Web Designer à Paris, disponible dès octobre 2026 — CDI ou missions freelance.',
+          ? 'Full Stack Developer & Web Designer based in Paris, available from October 2026 for a permanent, fixed-term or freelance role.'
+          : 'Développeuse Full Stack & Web Designer à Paris, disponible dès octobre 2026 — CDI, CDD ou freelance.',
         knowsAbout: ['Vue.js', 'Nuxt', 'React', 'Next.js', 'TypeScript', 'Node.js', 'NestJS', 'Express', 'Symfony', 'PHP', 'PostgreSQL', 'Docker', 'Flutter', 'Prisma', 'Tailwind CSS', 'Three.js', 'WebGL', 'GSAP', 'UI/UX Design'],
         address: { '@type': 'PostalAddress', addressLocality: 'Paris', addressRegion: 'Île-de-France', addressCountry: 'FR' },
         nationality: { '@type': 'Country', name: 'France' },
@@ -658,7 +658,7 @@ for (const route of allRoutes) {
           'https://www.linkedin.com/in/tenecoulibaly/',
           'https://www.npmjs.com/package/portfolio-sync',
         ],
-        email: 'contact@tenecoulibaly.fr',
+        email: 'coulibaly.tene00@gmail.com',
       }
     });
   }

@@ -1,10 +1,15 @@
 <template>
-  <div class="h-[100dvh] flex flex-col md:p-28 p-4 md:gap-5 gap-3 bg-transparent" :class="{ 'dark': isDarkMode, 'red-theme': isRedMode }">
+  <div class="h-[100dvh] flex flex-col md:p-28 p-4 md:gap-5 gap-4 bg-transparent" :class="{ 'dark': isDarkMode, 'red-theme': isRedMode }">
     <!-- Header -->
     <div class="flex justify-between items-start ">
       <div class="flex items-center">
         <div>
-          <p class="md:text-[40px] text-xl font-thin text-black dark:text-gray-100">Tene Coulibaly</p>
+          <p class="flex items-center gap-2 md:gap-3 md:text-[40px] text-xl font-thin text-black dark:text-gray-100">
+            Tene Coulibaly
+            <img src="/images/logo-tene.webp" alt="" width="48" height="48" class="w-7 h-7 md:w-12 md:h-12" fetchpriority="high">
+            <!-- Mobile : la prononciation suit le nom sur la même ligne (la colonne de droite n'a pas la place) -->
+            <span class="md:hidden text-sm font-normal text-gray-950 dark:text-gray-300">/ˈte.ne/</span>
+          </p>
           <div ref="roleText" class="text-sm text-gray-500 dark:text-gray-400 pl-0.5">
             <SynonymReveal
               :baseText="$t('role')"
@@ -12,12 +17,12 @@
             />
           </div>
         </div>
-        <div>
+        <div class="hidden md:block">
           <p class="text-gray-950 dark:text-gray-300">/ˈte.ne/</p>
         </div>
       </div>
 
-      <div class="space-x-2 text-gray-950 dark:text-gray-300">
+      <div class="shrink-0 whitespace-nowrap text-gray-950 dark:text-gray-300">
         <button
           @click="setLanguage('fr')"
           :class="{ 'font-bold': currentLanguage === 'fr' }"
@@ -38,7 +43,7 @@
 
     <!-- Navigation -->
     <div class="flex-1 flex lg:flex-row flex-col min-h-0 overflow-hidden">
-      <nav ref="navMenu" class="lg:w-1/4 w-full flex lg:flex-col flex-row lg:justify-center lg:gap-1.5 gap-4 lg:mb-0 mb-2 shrink-0 lg:overflow-visible overflow-x-auto whitespace-nowrap scrollbar-hide lg:pr-0 pr-5">
+      <nav ref="navMenu" class="lg:w-1/4 w-full flex lg:flex-col flex-row lg:justify-center lg:gap-1.5 gap-4 lg:mb-0 mb-5 shrink-0 lg:overflow-visible overflow-x-auto whitespace-nowrap scrollbar-hide nav-scroll lg:pr-0 pr-8">
         <router-link 
           active-class="font-bold active-link"
           class="nav-link text-gray-950 dark:text-gray-300 hover:text-black dark:hover:text-gray-100"
@@ -89,7 +94,8 @@
           <slot></slot>
         </div>
       </div>
-      <div class="w-1/4 hidden lg:block">
+      <!-- Sur /skills le tableau a besoin de toute la largeur : pas de colonne citation -->
+      <div v-if="!['skills', 'skills-en'].includes(route.name)" class="w-1/4 hidden lg:block">
         <DailyQuote />
       </div>
     </div>
@@ -118,7 +124,7 @@
       </div>
 
       <!-- Toggle Mode Clair/Sombre -->
-      <div class="space-x-2 text-gray-950 dark:text-gray-300">
+      <div class="text-gray-950 dark:text-gray-300">
         <button
           @click="toggleDarkMode(false)"
           :class="{ 'font-bold': !isDarkMode && !isRedMode }"
@@ -264,5 +270,13 @@ watchEffect(() => {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Mobile : la nav défile horizontalement ; un fondu à droite montre qu'il y a la suite */
+@media (max-width: 1023.98px) {
+  .nav-scroll {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  }
 }
 </style>

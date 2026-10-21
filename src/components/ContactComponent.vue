@@ -5,11 +5,11 @@
         <p class="text-sm md:text-base text-gray-500 dark:text-gray-400">{{ $t('contact_section.text') }}</p>
       </div>
       <a
-        href="mailto:contact@tenecoulibaly.fr"
+        href="mailto:coulibaly.tene00@gmail.com"
         @click="copyEmail"
         class="flex gap-1 items-center relative group text-bold break-all text-left cursor-copy"
       >
-        contact@tenecoulibaly.fr
+        coulibaly.tene00@gmail.com
         <ArrowUpRightIcon class="size-4.5 shrink-0" />
         <span class="underline-hover"></span>
       </a>
@@ -69,7 +69,7 @@ const copiedY = ref(0);
 
 const copyEmail = (e) => {
   e.preventDefault();
-  navigator.clipboard.writeText('contact@tenecoulibaly.fr');
+  navigator.clipboard.writeText('coulibaly.tene00@gmail.com');
   
   copiedX.value = e.clientX;
   copiedY.value = e.clientY;
