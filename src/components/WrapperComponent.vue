@@ -6,7 +6,11 @@
         <div>
           <p class="flex items-center gap-2 md:gap-3 md:text-[40px] text-xl font-thin text-black dark:text-gray-100">
             Tene Coulibaly
-            <img src="/images/logo-tene.webp" alt="" width="48" height="48" class="w-7 h-7 md:w-12 md:h-12" fetchpriority="high">
+            <img
+              :src="winking ? '/images/logo-tene-wink.webp' : '/images/logo-tene.webp'"
+              alt="" width="48" height="48" class="w-7 h-7 md:w-12 md:h-12" fetchpriority="high"
+              @mouseenter="wink" @click="wink"
+            >
             <!-- Mobile : la prononciation suit le nom sur la même ligne (la colonne de droite n'a pas la place) -->
             <span class="md:hidden text-sm font-normal text-gray-950 dark:text-gray-300">/ˈte.ne/</span>
           </p>
@@ -162,6 +166,20 @@ import LocalTime from "./LocalTime.vue";
 import WeatherWidget from "./WeatherWidget.vue";
 import SynonymReveal from "./SynonymReveal.vue";
 import DailyQuote from "./DailyQuote.vue";
+import { playCling } from "../composables/useCling";
+
+// The logo next to the name winks (with its cling) when hovered or tapped
+const winking = ref(false);
+let winkTimer = null;
+function wink() {
+  if (winking.value) return;
+  winking.value = true;
+  playCling();
+  clearTimeout(winkTimer);
+  winkTimer = setTimeout(() => { winking.value = false; }, 600);
+}
+// Preload the wink frame so the first hover swaps instantly
+if (typeof window !== "undefined") new Image().src = "/images/logo-tene-wink.webp";
 import { setI18nLanguage } from "../../config/i18n";
 
 const contentWrapper = ref(null);

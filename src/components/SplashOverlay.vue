@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import gsap from "gsap";
 import { useTheme } from "@/composables/useTheme";
+import { playCling } from "@/composables/useCling";
 
 const emit = defineEmits(['complete']);
 const { isDarkMode } = useTheme();
@@ -83,6 +84,7 @@ onMounted(async () => {
   .addLabel("wink", "-=0.2")
   .set(".splash-wink", { opacity: 1 }, "wink")
   .set(".splash-open", { opacity: 0 }, "wink")
+  .call(playCling, null, "wink")
   .fromTo(".splash-logo", { scale: 1 }, { scale: 1.06, duration: 0.15, yoyo: true, repeat: 1, ease: "power2.out" }, "wink")
   .fromTo(".splash-sparkle-wink", { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2.5)" }, "wink")
   .to(".splash-sparkle-wink", { scale: 0, rotation: 90, duration: 0.25, ease: "power2.in" }, "wink+=0.5")
@@ -111,7 +113,9 @@ onMounted(async () => {
   }, "-=0.2");
 });
 
-onUnmounted(() => twinkles.forEach((t) => t.kill()));
+onUnmounted(() => {
+  twinkles.forEach((t) => t.kill());
+});
 
 const title = "Tene Coulibaly".split("");
 </script>

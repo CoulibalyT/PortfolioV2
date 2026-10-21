@@ -12,8 +12,13 @@
       <div ref="interactiveBlob" class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-cyan-200 dark:bg-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-screen opacity-40 dark:opacity-70 transition-opacity duration-500"></div>
     </div>
 
+    <!-- Moi & Contact: the logo as a hidden neon sign, revealed where the pointer passes -->
+    <div v-if="showNeon" class="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
+      <NeonLogo />
+    </div>
+
     <!-- Hidden Text Layer (Spotlight Effect) -->
-    <div class="absolute inset-0 z-0 pointer-events-none flex flex-col justify-center items-center select-none overflow-hidden"
+    <div v-else class="absolute inset-0 z-0 pointer-events-none flex flex-col justify-center items-center select-none overflow-hidden"
          :style="{ maskImage: `radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black, transparent)`, webkitMaskImage: `radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black, transparent)` }">
          <div class="text-[15vw] font-black text-gray-900/5 dark:text-white/5 leading-none tracking-tighter text-center"
               :class="{ 'text-white/10': isRedMode }">
@@ -37,11 +42,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRoute } from 'vue-router';
 import gsap from 'gsap';
 import { useTheme } from '@/composables/useTheme';
+import NeonLogo from '@/components/NeonLogo.vue';
 
 const { isRedMode } = useTheme();
+const route = useRoute();
+const showNeon = computed(() => ['me', 'me-en', 'contact', 'contact-en'].includes(route.name));
 
 const container = ref(null);
 const interactiveBlob = ref(null);
