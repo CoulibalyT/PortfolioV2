@@ -27,3 +27,6 @@ dist-ssr
 
 # portfolio-sync --debug artifacts
 debug/
+
+# Playwright MCP artifacts (snapshots, screenshots)
+.playwright-mcp/
