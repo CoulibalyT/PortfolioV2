@@ -11,6 +11,7 @@ export const projects = [
       en: 'Personal project · designed and built solo',
     },
     cover: 'cover.webp',
+    coverAlt: "NØIR HAUS, défilé de mode 3D réalisé avec Three.js et WebGL",
     url: 'https://noir-inky.vercel.app/',
     urlLabel: 'Voir le défilé',
     urlSecondary: 'https://github.com/CoulibalyT/noir',
@@ -30,10 +31,10 @@ export const projects = [
       'Déploiement': ['Vercel', 'GitHub', 'Cache immutable', 'Preload HDR + GLB'],
     },
     images: [
-      { file: 'noir-haus-aw26-heritage.webp', label: 'Héritage' },
-      { file: 'noir-haus-aw26-dentelle.webp', label: 'Dentelle' },
-      { file: 'noir-haus-aw26-givre.webp',    label: 'Givre' },
-      { file: 'noir-haus-aw26-clown.webp',    label: 'Clown' },
+      { file: 'noir-haus-aw26-heritage.webp', label: 'Héritage', alt: "Défilé de mode 3D NØIR HAUS réalisé avec Three.js : look « Héritage »" },
+      { file: 'noir-haus-aw26-dentelle.webp', label: 'Dentelle', alt: "Look « Dentelle » du défilé haute couture 3D NØIR HAUS, rendu en WebGL" },
+      { file: 'noir-haus-aw26-givre.webp',    label: 'Givre', alt: "Look « Givre » du défilé de mode 3D NØIR HAUS" },
+      { file: 'noir-haus-aw26-clown.webp',    label: 'Clown', alt: "Look « Clown » du défilé 3D NØIR HAUS, collection AW26" },
     ]
   },
   {
@@ -44,6 +45,7 @@ export const projects = [
       en: 'Personal project · designed and built solo',
     },
     cover: 'cover.webp',
+    coverAlt: "Skywalk, plateforme full-stack d'aide à l'expatriation (React et NestJS)",
     url: 'https://skywalk-chi.vercel.app',
     urlLabel: 'Voir le site',
     description: {
@@ -59,11 +61,11 @@ export const projects = [
       'Testing / Qualité': ['Jest', 'Vitest', 'Playwright', 'Testing Library', 'Supertest', 'ESLint', 'Prettier', 'Husky', 'Commitlint'],
     },
     images: [
-      { file: 'home.webp',         label: 'Home' },
-      { file: 'destinations.webp', label: 'Destinations' },
-      { file: 'forum.webp',        label: 'Forum' },
-      { file: 'projects.webp',     label: 'Projets' },
-      { file: 'dashboard.webp',    label: 'Dashboard' },
+      { file: 'home.webp',         label: 'Home', alt: "Page d'accueil de Skywalk, plateforme d'aide à l'expatriation" },
+      { file: 'destinations.webp', label: 'Destinations', alt: "Exploration des destinations d'expatriation sur Skywalk" },
+      { file: 'forum.webp',        label: 'Forum', alt: "Forum communautaire de Skywalk, modéré par IA" },
+      { file: 'projects.webp',     label: 'Projets', alt: "Suivi d'un projet d'expatriation dans l'application Skywalk" },
+      { file: 'dashboard.webp',    label: 'Dashboard', alt: "Tableau de bord utilisateur de la plateforme Skywalk" },
     ]
   },
   {
@@ -74,6 +76,7 @@ export const projects = [
       en: 'Personal project · designed and built solo',
     },
     cover: 'cover.webp',
+    coverAlt: "Bento, plateforme de challenges créatifs pour designers",
     url: 'https://bento-sable.vercel.app/',
     urlLabel: 'Voir le site',
     urlSecondary: 'https://x.com/bento_designApp',
@@ -91,14 +94,14 @@ export const projects = [
       'Testing / Qualité': ['Jest', 'Supertest', 'SEO', 'Web Vitals', 'GA4'],
     },
     images: [
-      { file: 'home.webp',       label: 'Home' },
-      { file: 'login.webp',      label: 'Login' },
-      { file: 'challenges.webp', label: 'Challenges' },
-      { file: 'create-challenge.webp', label: 'Création de challenge' },
-      { file: 'explore.webp',    label: 'Explorer' },
-      { file: 'community.webp',  label: 'Communauté' },
-      { file: 'projects.webp',   label: 'Projets' },
-      { file: 'settings.webp',   label: 'Paramètres' },
+      { file: 'home.webp',       label: 'Home', alt: "Page d'accueil de Bento, plateforme de challenges créatifs pour designers" },
+      { file: 'login.webp',      label: 'Login', alt: "Écran de connexion de l'application Bento" },
+      { file: 'challenges.webp', label: 'Challenges', alt: "Liste des challenges de design proposés sur Bento" },
+      { file: 'create-challenge.webp', label: 'Création de challenge', alt: "Formulaire de création d'un challenge de design sur Bento" },
+      { file: 'explore.webp',    label: 'Explorer', alt: "Page Explorer de Bento : projets de designers à découvrir" },
+      { file: 'community.webp',  label: 'Communauté', alt: "Espace communauté de Bento : votes et classements des designers" },
+      { file: 'projects.webp',   label: 'Projets', alt: "Galerie des projets soumis par les designers sur Bento" },
+      { file: 'settings.webp',   label: 'Paramètres', alt: "Paramètres du compte utilisateur sur Bento" },
     ]
   },
   {
@@ -113,9 +116,9 @@ export const projects = [
     },
     tech: ['Vue.js', 'GSAP', 'Tailwind CSS'],
     images: [
-      { file: 'home.webp',     label: 'Home' },
-      { file: 'contact.webp',  label: 'Contact' },
-      { file: 'approche.webp', label: 'Approche' },
+      { file: 'home.webp',     label: 'Home', alt: "Page d'accueil du site vitrine Joy of Simple, studio de design minimaliste" },
+      { file: 'contact.webp',  label: 'Contact', alt: "Page contact du site vitrine Joy of Simple" },
+      { file: 'approche.webp', label: 'Approche', alt: "Page « Approche » du site vitrine Joy of Simple" },
     ]
   },
   {
@@ -126,6 +129,7 @@ export const projects = [
       en: 'INSEAD · work-study · team of 3 developers, 1 tester and 1 project manager',
     },
     cover: 'cover.webp',
+    coverAlt: "APOL, application de gestion des candidatures et des bourses d'INSEAD",
     url: null,
     urlLabel: null,
     description: {
@@ -141,11 +145,11 @@ export const projects = [
       'DevOps': ['Jenkins', 'Windows IIS', 'INT/UAT/PROD', 'PHPSpreadsheet', 'dompdf', 'wkhtmltopdf'],
     },
     images: [
-      { file: 'main.webp',              label: 'Dashboard' },
-      { file: 'list.webp',              label: 'Liste des candidatures' },
-      { file: 'scholarship-create.webp', label: 'Création de bourse' },
-      { file: 'evaluator.webp',         label: 'Évaluation' },
-      { file: 'reports.webp',           label: 'Rapports' },
+      { file: 'main.webp',              label: 'Dashboard', alt: "Tableau de bord d'APOL, application de gestion des candidatures d'INSEAD" },
+      { file: 'list.webp',              label: 'Liste des candidatures', alt: "Liste des candidatures aux programmes INSEAD dans APOL" },
+      { file: 'scholarship-create.webp', label: 'Création de bourse', alt: "Création d'une bourse dans l'application APOL (INSEAD)" },
+      { file: 'evaluator.webp',         label: 'Évaluation', alt: "Interface d'évaluation des candidatures dans APOL" },
+      { file: 'reports.webp',           label: 'Rapports', alt: "Rapports sur les candidatures et les bourses dans APOL" },
     ]
   },
   {
@@ -156,6 +160,7 @@ export const projects = [
       en: 'INSEAD · work-study · designed and built solo',
     },
     cover: 'cover.webp',
+    coverAlt: "ePortal, portail Executive Education d'INSEAD refondu sur Salesforce",
     url: null,
     urlLabel: null,
     description: {
@@ -167,12 +172,12 @@ export const projects = [
       'Design': ['UI/UX', 'Charte INSEAD 2025'],
     },
     images: [
-      { file: 'b2b.webp',                     label: 'Accueil B2B' },
-      { file: 'mylearning-enrolled.webp',     label: 'My Learning' },
-      { file: 'mylearning-applications.webp', label: 'Candidatures' },
-      { file: 'mylearning-reco.webp',         label: 'Recommandations' },
-      { file: 'search-certificates.webp',     label: 'Recherche certificats' },
-      { file: 'search-advancing.webp',        label: 'Recherche programmes' },
+      { file: 'b2b.webp',                     label: 'Accueil B2B', alt: "Accueil B2B d'ePortal, portail Executive Education d'INSEAD" },
+      { file: 'mylearning-enrolled.webp',     label: 'My Learning', alt: "Espace My Learning d'ePortal : formations suivies par l'apprenant" },
+      { file: 'mylearning-applications.webp', label: 'Candidatures', alt: "Suivi des candidatures aux formations dans ePortal (INSEAD)" },
+      { file: 'mylearning-reco.webp',         label: 'Recommandations', alt: "Recommandations de formations personnalisées dans ePortal" },
+      { file: 'search-certificates.webp',     label: 'Recherche certificats', alt: "Recherche de certificats Executive Education dans ePortal" },
+      { file: 'search-advancing.webp',        label: 'Recherche programmes', alt: "Recherche de programmes de formation dans ePortal (INSEAD)" },
     ]
   },
   {
@@ -183,6 +188,7 @@ export const projects = [
       en: 'Freelance project · designed and built solo',
     },
     cover: 'cover.webp',
+    coverAlt: "Intake, application de support informatique développée pour INSEAD",
     url: null,
     urlLabel: null,
     description: {
@@ -200,13 +206,13 @@ export const projects = [
       'Déploiement': ['Vercel', 'Supabase'],
     },
     images: [
-      { file: 'home.webp',        label: 'Accueil' },
-      { file: 'check-in.webp',    label: 'Check-in étudiant' },
-      { file: 'technician.webp',  label: 'Queue technicien' },
-      { file: 'manager.webp',     label: 'Dashboard analytics' },
-      { file: 'maintenance.webp', label: 'Admin hub' },
-      { file: 'programmes.webp',  label: 'Gestion programmes' },
-      { file: 'export.webp',      label: 'Export CSV' },
+      { file: 'home.webp',        label: 'Accueil', alt: "Accueil d'Intake, application de support informatique pour les étudiants d'INSEAD" },
+      { file: 'check-in.webp',    label: 'Check-in étudiant', alt: "Check-in étudiant par badge ou e-mail dans Intake" },
+      { file: 'technician.webp',  label: 'Queue technicien', alt: "File d'attente des techniciens en temps réel dans Intake" },
+      { file: 'manager.webp',     label: 'Dashboard analytics', alt: "Tableau de bord analytique d'Intake pour les responsables du support IT" },
+      { file: 'maintenance.webp', label: 'Admin hub', alt: "Hub d'administration de l'application Intake" },
+      { file: 'programmes.webp',  label: 'Gestion programmes', alt: "Gestion des programmes étudiants dans Intake" },
+      { file: 'export.webp',      label: 'Export CSV', alt: "Export CSV des données du support IT dans Intake" },
     ]
   },
   {
@@ -217,6 +223,7 @@ export const projects = [
       en: 'Freelance project for a body shop · designed and built solo',
     },
     cover: 'cover.webp',
+    coverAlt: "Site vitrine du garage Autoomat à Ivry-sur-Seine",
     url: 'https://www.autoomat.fr',
     urlLabel: 'Voir le site',
     description: {
@@ -231,10 +238,10 @@ export const projects = [
       'Déploiement': ['Vercel', 'SSG'],
     },
     images: [
-      { file: 'home.webp', label: 'Accueil' },
-      { file: 'parcours-sinistre.webp', label: 'Parcours Sinistre' },
-      { file: 'devis-en-ligne.webp', label: 'Devis en ligne' },
-      { file: 'assurance.webp', label: 'Assurance' },
+      { file: 'home.webp', label: 'Accueil', alt: "Page d'accueil du site vitrine de la carrosserie Autoomat à Ivry-sur-Seine" },
+      { file: 'parcours-sinistre.webp', label: 'Parcours Sinistre', alt: "Parcours sinistre guidé sur le site du garage Autoomat" },
+      { file: 'devis-en-ligne.webp', label: 'Devis en ligne', alt: "Devis en ligne avec identification du véhicule par plaque sur le site Autoomat" },
+      { file: 'assurance.webp', label: 'Assurance', alt: "Outil de gestion des dossiers d'assurance développé pour la carrosserie Autoomat" },
     ]
   },
   {
@@ -256,7 +263,7 @@ export const projects = [
       'UX': ['Chalk', 'Ora spinners', 'dotenv'],
     },
     images: [
-      { file: 'cli.webp', label: 'CLI Output' },
+      { file: 'cli.webp', label: 'CLI Output', alt: "Sortie terminal de Portfolio Sync, outil CLI Node.js de capture de screenshots" },
     ]
   },
   {
@@ -276,7 +283,7 @@ export const projects = [
       'Fonctionnalités': ['Cache hors-ligne', 'Notifications locales', 'Partage natif'],
     },
     images: [
-      { file: 'home.webp', label: 'App' },
+      { file: 'home.webp', label: 'App', alt: "Écran d'accueil de Daily Quote, application mobile Flutter de citations" },
     ]
   },
 ]
@@ -301,6 +308,7 @@ function flattenImages(projectList) {
       flat.push({
         img: `/images/projects/${project.folder}/${image.file}`,
         label: image.label,
+        alt: image.alt,
         project: project.name,
         url: project.url || null,
         urlLabel: project.urlLabel || null,
@@ -315,6 +323,7 @@ function flattenCovers(projectList) {
   return projectList.filter(p => p.cover).map(project => ({
     img: `/images/projects/${project.folder}/${project.cover}`,
     label: project.name,
+    alt: project.coverAlt,
     project: project.name,
     url: project.url || null,
     urlLabel: project.urlLabel || null,
@@ -418,6 +427,7 @@ function generateCards(flat, cols = 5, size = {}) {
       w, h, tx, ty, rot,
       img: shuffled[i].img,
       label: shuffled[i].label,
+      alt: shuffled[i].alt,
       project: shuffled[i].project,
       url: shuffled[i].url,
       urlLabel: shuffled[i].urlLabel,
@@ -476,3 +486,19 @@ export const TILE_H = tileH
 
 // Liste plate de TOUTES les images (primaires + secondaires) pour la vue filtrée
 export const allImageCards = flattenImages(projects)
+
+// Texte alternatif de chaque image de projet, indexé par son chemin public (ex. polaroids de /skills)
+export const imageAlts = Object.fromEntries(
+  [...flattenCovers(projects), ...allImageCards].map(c => [c.img, c.alt])
+)
+
+// Title + description d'une page projet (/projects/<folder>). Partagé par ProjectView.vue (runtime)
+// et scripts/inject-meta.mjs (HTML statique) pour que les deux versions de la page disent la même chose.
+export function projectSeo(project, locale = 'fr') {
+  const en = locale === 'en'
+  const desc = en ? project.description.en : project.description.fr
+  return {
+    title: `${project.name} — ${en ? 'Full Stack Project by Tene Coulibaly' : 'Projet Full Stack par Tene Coulibaly'}`,
+    description: desc.length > 160 ? desc.substring(0, 159).trimEnd() + '…' : desc,
+  }
+}

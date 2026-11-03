@@ -119,6 +119,9 @@
 
       <div class="h-20"></div> <!-- Spacer for bottom scroll -->
 
+      <!-- Liens du site au bout du défilement (snap-end : reste atteignable malgré le snap mandatory) -->
+      <SiteFooterLinks class="snap-end pb-8 text-xs text-gray-400 dark:text-gray-600" />
+
     </div>
 </template>
 
@@ -127,6 +130,7 @@ import { ref, onMounted, nextTick, watch } from 'vue';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useSeo } from '@/composables/useSeo'
+import SiteFooterLinks from '@/components/SiteFooterLinks.vue'
 
 useSeo('timeline', '/timeline')
 

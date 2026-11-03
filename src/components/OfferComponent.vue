@@ -9,50 +9,24 @@ import {
   OFFER_PRICES as PRICES,
   OFFER_INSTALLMENTS as INSTALLMENTS,
   OFFER_MAINTENANCE as MAINTENANCE,
-  OFFER_HOURLY_RATE as HOURLY_RATE,
+  OFFER_CUSTOM_FROM as CUSTOM_FROM,
   OFFER_SEO as SEO,
-  OFFER_FAQ_TOP as FAQ_TOP,
+  OFFER_FAQ as faqs,
   AUTOOMAT_URL,
 } from '@/data/offer.js'
 import OfferFinder from '@/components/OfferFinder.vue'
+import SiteFooterLinks from '@/components/SiteFooterLinks.vue'
 import { OFFER_PAGES, OFFER_PAGE_PATH } from '@/data/offerPages.js'
 import '@/assets/offer-page.css'
 
 // Pricing, phone and SEO copy live in src/data/offer.js (shared with scripts/inject-meta.mjs).
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.tenecoulibaly.fr'
 
-// --- FAQ state ---
+// --- FAQ state --- (questions/answers live in src/data/offer.js, shared with the FAQPage JSON-LD)
 const openFaqIndex = ref(null)
 const toggleFaq = (i) => {
   openFaqIndex.value = openFaqIndex.value === i ? null : i
 }
-const faqs = [
-  ...FAQ_TOP,
-  {
-    q: "Combien de temps ça prend de A à Z ?",
-    a: "Entre 2 semaines (Pack Vitrine) et 4 semaines (Pack Business). Le Pack Premium dépend du périmètre, on en discute lors du premier appel.",
-  },
-  {
-    q: "Je n'y connais rien en informatique, c'est un problème ?",
-    a: "Pas du tout. Mon rôle est justement de m'occuper de toute la partie technique. On parle ensemble de votre activité, de vos clients, de ce que vous voulez transmettre — je traduis ça en site web. Vous n'avez aucune ligne de code à voir.",
-  },
-  {
-    q: "Est-ce que je pourrai modifier mon site moi-même ?",
-    a: "Oui. Selon le pack, je vous mets en place une interface simple (style Notion ou Strapi) pour modifier vos textes, ajouter des photos ou un article de blog. Je vous forme à la livraison.",
-  },
-  {
-    q: "Pourquoi pas juste une page Facebook ou Instagram ?",
-    a: "Parce que vous n'êtes pas propriétaire de votre audience. Demain, Meta change l'algorithme ou ferme votre page — vous perdez tout. Un site web vous appartient, apparaît sur Google quand on cherche votre métier, et donne confiance (90% des gens vérifient sur Google avant de pousser la porte d'un commerce inconnu).",
-  },
-  {
-    q: "C'est quoi le SEO dont tu parles ?",
-    a: "C'est tout ce qui fait que votre site apparaît dans les résultats Google quand un client tape « coiffeur Paris 11 » ou « garage Paris 12 ». Je configure ça à la livraison : titres, descriptions, fiche Google Business, balisage local. L'objectif : être trouvé par les bonnes personnes près de chez vous.",
-  },
-  {
-    q: "Et si je veux des modifications après la livraison ?",
-    a: `Les Packs Vitrine et Business incluent 15 jours de retouches gratuites après mise en ligne. Au-delà, je propose des forfaits maintenance (à partir de ${MAINTENANCE.essentiel} €/mois) ou des interventions à la demande (${HOURLY_RATE} €/h). Pas d'abonnement obligatoire.`,
-  },
-]
 
 const mailtoUrl = computed(() => {
   const subject = encodeURIComponent('Projet de site web — demande de devis')
@@ -90,7 +64,6 @@ useHead({
   htmlAttrs: { lang: 'fr' },
   meta: [
     { name: 'description', content: SEO.description },
-    { name: 'keywords', content: SEO.keywords },
     { property: 'og:type', content: 'website' },
     { property: 'og:locale', content: 'fr_FR' },
     { property: 'og:site_name', content: SEO.siteName },
@@ -273,7 +246,7 @@ useHead({
             <p class="text-xs uppercase tracking-[0.25em] opacity-50 mb-4">Pack 03</p>
             <h3 class="text-3xl md:text-4xl font-thin mb-8">Premium</h3>
             <p class="text-5xl md:text-6xl font-thin mb-2">Sur devis</p>
-            <p class="text-xs opacity-50 mb-2">selon périmètre</p>
+            <p class="text-xs opacity-50 mb-2">à partir de {{ CUSTOM_FROM.shop.toLocaleString('fr-FR') }}&nbsp;€ selon périmètre</p>
             <!-- Empty line mirroring the installment line of the two other packs, so the feature lists stay aligned -->
             <p class="text-sm mb-10" aria-hidden="true">&nbsp;</p>
             <ul class="space-y-3 text-sm md:text-base opacity-80 mb-12">
@@ -463,7 +436,7 @@ useHead({
           <div>
             <h3 class="text-xl md:text-2xl font-thin mb-4">Basée à Paris</h3>
             <p class="text-base md:text-lg opacity-60 leading-relaxed">
-              J'habite à Paris et je fréquente les commerces du quartier. Je comprends vos clients parce que j'en suis une.
+              J'habite à Paris et je crée des sites pour tous, à Paris, en Seine-Saint-Denis et dans toute l'Île-de-France. Je fréquente les commerces du quartier : je comprends vos clients parce que j'en suis une.
             </p>
           </div>
           <div>
@@ -578,6 +551,7 @@ useHead({
 
     <!-- ============================== FOOTER ============================== -->
     <footer class="px-6 md:px-12 lg:px-20 pt-12 pb-28 md:pb-12 border-t border-gray-100 dark:border-gray-900 text-xs opacity-40">
+      <SiteFooterLinks contact-href="#contact" align="start" class="max-w-7xl mx-auto mb-6" />
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-3 md:gap-6 md:items-center md:justify-between">
         <p>Tene Coulibaly · Développeuse Full Stack freelance · Paris</p>
         <p>Auto-entrepreneuse — TVA non applicable, art. 293 B du CGI</p>

@@ -1,6 +1,6 @@
 # Tene Coulibaly
 
-> Développeuse Full Stack & Web Designer à Paris (Vue.js, React, Next.js, Node.js, NestJS, TypeScript, Three.js). Disponible dès octobre 2026 — CDI, CDD ou freelance.
+> Développeuse Full Stack & Web Designer à Paris (Vue.js, React, Next.js, Node.js, NestJS, TypeScript, Three.js). Disponible dès maintenant — CDI, CDD ou freelance.
 
 ## À propos
 
@@ -16,7 +16,7 @@ Salut, moi c'est Tene. Développeuse Full Stack, diplômée d'un Master à l'ETN
 - GitHub : https://github.com/CoulibalyT
 - npm : https://www.npmjs.com/package/portfolio-sync
 - Portfolio : https://www.tenecoulibaly.fr
-- Disponibilité : dès octobre 2026 — CDI, CDD ou freelance
+- Disponibilité : dès maintenant — CDI, CDD ou freelance
 
 ## Stack technique
 
@@ -87,7 +87,7 @@ Site vitrine pour un studio de design minimaliste.
 
 ## Offre freelance — création de sites web
 
-Tene Coulibaly crée des sites web pour indépendants, commerces, artisans, associations, auteurs, artistes et créateurs. Basée à Paris et en Seine-Saint-Denis, elle travaille en Île-de-France et à distance partout en France.
+Tene Coulibaly crée des sites web pour indépendants, commerces, artisans, associations, auteurs, artistes et créateurs. Basée à Paris, elle travaille avec des clients à Paris, en Seine-Saint-Denis, dans toute l'Île-de-France et à distance partout en France.
 
 - Page de l'offre : https://www.tenecoulibaly.fr/offre
 - Pack Vitrine : à partir de 800 € (ou 3 × 270 € sans frais) — site one-page, responsive, optimisé Google, formulaire de contact, livré en 2 semaines environ

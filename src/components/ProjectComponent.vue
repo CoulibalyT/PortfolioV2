@@ -22,7 +22,7 @@
       <Transition name="lightbox-fade">
         <div v-if="lightboxData" class="lightbox-overlay" @click="closeLightbox" @keydown="onLightboxKeydown" role="dialog" aria-modal="true" tabindex="-1" ref="lightboxRef">
           <div class="lightbox-content" @click.stop>
-            <img :src="lightboxData.img" :alt="lightboxData.label" />
+            <img :src="lightboxData.img" :alt="lightboxData.alt || lightboxData.label" />
             <div class="lightbox-info">
               <span class="lightbox-label">{{ lightboxData.label }}</span>
               <span class="lightbox-project">{{ lightboxData.project }}</span>
@@ -201,7 +201,7 @@ function createCardElement() {
   const card = document.createElement('div')
   card.className = 'canvas-card'
   card.innerHTML = `
-    <img loading="lazy" draggable="false" />
+    <img loading="lazy" draggable="false" alt="" />
     <div class="card-badge">↗ Live</div>
     <div class="card-overlay">
       <span class="card-label"></span>
@@ -301,7 +301,7 @@ function render() {
       if (img.dataset.src !== c.img) {
         img.src = c.img
         img.dataset.src = c.img
-        img.alt = `${c.project} — ${c.label}`
+        img.alt = c.alt || `${c.project} — ${c.label}`
         img.onload = () => { img.style.opacity = '1' }
       }
 
@@ -374,7 +374,7 @@ function render() {
         if (img.dataset.src !== c.img) {
           img.src = c.img
           img.dataset.src = c.img
-          img.alt = `${c.project} — ${c.label}`
+          img.alt = c.alt || `${c.project} — ${c.label}`
         }
 
         const label = el.querySelector('.card-label')

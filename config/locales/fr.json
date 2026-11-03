@@ -14,7 +14,9 @@
   "offer_banner": "Indépendant, commerçant, artisan, association ? Découvrez mes offres de création de site web",
   "home_cta": {
     "cv": "Télécharger mon CV",
-    "contact": "Me contacter"
+    "contact": "Me contacter",
+    "offer_intro": "Basée à Paris, je crée aussi des sites web pour tous : indépendants, commerces, associations, créateurs ou particuliers, à Paris, en Seine-Saint-Denis et dans toute l'Île-de-France.",
+    "offer": "Vous cherchez un site pour votre activité ?"
   },
   "timeline_section": {
     "title": "Mon Parcours",
@@ -91,8 +93,8 @@
   "light": "claire",
   "red": "rouge",
   "status": {
-    "available": "Disponible dès octobre 2026 — CDI, CDD ou freelance",
-    "available_short": "Disponible dès oct. 2026"
+    "available": "Disponible dès maintenant — CDI, CDD ou freelance",
+    "available_short": "Disponible dès maintenant"
   },
   "description": {
     "intro": "Salut, moi c’est Tene.",
@@ -117,7 +119,7 @@
     "lang_soninke": "Soninké — Courant",
     "board": {
       "tagline": "les outils, et ce que j'en fais",
-      "stamp": "DISPONIBLE DÈS OCTOBRE 2026 · CDI, CDD OU FREELANCE · ",
+      "stamp": "DISPONIBLE DÈS MAINTENANT · CDI, CDD OU FREELANCE · ",
       "moved": "passé dans la stack",
       "sticker": "creative coder",
       "projects_link": "voir les projets",
@@ -152,13 +154,13 @@
   },
   "contact_section": {
     "title": "Restons en contact",
-    "text": "Disponible dès octobre 2026 — CDI, CDD ou freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger !",
+    "text": "Disponible dès maintenant — CDI, CDD ou freelance. N'hésitez pas à me contacter pour discuter d'opportunités ou simplement échanger !",
     "cta": "Dire Bonjour"
   },
   "seo": {
     "home": {
       "title": "Tene Coulibaly — Développeuse Full Stack & Web Designer à Paris",
-      "description": "Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès octobre 2026 — CDI, CDD ou freelance."
+      "description": "Développeuse Full Stack & Web Designer à Paris. Applications web et expériences immersives 3D. Disponible dès maintenant — CDI, CDD ou freelance."
     },
     "projects": {
       "title": "Projets — Tene Coulibaly",

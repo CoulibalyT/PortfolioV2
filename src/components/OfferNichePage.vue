@@ -10,6 +10,7 @@ import {
   AUTOOMAT_URL,
 } from '@/data/offer.js'
 import { OFFER_PAGES, OFFER_PAGE_PATH, offerPagePack } from '@/data/offerPages.js'
+import SiteFooterLinks from '@/components/SiteFooterLinks.vue'
 
 // One landing page per trade (/offre/<slug>). All copy lives in src/data/offerPages.js.
 const props = defineProps({ page: { type: Object, required: true } })
@@ -221,6 +222,7 @@ useHead({
     </nav>
 
     <footer class="px-6 md:px-12 lg:px-20 py-12 border-t border-gray-100 dark:border-gray-900 text-xs opacity-40">
+      <SiteFooterLinks contact-href="#contact" align="start" class="max-w-7xl mx-auto mb-6" />
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-3 md:gap-6 md:items-center md:justify-between">
         <p>Tene Coulibaly · Développeuse Full Stack freelance · Paris</p>
         <p>Auto-entrepreneuse — TVA non applicable, art. 293 B du CGI</p>

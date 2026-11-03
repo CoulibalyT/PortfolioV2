@@ -7,12 +7,13 @@ import { useSeo } from '@/composables/useSeo'
 useSeo('home', '/')
 
 const route = useRoute()
-const contactPath = computed(() => (route.meta?.locale === 'en' ? '/en/contact' : '/contact'))
+const isEn = computed(() => route.meta?.locale === 'en')
+const contactPath = computed(() => (isEn.value ? '/en/contact' : '/contact'))
 </script>
 
 <template>
   <main class="w-full flex flex-col items-center gap-6 md:gap-8">
-    <!-- Accueil = recruteurs : CV et contact en premier. L'offre freelance reste dans la nav et le footer -->
+    <!-- Accueil = recruteurs : CV et contact en premier. Les clients ont leur accès sous la présentation -->
     <div class="w-full max-w-3xl px-4 md:px-0 flex flex-wrap gap-2 text-left">
       <a href="/CV_Tene_Coulibaly.pdf" target="_blank" rel="noopener" class="offer-banner text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-100">
         <span>{{ $t('home_cta.cv') }}</span>
@@ -24,6 +25,14 @@ const contactPath = computed(() => (route.meta?.locale === 'en' ? '/en/contact' 
       </router-link>
     </div>
     <MeComponent />
+    <!-- Clients freelance : localisation visible + accès à /offre (FR uniquement, /offre n'a pas de version EN) -->
+    <div v-if="!isEn" class="w-full max-w-3xl px-4 md:px-0 text-left">
+      <p class="mb-3 text-gray-500 dark:text-gray-500 text-sm md:text-base leading-relaxed">{{ $t('home_cta.offer_intro') }}</p>
+      <router-link to="/offre" class="offer-banner text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-100">
+        <span>{{ $t('home_cta.offer') }}</span>
+        <span aria-hidden="true">→</span>
+      </router-link>
+    </div>
   </main>
 </template>
 

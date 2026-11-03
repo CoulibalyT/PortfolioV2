@@ -55,7 +55,7 @@
                                 :aria-label="c.project.label"
                             >
                                 <span class="tape" aria-hidden="true"></span>
-                                <img :src="c.project.img" alt="" width="84" height="84" loading="lazy">
+                                <img :src="c.project.img" :alt="imageAlts[c.project.img] || ''" width="84" height="84" loading="lazy">
                                 <span class="caption">{{ c.project.caption }}</span>
                             </router-link>
                         </div>
@@ -145,6 +145,7 @@
     import { useI18n } from 'vue-i18n';
     import gsap from 'gsap';
     import { useTheme } from '@/composables/useTheme';
+    import { imageAlts } from '@/data/projects.js';
 
     const { isRedMode, isDarkMode } = useTheme();
     const { t } = useI18n();

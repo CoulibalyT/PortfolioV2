@@ -95,7 +95,11 @@
           class="w-full"
           :class="['timeline', 'project'].includes(route.name) ? 'h-full' : 'min-h-full flex flex-col justify-center items-center py-4 md:py-8'"
         >
+          <!-- Cale + liens en mt-auto : l'espace libre se partage des deux côtés, le contenu reste centré
+               et les liens du site se posent en bas (le parcours les affiche au bout de son propre défilement) -->
+          <div v-if="showFooterLinks" class="mt-auto" aria-hidden="true"></div>
           <slot></slot>
+          <SiteFooterLinks v-if="showFooterLinks" class="mt-auto pt-10 text-xs text-gray-400 dark:text-gray-600" />
         </div>
       </div>
       <!-- Sur /skills le tableau a besoin de toute la largeur : pas de colonne citation -->
@@ -166,6 +170,7 @@ import LocalTime from "./LocalTime.vue";
 import WeatherWidget from "./WeatherWidget.vue";
 import SynonymReveal from "./SynonymReveal.vue";
 import DailyQuote from "./DailyQuote.vue";
+import SiteFooterLinks from "./SiteFooterLinks.vue";
 import { playCling } from "../composables/useCling";
 
 // The logo next to the name winks (with its cling) when hovered or tapped
@@ -190,6 +195,9 @@ const { isDarkMode, isRedMode, toggleDarkMode, toggleRedMode } = useTheme();
 
 // L'URL est la source de vérité pour la langue (cf. router.beforeEach dans App.vue)
 const currentLanguage = computed(() => route.meta?.locale || "fr");
+
+// Le parcours défile dans son propre conteneur : il porte ses liens de pied de page lui-même
+const showFooterLinks = computed(() => !["timeline", "timeline-en"].includes(route.name));
 
 // Préfixe les liens de nav selon la langue courante
 const localePath = (path) =>
