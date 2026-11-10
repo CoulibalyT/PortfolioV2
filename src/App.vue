@@ -92,6 +92,13 @@ router.beforeEach(async (to, from, next) => {
   const targetLocale = to.meta?.locale || 'fr';
   setI18nLanguage(targetLocale);
 
+  // Opening or closing a project inside the wall stays on the same page: no curtain
+  const wallRoutes = ['project', 'project-detail', 'project-en', 'project-detail-en'];
+  if (wallRoutes.includes(to.name) && wallRoutes.includes(from.name) && to.meta?.locale === from.meta?.locale) {
+    next();
+    return;
+  }
+
   if (isTransitioning.value) return;
   isTransitioning.value = true;
 
